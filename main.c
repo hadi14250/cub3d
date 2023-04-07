@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 20:27:50 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/07 21:25:30 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/07 23:24:41 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ t_rect	init_rect(int x, int y, int width, int height)
 // 	}
 // }
 
+// make re && make clean && clear && valgrind --leak-check=full ./cub3d map.cub
 int main(int ac, char **av)
 {
 	t_cub		cub;
