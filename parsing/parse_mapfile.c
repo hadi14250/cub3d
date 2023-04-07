@@ -6,34 +6,18 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 23:03:02 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/07 19:44:29 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/07 21:54:49 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-int	textures(t_cub *cub, char *line)
+void	*free_null(void *ptr)
 {
-	char	**tokens;
-
-	tokens = ft_split(line, ' ');
-	if (!tokens)
-		return (1);
-	if (ft_array_length(tokens) != 2)
-		return (1);
-	if (ft_strncmp(tokens[0], "NO", 3) == 0)
-		cub->xpm[0] = ft_strdup(tokens[1]);
-	else if (ft_strncmp(tokens[0], "EA", 3) == 0)
-		cub->xpm[1] = ft_strdup(tokens[1]);
-	else if (ft_strncmp(tokens[0], "SO", 3) == 0)
-		cub->xpm[2] = ft_strdup(tokens[1]);
-	else if (ft_strncmp(tokens[0], "WE", 3) == 0)
-		cub->xpm[3] = ft_strdup(tokens[1]);
-	else if (ft_strncmp(tokens[0], "C", 2) \
-		&& ft_strncmp(tokens[0], "F", 2))
-		return (1);
-	ft_free(&tokens);
-	return (0);
+	if (!ptr)
+		return (NULL);
+	free(ptr);
+	return (NULL);
 }
 
 void	free_split(char **split)
@@ -78,25 +62,10 @@ void	exit_cub(t_cub *cub, int code, char *msg)
 	free_split(cub->map);
 	free_split(cub->xpm);
 	free_split(cub->rgb);
+	cub->c_rgb = free_null(cub->c_rgb);
+	cub->f_rgb = free_null(cub->f_rgb);
 	write(2, msg, ft_strlen(msg));
 	exit (code);
-}
-
-int	rgb(t_cub *cub, char *line)
-{
-	char	**tokens;
-
-	tokens = ft_split(line, ' ');
-	if (!tokens)
-		return (1);
-	if (ft_array_length(tokens) != 2)
-		return (1);
-	if (ft_strncmp(tokens[0], "F", 1) == 0)
-		cub->rgb[0] = ft_strdup(tokens[1]);
-	else if (ft_strncmp(tokens[0], "C", 1) == 0)
-		cub->rgb[1] = ft_strdup(tokens[1]);
-	ft_free(&tokens);
-	return (0);
 }
 
 void	null_params(char **tmp, char **total, char **line)
@@ -104,14 +73,6 @@ void	null_params(char **tmp, char **total, char **line)
 	*tmp = NULL;
 	*total = NULL;
 	*line = NULL;
-}
-
-void	*free_null(void *ptr)
-{
-	if (!ptr)
-		return (NULL);
-	free(ptr);
-	return (NULL);
 }
 
 void	free_params(char **line, char **tmp, char **input)
@@ -142,39 +103,39 @@ char	*take_map_input(int fd, t_cub *cub)
 	return (h.total);
 }
 
-int	parse_xpm(t_cub *cub, int fd)
-{
-	char	*line;
+// int	parse_xpm(t_cub *cub, int fd)
+// {
+// 	char	*line;
 
-	cub->xpm = ft_calloc(sizeof(char *), 5);
-	if (!cub->xpm)
-		return (1);
-	cub->rgb = ft_calloc(sizeof(char *), 3);
-	if (!cub->rgb)
-		return (1);
-	while (ft_array_length(cub->xpm) != 4 || ft_array_length(cub->rgb) != 2)
-	{
-		line = get_next_line(fd);
-		if (!line)
-			break ;
-		if (ft_strlen(line) == 0)
-		{
-			if (line[0])
-				free(line);
-		}
-		else if (textures(cub, line) == 1 || rgb(cub, line) == 1)
-		{
-			free(line);
-			line = NULL;
-			return (1);
-		}
-		free(line);
-		line = NULL;
-	}
-	if (line)
-		free(line);
-	return (0);
-}
+// 	cub->xpm = ft_calloc(sizeof(char *), 5);
+// 	if (!cub->xpm)
+// 		return (1);
+// 	cub->rgb = ft_calloc(sizeof(char *), 3);
+// 	if (!cub->rgb)
+// 		return (1);
+// 	while (ft_array_length(cub->xpm) != 4 || ft_array_length(cub->rgb) != 2)
+// 	{
+// 		line = get_next_line(fd);
+// 		if (!line)
+// 			break ;
+// 		if (ft_strlen(line) == 0)
+// 		{
+// 			if (line[0])
+// 				free(line);
+// 		}
+// 		else if (textures(cub, line) == 1 || rgb(cub, line) == 1)
+// 		{
+// 			free(line);
+// 			line = NULL;
+// 			return (1);
+// 		}
+// 		free(line);
+// 		line = NULL;
+// 	}
+// 	if (line)
+// 		free(line);
+// 	return (0);
+// }
 
 size_t	ft_tex_len(const char *s)
 {
@@ -251,21 +212,115 @@ void	print_cub(t_cub *cub)
 // void	check_cord_position(t_cub *cub)
 // {
 // 	int		i;
-// 	char	**split;
+// 	char	*str;
 
-// 	split = cub->map;
-// 	i = -1;
-// 	while (split[i] != NULL)
+// 	str = cub->map_1d;
+// 	i = cub->map_1d_len + 1;
+// 	while (--i >= 0)
 // 	{
 		
 // 	}
 // }
+
+void	trim_comma(char *str)
+{
+	int	i;
+
+	i = -1;
+	while(str[++i] != '\0' && str[i] != '\n')
+	{
+		if (str[i] == ',')
+			str[i] = ' ';
+	}
+}
+
+void	convert_colors(t_cub *cub, int *rgb, int flag)
+{
+	unsigned long	temp;
+
+	if (flag == 0)
+	{
+		temp = rgb_to_hex(rgb[0], rgb[1], rgb[2]);
+		cub->floor = temp;
+	}
+	if (flag == 1)
+	{
+		temp = rgb_to_hex(rgb[0], rgb[1], rgb[2]);
+		cub->ceiling = temp;
+	}
+}
+
+int	rgb(t_cub *cub, char *line, char flag)
+{
+	char	**tokens;
+	tokens = ft_split(line, ' ');
+	if (ft_array_length(tokens) != 3)
+	{
+		free_split(tokens);
+		exit_cub(cub, 1, "rgb validation failed\n");
+	}
+	if (flag == 'F')
+	{
+		cub->rgb[0] = line;
+		printf("line = %s\n", cub->rgb[0]);
+		printf("entered in F\n");
+	}
+	else if (flag == 'C')
+	{
+		cub->rgb[1] = line;
+		printf("line = %s\n", line);
+		printf("entered in C\n");
+	}
+	free_split(tokens);
+	return (0);
+}
+
+
+
+void	check_floor_ceiling(t_cub *cub)
+{
+	char	*str;
+	int		i;
+	int		c;
+	int		f;
+
+	c = 0;
+	f = 0;
+	i = -1;
+	str = cub->map_1d;
+	while (str[++i] != '\0')
+	{
+		if (str[i] == 'C')
+			c++;
+		if (str[i] == 'F')
+			f++;
+	}
+	if (!c || !f || c > 1 || f > 1)
+		exit_cub(cub, 1, "invalid rgb format");
+}
+
+void	parse_rgb(t_cub *cub)
+{
+	check_floor_ceiling(cub);
+	cub->rgb = ft_calloc(5, sizeof(char *));
+	cub->c_rgb = ft_strnstr(cub->map_1d, "C", cub->map_1d_len);
+	cub->c_rgb = ft_tex_dup(cub->c_rgb);
+	trim_comma(cub->c_rgb);
+	cub->f_rgb = ft_strnstr(cub->map_1d, "F", cub->map_1d_len);
+	cub->f_rgb = ft_tex_dup(cub->f_rgb);
+	trim_comma(cub->f_rgb);
+	rgb(cub, ft_strnstr(cub->c_rgb, "C", ft_strlen(cub->c_rgb)) + 1, 'C');
+	rgb(cub, ft_strnstr(cub->f_rgb, "F", ft_strlen(cub->f_rgb)) + 1, 'F');
+	cub->c_rgb = free_null(cub->c_rgb);
+	cub->f_rgb = free_null(cub->f_rgb);
+}
 
 int	parse_info(t_cub *cub, int fd)
 {
 	cub->map_1d = take_map_input(fd, cub);
 	cub->map_1d_len = ft_strlen(cub->map_1d);
 	cub->map = ft_split(cub->map_1d, '\n');
+	parse_rgb(cub);
 	// check_cord_position(cub);
 	check_for_textures(cub);
 	print_cub(cub);

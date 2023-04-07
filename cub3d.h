@@ -159,6 +159,8 @@ typedef struct s_cub
 	int		wall_bottom_pixel;
 	char	*map_1d;
 	int		map_1d_len;
+	char	*c_rgb;
+	char	*f_rgb;
 }				t_cub;
 
 // raycasting struct

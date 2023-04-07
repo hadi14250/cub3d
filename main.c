@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 20:27:50 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/07 19:35:35 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/07 21:25:30 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,7 @@ int main(int ac, char **av)
 
 	ft_bzero(&cub, sizeof(cub));
 	parse(ac, &cub, av[1]);
-	printf("reached end of main\n");
-	exit_cub(&cub, 0, "sucess");
+	exit_cub(&cub, 0, "reached end of main\n");
 	// // init(cub);
 
 	// //parse_size(cub);
