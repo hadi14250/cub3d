@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 23:03:02 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/07 14:50:56 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/07 14:56:28 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	parse_info(t_cub *cub, int fd)
 	while (ft_array_length(cub->xpm) != 4 || ft_array_length(cub->rgb) != 2)
 	{
 		line = get_next_line(fd);
-		if (ft_strlen(line) == 1)
+		if (ft_strlen(line) == 0)
 			;
 		else if (textures(cub, line) == 1 || rgb(cub, line) == 1)
 		{

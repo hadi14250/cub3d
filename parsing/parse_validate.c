@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 21:07:14 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/07 14:48:05 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/07 15:19:37 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ int	init_textures(t_cub *cub)
 		if (!cub->img2[i].address)
 			return (1);
 		fill_textures(cub, i);
-		// mlx_destroy_image(cub->mlx, cub->img2[i].img_ptr);
 		i++;
 	}
 	return (0);
