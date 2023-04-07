@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 20:27:50 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/07 15:02:13 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/07 15:25:03 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,16 +57,14 @@ void	draw_rectangle(t_img *img, t_rect rect, int color)
 
 int main(int ac, char **av)
 {
-	t_cub	*cub;
-	cub = malloc(sizeof(t_cub));
+	t_cub	cub;
+	ft_bzero(&cub, sizeof(cub));
+	parse(ac, &cub, av[1]);
 
-	ft_bzero(cub, sizeof(cub));
-	parse(ac, cub, av[1]);
+	init(&cub);
 
-	init(cub);
-
-	init_mlx_utils(cub);
-	cub->color_buffer = calloc(sizeof(int) * WINDOW_WIDTH , WINDOW_HEIGHT);
-	cub->tex = calloc(sizeof(int) * WINDOW_WIDTH , WINDOW_HEIGHT);
-	raycasting(cub);
+	init_mlx_utils(&cub);
+	cub.color_buffer = calloc(sizeof(int) * WINDOW_WIDTH , WINDOW_HEIGHT);
+	cub.tex = calloc(sizeof(int) * WINDOW_WIDTH , WINDOW_HEIGHT);
+	raycasting(&cub);
 }
