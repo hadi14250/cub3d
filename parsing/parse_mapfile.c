@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 23:03:02 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/07 21:54:49 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/07 22:30:22 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -207,6 +207,8 @@ void	print_cub(t_cub *cub)
 	printf("SO%s\n", cub->xpm[0]);
 	printf("EA%s\n", cub->xpm[0]);
 	printf("WE%s\n", cub->xpm[0]);
+	printf("floor color: %ld\n", cub->floor);
+	printf("ceiling color: %ld\n", cub->ceiling);
 }
 
 // void	check_cord_position(t_cub *cub)
@@ -234,25 +236,32 @@ void	trim_comma(char *str)
 	}
 }
 
-void	convert_colors(t_cub *cub, int *rgb, int flag)
+void	convert_colors(t_cub *cub, char *rgb, int flag)
 {
 	unsigned long	temp;
+	char			**line;
 
+	cub->color_flag = false;
+	line = ft_split(rgb, ' ');
 	if (flag == 0)
 	{
-		temp = rgb_to_hex(rgb[0], rgb[1], rgb[2]);
-		cub->floor = temp;
-	}
-	if (flag == 1)
-	{
-		temp = rgb_to_hex(rgb[0], rgb[1], rgb[2]);
+		temp = rgb_to_hex(ft_atoi(line[0]), ft_atoi(line[1]), ft_atoi(line[2]), cub);
 		cub->ceiling = temp;
 	}
+	else
+	{
+		temp = rgb_to_hex(ft_atoi(line[0]), ft_atoi(line[1]), ft_atoi(line[2]), cub);
+		cub->floor = temp;
+	}
+	free_split(line);
+	if (cub->color_flag == true)
+		exit_cub(cub, 1, "rgb out of bound\n");
 }
 
 int	rgb(t_cub *cub, char *line, char flag)
 {
 	char	**tokens;
+
 	tokens = ft_split(line, ' ');
 	if (ft_array_length(tokens) != 3)
 	{
@@ -260,22 +269,12 @@ int	rgb(t_cub *cub, char *line, char flag)
 		exit_cub(cub, 1, "rgb validation failed\n");
 	}
 	if (flag == 'F')
-	{
-		cub->rgb[0] = line;
-		printf("line = %s\n", cub->rgb[0]);
-		printf("entered in F\n");
-	}
+		cub->rgb[0] = ft_strdup(line);
 	else if (flag == 'C')
-	{
-		cub->rgb[1] = line;
-		printf("line = %s\n", line);
-		printf("entered in C\n");
-	}
+		cub->rgb[1] = ft_strdup(line);
 	free_split(tokens);
 	return (0);
 }
-
-
 
 void	check_floor_ceiling(t_cub *cub)
 {
@@ -313,6 +312,8 @@ void	parse_rgb(t_cub *cub)
 	rgb(cub, ft_strnstr(cub->f_rgb, "F", ft_strlen(cub->f_rgb)) + 1, 'F');
 	cub->c_rgb = free_null(cub->c_rgb);
 	cub->f_rgb = free_null(cub->f_rgb);
+	convert_colors(cub, cub->rgb[1], 0);;
+	convert_colors(cub, cub->rgb[0], 1);
 }
 
 int	parse_info(t_cub *cub, int fd)

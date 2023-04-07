@@ -161,6 +161,7 @@ typedef struct s_cub
 	int		map_1d_len;
 	char	*c_rgb;
 	char	*f_rgb;
+	bool	color_flag;
 }				t_cub;
 
 // raycasting struct
@@ -189,7 +190,7 @@ void	print_map(char **map);
 //------------cub_utils_folder------------//
 
 //const char		*get_exit(const char *file);
-unsigned long	rgb_to_hex(int red, int green, int blue);
+unsigned long	rgb_to_hex(int red, int green, int blue, t_cub *cub);
 
 // int				get_next_line(int fd, char **line);
 // int				ft_new_line(char *buf);

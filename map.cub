@@ -3,7 +3,7 @@ EA ./game_textures/EA.xpm
 WE ./game_textures/WE.xpm
 SO ./game_textures/SO.xpm
 
-C 0,0,139
+C 255,255,255
 F 90,90,90
 
 1111111111111111111111111

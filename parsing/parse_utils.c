@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 20:59:19 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/06 15:51:32 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/07 22:23:07 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,12 @@ void	print_map(char **map)
 	}
 }
 
-unsigned long	rgb_to_hex(int red, int green, int blue)
+unsigned long	rgb_to_hex(int red, int green, int blue, t_cub *cub)
 {
-	return (((red & 0xff) << 16) + ((green & 0xff) << 8) + (blue & 0xff));
+	unsigned long temp;
+	if (red > 255 || green > 255 || blue > 255 ||
+		red < 0 || green < 0 || blue < 0)
+		cub->color_flag = true;
+	temp = (((red & 0xff) << 16) + ((green & 0xff) << 8) + (blue & 0xff));
+	return (temp);
 }
