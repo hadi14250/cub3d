@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 23:03:02 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/08 00:19:40 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/08 00:40:17 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -362,17 +362,36 @@ int	map(t_cub *cub, char *line)
 
 void	check_positions(t_cub *cub)
 {
-	// int		i;
-	// char	*str;
+	int		i;
+	char	**split;
 
-	// str = cub->map_1d;
-	// i = cub->map_1d_len - 1;
-	// while(i >= 0)
-	// {
-	// }
-	printf("%d, %d, %d, %d, %d. %d, %d\n",
-	cub->ea_pos, cub->no_pos, cub->so_pos, cub->we_pos, cub->map_pos,
-	cub->floor_pos, cub->ceiling_pos);
+	split = cub->map;
+	i=  -1;
+	while(split[++i] != NULL)
+	{
+		if (ft_strnstr(split[i], "NO", ft_strlen(split[i])))
+			cub->no_pos = i;
+		if (ft_strnstr(split[i], "SO", ft_strlen(split[i])))
+			cub->so_pos = i;
+		if (ft_strnstr(split[i], "WE", ft_strlen(split[i])))
+			cub->we_pos = i;
+		if (ft_strnstr(split[i], "EA", ft_strlen(split[i])))
+			cub->ea_pos = i;
+		if (ft_strnstr(split[i], "F", ft_strlen(split[i])))
+			cub->floor_pos = i;
+		if (ft_strnstr(split[i], "C", ft_strlen(split[i])))
+			cub->ceiling_pos = i;
+	}
+	if (cub->no_pos > 5 || cub->ea_pos > 5 || cub->so_pos > 5
+		|| cub->we_pos > 5 || cub->floor_pos > 5 || cub->ceiling_pos > 5)
+		{
+			exit_cub(cub, 1, "Wrong map pisition\n");
+		}
+	else
+		printf("nice map position");
+		// printf("%d, %d, %d, %d, %d, %d, %d\n"),
+	// cub->no_pos, cub->ea_pos, cub->so_pos, cub->we_pos, cub->map_pos,
+	// cub->floor_pos, cub->ceiling_pos);
 }
 
 void	parse_map(t_cub *cub)

@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 20:27:50 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/07 23:31:13 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/08 00:40:36 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int main(int ac, char **av)
 
 	ft_bzero(&cub, sizeof(cub));
 	parse(ac, &cub, av[1]);
-	exit_cub(&cub, 0, "game finished successfully\n");
+	exit_cub(&cub, 0, "sdfghgfdfggame finisdfghjhgfdhed successfully\n");
 	// // init(cub);
 
 	// //parse_size(cub);
