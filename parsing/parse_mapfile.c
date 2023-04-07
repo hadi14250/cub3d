@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 23:03:02 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/07 18:50:49 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/07 19:44:29 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,6 +212,8 @@ char	*ft_tex_dup(const char *s1)
 void	check_for_textures(t_cub *cub)
 {
 	cub->xpm = ft_calloc(5, sizeof(char *));
+	if (!cub->xpm)
+		exit_cub(cub, 1, "memory allocation fail\n");
 	if (!ft_strnstr(cub->map_1d, "NO ", cub->map_1d_len) ||
 			!ft_strnstr(cub->map_1d, "SO ", cub->map_1d_len) ||
 			!ft_strnstr(cub->map_1d, "WE ", cub->map_1d_len) ||
@@ -233,6 +235,8 @@ void	check_for_textures(t_cub *cub)
 		exit_cub(cub, 1, "EA texture file not found\n");
 	else
 		cub->xpm[3] = ft_strdup("./game_textures/EA.xpm");
+	if (!cub->xpm[0] || !cub->xpm[1] || !cub->xpm[2] || !cub->xpm[3])
+		exit_cub(cub, 1, "memory allocation fail\n");
 }
 
 void	print_cub(t_cub *cub)
@@ -244,11 +248,25 @@ void	print_cub(t_cub *cub)
 	printf("WE%s\n", cub->xpm[0]);
 }
 
+// void	check_cord_position(t_cub *cub)
+// {
+// 	int		i;
+// 	char	**split;
+
+// 	split = cub->map;
+// 	i = -1;
+// 	while (split[i] != NULL)
+// 	{
+		
+// 	}
+// }
+
 int	parse_info(t_cub *cub, int fd)
 {
 	cub->map_1d = take_map_input(fd, cub);
 	cub->map_1d_len = ft_strlen(cub->map_1d);
 	cub->map = ft_split(cub->map_1d, '\n');
+	// check_cord_position(cub);
 	check_for_textures(cub);
 	print_cub(cub);
 	close(fd);
