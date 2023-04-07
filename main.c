@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 20:27:50 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/07 11:50:01 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/07 12:03:44 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,24 +36,24 @@ t_rect	init_rect(int x, int y, int width, int height)
 	return (rect);
 }
 
-void	draw_rectangle(t_img *img, t_rect rect, int color)
-{
-	int	i;
-	int	j;
+// void	draw_rectangle(t_img *img, t_rect rect, int color)
+// {
+// 	int	i;
+// 	int	j;
 
-	i = rect.x;
-	j = rect.y;
-	while (i < rect.x + rect.width)
-	{
-		while (j < rect.y + rect.height)
-		{
-			my_mlx_pixel_put(img, i, j, color);
-			j++;
-		}
-		i++;
-		j = rect.y;
-	}
-}
+// 	i = rect.x;
+// 	j = rect.y;
+// 	while (i < rect.x + rect.width)
+// 	{
+// 		while (j < rect.y + rect.height)
+// 		{
+// 			my_mlx_pixel_put(img, i, j, color);
+// 			j++;
+// 		}
+// 		i++;
+// 		j = rect.y;
+// 	}
+// }
 
 void	parse_size(t_cub *cub)
 {
@@ -93,12 +93,12 @@ int main(int ac, char **av)
 	cub = init_struct();
 	parse(ac, cub, av[1]);
 
-	init(cub);
+	// init(cub);
 
 	parse_size(cub);
 
-	init_mlx_utils(cub);
+	// init_mlx_utils(cub);
 	cub->color_buffer = calloc(sizeof(int) * WINDOW_WIDTH , WINDOW_HEIGHT);
 	cub->tex = calloc(sizeof(int) * WINDOW_WIDTH , WINDOW_HEIGHT);
-	raycasting(cub);
+	// raycasting(cub);
 }

@@ -7,62 +7,54 @@ MAGENTA=\033[0;35m
 CYAN=\033[0;36m
 RESET=\033[0m
 
-SRCS	= 	main.c \
-			parsing/parse_map.c\
-			parsing/parse_ext.c \
-			parsing/parse_utils.c \
-			parsing/parse_colors.c \
-			parsing/parse_mapfile.c \
-			parsing/parse_validate.c \
-			parsing/parse_initializer.c \
-			\
-			raycasting/utils.c \
-			raycasting/key_handles.c \
-			raycasting/line_drawing.c \
-			raycasting/drawing_utils.c \
-			raycasting/raycasting.c \
-			
+NAME	=	cub3d
 
+CC		=	@gcc
+CFLAGS	=	-g3 -Wall -Wextra -Werror #-fsanitize=address
 
-OBJS	= $(SRCS:.c=.o)
-FLAGS	= -crs
-mlx		= ./mlx/libmlx.a
+RM		=	@rm -f
+ECHO	=	@echo
 
 MAKELIB	=	@make -C libft
 LIBFT	=	libft/libft.a
 CLNLIB	=	@make clean -C libft
 FCLNLIB	=	@make fclean -C libft
 
-CC		= gcc -g3
-RM		= rm -rf
-CFLAGS	= -Wall -Wextra -Werror -Ofast -march=native
-NAME	= cub
+SRCS	= 	main.c \
+			parsing/parse_map.c\
+			parsing/parse_ext.c \
+			parsing/parse_utils.c \
+			parsing/parse_colors.c \
+			parsing/parse_mapfile.c \
+			# parsing/parse_validate.c \
+			parsing/parse_initializer.c \
+			# raycasting/utils.c \
+			# raycasting/key_handles.c \
+			# raycasting/line_drawing.c \
+			# raycasting/drawing_utils.c \
+			# raycasting/raycasting.c \
+			
 
-all: $(NAME)
 
-$(NAME): $(OBJS)
-	$(MAKELIB)
-	@echo "$(CYAN)Compiling $(NAME)...\n$(RESET)"
-	@make -C ./mlx
-	@$(CC) $(CFLAGS) -o $(NAME) $(LIBFT) $(OBJS) $(mlx) -framework OpenGL -framework AppKit
-	@echo "$(GREEN)Compilation completed.$(RESET)"
+OBJS	=	$(SRCS:.c=.o)
 
-%.o: %.c
-	@$(CC) $(CFLAGS) -c -o $@ $<
-	@echo "$(MAGENTA)Compiled $< into $@.$(RESET)"
+$(NAME):	$(OBJS)
+			$(MAKELIB)
+			$(ECHO) "Compiling minishell ......"
+			$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT) $(LRLFLAG) 
+
+all:		$(NAME)
 
 clean:
-	@$(RM) $(OBJS)
-	@make clean -C ./mlx && rm -rf *.dSYM
-	@echo "$(YELLOW)Removed object files.$(RESET)"
+			$(CLNLIB)
+			$(RM) $(OBJS)
 
-fclean: clean
-	@$(RM) $(NAME)
-	@make clean -C ./mlx && rm -rf *.dSYM
-	@echo "$(YELLOW)Removed executable.$(RESET)"
+fclean:		
+			$(FCLNLIB)
+			$(ECHO) "Removing minishell ......."
+			$(RM) $(NAME) $(OBJS)
 
-re: fclean all
-		make clean
+re:			fclean all clean
 
 exec: fclean all
 		./cub map.cub

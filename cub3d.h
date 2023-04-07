@@ -6,13 +6,14 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 20:27:23 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/07 11:51:38 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/07 12:21:35 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
+# include "libft/libft.h"
 # include <time.h>
 # include <stdio.h>
 # include <unistd.h>
@@ -34,7 +35,6 @@
 #include "./includes/colors.h"
 #include "./includes/raycasting.h"
 #include <strings.h>
-# include "libft/libft.h"
 
 
 // texture
@@ -197,14 +197,7 @@ int				ft_array_length(char **arr);
 // int				ft_atoi(const char *str);
 
 void			ft_free(char ***arr);
-void			*ft_calloc(size_t count, size_t size);
 
-char			**ft_split(char const *str, char c);
-char			*ft_strdup(const char *s);
-
-size_t			ft_strlen(const char *s);
-size_t			ft_strlcpy(char *dst, const char *src, size_t dstsize);
-char	*ft_strchr(const char *s, int c);
 
 /*parsing*/
 
@@ -213,8 +206,7 @@ int		parse_info(t_cub *cub, int fd);
 int		parse_map(t_cub *cub, int fd);
 int		parse(int ac, t_cub *cub, char *map_file);
 
-void	*ft_memchr(const void *s, int c, size_t n);
-char	*ft_strchr(const char *s, int c);
+
 int	check_characters(t_cub *cub);
 int		init_textures(t_cub *cub);
 int		init_colors(t_cub *cub);
