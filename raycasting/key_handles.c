@@ -6,7 +6,7 @@
 /*   By: bsaeed <bsaeed@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 18:09:08 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/07 11:33:36 by bsaeed           ###   ########.fr       */
+/*   Updated: 2023/04/07 16:11:25 by bsaeed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 // if the key is clicked, then we upudate depeends on what was
 // clicked and set the rest to zero
+
 
 int	keys_handler(int key, t_cub *cub)
 {
@@ -37,6 +38,16 @@ int	keys_handler(int key, t_cub *cub)
 	return (0);
 }
 
+// int	mouse_handler(int x, int y, t_cub *cub)
+// {
+// 	if (x < WINDOW_WIDTH / 2 && (y > 0 && y < WINDOW_HEIGHT))
+// 		printf("moved to the right\n");
+// 	else
+// 		printf("moved left\n");
+// 	// mlx_mouse_move(cub->win, WINDOW_HEIGHT/2, WINDOW_WIDTH/2);
+// 	//ft_start(g);
+// 	return (0);
+// }
 
 int	keys_released(int key, t_cub *cub)
 {
@@ -95,5 +106,6 @@ void	hook_keys(t_cub *cub)
 	mlx_hook(cub->win, 17, 0, exit_app, cub);
 	mlx_hook(cub->win, 2, 0, keys_handler, cub);
 	mlx_hook(cub->win, 3, 0, keys_released, cub);
+	// mlx_hook(cub->win, 6, 0, mouse_handler, cub);
 	mlx_loop_hook(cub->mlx, render_loop, cub);
 }
