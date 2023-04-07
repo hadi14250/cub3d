@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 02:52:17 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/07 11:51:38 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/07 15:39:41 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,37 +96,38 @@ int	is_end(t_cub *cub, int index)
 
 int	validate_map(t_cub *cub)
 {
-	int	i;
-	int	j;
+	// int	i;
+	// int	j;
 
-	if (ft_array_length(cub->map) < 3 || check_characters(cub) != 1)
-	{
-		printf("a11\n");
-		return (1);
-	}
-	i = 0;
-	while (cub->map[i])
-	{
-		if (ft_strlen(cub->map[i]) == 0)
-		{
-			if (is_end(cub, i) == 1)
-			{
-				printf("a2\n");
-				return (1);
-			}
-			break ;
-		}
-		j = 0;
-		while (cub->map[i][j])
-		{
-			if (is_closed(cub, i, j) == 1)
-			{
-				printf("a3\n");
-				return (1);
-			}
-			j++;
-		}
-		i++;
-	}
+	// if (ft_array_length(cub->map) < 3 || check_characters(cub) != 1)
+	// {
+	// 	printf("a1\n");
+	// 	return (1);
+	// }
+	// i = 0;
+	// while (cub->map[i])
+	// {
+	// 	if (ft_strlen(cub->map[i]) == 0)
+	// 	{
+	// 		if (is_end(cub, i) == 1)
+	// 		{
+	// 			printf("a2\n");
+	// 			return (1);
+	// 		}
+	// 		break ;
+	// 	}
+	// 	j = 0;
+	// 	while (cub->map[i][j])
+	// 	{
+	// 		if (is_closed(cub, i, j) == 1)
+	// 		{
+	// 			printf("a3\n");
+	// 			return (1);
+	// 		}
+	// 		j++;
+	// 	}
+	// 	i++;
+	// }
+	(void)cub;
 	return (0);
 }

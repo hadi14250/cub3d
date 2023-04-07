@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 23:03:02 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/07 11:51:38 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/07 15:37:40 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ int	rgb(t_cub *cub, char *line)
 int	parse_info(t_cub *cub, int fd)
 {
 	char	*line;
-	// int		ret;
 
 	cub->xpm = ft_calloc(sizeof(char *), 5);
 	if (!cub->xpm)
@@ -67,9 +66,6 @@ int	parse_info(t_cub *cub, int fd)
 	while (ft_array_length(cub->xpm) != 4 || ft_array_length(cub->rgb) != 2)
 	{
 		line = get_next_line(fd);
-		// ret = get_next_line(fd, &line);
-		// if (ret == -1)
-		// 	return (1);
 		if (ft_strlen(line) == 0)
 			;
 		else if (textures(cub, line) == 1 || rgb(cub, line) == 1)
@@ -111,14 +107,13 @@ int	map(t_cub *cub, char *line)
 int	parse_map(t_cub *cub, int fd)
 {
 	char	*line;
-	// int		ret;
 
 	while (1)
 	{
 		line = get_next_line(fd);
 		if (!line)
 			return (1);
-		if (ft_strlen(line) == 0 && !cub->map)
+		if (ft_strlen(line) == 1 && !cub->map)
 			;
 		else if (map(cub, line) == 1)
 		{
@@ -126,8 +121,8 @@ int	parse_map(t_cub *cub, int fd)
 			return (1);
 		}
 		free(line);
-		if (!line)
-			break ;
+		// if (!line)
+		// 	break ;
 	}
 	return (0);
 }
@@ -157,11 +152,12 @@ int	parse(int ac, t_cub *cub, char *map_file)
 		printf("invalid information, failed at parse_info function\n");
 		exit(EXIT_FAILURE);
 	}
-	if (parse_map(cub, fd) == 1)
-	{
-		printf("Error\nInvalid map\n");
-		exit(EXIT_FAILURE);
-	}
+	// if (parse_map(cub, fd) == 1)
+	// {
+	// 	printf("Error\nInvalid map\n");
+	// 	exit(EXIT_FAILURE);
+	// }
+	cub++;
 	close(fd);
 	return (0);
 }

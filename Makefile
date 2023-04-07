@@ -28,31 +28,50 @@ SRCS	= 	main.c \
 			parsing/parse_mapfile.c \
 			# parsing/parse_validate.c \
 			parsing/parse_initializer.c \
-			# raycasting/utils.c \
-			# raycasting/key_handles.c \
-			# raycasting/line_drawing.c \
-			# raycasting/drawing_utils.c \
-			# raycasting/raycasting.c \
+			raycasting/utils.c \
+			raycasting/key_handles.c \
+			raycasting/line_drawing.c \
+			raycasting/drawing_utils.c \
+			raycasting/raycasting.c \
 			
 
 
-OBJS	=	$(SRCS:.c=.o)
+OBJS	= $(SRCS:.c=.o)
+FLAGS	= -crs
+mlx		= ./mlx/libmlx.a
 
-$(NAME):	$(OBJS)
-			$(MAKELIB)
-			$(ECHO) "Compiling minishell ......"
-			$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT) $(LRLFLAG) 
+CC		= gcc -g3
+RM		= rm -rf
+CFLAGS	= -Wall -Wextra -Werror -Ofast -march=native
+NAME	= cub3d
+
+MAKELIB	=	@make -C libft
+LIBFT	=	libft/libft.a
+CLNLIB	=	@make clean -C libft
+FCLNLIB	=	@make fclean -C libft
+
+all: $(NAME)
+
+$(NAME): $(OBJS)
+	$(MAKELIB)
+	@echo "$(CYAN)Compiling $(NAME)...\n$(RESET)"
+	@make -C ./mlx
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT) $(mlx) -framework OpenGL -framework AppKit
+	@echo "$(GREEN)Compilation completed.$(RESET)"
 
 all:		$(NAME)
 
 clean:
-			$(CLNLIB)
-			$(RM) $(OBJS)
+	$(CLNLIB)
+	@$(RM) $(OBJS)
+	@make clean -C ./mlx && rm -rf *.dSYM
+	@echo "$(YELLOW)Removed object files.$(RESET)"
 
-fclean:		
-			$(FCLNLIB)
-			$(ECHO) "Removing minishell ......."
-			$(RM) $(NAME) $(OBJS)
+fclean: clean
+	$(FCLNLIB)
+	@$(RM) $(NAME)
+	@make clean -C ./mlx && rm -rf *.dSYM
+	@echo "$(YELLOW)Removed executable.$(RESET)"
 
 re:			fclean all clean
 

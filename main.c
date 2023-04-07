@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 20:27:50 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/07 12:03:44 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/07 15:38:45 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,50 +55,16 @@ t_rect	init_rect(int x, int y, int width, int height)
 // 	}
 // }
 
-void	parse_size(t_cub *cub)
-{
-	int	j;
-
-	j = 0;
-	while (cub->map[j])
-	{
-		cub->n_rows = ft_strlen(cub->map[j]);
-		if ((int)ft_strlen(cub->map[j]) > cub->n_rows)
-			cub->n_rows = (int)ft_strlen(cub->map[j]);
-		j++;
-	}
-	// while (cub->map[i])
-	// 	i++;
-	// i--;
-	// cub->n_columns = i;
-}
-
-int	ft_new_line(char *buf)
-{
-	int	i;
-
-	i = 0;
-	while (buf[i] && buf[i] != 10)
-		i++;
-	if (buf[i] == 10)
-		return (1);
-	return (0);
-}
-
-
 int main(int ac, char **av)
 {
-	t_cub		*cub;
+	t_cub	cub;
+	ft_bzero(&cub, sizeof(cub));
+	parse(ac, &cub, av[1]);
 
-	cub = init_struct();
-	parse(ac, cub, av[1]);
+	init(&cub);
 
-	// init(cub);
-
-	parse_size(cub);
-
-	// init_mlx_utils(cub);
-	cub->color_buffer = calloc(sizeof(int) * WINDOW_WIDTH , WINDOW_HEIGHT);
-	cub->tex = calloc(sizeof(int) * WINDOW_WIDTH , WINDOW_HEIGHT);
-	// raycasting(cub);
+	init_mlx_utils(&cub);
+	cub.color_buffer = calloc(sizeof(int) * WINDOW_WIDTH , WINDOW_HEIGHT);
+	cub.tex = calloc(sizeof(int) * WINDOW_WIDTH , WINDOW_HEIGHT);
+	raycasting(&cub);
 }

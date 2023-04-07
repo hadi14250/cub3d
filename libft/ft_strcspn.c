@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 10:43:36 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/07 12:08:09 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/07 15:45:10 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <stdio.h>
 
 int	ft_strcspn(const char *str, const char *set);
+
 
 int	ft_strlen(char *str)
 {

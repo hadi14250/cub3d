@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 19:51:44 by hakaddou          #+#    #+#             */
-/*   Updated: 2022/06/15 16:39:18 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/07 15:38:25 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char	*gl_trim_line(char *str)
 	i = 0;
 	while (str[i] != '\n' && str[i] != '\0')
 		i++;
-	tmp = ft_calloc (i + 2, 1);
+	tmp = ft_calloc (i + 1, 1);
 	if (!tmp)
 		return (NULL);
 	tmp[0] = '\0';
@@ -58,11 +58,7 @@ char	*gl_trim_line(char *str)
 		i++;
 	}
 	if (str[i] == '\n')
-	{
-		tmp[i] = str[i];
-		i++;
-	}
-	tmp[i] = '\0';
+		tmp[i] = '\0';
 	return (tmp);
 }
 
