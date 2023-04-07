@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/25 20:27:23 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/07 15:41:44 by hakaddou         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
@@ -35,7 +24,7 @@
 #include "./includes/colors.h"
 #include "./includes/raycasting.h"
 #include <strings.h>
-#include "./libft/libft.h"
+
 
 // texture
 
@@ -190,9 +179,14 @@ void	print_map(char **map);
 //const char		*get_exit(const char *file);
 unsigned long	rgb_to_hex(int red, int green, int blue);
 
+// int				get_next_line(int fd, char **line);
+// int				ft_new_line(char *buf);
 int				ft_array_length(char **arr);
+// int				ft_strncmp(const char *s1, char *s2, size_t n);
+// int				ft_atoi(const char *str);
 
 void			ft_free(char ***arr);
+
 
 /*parsing*/
 
@@ -200,6 +194,7 @@ int		ft_file_ext(int fd, char *map_file);
 int		parse_info(t_cub *cub, int fd);
 int		parse_map(t_cub *cub, int fd);
 int		parse(int ac, t_cub *cub, char *map_file);
+
 
 int	check_characters(t_cub *cub);
 int		init_textures(t_cub *cub);
@@ -247,3 +242,4 @@ void	render(t_cub *cub);
 void	update(t_cub *cub);
 
 #endif
+

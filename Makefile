@@ -1,3 +1,4 @@
+
 # ANSI color codes for output formatting
 RED=\033[0;31m
 GREEN=\033[0;32m
@@ -28,50 +29,31 @@ SRCS	= 	main.c \
 			parsing/parse_mapfile.c \
 			# parsing/parse_validate.c \
 			parsing/parse_initializer.c \
-			raycasting/utils.c \
-			raycasting/key_handles.c \
-			raycasting/line_drawing.c \
-			raycasting/drawing_utils.c \
-			raycasting/raycasting.c \
-			
+			# raycasting/utils.c \
+			# raycasting/key_handles.c \
+			# raycasting/line_drawing.c \
+			# raycasting/drawing_utils.c \
+			# raycasting/raycasting.c \
 
 
-OBJS	= $(SRCS:.c=.o)
-FLAGS	= -crs
-mlx		= ./mlx/libmlx.a
 
-CC		= gcc -g3
-RM		= rm -rf
-CFLAGS	= -Wall -Wextra -Werror -Ofast -march=native
-NAME	= cub3d
+OBJS	=	$(SRCS:.c=.o)
 
-MAKELIB	=	@make -C libft
-LIBFT	=	libft/libft.a
-CLNLIB	=	@make clean -C libft
-FCLNLIB	=	@make fclean -C libft
-
-all: $(NAME)
-
-$(NAME): $(OBJS)
-	$(MAKELIB)
-	@echo "$(CYAN)Compiling $(NAME)...\n$(RESET)"
-	@make -C ./mlx
-	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT) $(mlx) -framework OpenGL -framework AppKit
-	@echo "$(GREEN)Compilation completed.$(RESET)"
+$(NAME):	$(OBJS)
+			$(MAKELIB)
+			$(ECHO) "Compiling minishell ......"
+			$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT) $(LRLFLAG)
 
 all:		$(NAME)
 
 clean:
-	$(CLNLIB)
-	@$(RM) $(OBJS)
-	@make clean -C ./mlx && rm -rf *.dSYM
-	@echo "$(YELLOW)Removed object files.$(RESET)"
+			$(CLNLIB)
+			$(RM) $(OBJS)
 
-fclean: clean
-	$(FCLNLIB)
-	@$(RM) $(NAME)
-	@make clean -C ./mlx && rm -rf *.dSYM
-	@echo "$(YELLOW)Removed executable.$(RESET)"
+fclean:
+			$(FCLNLIB)
+			$(ECHO) "Removing minishell ......."
+			$(RM) $(NAME) $(OBJS)
 
 re:			fclean all clean
 
@@ -79,5 +61,7 @@ exec: fclean all
 		./cub map.cub
 
 .PHONY: all clean fclean re
+
+
 
 
