@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 23:03:02 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/08 00:40:17 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/08 01:16:17 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	exit_cub(t_cub *cub, int code, char *msg)
 	cub->c_rgb = free_null(cub->c_rgb);
 	cub->f_rgb = free_null(cub->f_rgb);
 	cub->fd = ft_close(cub->fd);
-	write(2, msg, ft_strlen(msg));
+	printf("%s", msg);
 	exit (code);
 }
 
@@ -185,10 +185,10 @@ void	check_for_textures(t_cub *cub)
 	cub->xpm = ft_calloc(5, sizeof(char *));
 	if (!cub->xpm)
 		exit_cub(cub, 1, "memory allocation fail\n");
-	if (!ft_strnstr(cub->map_1d, "NO ", cub->map_1d_len) ||
-			!ft_strnstr(cub->map_1d, "SO ", cub->map_1d_len) ||
-			!ft_strnstr(cub->map_1d, "WE ", cub->map_1d_len) ||
-			!ft_strnstr(cub->map_1d, "EA ", cub->map_1d_len))
+	if (!ft_strnstr(cub->map_1d, "NO", cub->map_1d_len) ||
+			!ft_strnstr(cub->map_1d, "SO", cub->map_1d_len) ||
+			!ft_strnstr(cub->map_1d, "WE", cub->map_1d_len) ||
+			!ft_strnstr(cub->map_1d, "EA", cub->map_1d_len))
 		exit_cub(cub, 1, "texture not found\n");
 	if(!ft_strnstr(cub->map_1d, "./game_textures/NO.xpm", cub->map_1d_len))
 		exit_cub(cub, 1, "NO texture file not found\n");
@@ -213,10 +213,10 @@ void	check_for_textures(t_cub *cub)
 void	print_cub(t_cub *cub)
 {
 	printf("%s", cub->map_1d);
-	printf("NO%s\n", cub->xpm[0]);
-	printf("SO%s\n", cub->xpm[0]);
-	printf("EA%s\n", cub->xpm[0]);
-	printf("WE%s\n", cub->xpm[0]);
+	printf("NO: %s\n", cub->xpm[0]);
+	printf("SO: %s\n", cub->xpm[1]);
+	printf("EA: %s\n", cub->xpm[2]);
+	printf("WE: %s\n", cub->xpm[3]);
 	printf("floor color: %ld\n", cub->floor);
 	printf("ceiling color: %ld\n", cub->ceiling);
 }
@@ -360,42 +360,91 @@ int	map(t_cub *cub, char *line)
 	return (0);
 }
 
+int	return_len(char **split)
+{
+	int	i;
+	int	d;
+
+	d = 0;
+	i = -1;
+	while(split[++i] != NULL)
+		d += ft_strlen(split[i]);
+	return (d);
+}
+
 void	check_positions(t_cub *cub)
 {
 	int		i;
 	char	**split;
+	int		max;
 
+	max = 0;
 	split = cub->map;
 	i=  -1;
 	while(split[++i] != NULL)
 	{
 		if (ft_strnstr(split[i], "NO", ft_strlen(split[i])))
-			cub->no_pos = i;
-		if (ft_strnstr(split[i], "SO", ft_strlen(split[i])))
-			cub->so_pos = i;
-		if (ft_strnstr(split[i], "WE", ft_strlen(split[i])))
-			cub->we_pos = i;
-		if (ft_strnstr(split[i], "EA", ft_strlen(split[i])))
-			cub->ea_pos = i;
-		if (ft_strnstr(split[i], "F", ft_strlen(split[i])))
-			cub->floor_pos = i;
-		if (ft_strnstr(split[i], "C", ft_strlen(split[i])))
-			cub->ceiling_pos = i;
-	}
-	if (cub->no_pos > 5 || cub->ea_pos > 5 || cub->so_pos > 5
-		|| cub->we_pos > 5 || cub->floor_pos > 5 || cub->ceiling_pos > 5)
 		{
-			exit_cub(cub, 1, "Wrong map pisition\n");
+			cub->no_pos = i;
+
 		}
-	else
-		printf("nice map position");
-		// printf("%d, %d, %d, %d, %d, %d, %d\n"),
-	// cub->no_pos, cub->ea_pos, cub->so_pos, cub->we_pos, cub->map_pos,
-	// cub->floor_pos, cub->ceiling_pos);
+		if (ft_strnstr(split[i], "SO", ft_strlen(split[i])))
+		{
+			cub->so_pos = i;
+			if (i > max)
+				max = i;
+		}
+		if (ft_strnstr(split[i], "WE", ft_strlen(split[i])))
+		{
+			cub->we_pos = i;
+			if (i > max)
+				max = i;
+		}
+		if (ft_strnstr(split[i], "EA", ft_strlen(split[i])))
+		{
+			cub->ea_pos = i;
+			if (i > max)
+				max = i;
+		}
+		if (ft_strnstr(split[i], "F", ft_strlen(split[i])))
+		{
+			cub->floor_pos = i;
+			if (i > max)
+				max = i;
+		}
+		if (ft_strnstr(split[i], "C", ft_strlen(split[i])))
+		{
+			cub->ceiling_pos = i;
+			if (i > max)
+				max = i;
+		}
+	}
+	// if (cub->no_pos > 5 || cub->ea_pos > 5 || cub->so_pos > 5
+	// 	|| cub->we_pos > 5 || cub->floor_pos > 5 || cub->ceiling_pos > 5)
+	// 	{
+	// 		exit_cub(cub, 1, "Wrong map pisition\n");
+	// 	}
+	printf("max is: %d and it is %s\n", max, cub->map[max]);
+	printf("%d, %d, %d, %d, %d, %d, %d\n",
+	cub->no_pos, cub->ea_pos, cub->so_pos, cub->we_pos, cub->map_pos,
+	cub->floor_pos, cub->ceiling_pos);
+}
+
+void	trim_spaces(char *str)
+{
+	int	i;
+
+	i = -1;
+	while(str[++i] != '\0')
+	{
+		if (str[i] == ' ')
+			str[i] = '\n';
+	}
 }
 
 void	parse_map(t_cub *cub)
 {
+	trim_spaces(cub->map_1d);
 	cub->map = ft_split(cub->map_1d, '\n');
 	check_positions(cub);
 }

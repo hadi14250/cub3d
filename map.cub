@@ -1,37 +1,15 @@
-
-
-
-
-
-
-
-
-
-
 NO ./game_textures/NO.xpm
-
-
-F 90,90,90
-
-C 255, 255, 255
-
-
-
-
 
 SO ./game_textures/SO.xpm
 
+
+C 255, 255, 255
 EA ./game_textures/EA.xpm
 
-
-
-
-
-
-
-
-
+F 90, 90,	90
+      
 WE ./game_textures/WE.xpm
+
 1111111111111111111111111
 1000000000110000000000001
 1011000001110000000000001
