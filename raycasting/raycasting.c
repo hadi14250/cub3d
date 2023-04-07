@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 23:10:35 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/06 20:47:25 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/07 23:29:16 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	init_player(t_player *player, t_cub *cub)
 	player->walkdirection = 0;
 	player->rotationangle = 0.501 * PI;
 	player->walkspeed = 3;
-	player->turnspeed = (1 * cub->fps) * (PI / 180);
+	player->turnspeed = (1.5 * cub->fps) * (PI / 180);
 	player->radius = 10;
 }
 
