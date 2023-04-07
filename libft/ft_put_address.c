@@ -1,34 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_initializer.c                                :+:      :+:    :+:   */
+/*   ft_put_address.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/03 23:01:56 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/07 14:59:53 by hakaddou         ###   ########.fr       */
+/*   Created: 2022/03/09 04:20:46 by hakaddou          #+#    #+#             */
+/*   Updated: 2022/03/09 18:32:37 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "ft_printf.h"
 
-void	init(t_cub *cub)
+int	ft_put_address(unsigned long long nb)
 {
-	//void	*temp;
-	cub->mlx = mlx_init();
-	if (init_textures(cub) == 1)
-	{
-		printf("Cannot load textures\n");
-		exit(1);
-	}
-	if (init_colors(cub) == 1)
-	{
-		printf("cannot load colours\n");
-		exit(1);
-	}
-	if (validate_map(cub) == 1)
-	{
-		printf("error in map\n");
-		exit(1);
-	}
+	int		length;
+	int		nbr;
+	char	res;
+
+	length = 0;
+	if (nb >= 16)
+		length += ft_put_address (nb / 16);
+	nbr = nb % 16;
+	if (nbr < 10)
+		res = nbr + 48;
+	if (nbr >= 10)
+		res = nbr + 87;
+	length += ft_putchar(res);
+	return (length);
 }

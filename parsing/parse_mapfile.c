@@ -6,13 +6,13 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 23:03:02 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/06 17:14:29 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/07 14:56:28 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-int	textures(t_cub *game, char *line)
+int	textures(t_cub *cub, char *line)
 {
 	char	**tokens;
 
@@ -22,13 +22,13 @@ int	textures(t_cub *game, char *line)
 	if (ft_array_length(tokens) != 2)
 		return (1);
 	if (ft_strncmp(tokens[0], "NO", 3) == 0)
-		game->xpm[0] = ft_strdup(tokens[1]);
+		cub->xpm[0] = ft_strdup(tokens[1]);
 	else if (ft_strncmp(tokens[0], "EA", 3) == 0)
-		game->xpm[1] = ft_strdup(tokens[1]);
+		cub->xpm[1] = ft_strdup(tokens[1]);
 	else if (ft_strncmp(tokens[0], "SO", 3) == 0)
-		game->xpm[2] = ft_strdup(tokens[1]);
+		cub->xpm[2] = ft_strdup(tokens[1]);
 	else if (ft_strncmp(tokens[0], "WE", 3) == 0)
-		game->xpm[3] = ft_strdup(tokens[1]);
+		cub->xpm[3] = ft_strdup(tokens[1]);
 	else if (ft_strncmp(tokens[0], "C", 2) \
 		&& ft_strncmp(tokens[0], "F", 2))
 		return (1);
@@ -36,7 +36,7 @@ int	textures(t_cub *game, char *line)
 	return (0);
 }
 
-int	rgb(t_cub *game, char *line)
+int	rgb(t_cub *cub, char *line)
 {
 	char	**tokens;
 
@@ -46,112 +46,118 @@ int	rgb(t_cub *game, char *line)
 	if (ft_array_length(tokens) != 2)
 		return (1);
 	if (ft_strncmp(tokens[0], "F", 1) == 0)
-		game->rgb[0] = ft_strdup(tokens[1]);
+		cub->rgb[0] = ft_strdup(tokens[1]);
 	else if (ft_strncmp(tokens[0], "C", 1) == 0)
-		game->rgb[1] = ft_strdup(tokens[1]);
+		cub->rgb[1] = ft_strdup(tokens[1]);
 	ft_free(&tokens);
 	return (0);
 }
 
-int	parse_info(t_cub *game, int fd)
+int	parse_info(t_cub *cub, int fd)
 {
 	char	*line;
-	int		ret;
 
-	game->xpm = ft_calloc(sizeof(char *), 5);
-	if (!game->xpm)
+	cub->xpm = ft_calloc(sizeof(char *), 5);
+	if (!cub->xpm)
 		return (1);
-	game->rgb = ft_calloc(sizeof(char *), 3);
-	if (!game->rgb)
+	cub->rgb = ft_calloc(sizeof(char *), 3);
+	if (!cub->rgb)
 		return (1);
-	while (ft_array_length(game->xpm) != 4 || ft_array_length(game->rgb) != 2)
+	while (ft_array_length(cub->xpm) != 4 || ft_array_length(cub->rgb) != 2)
 	{
-		// line = get_next_line(fd);
-		ret = get_next_line(fd, &line);
-		// if (ret == -1)
-		// 	return (1);
+		line = get_next_line(fd);
 		if (ft_strlen(line) == 0)
 			;
-		else if (textures(game, line) == 1 || rgb(game, line) == 1)
+		else if (textures(cub, line) == 1 || rgb(cub, line) == 1)
 		{
 			free(line);
 			return (1);
 		}
 		free(line);
-		if (ret == 0)
+		if (!line)
 			break ;
 	}
 	return (0);
 }
 
 
-int	map(t_cub *game, char *line)
+int	map(t_cub *cub, char *line)
 {
 	char	**tmp;
 
-	if (!game->map)
+	if (!cub->map)
 	{
-		game->map = malloc(sizeof(char *) * 2);
-		if (!game->map)
+		cub->map = malloc(sizeof(char *) * 2);
+		if (!cub->map)
 			return (1);
-		game->map[0] = ft_strdup(line);
-		game->map[1] = NULL;
+		cub->map[0] = ft_strdup(line);
+		cub->map[1] = NULL;
 	}
 	else
 	{
-		tmp = ft_reallocation(game->map, ft_array_length(game->map) + 2);
+		tmp = ft_reallocation(cub->map, ft_array_length(cub->map) + 2);
 		if (!tmp)
 			return (1);
-		game->map = tmp;
-		game->map[ft_array_length(game->map)] = ft_strdup(line);
+		cub->map = tmp;
+		cub->map[ft_array_length(cub->map)] = ft_strdup(line);
 	}
 	return (0);
 }
 
-int	parse_map(t_cub *game, int fd)
+int	parse_map(t_cub *cub, int fd)
 {
 	char	*line;
-	int		ret;
 
 	while (1)
 	{
-		ret = get_next_line(fd, &line);
-		if (ret == -1)
+		line = get_next_line(fd);
+		if (!line)
 			return (1);
-		if (ft_strlen(line) == 0 && !game->map)
+		if (ft_strlen(line) == 1 && !cub->map)
 			;
-		else if (map(game, line) == 1)
+		else if (map(cub, line) == 1)
 		{
 			free(line);
 			return (1);
 		}
 		free(line);
-		if (ret == 0)
-			break ;
+		// if (!line)
+		// 	break ;
 	}
 	return (0);
 }
 
-int	parse(t_cub *game, char *map_file)
+void	arg_count(int ac)
+{
+	if (ac != 2)
+	{
+		printf("[usage]: ./cub3d cubfile\n");
+		exit(EXIT_FAILURE);
+	}
+}
+
+int	parse(int ac, t_cub *cub, char *map_file)
 {
 	int	fd;
 
+	arg_count(ac);
 	fd = open(map_file, O_RDONLY);
 	if (ft_file_ext(fd, map_file))
 	{
 		printf("file ext parse failed\n");
 		exit(EXIT_FAILURE);
 	}
-	if (parse_info(game, fd) == 1)
+	if (parse_info(cub, fd) == 1)
 	{
 		printf("invalid information, failed at parse_info function\n");
 		exit(EXIT_FAILURE);
 	}
-	if (parse_map(game, fd) == 1)
-	{
-		printf("Error\nInvalid map\n");
-		exit(EXIT_FAILURE);
-	}
+	// if (parse_map(cub, fd) == 1)
+	// {
+	// 	printf("Error\nInvalid map\n");
+	// 	exit(EXIT_FAILURE);
+	// }
+	cub++;
 	close(fd);
 	return (0);
 }

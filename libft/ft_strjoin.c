@@ -1,34 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_initializer.c                                :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/03 23:01:56 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/07 14:59:53 by hakaddou         ###   ########.fr       */
+/*   Created: 2022/02/14 04:09:37 by hakaddou          #+#    #+#             */
+/*   Updated: 2022/06/14 21:30:21 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "libft.h"
 
-void	init(t_cub *cub)
+char	*ft_strjoin(char *s1, char *s2)
 {
-	//void	*temp;
-	cub->mlx = mlx_init();
-	if (init_textures(cub) == 1)
+	char	*str;
+	int		len1;
+	int		len2;
+	int		i;
+
+	i = 0;
+	len1 = ft_strlen(s1);
+	len2 = ft_strlen(s2);
+	if (!len1 && !len2)
+		return (0);
+	str = malloc(len1 + len2 + 1);
+	if (!str)
+		return (0);
+	str[0] = '\0';
+	while (i < len1 + len2)
 	{
-		printf("Cannot load textures\n");
-		exit(1);
+		if (i < len1)
+			str[i] = s1[i];
+		if (i >= len1)
+			str[i] = s2[i - len1];
+		i++;
 	}
-	if (init_colors(cub) == 1)
-	{
-		printf("cannot load colours\n");
-		exit(1);
-	}
-	if (validate_map(cub) == 1)
-	{
-		printf("error in map\n");
-		exit(1);
-	}
+	str[i] = '\0';
+	return (str);
 }
