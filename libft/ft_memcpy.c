@@ -1,34 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_initializer.c                                :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/03 23:01:56 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/07 11:51:38 by hakaddou         ###   ########.fr       */
+/*   Created: 2022/01/29 01:19:11 by hakaddou          #+#    #+#             */
+/*   Updated: 2022/03/01 19:26:52 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "libft.h"
 
-void	init(t_cub *cub)
+void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	//void	*temp;
-	cub->mlx = mlx_init();
-	if (init_textures(cub) == 1)
+	size_t	i;
+	char	*src1;
+	char	*dst1;
+
+	if (!dst && !src)
+		return (0);
+	i = 0;
+	src1 = (char *)src;
+	dst1 = (char *)dst;
+	while (i < n)
 	{
-		printf("Cannot load textures\n");
-		exit(1);
+		dst1[i] = src1[i];
+		i++;
 	}
-	if (init_colors(cub) == 1)
-	{
-		printf("cannot load colours\n");
-		exit(1);
-	}
-	if (validate_map(cub) == 1)
-	{
-		printf("error in map\n");
-		exit(1);
-	}
+	return (dst);
 }

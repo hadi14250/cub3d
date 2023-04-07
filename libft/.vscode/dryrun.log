@@ -1,0 +1,53 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory `/Users/hakaddou/Desktop/42cursus/libft'
+gcc -Wall -Wextra -Werror   -c -o ft_isalnum.o ft_isalnum.c
+gcc -Wall -Wextra -Werror   -c -o ft_isprint.o ft_isprint.c
+gcc -Wall -Wextra -Werror   -c -o ft_memcmp.o ft_memcmp.c
+gcc -Wall -Wextra -Werror   -c -o ft_split.o ft_split.c
+gcc -Wall -Wextra -Werror   -c -o ft_strlcat.o ft_strlcat.c
+gcc -Wall -Wextra -Werror   -c -o ft_strncmp.o ft_strncmp.c
+gcc -Wall -Wextra -Werror   -c -o ft_substr.o ft_substr.c
+gcc -Wall -Wextra -Werror   -c -o ft_atoi.o ft_atoi.c
+gcc -Wall -Wextra -Werror   -c -o ft_isalpha.o ft_isalpha.c
+gcc -Wall -Wextra -Werror   -c -o ft_itoa.o ft_itoa.c
+gcc -Wall -Wextra -Werror   -c -o ft_memcpy.o ft_memcpy.c
+gcc -Wall -Wextra -Werror   -c -o ft_strchr.o ft_strchr.c
+gcc -Wall -Wextra -Werror   -c -o ft_strlcpy.o ft_strlcpy.c
+gcc -Wall -Wextra -Werror   -c -o ft_strnstr.o ft_strnstr.c
+gcc -Wall -Wextra -Werror   -c -o ft_tolower.o ft_tolower.c
+gcc -Wall -Wextra -Werror   -c -o ft_bzero.o ft_bzero.c
+gcc -Wall -Wextra -Werror   -c -o ft_isascii.o ft_isascii.c
+gcc -Wall -Wextra -Werror   -c -o ft_memmove.o ft_memmove.c
+ 
+gcc -Wall -Wextra -Werror   -c -o ft_strdup.o ft_strdup.c
+gcc -Wall -Wextra -Werror   -c -o ft_strlen.o ft_strlen.c
+gcc -Wall -Wextra -Werror   -c -o ft_strrchr.o ft_strrchr.c
+gcc -Wall -Wextra -Werror   -c -o ft_toupper.o ft_toupper.c
+gcc -Wall -Wextra -Werror   -c -o ft_calloc.o ft_calloc.c
+gcc -Wall -Wextra -Werror   -c -o ft_isdigit.o ft_isdigit.c
+gcc -Wall -Wextra -Werror   -c -o ft_memchr.o ft_memchr.c
+gcc -Wall -Wextra -Werror   -c -o ft_memset.o ft_memset.c
+gcc -Wall -Wextra -Werror   -c -o ft_strjoin.o ft_strjoin.c
+gcc -Wall -Wextra -Werror   -c -o ft_strmapi.o ft_strmapi.c
+gcc -Wall -Wextra -Werror   -c -o ft_strtrim.o ft_strtrim.c
+gcc -Wall -Wextra -Werror   -c -o ft_striteri.o ft_striteri.c
+gcc -Wall -Wextra -Werror   -c -o ft_putchar_fd.o ft_putchar_fd.c
+gcc -Wall -Wextra -Werror   -c -o ft_putstr_fd.o ft_putstr_fd.c
+gcc -Wall -Wextra -Werror   -c -o ft_putendl_fd.o ft_putendl_fd.c
+gcc -Wall -Wextra -Werror   -c -o ft_putnbr_fd.o ft_putnbr_fd.c
+gcc -Wall -Wextra -Werror   -c -o ft_parse.o ft_parse.c
+gcc -Wall -Wextra -Werror   -c -o ft_printf.o ft_printf.c
+gcc -Wall -Wextra -Werror   -c -o ft_put_address.o ft_put_address.c
+gcc -Wall -Wextra -Werror   -c -o ft_put_hex.o ft_put_hex.c
+gcc -Wall -Wextra -Werror   -c -o ft_putchar.o ft_putchar.c
+gcc -Wall -Wextra -Werror   -c -o ft_putnbr_u.o ft_putnbr_u.c
+gcc -Wall -Wextra -Werror   -c -o ft_putnbr.o ft_putnbr.c
+gcc -Wall -Wextra -Werror   -c -o ft_putstr.o ft_putstr.c
+gcc -Wall -Wextra -Werror   -c -o ft_capitalise.o ft_capitalise.c
+gcc -Wall -Wextra -Werror   -c -o ft_strsjoin.o ft_strsjoin.c
+gcc -Wall -Wextra -Werror   -c -o get_next_line.o get_next_line.c
+gcc -Wall -Wextra -Werror   -c -o FIZZBUZZ.o FIZZBUZZ.c
+gcc -Wall -Wextra -Werror   -c -o get_next_line_utils.o get_next_line_utils.c
+ar rcs libft.a ft_isalnum.o ft_isprint.o ft_memcmp.o ft_split.o ft_strlcat.o ft_strncmp.o ft_substr.o ft_atoi.o ft_isalpha.o ft_itoa.o ft_memcpy.o ft_strchr.o ft_strlcpy.o ft_strnstr.o ft_tolower.o ft_bzero.o ft_isascii.o ft_memcpy.o ft_memmove.o ft_strdup.o ft_strlen.o ft_strrchr.o ft_toupper.o ft_calloc.o ft_isdigit.o ft_memchr.o ft_memset.o ft_strjoin.o ft_strmapi.o ft_strtrim.o ft_striteri.o ft_putchar_fd.o ft_putstr_fd.o ft_putendl_fd.o ft_putnbr_fd.o ft_parse.o ft_printf.o ft_put_address.o ft_put_hex.o ft_putchar.o ft_putnbr_u.o ft_putnbr.o ft_putstr.o ft_capitalise.o ft_strsjoin.o get_next_line.o FIZZBUZZ.o get_next_line_utils.o
+make: Leaving directory `/Users/hakaddou/Desktop/42cursus/libft'
+ 

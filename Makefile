@@ -15,10 +15,7 @@ SRCS	= 	main.c \
 			parsing/parse_mapfile.c \
 			parsing/parse_validate.c \
 			parsing/parse_initializer.c \
-			parsing/libft_utils/ft_split.c \
-			parsing/libft_utils/gnl.c \
-			parsing/libft_utils/utils1.c \
-			parsing/libft_utils/utils2.c \
+			\
 			raycasting/utils.c \
 			raycasting/key_handles.c \
 			raycasting/line_drawing.c \
@@ -30,8 +27,12 @@ SRCS	= 	main.c \
 OBJS	= $(SRCS:.c=.o)
 FLAGS	= -crs
 mlx		= ./mlx/libmlx.a
-#LIBFT	= cd libft && make
-#LIB		= libft/libft.a
+
+MAKELIB	=	@make -C libft
+LIBFT	=	libft/libft.a
+CLNLIB	=	@make clean -C libft
+FCLNLIB	=	@make fclean -C libft
+
 CC		= gcc -g3
 RM		= rm -rf
 CFLAGS	= -Wall -Wextra -Werror -Ofast -march=native
@@ -40,9 +41,10 @@ NAME	= cub
 all: $(NAME)
 
 $(NAME): $(OBJS)
+	$(MAKELIB)
 	@echo "$(CYAN)Compiling $(NAME)...\n$(RESET)"
 	@make -C ./mlx
-	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(mlx) -framework OpenGL -framework AppKit
+	@$(CC) $(CFLAGS) -o $(NAME) $(LIBFT) $(OBJS) $(mlx) -framework OpenGL -framework AppKit
 	@echo "$(GREEN)Compilation completed.$(RESET)"
 
 %.o: %.c

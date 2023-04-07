@@ -1,34 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_initializer.c                                :+:      :+:    :+:   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/03 23:01:56 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/07 11:51:38 by hakaddou         ###   ########.fr       */
+/*   Created: 2022/01/25 16:39:34 by hakaddou          #+#    #+#             */
+/*   Updated: 2022/03/01 19:24:57 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "libft.h"
 
-void	init(t_cub *cub)
+int	ft_isdigit(int c)
 {
-	//void	*temp;
-	cub->mlx = mlx_init();
-	if (init_textures(cub) == 1)
-	{
-		printf("Cannot load textures\n");
-		exit(1);
-	}
-	if (init_colors(cub) == 1)
-	{
-		printf("cannot load colours\n");
-		exit(1);
-	}
-	if (validate_map(cub) == 1)
-	{
-		printf("error in map\n");
-		exit(1);
-	}
+	if (c >= '0' && c <= '9')
+		return (1);
+	return (0);
 }

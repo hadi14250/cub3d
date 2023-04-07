@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_colors.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bsaeed <bsaeed@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 01:34:04 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/04 15:56:59 by bsaeed           ###   ########.fr       */
+/*   Updated: 2023/04/07 11:51:38 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,32 +32,32 @@ int	*check_rgb(char **rgb_array)
 	return (rgb);
 }
 
-void	convert_colors(t_cub *game, int *rgb, int flag)
+void	convert_colors(t_cub *cub, int *rgb, int flag)
 {
 	unsigned long	temp;
 
 	if (flag == 0)
 	{
 		temp = rgb_to_hex(rgb[0], rgb[1], rgb[2]);
-		game->floor = temp;
+		cub->floor = temp;
 	}
 	if (flag == 1)
 	{
 		temp = rgb_to_hex(rgb[0], rgb[1], rgb[2]);
-		game->ceiling = temp;
+		cub->ceiling = temp;
 	}
 }
 
-int	init_colors(t_cub *game)
+int	init_colors(t_cub *cub)
 {
 	int		i;
 	int		*rgb;
 	char	**temp;
 
 	i = 0;
-	while (game->rgb[i])
+	while (cub->rgb[i])
 	{
-		temp = ft_split(game->rgb[i], ',');
+		temp = ft_split(cub->rgb[i], ',');
 		if (ft_array_length(temp) != 3)
 		{
 			printf("messed up RGB size\n");
@@ -71,7 +71,7 @@ int	init_colors(t_cub *game)
 			free(rgb);
 			return (1);
 		}
-		convert_colors(game, rgb, i);
+		convert_colors(cub, rgb, i);
 		ft_free(&temp);
 		free(rgb);
 		i++;

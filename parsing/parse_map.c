@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bsaeed <bsaeed@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 02:52:17 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/04 15:08:50 by bsaeed           ###   ########.fr       */
+/*   Updated: 2023/04/07 11:51:38 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-int	check_characters(t_cub *game)
+int	check_characters(t_cub *cub)
 {
 	int	i;
 	int	j;
@@ -20,15 +20,15 @@ int	check_characters(t_cub *game)
 
 	i = 0;
 	count = 0;
-	while (game->map[i])
+	while (cub->map[i])
 	{
 		j = 0;
-		while (game->map[i][j])
+		while (cub->map[i][j])
 		{
-			if (!ft_strchr(" 10NSEW", game->map[i][j]))
+			if (!ft_strchr(" 10NSEW", cub->map[i][j]))
 				return (0);
-			if (game->map[i][j] == 'N' || game->map[i][j] == 'S' \
-				|| game->map[i][j] == 'E' || game->map[i][j] == 'W')
+			if (cub->map[i][j] == 'N' || cub->map[i][j] == 'S' \
+				|| cub->map[i][j] == 'E' || cub->map[i][j] == 'W')
 			{
 				//init_vectors(j, i);
 				count++;
@@ -40,36 +40,36 @@ int	check_characters(t_cub *game)
 	return (count);
 }
 
-int	is_closed(t_cub *game, int i, int j)
+int	is_closed(t_cub *cub, int i, int j)
 {
-	if (game->map[i][j] == '0' \
-		|| (game->map[i][j] != '1' && game->map[i][j] != ' '))
+	if (cub->map[i][j] == '0' \
+		|| (cub->map[i][j] != '1' && cub->map[i][j] != ' '))
 	{
-		if (i == 0 || !game->map[i + 1] || j == 0 || !game->map[i][j + 1])
+		if (i == 0 || !cub->map[i + 1] || j == 0 || !cub->map[i][j + 1])
 		{
 			printf("failed here\n");
 			return (1);
 		}
-		if (game->map[i - 1] && game->map[i - 1][j]
-			&& game->map[i - 1][j] == ' ')
+		if (cub->map[i - 1] && cub->map[i - 1][j]
+			&& cub->map[i - 1][j] == ' ')
 			{
 			printf("failed here1\n");
 			return (1);
 		}
-		if (game->map[i + 1] && game->map[i + 1][j]
-			&& game->map[i + 1][j] == ' ')
+		if (cub->map[i + 1] && cub->map[i + 1][j]
+			&& cub->map[i + 1][j] == ' ')
 			{
 			printf("failed here2\n");
 			return (1);
 		}
-		if (game->map[i] && game->map[i][j - 1]
-			&& game->map[i][j - 1] == ' ')
+		if (cub->map[i] && cub->map[i][j - 1]
+			&& cub->map[i][j - 1] == ' ')
 			{
 			printf("failed here3\n");
 			return (1);
 		}
-		if (game->map[i] && game->map[i][j + 1]
-			&& game->map[i][j + 1] == ' ')
+		if (cub->map[i] && cub->map[i][j + 1]
+			&& cub->map[i][j + 1] == ' ')
 			{
 			printf("failed here4\n");
 			return (1);
@@ -78,38 +78,38 @@ int	is_closed(t_cub *game, int i, int j)
 	return (0);
 }
 
-int	is_end(t_cub *game, int index)
+int	is_end(t_cub *cub, int index)
 {
 	int	i;
 
 	i = index;
 	i++;
-	while (game->map[i])
+	while (cub->map[i])
 	{
-		if (ft_strlen(game->map[i]) > 0)
+		if (ft_strlen(cub->map[i]) > 0)
 			return (1);
 		i++;
 	}
-	game->map[i] = NULL;
+	cub->map[i] = NULL;
 	return (0);
 }
 
-int	validate_map(t_cub *game)
+int	validate_map(t_cub *cub)
 {
 	int	i;
 	int	j;
 
-	if (ft_array_length(game->map) < 3 || check_characters(game) != 1)
+	if (ft_array_length(cub->map) < 3 || check_characters(cub) != 1)
 	{
 		printf("a11\n");
 		return (1);
 	}
 	i = 0;
-	while (game->map[i])
+	while (cub->map[i])
 	{
-		if (ft_strlen(game->map[i]) == 0)
+		if (ft_strlen(cub->map[i]) == 0)
 		{
-			if (is_end(game, i) == 1)
+			if (is_end(cub, i) == 1)
 			{
 				printf("a2\n");
 				return (1);
@@ -117,9 +117,9 @@ int	validate_map(t_cub *game)
 			break ;
 		}
 		j = 0;
-		while (game->map[i][j])
+		while (cub->map[i][j])
 		{
-			if (is_closed(game, i, j) == 1)
+			if (is_closed(cub, i, j) == 1)
 			{
 				printf("a3\n");
 				return (1);

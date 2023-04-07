@@ -6,20 +6,11 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 20:27:50 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/06 20:44:37 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/07 11:50:01 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	arg_count(int ac)
-{
-	if (ac != 2)
-	{
-		printf("[usage]: ./cub3d cubfile\n");
-		exit(EXIT_FAILURE);
-	}
-}
 
 t_cub	*init_struct( void )
 {
@@ -82,19 +73,30 @@ void	parse_size(t_cub *cub)
 	// cub->n_columns = i;
 }
 
+int	ft_new_line(char *buf)
+{
+	int	i;
+
+	i = 0;
+	while (buf[i] && buf[i] != 10)
+		i++;
+	if (buf[i] == 10)
+		return (1);
+	return (0);
+}
+
+
 int main(int ac, char **av)
 {
 	t_cub		*cub;
 
 	cub = init_struct();
-	arg_count(ac);
-	parse(cub, av[1]);
+	parse(ac, cub, av[1]);
+
 	init(cub);
 
 	parse_size(cub);
-	printf("color: %lu\n", cub->ceiling);
-	printf("number of rows = %d\n", cub->n_rows);
-	printf("number of columbs = %d\n", cub->n_columns);
+
 	init_mlx_utils(cub);
 	cub->color_buffer = calloc(sizeof(int) * WINDOW_WIDTH , WINDOW_HEIGHT);
 	cub->tex = calloc(sizeof(int) * WINDOW_WIDTH , WINDOW_HEIGHT);

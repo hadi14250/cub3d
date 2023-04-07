@@ -1,34 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_initializer.c                                :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/03 23:01:56 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/07 11:51:38 by hakaddou         ###   ########.fr       */
+/*   Created: 2022/02/25 05:24:04 by hakaddou          #+#    #+#             */
+/*   Updated: 2022/06/14 16:47:02 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "libft.h"
 
-void	init(t_cub *cub)
+void	ft_putnbr_fd(int n, int fd)
 {
-	//void	*temp;
-	cub->mlx = mlx_init();
-	if (init_textures(cub) == 1)
+	if (n == INT_MIN)
 	{
-		printf("Cannot load textures\n");
-		exit(1);
+		write (fd, "-2147483648", 11);
+		return ;
 	}
-	if (init_colors(cub) == 1)
+	if (n < 0)
 	{
-		printf("cannot load colours\n");
-		exit(1);
+		ft_putchar_fd('-', fd);
+		n *= -1;
 	}
-	if (validate_map(cub) == 1)
-	{
-		printf("error in map\n");
-		exit(1);
-	}
+	if (n >= 10)
+		ft_putnbr_fd(n / 10, fd);
+	n = n % 10 + '0';
+	write(fd, &n, 1);
 }

@@ -1,34 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_initializer.c                                :+:      :+:    :+:   */
+/*   ft_putnbr_u.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/03 23:01:56 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/07 11:51:38 by hakaddou         ###   ########.fr       */
+/*   Created: 2022/03/09 04:17:37 by hakaddou          #+#    #+#             */
+/*   Updated: 2022/03/09 18:35:26 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "ft_printf.h"
 
-void	init(t_cub *cub)
+int	ft_putnbr_u(unsigned int nb)
 {
-	//void	*temp;
-	cub->mlx = mlx_init();
-	if (init_textures(cub) == 1)
-	{
-		printf("Cannot load textures\n");
-		exit(1);
-	}
-	if (init_colors(cub) == 1)
-	{
-		printf("cannot load colours\n");
-		exit(1);
-	}
-	if (validate_map(cub) == 1)
-	{
-		printf("error in map\n");
-		exit(1);
-	}
+	int		length;
+	char	c;
+
+	length = 0;
+	if (nb == 2147483648)
+		return (length += ft_putstr("2147483648"));
+	if (nb >= 10)
+		length += ft_putnbr (nb / 10);
+	c = (nb % 10) + 48;
+	length += ft_putchar(c);
+	return (length);
 }
