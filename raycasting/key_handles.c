@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_handles.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bsaeed <bsaeed@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 18:09:08 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/06 04:18:46 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/07 11:33:36 by bsaeed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ int	keys_handler(int key, t_cub *cub)
 		cub->win = free_window(cub->mlx, cub->win);
 		exit (0);
 	}
-	if (key == UP_AROW)
+	if (key == W_KEY)
 		cub->keys.up = true;
-	if (key == DOWN_AROW)
+	if (key == S_KEY)
 		cub->keys.down = true;
 	if (key == LEFT_AROW)
 		cub->keys.left = true;
@@ -37,12 +37,13 @@ int	keys_handler(int key, t_cub *cub)
 	return (0);
 }
 
+
 int	keys_released(int key, t_cub *cub)
 {
 
-	if (key == UP_AROW)
+	if (key == W_KEY)
 		cub->keys.up = false;
-	if (key == DOWN_AROW)
+	if (key == S_KEY)
 		cub->keys.down = false;
 	if (key == LEFT_AROW)
 		cub->keys.left = false;
