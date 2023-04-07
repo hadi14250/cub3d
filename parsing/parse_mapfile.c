@@ -6,11 +6,27 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 23:03:02 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/07 22:30:22 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/07 23:21:09 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+void	arg_count(int ac)
+{
+	if (ac != 2)
+	{
+		printf("[usage]: ./cub3d cubfile\n");
+		exit(EXIT_FAILURE);
+	}
+}
+
+int	ft_close(int fd)
+{
+	if (fd > 2)
+		close(fd);
+	return (-1);
+}
 
 void	*free_null(void *ptr)
 {
@@ -28,15 +44,8 @@ void	free_split(char **split)
 	if (!split)
 		return ;
 	while(split[++i])
-	{
-		if (split[i])
-		{
-			free(split[i]);
-			split[i] = NULL;
-		}
-	}
-	free (split);
-	split = NULL;
+		split[i] = free_null(split[i]);
+	split = free_null(split);
 }
 
 void	exit_cub(t_cub *cub, int code, char *msg)
@@ -45,9 +54,9 @@ void	exit_cub(t_cub *cub, int code, char *msg)
 
 	// i = -1;
 	if (cub->color_buffer)
-		free(cub->color_buffer);
+		cub->color_buffer = free_null(cub->color_buffer);
 	if (cub->tex)
-		free(cub->tex);
+		cub->tex = free_null(cub->tex);
 	// if (cub->img.img_ptr)
 	// 	mlx_destroy_image(cub->mlx, cub->img.img_ptr);
 	// while(++i < 4)
@@ -58,12 +67,13 @@ void	exit_cub(t_cub *cub, int code, char *msg)
 	// if (cub->win)
 	// 	mlx_destroy_window(cub->mlx, cub->win);
 	if (cub->map_1d)
-		free(cub->map_1d);
+		cub->map_1d = free_null(cub->map_1d);
 	free_split(cub->map);
 	free_split(cub->xpm);
 	free_split(cub->rgb);
 	cub->c_rgb = free_null(cub->c_rgb);
 	cub->f_rgb = free_null(cub->f_rgb);
+	cub->fd = ft_close(cub->fd);
 	write(2, msg, ft_strlen(msg));
 	exit (code);
 }
@@ -316,17 +326,15 @@ void	parse_rgb(t_cub *cub)
 	convert_colors(cub, cub->rgb[0], 1);
 }
 
-int	parse_info(t_cub *cub, int fd)
+void	parse_info(t_cub *cub)
 {
-	cub->map_1d = take_map_input(fd, cub);
+	cub->map_1d = take_map_input(cub->fd, cub);
+	cub->fd = ft_close(cub->fd);
 	cub->map_1d_len = ft_strlen(cub->map_1d);
-	cub->map = ft_split(cub->map_1d, '\n');
 	parse_rgb(cub);
 	// check_cord_position(cub);
 	check_for_textures(cub);
 	print_cub(cub);
-	close(fd);
-	return (0);
 }
 
 int	map(t_cub *cub, char *line)
@@ -352,53 +360,17 @@ int	map(t_cub *cub, char *line)
 	return (0);
 }
 
-int	parse_map(t_cub *cub, int fd)
+void	parse_map(t_cub *cub)
 {
-	char	*line;
-
-	while (1)
-	{
-		line = get_next_line(fd);
-		if (!line)
-			return (1);
-		if (ft_strlen(line) == 1 && !cub->map)
-			;
-		else if (map(cub, line) == 1)
-		{
-			free(line);
-			return (1);
-		}
-		free(line);
-		// if (!line)
-		// 	break ;
-	}
-	return (0);
-}
-
-void	arg_count(int ac)
-{
-	if (ac != 2)
-	{
-		printf("[usage]: ./cub3d cubfile\n");
-		exit(EXIT_FAILURE);
-	}
+	cub->map = ft_split(cub->map_1d, '\n');
 }
 
 int	parse(int ac, t_cub *cub, char *map_file)
 {
-	int	fd;
-
 	arg_count(ac);
-	fd = open(map_file, O_RDONLY);
-	if (ft_file_ext(fd, map_file))
-		exit_cub(cub, 1, "file ext parse failed\n");
-	if (parse_info(cub, fd) == 1)
-		exit_cub(cub, 1, "invalid information\n");
-	// if (parse_map(cub, fd) == 1)
-	// {
-	// 	printf("Error\nInvalid map\n");
-	// 	exit(EXIT_FAILURE);
-	// }
-	cub++;
+	cub->fd = open(map_file, O_RDONLY);
+	ft_file_ext(cub, map_file);
+	parse_info(cub);
+	parse_map(cub);
 	return (0);
 }

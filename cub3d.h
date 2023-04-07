@@ -162,6 +162,7 @@ typedef struct s_cub
 	char	*c_rgb;
 	char	*f_rgb;
 	bool	color_flag;
+	int		fd;
 }				t_cub;
 
 // raycasting struct
@@ -203,13 +204,13 @@ void			ft_free(char ***arr);
 
 /*parsing*/
 
-int		ft_file_ext(int fd, char *map_file);
-int		parse_info(t_cub *cub, int fd);
-int		parse_map(t_cub *cub, int fd);
+int		ft_file_ext(t_cub *cub, char *map_file);
+void	parse_info(t_cub *cub);
+void		parse_map(t_cub *cub);
 int		parse(int ac, t_cub *cub, char *map_file);
 
 
-int	check_characters(t_cub *cub);
+int		check_characters(t_cub *cub);
 int		init_textures(t_cub *cub);
 int		init_colors(t_cub *cub);
 int		validate_map(t_cub *cub);
