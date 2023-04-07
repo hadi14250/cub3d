@@ -1,34 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_initializer.c                                :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/03 23:01:56 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/07 14:48:05 by hakaddou         ###   ########.fr       */
+/*   Created: 2022/02/03 17:31:35 by hakaddou          #+#    #+#             */
+/*   Updated: 2022/06/14 17:08:47 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "libft.h"
 
-void	init(t_cub *cub)
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
-	//void	*temp;
-	cub->mlx = mlx_init();
-	if (init_textures(cub) == 1)
+	size_t	i;
+	size_t	b;
+
+	i = 0;
+	b = 0;
+	if (needle[i] == '\0')
+		return ((char *)haystack);
+	while (haystack[i] != '\0' && i < len)
 	{
-		printf("Cannot load textures\n");
-		exit(1);
+		b = 0;
+		while (haystack[i + b] == needle[b] && (i + b < len))
+		{
+			b++;
+			if (needle[b] == '\0')
+				return ((char *)&haystack[i]);
+		}
+		i++;
 	}
-	if (init_colors(cub) == 1)
-	{
-		printf("cannot load colours\n");
-		exit(1);
-	}
-	if (validate_map(cub) == 1)
-	{
-		printf("error in map\n");
-		exit(1);
-	}
+	return (NULL);
 }

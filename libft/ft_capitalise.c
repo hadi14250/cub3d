@@ -1,34 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_initializer.c                                :+:      :+:    :+:   */
+/*   ft_capitalise.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/03 23:01:56 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/07 14:48:05 by hakaddou         ###   ########.fr       */
+/*   Created: 2022/03/10 21:43:48 by hakaddou          #+#    #+#             */
+/*   Updated: 2022/03/10 21:53:16 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "libft.h"
 
-void	init(t_cub *cub)
+char	*ft_capitalise(char *str)
 {
-	//void	*temp;
-	cub->mlx = mlx_init();
-	if (init_textures(cub) == 1)
+	int	i;
+
+	i = 0;
+	while (str[i] != '\0')
 	{
-		printf("Cannot load textures\n");
-		exit(1);
+		if (str[0] >= 'a' && str[0] <= 'z')
+			str[0] -= 32;
+		if (str[i] >= 'a' && str[i] <= 'z' && str[i - 1] == 32)
+			str[i] -= 32;
+		if (str[i] >= 'A' && str[i] <= 'Z' && str[i - 1] != 32)
+			str[i] += 32;
+		i++;
 	}
-	if (init_colors(cub) == 1)
-	{
-		printf("cannot load colours\n");
-		exit(1);
-	}
-	if (validate_map(cub) == 1)
-	{
-		printf("error in map\n");
-		exit(1);
-	}
+	return (str);
 }

@@ -1,34 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_initializer.c                                :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/03 23:01:56 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/07 14:48:05 by hakaddou         ###   ########.fr       */
+/*   Created: 2022/02/26 19:59:03 by hakaddou          #+#    #+#             */
+/*   Updated: 2022/03/01 19:26:27 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "libft.h"
 
-void	init(t_cub *cub)
+int	ft_lstsize(t_list *lst)
 {
-	//void	*temp;
-	cub->mlx = mlx_init();
-	if (init_textures(cub) == 1)
+	int		count;
+	t_list	*ptr;
+
+	ptr = lst;
+	if (lst == NULL)
+		return (0);
+	count = 0;
+	while (ptr != NULL)
 	{
-		printf("Cannot load textures\n");
-		exit(1);
+		ptr = ptr->next;
+		count++;
 	}
-	if (init_colors(cub) == 1)
-	{
-		printf("cannot load colours\n");
-		exit(1);
-	}
-	if (validate_map(cub) == 1)
-	{
-		printf("error in map\n");
-		exit(1);
-	}
+	return (count);
 }

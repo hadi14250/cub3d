@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 20:27:23 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/06 17:18:26 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/07 14:48:05 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,7 @@
 #include "./includes/colors.h"
 #include "./includes/raycasting.h"
 #include <strings.h>
-
-# define BUFFER_SIZE 1
+#include "./libft/libft.h"
 
 // texture
 
@@ -49,7 +48,7 @@ typedef struct s_state
 	t_point			plane;
 }			t_state;
 
-// game structs
+// cub structs
 typedef struct s_var
 {
 	double			position_x;
@@ -185,41 +184,27 @@ char	**ft_reallocation(char **pointer, int size);
 void	print_map(char **map);
 
 
-//------------game_utils_folder------------//
+//------------cub_utils_folder------------//
 
 //const char		*get_exit(const char *file);
 unsigned long	rgb_to_hex(int red, int green, int blue);
 
-int				get_next_line(int fd, char **line);
-int				ft_new_line(char *buf);
 int				ft_array_length(char **arr);
-int				ft_strncmp(const char *s1, char *s2, size_t n);
-int				ft_atoi(const char *str);
 
 void			ft_free(char ***arr);
-void			*ft_calloc(size_t count, size_t size);
-
-char			**ft_split(char const *str, char c);
-char			*ft_strdup(const char *s);
-
-size_t			ft_strlen(const char *s);
-size_t			ft_strlcpy(char *dst, const char *src, size_t dstsize);
-char	*ft_strchr(const char *s, int c);
 
 /*parsing*/
 
 int		ft_file_ext(int fd, char *map_file);
-int		parse_info(t_cub *game, int fd);
-int		parse_map(t_cub *game, int fd);
-int		parse(t_cub *game, char *map_file);
+int		parse_info(t_cub *cub, int fd);
+int		parse_map(t_cub *cub, int fd);
+int		parse(int ac, t_cub *cub, char *map_file);
 
-void	*ft_memchr(const void *s, int c, size_t n);
-char	*ft_strchr(const char *s, int c);
-int	check_characters(t_cub *game);
-int		init_textures(t_cub *game);
-int		init_colors(t_cub *game);
-int		validate_map(t_cub *game);
-void	init(t_cub *game);
+int	check_characters(t_cub *cub);
+int		init_textures(t_cub *cub);
+int		init_colors(t_cub *cub);
+int		validate_map(t_cub *cub);
+void	init(t_cub *cub);
 
 
 /* mlx utils */

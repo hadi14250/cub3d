@@ -6,25 +6,25 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 21:07:14 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/05 20:51:42 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/07 14:48:05 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void	fill_textures(t_cub *game, int i)
+void	fill_textures(t_cub *cub, int i)
 {
 	int	x;
 	int	y;
 
 	y = -1;
-	while (++y < game->img2[i].height)
+	while (++y < cub->img2[i].height)
 	{
 		x = -1;
-		while (++x < game->img2[i].width)
+		while (++x < cub->img2[i].width)
 		{
-			game->texture[i][game->img2[i].height * y + x] = \
-				(game->img2[i].address[game->img2[i].height * y + x]);
+			cub->texture[i][cub->img2[i].height * y + x] = \
+				(cub->img2[i].address[cub->img2[i].height * y + x]);
 		}
 	}
 }
@@ -38,7 +38,7 @@ void	fill_textures(t_cub *game, int i)
 // 	return (res);
 // }
 
-int	init_textures(t_cub *game)
+int	init_textures(t_cub *cub)
 {
 	int		i;
 	int		*address;
@@ -46,20 +46,20 @@ int	init_textures(t_cub *game)
 	i = 0;
 	while (i < 4)
 	{
-		game->img2[i].img_ptr = mlx_xpm_file_to_image(game->mlx, game->xpm[i], \
-			&(game->img2[i].width), &(game->img2[i].height));
-		if (!game->img2[i].img_ptr)
+		cub->img2[i].img_ptr = mlx_xpm_file_to_image(cub->mlx, cub->xpm[i], \
+			&(cub->img2[i].width), &(cub->img2[i].height));
+		if (!cub->img2[i].img_ptr)
 		{
 			printf("failing here, i = %d\n", i);
 			return (1);
 		}
-		address = (int *) mlx_get_data_addr(game->img2[i].img_ptr, &game->img2[i].bits_per_pixel,
-			&game->img2[i].line_length, &game->img2[i].endian);
-		game->img2[i].address = address;
-		if (!game->img2[i].address)
+		address = (int *) mlx_get_data_addr(cub->img2[i].img_ptr, &cub->img2[i].bits_per_pixel,
+			&cub->img2[i].line_length, &cub->img2[i].endian);
+		cub->img2[i].address = address;
+		if (!cub->img2[i].address)
 			return (1);
-		fill_textures(game, i);
-		// mlx_destroy_image(game->mlx, game->img2[i].img_ptr);
+		fill_textures(cub, i);
+		// mlx_destroy_image(cub->mlx, cub->img2[i].img_ptr);
 		i++;
 	}
 	return (0);
