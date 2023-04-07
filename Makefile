@@ -30,7 +30,7 @@ mlx		= ./mlx/libmlx.a
 CC		= gcc -g3
 RM		= rm -rf
 CFLAGS	= -Wall -Wextra -Werror -Ofast -march=native
-NAME	= cub
+NAME	= cub3d
 
 MAKELIB	=	@make -C libft
 LIBFT	=	libft/libft.a
