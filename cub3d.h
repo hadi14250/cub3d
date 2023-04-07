@@ -163,6 +163,13 @@ typedef struct s_cub
 	char	*f_rgb;
 	bool	color_flag;
 	int		fd;
+	int		no_pos;
+	int		so_pos;
+	int		we_pos;
+	int		ea_pos;
+	int		floor_pos;
+	int		ceiling_pos;
+	int		map_pos;
 }				t_cub;
 
 // raycasting struct

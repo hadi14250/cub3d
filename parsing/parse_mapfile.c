@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 23:03:02 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/07 23:21:09 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/08 00:19:40 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -360,9 +360,25 @@ int	map(t_cub *cub, char *line)
 	return (0);
 }
 
+void	check_positions(t_cub *cub)
+{
+	// int		i;
+	// char	*str;
+
+	// str = cub->map_1d;
+	// i = cub->map_1d_len - 1;
+	// while(i >= 0)
+	// {
+	// }
+	printf("%d, %d, %d, %d, %d. %d, %d\n",
+	cub->ea_pos, cub->no_pos, cub->so_pos, cub->we_pos, cub->map_pos,
+	cub->floor_pos, cub->ceiling_pos);
+}
+
 void	parse_map(t_cub *cub)
 {
 	cub->map = ft_split(cub->map_1d, '\n');
+	check_positions(cub);
 }
 
 int	parse(int ac, t_cub *cub, char *map_file)
