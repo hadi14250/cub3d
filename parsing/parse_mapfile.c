@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 23:03:02 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/08 01:16:17 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/08 03:01:41 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -219,6 +219,10 @@ void	print_cub(t_cub *cub)
 	printf("WE: %s\n", cub->xpm[3]);
 	printf("floor color: %ld\n", cub->floor);
 	printf("ceiling color: %ld\n", cub->ceiling);
+	printf("positions: no %d, ea: %d, so: %d, we: %d, map: %d, floor: %d, ceiling: %d\n",
+	cub->no_pos, cub->ea_pos, cub->so_pos, cub->we_pos, cub->map_pos,
+	cub->floor_pos, cub->ceiling_pos);
+	printf("max is: %d and it is --->%s<---\n", cub->max, cub->map[cub->max]);
 }
 
 // void	check_cord_position(t_cub *cub)
@@ -334,7 +338,6 @@ void	parse_info(t_cub *cub)
 	parse_rgb(cub);
 	// check_cord_position(cub);
 	check_for_textures(cub);
-	print_cub(cub);
 }
 
 int	map(t_cub *cub, char *line)
@@ -368,17 +371,73 @@ int	return_len(char **split)
 	d = 0;
 	i = -1;
 	while(split[++i] != NULL)
-		d += ft_strlen(split[i]);
+	{
+		d += ft_tex_len(split[i]);
+		printf("len of %s is: %d\n", split[i], d);
+	}
 	return (d);
+}
+
+void	print_map_two(char **split)
+{
+	int	i;
+
+	if (!split)
+	{
+		return ;
+	}
+	i = -1;
+	while (split[++i])
+		printf("->%s<-\n", split[i]);
+	printf("\n");
+}
+
+int	return_split_len(char **split)
+{
+	int	i;
+
+	i = -1;
+	while (split[++i] != NULL)
+		;
+	return (i);
+}
+
+
+void	check_map_pos(t_cub *cub, char **half_map)
+{
+	int	i;
+
+	i = cub->max - 1;
+	if (i <= 1)
+		exit_cub(cub, 1, "Invalid map\n");
+	if (!half_map || !half_map[0])
+		exit_cub(cub, 1, "Error\nunorganized map\n");
+	while (i >= 0)
+	{
+		printf("performing check on: %s\n", cub->map[i]);
+		if (ft_strnstr(cub->map[i], "111", ft_strlen(cub->map[i])))
+			{
+				if (!ft_strnstr(cub->map[i], cub->map[cub->floor_pos],
+					ft_strlen(cub->map[i])) &&
+					!ft_strnstr(cub->map[i], cub->map[cub->ceiling_pos],
+					ft_strlen(cub->map[i])))
+					exit_cub(cub, 1, "Error\ninvalid map\n");
+			}
+			i--;
+	}
+	int new_len = return_len(half_map);
+	int bmap_len = cub->map_1d_len - new_len;
+	printf("map is %s\n", cub->map_1d + bmap_len);
+	// printf("MAP is: %s\n", cub->map_1d - cub->map_1d_len + return_len(half_map)));
+	print_map_two(half_map);
 }
 
 void	check_positions(t_cub *cub)
 {
 	int		i;
 	char	**split;
-	int		max;
 
-	max = 0;
+	cub->max = 0;
 	split = cub->map;
 	i=  -1;
 	while(split[++i] != NULL)
@@ -386,48 +445,41 @@ void	check_positions(t_cub *cub)
 		if (ft_strnstr(split[i], "NO", ft_strlen(split[i])))
 		{
 			cub->no_pos = i;
-
+			if (i > cub->max)
+				cub->max = i;
 		}
 		if (ft_strnstr(split[i], "SO", ft_strlen(split[i])))
 		{
 			cub->so_pos = i;
-			if (i > max)
-				max = i;
+			if (i > cub->max)
+				cub->max = i;
 		}
 		if (ft_strnstr(split[i], "WE", ft_strlen(split[i])))
 		{
 			cub->we_pos = i;
-			if (i > max)
-				max = i;
+			if (i > cub->max)
+				cub->max = i;
 		}
 		if (ft_strnstr(split[i], "EA", ft_strlen(split[i])))
 		{
 			cub->ea_pos = i;
-			if (i > max)
-				max = i;
+			if (i > cub->max)
+				cub->max = i;
 		}
 		if (ft_strnstr(split[i], "F", ft_strlen(split[i])))
 		{
 			cub->floor_pos = i;
-			if (i > max)
-				max = i;
+			if (i > cub->max)
+				cub->max = i;
 		}
 		if (ft_strnstr(split[i], "C", ft_strlen(split[i])))
 		{
 			cub->ceiling_pos = i;
-			if (i > max)
-				max = i;
+			if (i > cub->max)
+				cub->max = i;
 		}
 	}
-	// if (cub->no_pos > 5 || cub->ea_pos > 5 || cub->so_pos > 5
-	// 	|| cub->we_pos > 5 || cub->floor_pos > 5 || cub->ceiling_pos > 5)
-	// 	{
-	// 		exit_cub(cub, 1, "Wrong map pisition\n");
-	// 	}
-	printf("max is: %d and it is %s\n", max, cub->map[max]);
-	printf("%d, %d, %d, %d, %d, %d, %d\n",
-	cub->no_pos, cub->ea_pos, cub->so_pos, cub->we_pos, cub->map_pos,
-	cub->floor_pos, cub->ceiling_pos);
+	check_map_pos(cub, &cub->map[cub->max + 1]);
 }
 
 void	trim_spaces(char *str)
@@ -444,7 +496,7 @@ void	trim_spaces(char *str)
 
 void	parse_map(t_cub *cub)
 {
-	trim_spaces(cub->map_1d);
+	// trim_spaces(cub->map_1d);
 	cub->map = ft_split(cub->map_1d, '\n');
 	check_positions(cub);
 }
@@ -456,5 +508,6 @@ int	parse(int ac, t_cub *cub, char *map_file)
 	ft_file_ext(cub, map_file);
 	parse_info(cub);
 	parse_map(cub);
+	print_cub(cub);
 	return (0);
 }

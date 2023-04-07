@@ -170,6 +170,12 @@ typedef struct s_cub
 	int		floor_pos;
 	int		ceiling_pos;
 	int		map_pos;
+	int		max;
+	// char	*no_val;
+	// char	*so_val;
+	// char	*we_val;
+	// char	*ea_val;
+	// char	*floor_val;
 }				t_cub;
 
 // raycasting struct
