@@ -117,6 +117,14 @@ typedef struct s_key
 	int	p;
 }				t_key;
 
+typedef struct s_buff
+{
+	char	*i;
+	char	*total;
+	char	*tmp;
+	char	*line;
+}	t_buff;
+
 // map struct
 typedef struct s_cub
 {
@@ -149,6 +157,8 @@ typedef struct s_cub
 	int		wall_strip_height;
 	int		wall_top_pixel;
 	int		wall_bottom_pixel;
+	char	*map_1d;
+	int		map_1d_len;
 }				t_cub;
 
 // raycasting struct
@@ -240,6 +250,9 @@ void	raycasting(t_cub *cub);
 void	draw_background(t_img *img, t_cub *cub);
 void	render(t_cub *cub);
 void	update(t_cub *cub);
+
+/*	free utils	*/
+void	exit_cub(t_cub *cub, int code, char *msg);
 
 #endif
 

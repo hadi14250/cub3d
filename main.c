@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 20:27:50 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/07 15:50:49 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/07 18:13:45 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,17 +57,18 @@ t_rect	init_rect(int x, int y, int width, int height)
 
 int main(int ac, char **av)
 {
-	t_cub		*cub;
+	t_cub		cub;
 
-	cub = init_struct();
-	parse(ac, cub, av[1]);
+	ft_bzero(&cub, sizeof(cub));
+	parse(ac, &cub, av[1]);
+	exit_cub(&cub, 0, "sucess");
+	// // init(cub);
 
-	// init(cub);
+	// //parse_size(cub);
 
-	//parse_size(cub);
-
-	// init_mlx_utils(cub);
-	cub->color_buffer = calloc(sizeof(int) * WINDOW_WIDTH , WINDOW_HEIGHT);
-	cub->tex = calloc(sizeof(int) * WINDOW_WIDTH , WINDOW_HEIGHT);
-	// raycasting(cub);
+	// // init_mlx_utils(cub);
+	// cub->color_buffer = calloc(sizeof(int) * WINDOW_WIDTH , WINDOW_HEIGHT);
+	// cub->tex = calloc(sizeof(int) * WINDOW_WIDTH , WINDOW_HEIGHT);
+	// // raycasting(cub);
+	// exit_cub(cub, 0, "Success\n");
 }
