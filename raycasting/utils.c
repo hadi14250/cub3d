@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 15:18:53 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/08 04:16:46 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/08 13:25:03 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,20 +56,12 @@ void	init_mlx_utils(t_cub *cub)
 {
 	cub->win = mlx_new_window(cub->mlx, WINDOW_WIDTH, WINDOW_HEIGHT, "Cub3d");
 	if (!cub->win)
-	{
-		// need to free before exiting
-		printf("error initialising mlx window\n");
-		exit(1);
-	}
+		exit_cub(cub, 1, "Error\ncan't initialise window\n");
 	cub->img.img_ptr = NULL;
 	cub->img.img_ptr = cub_new_img (&cub->img, cub->mlx,
 			WINDOW_WIDTH, WINDOW_HEIGHT);
 	if (!cub->img.img_ptr)
-	{
-		// need to free before exiting
-		printf("error initialising img\n");
-		exit(1);
-	}
+		exit_cub(cub, 1, "Error\ncan't initialise image\n");
 }
 
 void	ft_swap(double *a, double *b)

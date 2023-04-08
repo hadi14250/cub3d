@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 23:03:02 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/08 05:46:27 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/08 13:26:38 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,22 +50,22 @@ void	free_split(char **split)
 
 void	exit_cub(t_cub *cub, int code, char *msg)
 {
-	// int	i;
+	int	i;
 
-	// i = -1;
+	i = -1;
 	if (cub->color_buffer)
 		cub->color_buffer = free_null(cub->color_buffer);
 	if (cub->tex)
 		cub->tex = free_null(cub->tex);
-	// if (cub->img.img_ptr)
-	// 	mlx_destroy_image(cub->mlx, cub->img.img_ptr);
-	// while(++i < 4)
-	// {
-	// 	// if (cub->img2[i].img_ptr)
-	// 	// 	mlx_destroy_image(cub->mlx, cub->img2[i].img_ptr);
-	// }
-	// if (cub->win)
-	// 	mlx_destroy_window(cub->mlx, cub->win);
+	if (cub->img.img_ptr)
+		mlx_destroy_image(cub->mlx, cub->img.img_ptr);
+	while(++i < 4)
+	{
+		if (cub->img2[i].img_ptr)
+			mlx_destroy_image(cub->mlx, cub->img2[i].img_ptr);
+	}
+	if (cub->win)
+		mlx_destroy_window(cub->mlx, cub->win);
 	if (cub->map_1d)
 		cub->map_1d = free_null(cub->map_1d);
 	free_split(cub->map);
@@ -74,6 +74,8 @@ void	exit_cub(t_cub *cub, int code, char *msg)
 	cub->c_rgb = free_null(cub->c_rgb);
 	cub->f_rgb = free_null(cub->f_rgb);
 	cub->fd = ft_close(cub->fd);
+	cub->color_buffer = free_null(cub->color_buffer);
+	cub->tex = free_null(cub->tex);
 	printf("%s", msg);
 	exit (code);
 }
