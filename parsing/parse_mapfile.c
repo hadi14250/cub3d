@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 23:03:02 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/08 13:46:49 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/08 13:59:31 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,8 @@ char	*take_map_input(int fd, t_cub *cub)
 		h.total = gl_strjoin(h.total, h.line);
 		free_params(&h.line, &h.tmp, &h.i);
 	}
-	cub++;
+	if (!h.total)
+		exit_cub(cub, 1, "Error\nempty file\n");
 	return (h.total);
 }
 
