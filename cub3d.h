@@ -125,6 +125,16 @@ typedef struct s_buff
 	char	*line;
 }	t_buff;
 
+typedef struct s_dir
+{
+	int		south;
+	int		north;
+	int		west;
+	int		east;
+	double	actual_dir;
+}				t_dir;
+
+
 // map struct
 typedef struct s_cub
 {
@@ -172,6 +182,7 @@ typedef struct s_cub
 	int		map_pos;
 	int		max;
 	char	*trimmed;
+	t_dir	dir;
 	// char	*no_val;
 	// char	*so_val;
 	// char	*we_val;
