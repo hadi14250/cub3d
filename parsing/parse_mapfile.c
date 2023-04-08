@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 23:03:02 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/08 04:03:05 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/08 04:21:22 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,31 +212,18 @@ void	check_for_textures(t_cub *cub)
 
 void	print_cub(t_cub *cub)
 {
-	printf("%s", cub->map_1d);
-	printf("NO: %s\n", cub->xpm[0]);
-	printf("SO: %s\n", cub->xpm[1]);
-	printf("EA: %s\n", cub->xpm[2]);
-	printf("WE: %s\n", cub->xpm[3]);
-	printf("floor color: %ld\n", cub->floor);
-	printf("ceiling color: %ld\n", cub->ceiling);
+	printf("1D MAP: -->%s<--\n", cub->map_1d);
+	printf("NO: -->%s<--\n", cub->xpm[0]);
+	printf("SO: -->%s<--\n", cub->xpm[1]);
+	printf("EA: -->%s<--\n", cub->xpm[2]);
+	printf("WE: -->%s<--\n", cub->xpm[3]);
+	printf("floor color: -->%ld<--\n", cub->floor);
+	printf("ceiling color: -->%ld<--\n", cub->ceiling);
 	printf("positions: no %d, ea: %d, so: %d, we: %d, map: %d, floor: %d, ceiling: %d\n",
 	cub->no_pos, cub->ea_pos, cub->so_pos, cub->we_pos, cub->map_pos,
 	cub->floor_pos, cub->ceiling_pos);
 	printf("max is: %d and it is --->%s<---\n", cub->max, cub->map[cub->max]);
 }
-
-// void	check_cord_position(t_cub *cub)
-// {
-// 	int		i;
-// 	char	*str;
-
-// 	str = cub->map_1d;
-// 	i = cub->map_1d_len + 1;
-// 	while (--i >= 0)
-// 	{
-		
-// 	}
-// }
 
 void	trim_comma(char *str)
 {
@@ -336,7 +323,6 @@ void	parse_info(t_cub *cub)
 	cub->fd = ft_close(cub->fd);
 	cub->map_1d_len = ft_strlen(cub->map_1d);
 	parse_rgb(cub);
-	// check_cord_position(cub);
 	check_for_textures(cub);
 }
 
@@ -507,7 +493,6 @@ void	trim_spaces(char *str)
 
 void	parse_map(t_cub *cub)
 {
-	// trim_spaces(cub->map_1d);
 	cub->map = ft_split(cub->map_1d, '\n');
 	check_positions(cub);
 }
@@ -519,6 +504,5 @@ int	parse(int ac, t_cub *cub, char *map_file)
 	ft_file_ext(cub, map_file);
 	parse_info(cub);
 	parse_map(cub);
-	print_cub(cub);
 	return (0);
 }

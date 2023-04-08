@@ -221,6 +221,7 @@ int		ft_file_ext(t_cub *cub, char *map_file);
 void	parse_info(t_cub *cub);
 void		parse_map(t_cub *cub);
 int		parse(int ac, t_cub *cub, char *map_file);
+void	print_cub(t_cub *cub);
 
 
 int		check_characters(t_cub *cub);
