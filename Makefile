@@ -1,3 +1,4 @@
+
 # ANSI color codes for output formatting
 RED=\033[0;31m
 GREEN=\033[0;32m
@@ -21,7 +22,23 @@ SRCS	= 	main.c \
 			raycasting/drawing_utils.c \
 			raycasting/raycasting.c \
 			
+BONUSSRCS	=	bonus/main.c \
+			bonus/parsing/parse_map.c\
+			bonus/parsing/parse_ext.c \
+			bonus/parsing/parse_utils.c \
+			bonus/parsing/parse_colors.c \
+			bonus/parsing/parse_mapfile.c \
+			bonus/parsing/parse_validate.c \
+			bonus/parsing/parse_initializer.c \
+			bonus/raycasting/utils.c \
+			bonus/raycasting/key_handles.c \
+			bonus/raycasting/line_drawing.c \
+			bonus/raycasting/drawing_utils.c \
+			bonus/raycasting/raycasting.c \
 
+
+BONUSOBJS	=	$(BONUSSRCS:.c=.o)
+BONUSNAME	=	cub3d_bonus
 
 OBJS	= $(SRCS:.c=.o)
 FLAGS	= -crs
@@ -54,20 +71,31 @@ clean:
 	$(CLNLIB)
 	@$(RM) $(OBJS)
 	@make clean -C ./mlx && rm -rf *.dSYM
+	@make clean -C ./bonus
 	@echo "$(YELLOW)Removed object files.$(RESET)"
 
 fclean: clean
 	$(FCLNLIB)
 	@$(RM) $(NAME)
+	@$(RM) $(BONUSNAME)
 	@make clean -C ./mlx && rm -rf *.dSYM
 	@echo "$(YELLOW)Removed executable.$(RESET)"
 
 re: fclean all
 		make clean
 
+bonus: $(BONUSNAME)
+$(BONUSNAME): $(BONUSOBJS)
+	$(MAKELIB)
+	@echo "$(CYAN)Compiling $(BONUSNAME)...\n$(RESET)"
+	@make -C ./mlx
+	@$(CC) $(CFLAGS) -o $(BONUSNAME) $(BONUSOBJS) $(LIBFT) $(mlx) -framework OpenGL -framework AppKit
+	@echo "$(GREEN)Compilation completed.$(RESET)"
+
 exec: fclean all
-		./cub map.cub
+		./cub3d map.cub
 
-.PHONY: all clean fclean re
+execb: fclean bonus
+		./cub3d_bonus map.cub
 
-
+.PHONY: all clean fclean re bonus

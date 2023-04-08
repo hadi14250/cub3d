@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 23:10:35 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/06 20:47:25 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/09 01:45:13 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,9 @@ void	init_player(t_player *player, t_cub *cub)
 	player->height = 3;
 	player->turndirection = 0;
 	player->walkdirection = 0;
-	player->rotationangle = 0.501 * PI;
+	player->rotationangle = cub->dir.actual_dir;
 	player->walkspeed = 3;
-	player->turnspeed = (1 * cub->fps) * (PI / 180);
+	player->turnspeed = (1.5 * cub->fps) * (PI / 180);
 	player->radius = 10;
 }
 
@@ -75,7 +75,7 @@ void	setup(t_cub *cub)
 
 	init_player(&cub->player, cub);
 
-	// 
+	//
 	// for (int x = 0; x < TEX_WIDTH; x++)
 	// {
 	// 	for (int y = 0; y < TEXTURE_HEIGHT; y++)
@@ -164,7 +164,7 @@ bool	maphaswallat(double x, double y)
 	return (true);
 }
 
-void	move_player(t_player *player)
+void	move_player(t_player *player, int flag)
 {
 	double	movestep;
 	t_point	new_pos;
@@ -172,9 +172,16 @@ void	move_player(t_player *player)
 	player->rotationangle += player->turndirection * player->turnspeed;
 
 	movestep = player->walkdirection * player->walkspeed;
-	new_pos.x = player->pos.x + (cos(player->rotationangle) * movestep);
-	new_pos.y = player->pos.y + (sin(player->rotationangle) * movestep);
-
+	if (flag == 0)
+	{
+		new_pos.x = player->pos.x + (cos(player->rotationangle) * movestep);
+		new_pos.y = player->pos.y + (sin(player->rotationangle) * movestep);
+	}
+	else
+	{
+		new_pos.x = player->pos.x + (cos(player->rotationangle - M_PI_2) * movestep);
+		new_pos.y = player->pos.y + (sin(player->rotationangle - M_PI_2) * movestep);
+	}
 	if (!maphaswallat(new_pos.x, new_pos.y))
 	{
 		player->pos.x = new_pos.x;
@@ -212,7 +219,7 @@ void	cast_horz_ray(double ray_angle, t_ray *ray, t_player *player)
 	if (ray->is_ray_facing_left && ray->h_step.x > 0)
 		ray->h_step.x *= -1;
 	if (ray->is_ray_facing_right && ray->h_step.x < 0)
-		ray->h_step.x *= -1;		
+		ray->h_step.x *= -1;
 	ray->next_h_touch.x = ray->h_intercept.x;
 	ray->next_h_touch.y = ray->h_intercept.y;
 
@@ -383,7 +390,7 @@ void	cast_all_rays(t_ray *rays, t_player *player)
 
 void	update(t_cub *cub)
 {
-	move_player(&cub->player);
+	move_player(&cub->player, cub->p_flag);
 	cast_all_rays(cub->player.rays, &cub->player);
 }
 
@@ -424,7 +431,7 @@ void	draw_3d_wall(t_cub *cub, int i, t_ray *rays)
 {
 	int					y;
 	t_wall_cords	cords;
-	
+
 	cub->t_size = WINDOW_WIDTH;
 	bzero(&cords, sizeof(t_wall_cords));
 	y = cub->wall_top_pixel;
@@ -520,10 +527,11 @@ void	render(t_cub *cub)
 	cub->img.img_ptr = free_img(cub->img.img_ptr, cub->mlx);
 	cub->img.img_ptr = cub_new_img(&cub->img, cub->mlx,
 			WINDOW_WIDTH, WINDOW_HEIGHT);
-
+	if (!cub->img.img_ptr)
+		exit_cub(cub, 1, "Error\n, can't allocate image\n");
 	generate_3d_wprojection(&cub->player, cub->player.rays, cub);
 	render_color_buffer(cub);
-	
+
 	render_map(cub);
 	render_rays(cub, cub->player.rays);
 	render_player(&cub->player, cub);

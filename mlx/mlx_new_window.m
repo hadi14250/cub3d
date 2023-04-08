@@ -5,6 +5,7 @@
 #import <AppKit/NSOpenGLView.h>
 
 #include <stdio.h>
+#include <math.h>
 
 #include "mlx_int.h"
 #include "mlx_new_window.h"
@@ -83,7 +84,7 @@ int get_mouse_button(NSEventType eventtype)
 {
   event_funct[event] = func;
   event_param[event] = param;
-  if (event == 6) // motion notify
+  if (event == 6 || event == 32) // motion notify && high precision motion notify
     {
       if (func == NULL)
 	[self setAcceptsMouseMovedEvents:NO];
@@ -343,7 +344,7 @@ int get_mouse_button(NSEventType eventtype)
 
   if ((self = [super initWithFrame:rect pixelFormat:pixFmt]) != nil)
     {
-      NSUInteger windowStyle = NSWindowStyleMaskTitled | NSWindowStyleMaskClosable | NSWindowStyleMaskMiniaturizable | NSWindowStyleMaskResizable;
+      NSUInteger windowStyle = NSWindowStyleMaskTitled | NSWindowStyleMaskClosable | NSWindowStyleMaskMiniaturizable;
 
       win = [[NSWindowEvent alloc] initWithContentRect:rect
 				   styleMask:windowStyle
@@ -483,6 +484,11 @@ int get_mouse_button(NSEventType eventtype)
 - (NSOpenGLContext *) ctx
 {
   return (ctx);
+}
+
+- (NSWindowEvent *) win
+{
+  return (win);
 }
 
 

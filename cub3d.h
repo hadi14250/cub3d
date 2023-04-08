@@ -1,18 +1,8 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/25 20:27:23 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/07 14:48:05 by hakaddou         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
+# include "libft/libft.h"
 # include <time.h>
 # include <stdio.h>
 # include <unistd.h>
@@ -34,7 +24,7 @@
 #include "./includes/colors.h"
 #include "./includes/raycasting.h"
 #include <strings.h>
-#include "./libft/libft.h"
+
 
 // texture
 
@@ -47,47 +37,6 @@ typedef struct s_state
 	t_point			direction;
 	t_point			plane;
 }			t_state;
-
-// cub structs
-typedef struct s_var
-{
-	double			position_x;
-	double			position_y;
-	double			direction_x;
-	double			direction_y;
-	double			plane_x;
-	double			plane_y;
-	double			camera_x;
-	double			ray_direction_x;
-	double			ray_direction_y;
-	double			side_distance_x;
-	double			side_distance_y;
-	double			delta_distance_x;
-	double			delta_distance_y;
-	double			perspective_wall_distance;
-	double			wall_x;
-	double			step;
-	double			texture_position;
-	double			frame_time;
-	double			move_speed;
-	double			rotate_speed;
-
-	int				map_x;
-	int				map_y;
-	int				step_x;
-	int				step_y;
-	int				hit;
-	int				side;
-	int				line_height;
-	int				draw_start;
-	int				draw_end;
-	int				texture_number;
-	int				texture_y;
-	int				texture_x;
-
-	unsigned int	color;
-}			t_var;
-
 
 // screen struct
 typedef struct s_img
@@ -127,6 +76,24 @@ typedef struct s_key
 	int	p;
 }				t_key;
 
+typedef struct s_buff
+{
+	char	*i;
+	char	*total;
+	char	*tmp;
+	char	*line;
+}	t_buff;
+
+typedef struct s_dir
+{
+	int		south;
+	int		north;
+	int		west;
+	int		east;
+	double	actual_dir;
+}				t_dir;
+
+
 // map struct
 typedef struct s_cub
 {
@@ -141,7 +108,6 @@ typedef struct s_cub
 	int				n_columns;
 	unsigned long	floor;
 	unsigned long	ceiling;
-	t_var			var;
 	int				texture[4][TEXTURE_HEIGHT * TEXTURE_WIDTH];
 	t_key			key;
 	t_point		start_line_pos;
@@ -159,6 +125,23 @@ typedef struct s_cub
 	int		wall_strip_height;
 	int		wall_top_pixel;
 	int		wall_bottom_pixel;
+	char	*map_1d;
+	int		map_1d_len;
+	char	*c_rgb;
+	char	*f_rgb;
+	bool	color_flag;
+	int		fd;
+	int		no_pos;
+	int		so_pos;
+	int		we_pos;
+	int		ea_pos;
+	int		floor_pos;
+	int		ceiling_pos;
+	int		map_pos;
+	int		max;
+	char	*trimmed;
+	t_dir	dir;
+	int		p_flag;
 }				t_cub;
 
 // raycasting struct
@@ -187,22 +170,28 @@ void	print_map(char **map);
 //------------cub_utils_folder------------//
 
 //const char		*get_exit(const char *file);
-unsigned long	rgb_to_hex(int red, int green, int blue);
+unsigned long	rgb_to_hex(int red, int green, int blue, t_cub *cub);
 
+// int				get_next_line(int fd, char **line);
+// int				ft_new_line(char *buf);
 int				ft_array_length(char **arr);
+// int				ft_strncmp(const char *s1, char *s2, size_t n);
+// int				ft_atoi(const char *str);
 
 void			ft_free(char ***arr);
 
+
 /*parsing*/
 
-int		ft_file_ext(int fd, char *map_file);
-int		parse_info(t_cub *cub, int fd);
-int		parse_map(t_cub *cub, int fd);
+int		ft_file_ext(t_cub *cub, char *map_file);
+void	parse_info(t_cub *cub);
+void		parse_map(t_cub *cub);
 int		parse(int ac, t_cub *cub, char *map_file);
+void	print_cub(t_cub *cub);
 
-int	check_characters(t_cub *cub);
+
+int		check_characters(t_cub *cub);
 int		init_textures(t_cub *cub);
-int		init_colors(t_cub *cub);
 int		validate_map(t_cub *cub);
 void	init(t_cub *cub);
 
@@ -245,4 +234,8 @@ void	draw_background(t_img *img, t_cub *cub);
 void	render(t_cub *cub);
 void	update(t_cub *cub);
 
+/*	free utils	*/
+void	exit_cub(t_cub *cub, int code, char *msg);
+
 #endif
+
