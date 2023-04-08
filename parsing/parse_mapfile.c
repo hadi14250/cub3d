@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 23:03:02 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/08 04:21:22 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/08 05:46:27 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -299,9 +299,69 @@ void	check_floor_ceiling(t_cub *cub)
 		exit_cub(cub, 1, "invalid rgb format");
 }
 
+void	check_north_south(t_cub *cub)
+{
+	char	*north;
+	char	*south;
+
+	north = ft_strnstr(cub->map_1d, "NO", cub->map_1d_len);
+	if (!north)
+		exit_cub(cub, 1, "Error\nNO not found");
+	north += 2;
+	north = ft_strnstr(north, "NO", cub->map_1d_len);
+	if (!north)
+		exit_cub(cub, 1, "Error\n NO invalid\n");
+	north += 2;
+	north = ft_strnstr(north, "NO", cub->map_1d_len);
+	if (north)
+		exit_cub(cub, 1, "Error\nmore than one NO texture found\n");
+	south = ft_strnstr(cub->map_1d, "SO", cub->map_1d_len);
+	if (!south)
+		exit_cub(cub, 1, "Error\nSO not found");
+	south += 2;
+	south = ft_strnstr(south, "SO", cub->map_1d_len);
+	if (!south)
+		exit_cub(cub, 1, "Error\n SO invalid\n");
+	south += 2;
+	south = ft_strnstr(south, "SO", cub->map_1d_len);
+	if (south)
+		exit_cub(cub, 1, "Error\nmore than one SO texture found\n");
+}
+
+void	east_west(t_cub *cub)
+{
+	char	*east;
+	char	*west;
+
+	east = ft_strnstr(cub->map_1d, "EA", cub->map_1d_len);
+	if (!east)
+		exit_cub(cub, 1, "Error\nEA not found");
+	east += 2;
+	east = ft_strnstr(east, "EA", cub->map_1d_len);
+	if (!east)
+		exit_cub(cub, 1, "Error\n EA invalid\n");
+	east += 2;
+	east = ft_strnstr(east, "EA", cub->map_1d_len);
+	if (east)
+		exit_cub(cub, 1, "Error\nmore than one EA texture found\n");
+	west = ft_strnstr(cub->map_1d, "WE", cub->map_1d_len);
+	if (!west)
+		exit_cub(cub, 1, "Error\nWE not found");
+	west += 2;
+	west = ft_strnstr(west, "WE", cub->map_1d_len);
+	if (!west)
+		exit_cub(cub, 1, "Error\n WE invalid\n");
+	west += 2;
+	west = ft_strnstr(west, "WE", cub->map_1d_len);
+	if (west)
+		exit_cub(cub, 1, "Error\nmore than one WE texture found\n");
+}
+
 void	parse_rgb(t_cub *cub)
 {
 	check_floor_ceiling(cub);
+	check_north_south(cub);
+	east_west(cub);
 	cub->rgb = ft_calloc(5, sizeof(char *));
 	cub->c_rgb = ft_strnstr(cub->map_1d, "C", cub->map_1d_len);
 	cub->c_rgb = ft_tex_dup(cub->c_rgb);
@@ -433,7 +493,9 @@ void	check_positions(t_cub *cub)
 {
 	int		i;
 	char	**split;
+	int		d;
 
+	d = 0;
 	cub->max = 0;
 	split = cub->map;
 	i=  -1;
@@ -444,36 +506,42 @@ void	check_positions(t_cub *cub)
 			cub->no_pos = i;
 			if (i > cub->max)
 				cub->max = i;
+			d++;
 		}
 		if (ft_strnstr(split[i], "SO", ft_strlen(split[i])))
 		{
 			cub->so_pos = i;
 			if (i > cub->max)
 				cub->max = i;
+			d++;
 		}
 		if (ft_strnstr(split[i], "WE", ft_strlen(split[i])))
 		{
 			cub->we_pos = i;
 			if (i > cub->max)
 				cub->max = i;
+			d++;
 		}
 		if (ft_strnstr(split[i], "EA", ft_strlen(split[i])))
 		{
 			cub->ea_pos = i;
 			if (i > cub->max)
 				cub->max = i;
+			d++;
 		}
 		if (ft_strnstr(split[i], "F", ft_strlen(split[i])))
 		{
 			cub->floor_pos = i;
 			if (i > cub->max)
 				cub->max = i;
+			d++;
 		}
 		if (ft_strnstr(split[i], "C", ft_strlen(split[i])))
 		{
 			cub->ceiling_pos = i;
 			if (i > cub->max)
 				cub->max = i;
+			d++;
 		}
 	}
 	check_map_pos(cub, &cub->map[cub->max + 1]);

@@ -171,6 +171,7 @@ typedef struct s_cub
 	int		ceiling_pos;
 	int		map_pos;
 	int		max;
+	char	*trimmed;
 	// char	*no_val;
 	// char	*so_val;
 	// char	*we_val;
