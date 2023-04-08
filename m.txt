@@ -1,4 +1,3 @@
-
 # ANSI color codes for output formatting
 RED=\033[0;31m
 GREEN=\033[0;32m
@@ -14,7 +13,7 @@ CC		=	@gcc
 CFLAGS	=	-g3 -Wall -Wextra -Werror #-fsanitize=address
 
 RM		=	@rm -f
-ECHO	=	@echo
+
 
 MAKELIB	=	@make -C libft
 LIBFT	=	libft/libft.a
@@ -34,7 +33,7 @@ SRCS	= 	main.c \
 			# raycasting/line_drawing.c \
 			# raycasting/drawing_utils.c \
 			# raycasting/raycasting.c \
-
+			
 
 
 OBJS	=	$(SRCS:.c=.o)
@@ -42,7 +41,7 @@ OBJS	=	$(SRCS:.c=.o)
 $(NAME):	$(OBJS)
 			$(MAKELIB)
 			$(ECHO) "Compiling minishell ......"
-			$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT) $(LRLFLAG)
+			$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT) $(LRLFLAG) 
 
 all:		$(NAME)
 
@@ -50,7 +49,7 @@ clean:
 			$(CLNLIB)
 			$(RM) $(OBJS)
 
-fclean:
+fclean:		
 			$(FCLNLIB)
 			$(ECHO) "Removing minishell ......."
 			$(RM) $(NAME) $(OBJS)
@@ -61,7 +60,5 @@ exec: fclean all
 		./cub map.cub
 
 .PHONY: all clean fclean re
-
-
 
 

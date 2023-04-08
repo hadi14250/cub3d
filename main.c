@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 20:27:50 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/07 15:25:03 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/08 04:21:35 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,35 +36,41 @@ t_rect	init_rect(int x, int y, int width, int height)
 	return (rect);
 }
 
-void	draw_rectangle(t_img *img, t_rect rect, int color)
-{
-	int	i;
-	int	j;
+// void	draw_rectangle(t_img *img, t_rect rect, int color)
+// {
+// 	int	i;
+// 	int	j;
 
-	i = rect.x;
-	j = rect.y;
-	while (i < rect.x + rect.width)
-	{
-		while (j < rect.y + rect.height)
-		{
-			my_mlx_pixel_put(img, i, j, color);
-			j++;
-		}
-		i++;
-		j = rect.y;
-	}
-}
+// 	i = rect.x;
+// 	j = rect.y;
+// 	while (i < rect.x + rect.width)
+// 	{
+// 		while (j < rect.y + rect.height)
+// 		{
+// 			my_mlx_pixel_put(img, i, j, color);
+// 			j++;
+// 		}
+// 		i++;
+// 		j = rect.y;
+// 	}
+// }
 
+// make re && make clean && clear && valgrind --leak-check=full ./cub3d map.cub
 int main(int ac, char **av)
 {
-	t_cub	cub;
+	t_cub		cub;
+
 	ft_bzero(&cub, sizeof(cub));
 	parse(ac, &cub, av[1]);
+	// init(&cub);
+	print_cub(&cub);
+	exit_cub(&cub, 0, "game finished successfully\n");
 
-	init(&cub);
+	// //parse_size(cub);
 
-	init_mlx_utils(&cub);
-	cub.color_buffer = calloc(sizeof(int) * WINDOW_WIDTH , WINDOW_HEIGHT);
-	cub.tex = calloc(sizeof(int) * WINDOW_WIDTH , WINDOW_HEIGHT);
-	raycasting(&cub);
+	// // init_mlx_utils(cub);
+	// cub->color_buffer = calloc(sizeof(int) * WINDOW_WIDTH , WINDOW_HEIGHT);
+	// cub->tex = calloc(sizeof(int) * WINDOW_WIDTH , WINDOW_HEIGHT);
+	// // raycasting(cub);
+	// exit_cub(cub, 0, "Success\n");
 }

@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 19:51:44 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/07 14:55:26 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/07 17:31:56 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,7 @@ char	*gl_trim_line(char *str)
 		i++;
 	}
 	if (str[i] == '\n')
-	{
-		// tmp[i] = str[i];
-		// i++;
 		tmp[i] = '\0';
-	}
 	return (tmp);
 }
 
