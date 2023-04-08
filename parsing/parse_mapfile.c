@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 23:03:02 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/08 15:17:56 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/08 17:14:57 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -226,6 +226,7 @@ void	print_cub(t_cub *cub)
 	cub->no_pos, cub->ea_pos, cub->so_pos, cub->we_pos, cub->map_pos,
 	cub->floor_pos, cub->ceiling_pos);
 	printf("max is: %d and it is --->%s<---\n", cub->max, cub->map[cub->max]);
+	printf("player direction is: %f\n", cub->dir.actual_dir);
 }
 
 void	trim_comma(char *str)
@@ -639,12 +640,65 @@ void	check_other_format_1d(t_cub *cub)
 		exit_cub(cub, 1, "\n");
 }
 
+void	set_player_direction(t_cub *cub)
+{
+	if (cub->dir.north == 1)
+		cub->dir.actual_dir = 1.5001 * PI;
+	else if (cub->dir.south == 1)
+		cub->dir.actual_dir = 0.5001 * PI;
+	else if (cub->dir.west == 1)
+		cub->dir.actual_dir = 0.001 + PI;
+	else if (cub->dir.east == 1)
+		cub->dir.actual_dir = 0.001;
+}
+
+void	check_player_format_two(t_cub *cub)
+{
+	int	i;
+
+	i = -1;
+	cub->dir.west = 0;
+	cub->dir.east = 0;
+	while (cub->map_1d[++i] != '\0')
+	{
+		if (cub->map_1d[i] == 'E')
+			cub->dir.east++;
+		else if (cub->map_1d[i] == 'W')
+			cub->dir.west++;
+	}
+	if ((cub->dir.south + cub->dir.north
+		+ cub->dir.east + cub->dir.west) > 1)
+		exit_cub(cub, 1, "Error\nmore than one player position found\n");
+	if ((cub->dir.south + cub->dir.north
+		+ cub->dir.east + cub->dir.west) < 1)
+		exit_cub(cub, 1, "Error\nno player position found\n");
+	set_player_direction(cub);
+}
+
+void	check_player_format(t_cub *cub)
+{
+	int	i;
+
+	i = -1;
+	cub->dir.north = 0;
+	cub->dir.south = 0;
+	while (cub->map_1d[++i] != '\0')
+	{
+		if (cub->map_1d[i] == 'N')
+			cub->dir.north++;
+		else if (cub->map_1d[i] == 'S')
+			cub->dir.south++;
+	}
+	check_player_format_two(cub);
+}
+
 void	parse_map(t_cub *cub)
 {
 	cub->map = ft_split(cub->map_1d, '\n');
 	check_positions(cub);
 	check_other_format(cub);
 	check_other_format_1d(cub);
+	check_player_format(cub);
 }
 
 int	parse(int ac, t_cub *cub, char *map_file)
