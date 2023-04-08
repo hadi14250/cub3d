@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 15:18:53 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/08 04:16:29 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/08 04:16:46 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,6 @@ void	*cub_new_img(t_img *img, void *mlx, int width, int height)
 
 void	init_mlx_utils(t_cub *cub)
 {
-	if (!cub->mlx)
-	{
-		// need to free before exiting
-		printf("error initialising mlx\n");
-		exit(1);
-	}
 	cub->win = mlx_new_window(cub->mlx, WINDOW_WIDTH, WINDOW_HEIGHT, "Cub3d");
 	if (!cub->win)
 	{
