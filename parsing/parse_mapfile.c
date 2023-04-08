@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 23:03:02 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/08 23:25:01 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/09 01:14:19 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -494,6 +494,26 @@ int	return_double_len(char **split)
 // 	printf("mapmap map map is ------------------>\n%s<--------------\n", cub->map_1d);
 // }
 
+int	check_next_line(t_cub *cub, char *str, int len)
+{
+	int	len_two;
+	while(len >= 0 && (str[len] == ' ' || str[len] == '\t'))
+		len--;
+	len_two = len;
+	if (len >= 0 && str[len] == '\n')
+	{
+		while (len >= 0 && (str[len] == ' ' || str[len] == '\t' ||
+			str[len] == '\n' || str[len] == '\r' || str[len] == '\f' ||
+			str[len] == '\v'))
+				len--;
+		if (len >= 0 && (str[len] == '1' || str[len] == '0' ||
+			str[len] == ' ' || str[len] == 'E' || str[len] == 'S' ||
+			str[len] == 'W' || str[len] == 'N'))
+				exit_cub(cub, 1, "Error\nconesecutive new lines in map\n");
+	}
+	return (len_two);
+}
+
 void	check_for_lines(t_cub *cub)
 {
 	char	*str;
@@ -505,28 +525,15 @@ void	check_for_lines(t_cub *cub)
 		str[len] == '\n' || str[len] == '\r' || str[len] == '\f' ||
 		str[len] == '\v'))
 			len--;
-	printf("checking:\n");
 	while (len >= 0 && (str[len] == '1' || str[len] == '0' ||
 		str[len] == ' ' || str[len] == 'E' || str[len] == 'S' ||
 		str[len] == 'W' || str[len] == 'N' || str[len] == '\n' ||
 		str[len] == '\t'))
 	{
 		if (str[len] == '\n')
-		{
-			
-			while(len >= 0 && (str[len] == ' ' || str[len] == '\t'))
-				len--;
-			if (len >= 0 && str[len - 1] == '\n')
-			// need to check if xpm is there,
-			// how? itertate backwards and check if it's not 1, 0 etc, if it is not
-			// then exit
-				exit_cub(cub, 1, "Error\nconsecutive newlines found\n");
-		}
-		printf("%c, ", str[len]);
+			len = check_next_line(cub, str, len - 1);
 		len--;
 	}
-	printf("it stopped here: --->%c<---\n", str[len]);
-	printf("\n");
 }
 
 void	realloc_map(t_cub *cub)
@@ -539,8 +546,9 @@ void	realloc_map(t_cub *cub)
 	temp  = ft_strsjoin(len, &cub->map[cub->max], "\n");
 	cub->map_1d = free_null(cub->map_1d);
 	cub->map_1d = temp;
-	// trim_map_spaces(cub->map_1d);
-	printf("mapmap map map is ------------------>\n%s<--------------\n", cub->map_1d);
+	temp = ft_strtrim(cub->map_1d, " \t\n\r\f\v");
+	cub->map_1d = free_null(cub->map_1d);
+	cub->map_1d = temp;
 }
 
 void	check_map_pos(t_cub *cub, char **half_map)
