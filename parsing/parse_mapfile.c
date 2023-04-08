@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 23:03:02 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/08 15:08:57 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/08 15:13:14 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -591,8 +591,8 @@ void	check_other_format(t_cub *cub)
 			{
 				if (check_spaces(cub->map[i]))
 				{
-					printf("Error: position %d: invalid format: -->%s<--\n",
-						i, cub->map[i]);
+					printf("Error\nposition %d: invalid format: -->%s<--\n",
+						i + 1, cub->map[i]);
 					exit_cub(cub, 1, "");
 				}
 			}
