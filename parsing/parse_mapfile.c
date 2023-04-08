@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 23:03:02 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/08 14:02:04 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/08 15:08:57 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -464,6 +464,7 @@ void	realloc_map(char **half_map, t_cub *cub)
 	new[d] = '\0';
 	cub->map_1d = free_null(cub->map_1d);
 	cub->map_1d = new;
+	cub->map_1d_len = ft_strlen(new);
 }
 
 void	check_map_pos(t_cub *cub, char **half_map)
@@ -560,10 +561,88 @@ void	trim_spaces(char *str)
 	}
 }
 
+int	check_spaces(char *str)
+{
+	int	i;
+	int	d;
+
+	i = -1;
+	d = 0;
+	while(str[++i] != '\0')
+	{
+		if ((str[i] == 32) || (str[i] >= 9 && str[i] <= 13))
+			d++;
+	}
+	if (d != i)
+		return (1);
+	return (0);
+}
+
+void	check_other_format(t_cub *cub)
+{
+	int	i;
+
+	i = -1;
+	while (cub->map[++i] != NULL && i <= cub->max)
+	{
+		if (i != cub->no_pos && i != cub->ea_pos &&
+			i != cub->so_pos && i != cub->we_pos &&
+			i != cub->floor_pos && i != cub->ceiling_pos)
+			{
+				if (check_spaces(cub->map[i]))
+				{
+					printf("Error: position %d: invalid format: -->%s<--\n",
+						i, cub->map[i]);
+					exit_cub(cub, 1, "");
+				}
+			}
+	}
+}
+
+int	is_valid_char(char c)
+{
+	if (c == '1' || c == '0' || c == 'N' ||
+		c == 'S' || c == 'E' || c == 'W'
+		|| (c == ' ') || (c >= 9 && c <= 13))
+		return (1);
+	return (0);
+}
+
+void	check_other_format_1d(t_cub *cub)
+{
+	int		i;
+	int		d;
+	int		j;
+	int		r;
+
+	r = 0;
+	i = -1;
+	d = 0;
+	j = 0;
+	while(cub->map_1d[++i] != '\0')
+	{
+		if (is_valid_char(cub->map_1d[i]))
+			d++;
+		else
+		{
+			if (j == 0)
+				printf("Error\ninvalid character(s): ");
+			printf("->%c<- in column %d, ", cub->map_1d[i], r + 1);
+			j++;
+		}
+		if (cub->map_1d[i] == '\n')
+			r++;
+	}
+	if (d != i)
+		exit_cub(cub, 1, "\n");
+}
+
 void	parse_map(t_cub *cub)
 {
 	cub->map = ft_split(cub->map_1d, '\n');
 	check_positions(cub);
+	check_other_format(cub);
+	check_other_format_1d(cub);
 }
 
 int	parse(int ac, t_cub *cub, char *map_file)
