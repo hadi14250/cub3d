@@ -1,7 +1,8 @@
 WE ./game_textures/WE.xpm
 
-C 0, 1, 255
-F 111, 90,	111
+C 255, 192, 203
+F 0, 100, 100
+
 SO ./game_textures/SO.xpm
 
 EA ./game_textures/EA.xpm

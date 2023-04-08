@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 23:01:56 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/08 13:22:14 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/08 13:33:26 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,6 @@ void	init(t_cub *cub)
 	if (init_textures(cub) == 1)
 	{
 		printf("Cannot load textures\n");
-		exit(1);
-	}
-	if (init_colors(cub) == 1)
-	{
-		printf("cannot load colours\n");
 		exit(1);
 	}
 	init_textures(cub);

@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 15:18:53 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/08 13:25:03 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/08 13:40:43 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,12 @@ void	init_mlx_utils(t_cub *cub)
 			WINDOW_WIDTH, WINDOW_HEIGHT);
 	if (!cub->img.img_ptr)
 		exit_cub(cub, 1, "Error\ncan't initialise image\n");
+	cub->color_buffer = calloc(sizeof(int) * WINDOW_WIDTH , WINDOW_HEIGHT);
+	if (!cub->color_buffer)
+		exit_cub(cub, 1, "Error\n, memory alloction failed\n");
+	cub->tex = calloc(sizeof(int) * WINDOW_WIDTH , WINDOW_HEIGHT);
+	if (!cub->tex)
+		exit_cub(cub, 1, "Error\n, memory alloction failed\n");
 }
 
 void	ft_swap(double *a, double *b)
