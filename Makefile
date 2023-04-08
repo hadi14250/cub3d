@@ -67,6 +67,6 @@ re: fclean all
 		make clean
 
 exec: fclean all
-		./cub map.cub
+		./cub3d map.cub
 
 .PHONY: all clean fclean re
