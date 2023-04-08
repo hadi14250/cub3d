@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 23:03:02 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/08 17:16:11 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/09 01:18:39 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -216,7 +216,7 @@ void	check_for_textures(t_cub *cub)
 
 void	print_cub(t_cub *cub)
 {
-	printf("1D MAP: -->%s<--\n", cub->map_1d);
+	printf("1D MAP: -->\n%s<--\n", cub->map_1d);
 	printf("NO: -->%s<--\n", cub->xpm[0]);
 	printf("SO: -->%s<--\n", cub->xpm[1]);
 	printf("EA: -->%s<--\n", cub->xpm[2]);
@@ -450,25 +450,108 @@ int	return_split_len(char **split)
 	return (i);
 }
 
-void	realloc_map(char **half_map, t_cub *cub)
+void	trim_map_spaces(char *str)
 {
-	int		new_len;
-	int		bmap_len;
-	int		i;
-	char	*new;
-	int		d;
+	int	i;
 
-	d = -1;
-	new_len = return_len(half_map);
-	bmap_len = cub->map_1d_len - new_len;
-	i = bmap_len - 1;
-	new = ft_calloc((cub->map_1d_len - bmap_len) + 1, sizeof(char));
-	while(cub->map_1d[++i] != '\0')
-		new[++d] = cub->map_1d[i];
-	new[d] = '\0';
+	i = -1;
+	while (str[++i] != '\0')
+	{
+		if (str[i] == ' ' || str[i] == '\t')
+			str[i] = '0';
+	}
+}
+
+void	check_lines(char *str, t_cub *cub);
+
+int	return_double_len(char **split)
+{
+	int	i;
+	int	d;
+
+	d = 0;
+	i = 0;
+	if (!split || !split[0])
+		return (0);
+	while (split[i] != NULL)
+	{
+		d += (ft_strlen(split[i]));
+		i++;
+	}
+	return (d - i);
+}
+
+// void	realloc_map(t_cub *cub)
+// {
+// 	char	*temp;
+// 	int		len;
+// 	int		arr_len;
+
+// 	arr_len = return_double_len(&cub->map[cub->max + 1]);
+// 	check_lines(cub->map_1d + arr_len, cub);
+// 	len = return_split_len(&cub->map[cub->max]);
+// 	temp  = ft_strsjoin(len, &cub->map[cub->max], "\n");
+// 	cub->map_1d = free_null(cub->map_1d);
+// 	cub->map_1d = temp;
+// 	// trim_map_spaces(cub->map_1d);
+// 	printf("mapmap map map is ------------------>\n%s<--------------\n", cub->map_1d);
+// }
+
+int	check_next_line(t_cub *cub, char *str, int len)
+{
+	int	len_two;
+	while(len >= 0 && (str[len] == ' ' || str[len] == '\t'))
+		len--;
+	len_two = len;
+	if (len >= 0 && str[len] == '\n')
+	{
+		while (len >= 0 && (str[len] == ' ' || str[len] == '\t' ||
+			str[len] == '\n' || str[len] == '\r' || str[len] == '\f' ||
+			str[len] == '\v'))
+				len--;
+		if (len >= 0 && (str[len] == '1' || str[len] == '0' ||
+			str[len] == ' ' || str[len] == 'E' || str[len] == 'S' ||
+			str[len] == 'W' || str[len] == 'N'))
+				exit_cub(cub, 1, "Error\nconesecutive new lines in map\n");
+	}
+	return (len_two);
+}
+
+void	check_for_lines(t_cub *cub)
+{
+	char	*str;
+	int		len;
+
+	len = ft_strlen(cub->map_1d) - 1;
+	str = cub->map_1d; //  \t\n\r\f\v
+	while (len >= 0 && (str[len] == ' ' || str[len] == '\t' ||
+		str[len] == '\n' || str[len] == '\r' || str[len] == '\f' ||
+		str[len] == '\v'))
+			len--;
+	while (len >= 0 && (str[len] == '1' || str[len] == '0' ||
+		str[len] == ' ' || str[len] == 'E' || str[len] == 'S' ||
+		str[len] == 'W' || str[len] == 'N' || str[len] == '\n' ||
+		str[len] == '\t'))
+	{
+		if (str[len] == '\n')
+			len = check_next_line(cub, str, len - 1);
+		len--;
+	}
+}
+
+void	realloc_map(t_cub *cub)
+{
+	char	*temp;
+	int		len;
+
+	check_for_lines(cub);
+	len = return_split_len(&cub->map[cub->max]);
+	temp  = ft_strsjoin(len, &cub->map[cub->max], "\n");
 	cub->map_1d = free_null(cub->map_1d);
-	cub->map_1d = new;
-	cub->map_1d_len = ft_strlen(new);
+	cub->map_1d = temp;
+	temp = ft_strtrim(cub->map_1d, " \t\n\r\f\v");
+	cub->map_1d = free_null(cub->map_1d);
+	cub->map_1d = temp;
 }
 
 void	check_map_pos(t_cub *cub, char **half_map)
@@ -492,16 +575,14 @@ void	check_map_pos(t_cub *cub, char **half_map)
 			}
 			i--;
 	}
-	realloc_map(half_map, cub);
+	realloc_map(cub);
 }
 
 void	check_positions(t_cub *cub)
 {
 	int		i;
 	char	**split;
-	int		d;
 
-	d = 0;
 	cub->max = 0;
 	split = cub->map;
 	i=  -1;
@@ -512,42 +593,36 @@ void	check_positions(t_cub *cub)
 			cub->no_pos = i;
 			if (i > cub->max)
 				cub->max = i;
-			d++;
 		}
 		if (ft_strnstr(split[i], "SO", ft_strlen(split[i])))
 		{
 			cub->so_pos = i;
 			if (i > cub->max)
 				cub->max = i;
-			d++;
 		}
 		if (ft_strnstr(split[i], "WE", ft_strlen(split[i])))
 		{
 			cub->we_pos = i;
 			if (i > cub->max)
 				cub->max = i;
-			d++;
 		}
 		if (ft_strnstr(split[i], "EA", ft_strlen(split[i])))
 		{
 			cub->ea_pos = i;
 			if (i > cub->max)
 				cub->max = i;
-			d++;
 		}
 		if (ft_strnstr(split[i], "F", ft_strlen(split[i])))
 		{
 			cub->floor_pos = i;
 			if (i > cub->max)
 				cub->max = i;
-			d++;
 		}
 		if (ft_strnstr(split[i], "C", ft_strlen(split[i])))
 		{
 			cub->ceiling_pos = i;
 			if (i > cub->max)
 				cub->max = i;
-			d++;
 		}
 	}
 	check_map_pos(cub, &cub->map[cub->max + 1]);
@@ -691,6 +766,31 @@ void	check_player_format(t_cub *cub)
 			cub->dir.south++;
 	}
 	check_player_format_two(cub);
+}
+
+void	check_lines(char *str, t_cub *cub)
+{
+	char	*temp;
+	int	i;
+	int	d;
+
+	i = -1;
+	d = 0;
+	temp = ft_strtrim(str, " \t\n\r\f\v");
+	cub->map_1d = free_null(cub->map_1d);
+	str = temp;
+	cub->map_1d = temp;
+	while (str[++i] != '\0')
+	{
+		while (str[i] != '\0' && (str[i] == ' ' ||
+				str[i] == '\t'))
+					i++;
+		if (str[i] == '\n' && str[i + 1] != '\0'
+			&& str[i + 1] == '\n')
+				d++;
+	}
+	if (d)
+		exit_cub(cub, 1, "Error\nconesuctive new lines in map\n");
 }
 
 void	parse_map(t_cub *cub)
