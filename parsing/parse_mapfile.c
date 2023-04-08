@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 23:03:02 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/08 03:01:41 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/08 04:03:05 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -371,10 +371,7 @@ int	return_len(char **split)
 	d = 0;
 	i = -1;
 	while(split[++i] != NULL)
-	{
-		d += ft_tex_len(split[i]);
-		printf("len of %s is: %d\n", split[i], d);
-	}
+		d += ft_strlen(split[i]) + 1;
 	return (d);
 }
 
@@ -402,6 +399,25 @@ int	return_split_len(char **split)
 	return (i);
 }
 
+void	realloc_map(char **half_map, t_cub *cub)
+{
+	int		new_len;
+	int		bmap_len;
+	int		i;
+	char	*new;
+	int		d;
+
+	d = -1;
+	new_len = return_len(half_map);
+	bmap_len = cub->map_1d_len - new_len;
+	i = bmap_len - 1;
+	new = ft_calloc((cub->map_1d_len - bmap_len) + 1, sizeof(char));
+	while(cub->map_1d[++i] != '\0')
+		new[++d] = cub->map_1d[i];
+	new[d] = '\0';
+	cub->map_1d = free_null(cub->map_1d);
+	cub->map_1d = new;
+}
 
 void	check_map_pos(t_cub *cub, char **half_map)
 {
@@ -414,7 +430,6 @@ void	check_map_pos(t_cub *cub, char **half_map)
 		exit_cub(cub, 1, "Error\nunorganized map\n");
 	while (i >= 0)
 	{
-		printf("performing check on: %s\n", cub->map[i]);
 		if (ft_strnstr(cub->map[i], "111", ft_strlen(cub->map[i])))
 			{
 				if (!ft_strnstr(cub->map[i], cub->map[cub->floor_pos],
@@ -425,11 +440,7 @@ void	check_map_pos(t_cub *cub, char **half_map)
 			}
 			i--;
 	}
-	int new_len = return_len(half_map);
-	int bmap_len = cub->map_1d_len - new_len;
-	printf("map is %s\n", cub->map_1d + bmap_len);
-	// printf("MAP is: %s\n", cub->map_1d - cub->map_1d_len + return_len(half_map)));
-	print_map_two(half_map);
+	realloc_map(half_map, cub);
 }
 
 void	check_positions(t_cub *cub)
