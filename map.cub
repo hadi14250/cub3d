@@ -1,7 +1,7 @@
 WE ./game_textures/WE.xpm
 
 C 255, 192, 203
-F 0, 100, 100
+F 255, 215, 0
 
 SO ./game_textures/SO.xpm
 NO ./game_textures/NO.xpm
