@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 23:03:02 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/09 01:14:19 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/09 02:20:15 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,18 @@ void	*free_null(void *ptr)
 	return (NULL);
 }
 
-void	free_split(char **split)
+void	free_split(char ***split)
 {
-	int	i;
+	int		i;
+	char	**to_free;
 
+	to_free = *split;
 	i = -1;
-	if (!split)
+	if (!to_free)
 		return ;
-	while(split[++i])
-		split[i] = free_null(split[i]);
-	split = free_null(split);
+	while(to_free[++i])
+		to_free[i] = free_null(to_free[i]);
+	*split = free_null(to_free);
 }
 
 void	exit_cub(t_cub *cub, int code, char *msg)
@@ -68,9 +70,9 @@ void	exit_cub(t_cub *cub, int code, char *msg)
 	// 	mlx_destroy_window(cub->mlx, cub->win);
 	if (cub->map_1d)
 		cub->map_1d = free_null(cub->map_1d);
-	free_split(cub->map);
-	free_split(cub->xpm);
-	free_split(cub->rgb);
+	free_split(&cub->map);
+	free_split(&cub->xpm);
+	free_split(&cub->rgb);
 	cub->c_rgb = free_null(cub->c_rgb);
 	cub->f_rgb = free_null(cub->f_rgb);
 	cub->fd = ft_close(cub->fd);
@@ -256,7 +258,7 @@ void	convert_colors(t_cub *cub, char *rgb, int flag)
 		temp = rgb_to_hex(ft_atoi(line[0]), ft_atoi(line[1]), ft_atoi(line[2]), cub);
 		cub->floor = temp;
 	}
-	free_split(line);
+	free_split(&line);
 	if (cub->color_flag == true)
 		exit_cub(cub, 1, "rgb out of bound\n");
 }
@@ -268,14 +270,14 @@ int	rgb(t_cub *cub, char *line, char flag)
 	tokens = ft_split(line, ' ');
 	if (ft_array_length(tokens) != 3)
 	{
-		free_split(tokens);
+		free_split(&tokens);
 		exit_cub(cub, 1, "rgb validation failed\n");
 	}
 	if (flag == 'F')
 		cub->rgb[0] = ft_strdup(line);
 	else if (flag == 'C')
 		cub->rgb[1] = ft_strdup(line);
-	free_split(tokens);
+	free_split(&tokens);
 	return (0);
 }
 
