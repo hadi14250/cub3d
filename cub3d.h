@@ -38,47 +38,6 @@ typedef struct s_state
 	t_point			plane;
 }			t_state;
 
-// cub structs
-typedef struct s_var
-{
-	double			position_x;
-	double			position_y;
-	double			direction_x;
-	double			direction_y;
-	double			plane_x;
-	double			plane_y;
-	double			camera_x;
-	double			ray_direction_x;
-	double			ray_direction_y;
-	double			side_distance_x;
-	double			side_distance_y;
-	double			delta_distance_x;
-	double			delta_distance_y;
-	double			perspective_wall_distance;
-	double			wall_x;
-	double			step;
-	double			texture_position;
-	double			frame_time;
-	double			move_speed;
-	double			rotate_speed;
-
-	int				map_x;
-	int				map_y;
-	int				step_x;
-	int				step_y;
-	int				hit;
-	int				side;
-	int				line_height;
-	int				draw_start;
-	int				draw_end;
-	int				texture_number;
-	int				texture_y;
-	int				texture_x;
-
-	unsigned int	color;
-}			t_var;
-
-
 // screen struct
 typedef struct s_img
 {
@@ -149,7 +108,6 @@ typedef struct s_cub
 	int				n_columns;
 	unsigned long	floor;
 	unsigned long	ceiling;
-	t_var			var;
 	int				texture[4][TEXTURE_HEIGHT * TEXTURE_WIDTH];
 	t_key			key;
 	t_point		start_line_pos;
@@ -183,11 +141,7 @@ typedef struct s_cub
 	int		max;
 	char	*trimmed;
 	t_dir	dir;
-	// char	*no_val;
-	// char	*so_val;
-	// char	*we_val;
-	// char	*ea_val;
-	// char	*floor_val;
+	int		p_flag;
 }				t_cub;
 
 // raycasting struct
