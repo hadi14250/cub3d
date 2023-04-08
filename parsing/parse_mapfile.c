@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 23:03:02 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/08 13:26:38 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/08 13:46:49 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	arg_count(int ac)
 {
 	if (ac != 2)
 	{
-		printf("[usage]: ./cub3d cubfile\n");
+		printf("Error\n[usage]: ./cub3d cubfile\n");
 		exit(EXIT_FAILURE);
 	}
 }

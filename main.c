@@ -6,24 +6,11 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 20:27:50 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/08 13:32:40 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/08 13:43:22 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-t_cub	*init_struct( void )
-{
-	t_cub	*cub;
-
-	cub = calloc(sizeof(t_cub), 1);
-	if (!cub)
-	{
-		printf("struct allocation failed\n");
-		exit(EXIT_FAILURE);
-	}
-	return (cub);
-}
 
 t_rect	init_rect(int x, int y, int width, int height)
 {
@@ -68,8 +55,6 @@ int main(int ac, char **av)
 	// parse_size(cub);
 
 	init_mlx_utils(&cub);
-	cub.color_buffer = calloc(sizeof(int) * WINDOW_WIDTH , WINDOW_HEIGHT); // need protection
-	cub.tex = calloc(sizeof(int) * WINDOW_WIDTH , WINDOW_HEIGHT);
 	raycasting(&cub);
 	exit_cub(&cub, 0, "game finished successfully\n");
 }

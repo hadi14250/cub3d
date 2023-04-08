@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 23:10:35 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/07 23:29:16 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/08 13:50:56 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -520,7 +520,8 @@ void	render(t_cub *cub)
 	cub->img.img_ptr = free_img(cub->img.img_ptr, cub->mlx);
 	cub->img.img_ptr = cub_new_img(&cub->img, cub->mlx,
 			WINDOW_WIDTH, WINDOW_HEIGHT);
-
+	if (!cub->img.img_ptr)
+		exit_cub(cub, 1, "Error\n, can't allocate image\n");
 	generate_3d_wprojection(&cub->player, cub->player.rays, cub);
 	render_color_buffer(cub);
 	
