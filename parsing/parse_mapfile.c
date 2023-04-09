@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 23:03:02 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/09 02:22:38 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/09 22:51:23 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -216,9 +216,25 @@ void	check_for_textures(t_cub *cub)
 		exit_cub(cub, 1, "memory allocation fail\n");
 }
 
+void	print_map_two(char **split)
+{
+	int	i;
+
+	if (!split)
+	{
+		return ;
+	}
+	i = -1;
+	while (split[++i])
+		printf("--->%s<---\n", split[i]);
+	printf("\n");
+}
+
 void	print_cub(t_cub *cub)
 {
 	printf("1D MAP: -->\n%s<--\n", cub->map_1d);
+	printf("2D MAP:\n");
+	print_map_two(cub->map);
 	printf("NO: -->%s<--\n", cub->xpm[0]);
 	printf("SO: -->%s<--\n", cub->xpm[1]);
 	printf("EA: -->%s<--\n", cub->xpm[2]);
@@ -228,7 +244,8 @@ void	print_cub(t_cub *cub)
 	printf("positions: no %d, ea: %d, so: %d, we: %d, map: %d, floor: %d, ceiling: %d\n",
 	cub->no_pos, cub->ea_pos, cub->so_pos, cub->we_pos, cub->map_pos,
 	cub->floor_pos, cub->ceiling_pos);
-	printf("max is: %d and it is --->%s<---\n", cub->max, cub->map[cub->max]);
+	if (cub->map)
+		printf("max is: %d and it is --->%s<---\n", cub->max, cub->map[cub->max]);
 	printf("player direction is: %f\n", cub->dir.actual_dir);
 }
 
@@ -428,20 +445,6 @@ int	return_len(char **split)
 	return (d);
 }
 
-void	print_map_two(char **split)
-{
-	int	i;
-
-	if (!split)
-	{
-		return ;
-	}
-	i = -1;
-	while (split[++i])
-		printf("->%s<-\n", split[i]);
-	printf("\n");
-}
-
 int	return_split_len(char **split)
 {
 	int	i;
@@ -541,6 +544,20 @@ void	check_for_lines(t_cub *cub)
 	}
 }
 
+char	*ft_maptrim(char const *s1, char const *set)
+{
+	int		i;
+	char	*res;
+
+	if (!s1 || !set)
+		return (NULL);
+	i = ft_strlen((char *)s1);
+	while (*s1 && ft_strrchr(set, s1[i]))
+		i--;
+	res = ft_substr(s1, 0, i + 1);
+	return (res);
+}
+
 void	realloc_map(t_cub *cub)
 {
 	char	*temp;
@@ -551,7 +568,7 @@ void	realloc_map(t_cub *cub)
 	temp  = ft_strsjoin(len, &cub->map[cub->max], "\n");
 	cub->map_1d = free_null(cub->map_1d);
 	cub->map_1d = temp;
-	temp = ft_strtrim(cub->map_1d, " \t\n\r\f\v");
+	temp = ft_maptrim(cub->map_1d, "\n\r\f\v");
 	cub->map_1d = free_null(cub->map_1d);
 	cub->map_1d = temp;
 }
@@ -795,6 +812,42 @@ void	check_lines(char *str, t_cub *cub)
 		exit_cub(cub, 1, "Error\nconesuctive new lines in map\n");
 }
 
+void	convert_spaces(t_cub *cub)
+{
+	int	i;
+
+	i = 0;
+	while (cub->map_1d[i])
+	{
+		if (cub->map_1d[i] == '\t' || cub->map_1d[i] == '\r'
+			|| cub->map_1d[i] == '\v' || cub->map_1d[i] == '\f')
+			cub->map_1d[i] = ' ';
+		i++;
+	}
+}
+
+void	convert_space_to_wall(t_cub *cub)
+{
+	int	i;
+
+	i = 0;
+	while (cub->map_1d[i])
+	{
+		if (cub->map_1d[i] == ' ')
+			cub->map_1d[i] = '1';
+		i++;
+	}
+}
+
+void	print_new_map(t_cub *cub)
+{
+	int	i;
+
+	i = 0;
+	while (cub->map[i])
+		printf("|%s|\n", cub->map[i++]);
+}
+
 void	parse_map(t_cub *cub)
 {
 	cub->map = ft_split(cub->map_1d, '\n');
@@ -804,6 +857,217 @@ void	parse_map(t_cub *cub)
 	check_player_format(cub);
 }
 
+int	get_longest_line(char **split)
+{
+	int	i;
+	int	len;
+	int	longest;
+
+	i = 0;
+	len = -1;
+	longest = -1;
+	while (split[i])
+	{
+		len = ft_strlen(split[i]);
+		if (len > longest)
+			longest = len;
+		i++;
+	}
+	return (longest);
+}
+
+void	*callocer(int size, int block, t_cub *cub)
+{
+	void	*ptr;
+
+	ptr = ft_calloc(block, size);
+	if (!ptr)
+		exit_cub(cub, 1, "Error\nmemory allocation failed");
+	return(ptr);
+}
+
+int	check_up(t_cub *cub, int i, int j)
+{
+	int	up;
+
+	up = i;
+	if (i == 0)
+		exit_cub(cub, 1, "'0' found at the top of the map\n");
+	while (up >= 0)
+	{
+		if (cub->map[up][j])
+		{
+			if (cub->map[up][j] == '1')
+				return (0);
+		}
+		up--;
+	}
+	return (1);
+}
+
+int	check_down(t_cub *cub, int i, int j)
+{
+	int	down;
+
+	down = i;
+	if (i == 0)
+		exit_cub(cub, 1, "'0' found at the top of the map\n");
+	while (cub->map[down])
+	{
+		if (cub->map[down][j])
+		{
+			if (cub->map[down][j] == '1')
+				return (0);
+		}
+		down++;
+	}
+	return (1);
+}
+
+int	check_left(t_cub *cub, int i, int j)
+{
+	int	left;
+
+	left = j;
+	if (i == 0)
+		exit_cub(cub, 1, "'0' found at the top of the map\n");
+	while (cub->map[i][left])
+	{
+		if (cub->map[i][left])
+		{
+			if (cub->map[i][left] == '1')
+				return (0);
+		}
+		left--;
+	}
+	return (1);
+}
+
+int	check_right(t_cub *cub, int i, int j)
+{
+	int	right;
+
+	right = j;
+	if (i == 0)
+		exit_cub(cub, 1, "'0' found at the top of the map\n");
+	while (cub->map[i][right])
+	{
+		if (cub->map[i][right])
+		{
+			if (cub->map[i][right] == '1')
+				return (0);
+		}
+		right++;
+	}
+	return (1);
+}
+
+void	all_wall_checks(t_cub *cub, int i, int j)
+{
+	if (check_up(cub, i, j))
+		exit_cub(cub, 1, "Error\nMap is not surrounded by walls\n");
+	if (check_down(cub, i, j))
+		exit_cub(cub, 1, "Error\nMap is not surrounded by walls\n");
+	if (check_left(cub, i, j))
+		exit_cub(cub, 1, "Error\nMap is not surrounded by walls\n");
+	if (check_right(cub, i, j))
+		exit_cub(cub, 1, "Error\nMap is not surrounded by walls\n");
+}
+
+void	check_borders(t_cub *cub)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (cub->map[i])
+	{
+		j = 0;
+		while (cub->map[i][j])
+		{
+			if (cub->map[i][j] == '0')
+				all_wall_checks(cub, i, j);
+			j++;
+		}
+		i++;
+	}
+}
+
+void	*allocate_new_map(t_cub *cub)
+{
+	int		longest;
+	int		height;
+	char	**new;
+	int		i;
+
+	i = 0;
+	longest = get_longest_line(cub->map);
+	height = return_split_len(cub->map);
+	new = callocer(height + 1, sizeof(char *), cub);
+	while (i < height)
+	{
+		new[i] = callocer(longest + 1, sizeof(char), cub);
+		i++;
+	}
+	new[i] = NULL;
+	return (new);
+}
+
+void	memset_map(t_cub *cub, char **tmp_map)
+{
+	int	i;
+	int	longest;
+
+	i = 0;
+	longest = get_longest_line(cub->map);
+	printf("longest = %d\n", longest);
+	while (cub->map[i])
+	{
+		ft_memset(tmp_map[i], '1', longest);
+		tmp_map[i][longest] = '\0';
+		i++;
+	}
+}
+
+void	hadis_rectangle_map(t_cub *cub, char **tmp_map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (cub->map[i])
+	{
+		j = 0;
+		while (cub->map[i][j])
+		{
+			tmp_map[i][j] = cub->map[i][j];
+			j++;
+		}
+		i++;
+	}
+	free_split(&cub->map);
+	cub->map = tmp_map;
+}
+
+void	validations(t_cub *cub)
+{
+	char	**temp;
+
+	convert_spaces(cub);
+	free_split(&cub->map);
+	cub->map = ft_split(cub->map_1d, '\n');
+	check_borders(cub);
+	free_split(&cub->map);
+	convert_space_to_wall(cub);
+	cub->map = ft_split(cub->map_1d, '\n');
+	temp = allocate_new_map(cub);
+	memset_map(cub, temp);
+	// free_split(&cub->map);
+	hadis_rectangle_map(cub, temp);
+	print_map_two(cub->map);
+}
+
 int	parse(int ac, t_cub *cub, char *map_file)
 {
 	arg_count(ac);
@@ -811,5 +1075,11 @@ int	parse(int ac, t_cub *cub, char *map_file)
 	ft_file_ext(cub, map_file);
 	parse_info(cub);
 	parse_map(cub);
+
+	/* MORE PARSING*/
+
+	// validate_map(cub);
+	validations(cub);
+
 	return (0);
 }
