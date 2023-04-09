@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 23:10:35 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/10 01:28:14 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/10 02:19:13 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ void	generate_3d_wprojection(t_player *player, t_ray *rays, t_cub *cub)
 	while (++i < NUM_RAYS)
 	{
 		rays[i].correct_dist = rays[i].hit_distance * cos(rays[i].ray_angle - player->rotationangle);
-		cub->proj_wall_h = (TILE_SIZE / rays[i].correct_dist) * cub->dist_proj_plane;
+		cub->proj_wall_h = (TILE_SIZE / rays[i].correct_dist) * DIST_PROJ_PLANE;
 		cub->wall_strip_height = (int)cub->proj_wall_h;
 		cub->wall_top_pixel = (WINDOW_HEIGHT / 2) - (cub->wall_strip_height / 2);
 		if (cub->wall_top_pixel < 0)
@@ -190,7 +190,6 @@ void	setup(t_cub *cub)
 	cub->fps = 1;
 
 	init_player(&cub->player, cub);
-	cub->dist_proj_plane = (WINDOW_WIDTH / 2) / tan(FOV_ANGLE / 2);
 	//
 	// for (int x = 0; x < TEX_WIDTH; x++)
 	// {
@@ -492,15 +491,14 @@ void	cast_ray(double ray_angle, t_ray *ray, int stripid, t_player *player)
 void	cast_all_rays(t_ray *rays, t_player *player)
 {
 	double	ray_angle;
-	int		stripid;
+	int		i;
 
-	ray_angle = player->rotationangle - (FOV_ANGLE / 2);
-
-	stripid = -1;
-	while (++stripid < NUM_RAYS)
+	i = -1;
+	while (++i < NUM_RAYS)
 	{
-		cast_ray(ray_angle, &rays[stripid], stripid, player);
-		ray_angle += (FOV_ANGLE / NUM_RAYS);
+		ray_angle = player->rotationangle
+			+ atan((i - NUM_RAYS / 2) / DIST_PROJ_PLANE);
+		cast_ray(ray_angle, &rays[i], i, player);
 	}
 }
 

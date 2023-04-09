@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   constants.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bsaeed <bsaeed@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 20:15:27 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/10 01:03:47 by bsaeed           ###   ########.fr       */
+/*   Updated: 2023/04/10 02:42:10 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # ifndef CONSTANTS_H
 # define CONSTANTS_H
+
+#include "../cub3d.h"
 
 # define TILE_SIZE 64
 
@@ -28,13 +30,15 @@
 # define PI 3.14159265
 # define TWO_PI 6.283185
 
-# define FOV_ANGLE 60 * (PI / 180)
+# define FOV_ANGLE 150 * (PI / 180)
 
 #define WALL_STRIP_WIDTH 1
 
 # define NUM_RAYS WINDOW_WIDTH / WALL_STRIP_WIDTH
 
 # define MINIMAP_SCALE_FACTOR 0.3
+
+# define DIST_PROJ_PLANE ((WINDOW_WIDTH / 2) / tan(FOV_ANGLE / 2))
 
 // // texture
 // # define TEXTURE_HEIGHT 			64
