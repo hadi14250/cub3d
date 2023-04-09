@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 23:03:02 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/09 16:43:36 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/09 17:07:34 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -878,14 +878,22 @@ void	validate_map(t_cub *cub)
 	char	**new;
 	int		i;
 	int		d;
+	int		j;
 
+	j = -1;
 	d = -1;
 	i = -1;
 	convert_spaces(cub);
 	free_split(&cub->map);
 	cub->map = ft_split(cub->map_1d, '\n');
 	new = allocate_new_map(cub);
-	
+	while (new[++i] != NULL)
+	{
+		d = -1;
+		while (cub->map[++d] != '\0')
+			new[i][d] = cub->map[i][d];
+		new[i][d] = '\0';
+	}
 }
 
 int	parse(int ac, t_cub *cub, char *map_file)
