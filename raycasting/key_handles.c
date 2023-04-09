@@ -6,7 +6,7 @@
 /*   By: bsaeed <bsaeed@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 18:09:08 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/10 01:03:05 by bsaeed           ###   ########.fr       */
+/*   Updated: 2023/04/10 01:28:45 by bsaeed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 // if the key is clicked, then we upudate depeends on what was
 // clicked and set the rest to zero
 
-<<<<<<< HEAD
-=======
 void    mouse_funcs(t_cub *cub, int flag)
 {
 	if (flag == 0)
@@ -57,7 +55,6 @@ int mouse_events(int x, int y, t_cub *cub)
 	prev_x = x;
 	return 0;
 }
->>>>>>> origin/hadi
 
 int	keys_handler(int key, t_cub *cub)
 {
@@ -67,31 +64,33 @@ int	keys_handler(int key, t_cub *cub)
 		cub->win = free_window(cub->mlx, cub->win);
 		exit (0);
 	}
-<<<<<<< HEAD
-	if (key == W_KEY)
-		cub->keys.up = true;
-	if (key == S_KEY)
-=======
 	if (key == A_KEY)
 	{
 		cub->p_flag = 1;
+		if (cub->keys.down)
+			cub->keys.down = false;
 		cub->keys.up = true;
 	}
 	if (key == D_KEY)
 	{
 		cub->p_flag = 1;
+		if (cub->keys.up == true)
+			cub->keys.up = false;
 		cub->keys.down = true;
 	}
 	if (key == W_KEY)
 	{
-		cub->keys.up = true;
 		cub->p_flag = 0;
+		if (cub->keys.down == true)
+			cub->keys.down = false;
+		cub->keys.up = true;
 	}
 	if (key == S_KEY)
 	{
->>>>>>> origin/hadi
-		cub->keys.down = true;
 		cub->p_flag = 0;
+		if (cub->keys.up == true)
+			cub->keys.up = false;
+		cub->keys.down = true;
 	}
 	if (key == LEFT_AROW)
 		cub->keys.left = true;
@@ -114,17 +113,12 @@ int	keys_handler(int key, t_cub *cub)
 int	keys_released(int key, t_cub *cub)
 {
 
-<<<<<<< HEAD
-	if (key == W_KEY)
-		cub->keys.up = false;
-=======
 	if (key == A_KEY)
 		cub->keys.up = false;
 	if (key == D_KEY)
 		cub->keys.down = false;
 	if (key == W_KEY)
 		cub->keys.up = false;
->>>>>>> origin/hadi
 	if (key == S_KEY)
 		cub->keys.down = false;
 	if (key == LEFT_AROW)
@@ -178,10 +172,6 @@ void	hook_keys(t_cub *cub)
 	mlx_hook(cub->win, 17, 0, exit_app, cub);
 	mlx_hook(cub->win, 2, 0, keys_handler, cub);
 	mlx_hook(cub->win, 3, 0, keys_released, cub);
-<<<<<<< HEAD
-	// mlx_hook(cub->win, 6, 0, mouse_handler, cub);
-=======
 	mlx_hook(cub->win, 6, 1L<<6, mouse_events, cub);
->>>>>>> origin/hadi
 	mlx_loop_hook(cub->mlx, render_loop, cub);
 }
