@@ -1,6 +1,6 @@
 WE ./game_textures/WE.xpm
-C 255, 192, 203
-F 0, 100, 100
+C 250, 160, 160
+F 234, 221, 202
 SO ./game_textures/SO.xpm
 
 

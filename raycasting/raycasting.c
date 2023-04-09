@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 23:10:35 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/09 01:45:13 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/09 05:33:37 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,122 @@ const int Map[MAP_NUM_ROWS][MAP_NUM_COLS] = {
 //     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ,1, 1}
 // };
 
+typedef struct s_loc_3d_wall_vars
+{
+	int		return_tex_val;
+	int		dis_from_top;
+	int		tex_offset_y;
+	int		tex_offset_x;
+}		t_wall_cords;
+
+int	return_tex_val(t_cub *cub, int i, t_wall_cords cords, t_ray *rays)
+{
+	cords.return_tex_val = 0;
+	if (rays[i].is_ray_facing_right && rays[i].washitvertical)
+		cords.return_tex_val = cub->img2[0].address[
+			(cub->img2[0].width * cords.tex_offset_y)
+			+ cords.tex_offset_x];
+	else if (rays[i].is_ray_facing_up && !rays[i].washitvertical)
+		cords.return_tex_val = cub->img2[2].address[
+			(cub->img2[2].width * cords.tex_offset_y)
+			+ cords.tex_offset_x];
+	else if (rays[i].is_ray_facing_left && rays[i].washitvertical)
+		cords.return_tex_val = cub->img2[1].address[
+			(cub->img2[1].width * cords.tex_offset_y)
+			+ cords.tex_offset_x];
+	else if (rays[i].is_ray_facing_down
+		&& !rays[i].washitvertical)
+		cords.return_tex_val = cub->img2[3].address[
+			(cub->img2[3].width * cords.tex_offset_y)
+			+ cords.tex_offset_x];
+	return (cords.return_tex_val);
+}
+
+
+void	draw_3d_ceiling(t_cub *cub, int wall_top_pixel, int i)
+{
+	int	y;
+
+	y = -1;
+	while (++y < wall_top_pixel)
+		cub->color_buffer[(WINDOW_WIDTH * y) + i] = cub->ceiling;
+}
+
+void	draw_3d_floor(t_cub *cub, int wall_bottom_pixel, int i)
+{
+	int	y;
+
+	y = wall_bottom_pixel;
+	while (y < WINDOW_HEIGHT)
+	{
+		cub->color_buffer[(WINDOW_WIDTH * y) + i] = cub->floor;
+		y++;
+	}
+}
+
+void	draw_3d_wall(t_cub *cub, int i, t_ray *rays)
+{
+	int					y;
+	t_wall_cords	cords;
+
+	cub->t_size = TILE_SIZE;
+	bzero(&cords, sizeof(t_wall_cords));
+	y = cub->wall_top_pixel;
+	if (rays[i].washitvertical)
+		cords.tex_offset_x = (int)rays[i].wall_hit.y % cub->t_size;
+	else
+		cords.tex_offset_x = (int)rays[i].wall_hit.x % cub->t_size;
+	while (y < cub->wall_bottom_pixel)
+	{
+		cords.dis_from_top = y + ((cub->wall_strip_height / 2)
+			- (WINDOW_HEIGHT / 2));
+		cords.tex_offset_y = cords.dis_from_top
+			* ((float)cub->img2[0].height / cub->wall_strip_height);
+		cords.return_tex_val = return_tex_val(cub, i, cords, rays);
+		cub->color_buffer[(WINDOW_WIDTH * y) + i] = cords.return_tex_val;
+		y++;
+	}
+}
+
+
+void	generate_3d_wprojection(t_player *player, t_ray *rays, t_cub *cub)
+{
+	int	i;
+
+	i = -1;
+	while (++i < NUM_RAYS)
+	{
+		rays[i].correct_dist = rays[i].hit_distance * cos(rays[i].ray_angle - player->rotationangle);
+		cub->proj_wall_h = (TILE_SIZE / rays[i].correct_dist) * cub->dist_proj_plane;
+		cub->wall_strip_height = (int)cub->proj_wall_h;
+		cub->wall_top_pixel = (WINDOW_HEIGHT / 2) - (cub->wall_strip_height / 2);
+		if (cub->wall_top_pixel < 0)
+			cub->wall_top_pixel = 0;
+		cub->wall_bottom_pixel = ((WINDOW_HEIGHT / 2) + (cub->wall_strip_height / 2));
+		if (cub->wall_bottom_pixel > WINDOW_HEIGHT)
+			cub->wall_bottom_pixel = WINDOW_HEIGHT;
+		draw_3d_ceiling(cub, cub->wall_top_pixel, i);
+		draw_3d_wall(cub, i, rays);
+		draw_3d_floor(cub, cub->wall_bottom_pixel, i);
+	}
+	(void)player;
+}
+
+void	render_color_buffer(t_cub *cub)
+{
+	int	x;
+	int	y;
+
+	x = -1;
+	while (++x < WINDOW_WIDTH)
+	{
+		y = -1;
+		while (++y < WINDOW_HEIGHT)
+			my_mlx_pixel_put(&cub->img, x, y,
+				cub->color_buffer[(WINDOW_WIDTH * y) + x]);
+	}
+}
+
 void	draw_background(t_img *img, t_cub *cub)
 {
 	t_rect	rect_up;
@@ -74,7 +190,7 @@ void	setup(t_cub *cub)
 	cub->fps = 1;
 
 	init_player(&cub->player, cub);
-
+	cub->dist_proj_plane = (WINDOW_WIDTH / 2) / tan(FOV_ANGLE / 2);
 	//
 	// for (int x = 0; x < TEX_WIDTH; x++)
 	// {
@@ -155,11 +271,11 @@ bool	maphaswallat(double x, double y)
 	int	map_grid_index_x;
 	int	map_grid_index_y;
 
-	if (x < 0 || x > WINDOW_WIDTH || y < 0 || y > WINDOW_HEIGHT)
-		return (true);
 	map_grid_index_x = floor(x / TILE_SIZE);
 	map_grid_index_y = floor(y / TILE_SIZE);
-	if (Map[map_grid_index_y][map_grid_index_x] == 0)
+	if (x < 0 || x > WINDOW_WIDTH || y < 0 || y > WINDOW_HEIGHT)
+		return (true);
+	if ((Map[map_grid_index_y][map_grid_index_x] == 0))
 		return (false);
 	return (true);
 }
@@ -179,8 +295,8 @@ void	move_player(t_player *player, int flag)
 	}
 	else
 	{
-		new_pos.x = player->pos.x + (cos(player->rotationangle - M_PI_2) * movestep);
-		new_pos.y = player->pos.y + (sin(player->rotationangle - M_PI_2) * movestep);
+		new_pos.x = player->pos.x + (cos(player->rotationangle - (M_PI_2)) * movestep);
+		new_pos.y = player->pos.y + (sin(player->rotationangle - (M_PI_2)) * movestep);
 	}
 	if (!maphaswallat(new_pos.x, new_pos.y))
 	{
@@ -308,13 +424,13 @@ void	cast_vert_ray(double ray_angle, t_ray *ray, t_player *player)
 
 void	init_ray(double ray_angle, t_ray *ray, int stripid)
 {
-	ray_angle = normalize_angle(ray_angle);
-	ray->is_ray_facing_down = (ray_angle > 0 && ray_angle < PI);
+	ray->ray_angle = normalize_angle(ray_angle);
+	ray->is_ray_facing_down = (ray->ray_angle > 0 && ray->ray_angle < PI);
 	ray->is_ray_facing_up = !ray->is_ray_facing_down;
-	ray->is_ray_facing_right = (ray_angle > (1.5 * PI) || ray_angle < (PI / 2));
+	ray->is_ray_facing_right = (ray->ray_angle > (1.5 * PI)
+		|| ray->ray_angle < (PI / 2));
 	ray->is_ray_facing_left = !ray->is_ray_facing_right;
 	ray->stripid = stripid;
-	ray->ray_angle = ray_angle;
 }
 
 // returns the difference between 2 points using the pythagoras theorem
@@ -390,147 +506,22 @@ void	cast_all_rays(t_ray *rays, t_player *player)
 
 void	update(t_cub *cub)
 {
-	move_player(&cub->player, cub->p_flag);
-	cast_all_rays(cub->player.rays, &cub->player);
-}
-
-
-typedef struct s_loc_3d_wall_vars
-{
-	int		return_tex_val;
-	int		dis_from_top;
-	int		tex_offset_y;
-	int		tex_offset_x;
-}		t_wall_cords;
-
-int	return_tex_val(t_cub *cub, int i, t_wall_cords cords, t_ray *rays)
-{
-	cords.return_tex_val = 0;
-	if (rays[i].is_ray_facing_right && rays[i].washitvertical)
-		cords.return_tex_val = cub->img2[0].address[
-			(cub->img2[0].width * cords.tex_offset_y)
-			+ cords.tex_offset_x];
-	else if (rays[i].is_ray_facing_up && !rays[i].washitvertical)
-		cords.return_tex_val = cub->img2[2].address[
-			(cub->img2[2].width * cords.tex_offset_y)
-			+ cords.tex_offset_x];
-	else if (rays[i].is_ray_facing_left && rays[i].washitvertical)
-		cords.return_tex_val = cub->img2[1].address[
-			(cub->img2[1].width * cords.tex_offset_y)
-			+ cords.tex_offset_x];
-	else if (rays[i].is_ray_facing_down
-		&& !rays[i].washitvertical)
-		cords.return_tex_val = cub->img2[3].address[
-			(cub->img2[3].width * cords.tex_offset_y)
-			+ cords.tex_offset_x];
-	return (cords.return_tex_val);
-}
-
-
-void	draw_3d_wall(t_cub *cub, int i, t_ray *rays)
-{
-	int					y;
-	t_wall_cords	cords;
-
-	cub->t_size = WINDOW_WIDTH;
-	bzero(&cords, sizeof(t_wall_cords));
-	y = cub->wall_top_pixel;
-	if (rays[i].washitvertical)
-		cords.tex_offset_x = (int)rays[i].wall_hit.y % cub->t_size;
-	else
-		cords.tex_offset_x = (int)rays[i].wall_hit.x % cub->t_size;
-	while (y < cub->wall_bottom_pixel)
-	{
-		cords.dis_from_top = y + ((cub->wall_strip_height / 2)
-			- (WINDOW_HEIGHT / 2));
-		cords.tex_offset_y = cords.dis_from_top
-			* ((float)cub->img2[0].height / cub->wall_strip_height);
-		cords.return_tex_val = return_tex_val(cub, i, cords, rays);
-		cub->color_buffer[(WINDOW_WIDTH * y) + i] = cords.return_tex_val;
-		y++;
-	}
-}
-
-void	draw_3d_ceiling(t_cub *cub, int wall_top_pixel, int i)
-{
-	int	y;
-
-	y = -1;
-	while (++y < wall_top_pixel)
-		cub->color_buffer[(WINDOW_WIDTH * y) + i] = cub->ceiling;
-}
-
-void	draw_3d_floor(t_cub *cub, int wall_bottom_pixel, int i)
-{
-	int	y;
-
-	y = wall_bottom_pixel;
-	while (y < WINDOW_HEIGHT)
-	{
-		cub->color_buffer[(WINDOW_WIDTH * y) + i] = cub->floor;
-		y++;
-	}
-}
-
-void	generate_3d_wprojection(t_player *player, t_ray *rays, t_cub *cub)
-{
-	int	i;
-	int	y;
-
-	i = -1;
-	cub->dist_proj_plane = (WINDOW_WIDTH / 2) / tan(FOV_ANGLE / 2); // put this outside rendering
-	while (++i < NUM_RAYS)
-	{
-		rays[i].correct_dist = rays[i].hit_distance * cos(rays[i].ray_angle - player->rotationangle);
-		cub->proj_wall_h = (TILE_SIZE / rays[i].correct_dist) * cub->dist_proj_plane;
-		cub->wall_strip_height = cub->proj_wall_h;
-		cub->wall_top_pixel = (WINDOW_HEIGHT / 2) - (cub->wall_strip_height / 2);
-		if (cub->wall_top_pixel < 0)
-			cub->wall_top_pixel = 0;
-		cub->wall_bottom_pixel = ((WINDOW_HEIGHT / 2) + (cub->wall_strip_height / 2));
-		if (cub->wall_bottom_pixel > WINDOW_HEIGHT)
-			cub->wall_bottom_pixel = WINDOW_HEIGHT;
-		draw_3d_floor(cub, cub->wall_bottom_pixel, i);
-		y = -1;
-		draw_3d_wall(cub, i, rays);
-		// while (++y < cub->wall_bottom_pixel)
-		// {
-		// 	if (rays[i].washitvertical)
-		// 		cub->color_buffer[(WINDOW_WIDTH * y) + i] = 0xFFFFFF;
-		// 	else
-		// 		cub->color_buffer[(WINDOW_WIDTH * y) + i] = 0xBBBBBB;
-		// }
-		draw_3d_ceiling(cub, cub->wall_top_pixel, i);
-	}
-	(void)player;
-}
-
-void	render_color_buffer(t_cub *cub)
-{
-	int	x;
-	int	y;
-
-	x = -1;
-	while (++x < WINDOW_WIDTH)
-	{
-		y = -1;
-		while (++y < WINDOW_HEIGHT)
-			my_mlx_pixel_put(&cub->img, x, y,
-				cub->color_buffer[(WINDOW_WIDTH * y) + x]);
-	}
-}
-
-
-// render all objects for the current frame
-void	render(t_cub *cub)
-{
 	cub->img.img_ptr = free_img(cub->img.img_ptr, cub->mlx);
 	cub->img.img_ptr = cub_new_img(&cub->img, cub->mlx,
 			WINDOW_WIDTH, WINDOW_HEIGHT);
 	if (!cub->img.img_ptr)
 		exit_cub(cub, 1, "Error\n, can't allocate image\n");
+	cast_all_rays(cub->player.rays, &cub->player);
+	move_player(&cub->player, cub->p_flag);
 	generate_3d_wprojection(&cub->player, cub->player.rays, cub);
 	render_color_buffer(cub);
+}
+
+// render all objects for the current frame
+void	render(t_cub *cub)
+{
+	// generate_3d_wprojection(&cub->player, cub->player.rays, cub);
+	// render_color_buffer(cub);
 
 	render_map(cub);
 	render_rays(cub, cub->player.rays);
