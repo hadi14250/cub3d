@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_handles.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bsaeed <bsaeed@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 18:09:08 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/09 05:20:54 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/10 01:28:45 by bsaeed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,22 +67,30 @@ int	keys_handler(int key, t_cub *cub)
 	if (key == A_KEY)
 	{
 		cub->p_flag = 1;
+		if (cub->keys.down)
+			cub->keys.down = false;
 		cub->keys.up = true;
 	}
 	if (key == D_KEY)
 	{
 		cub->p_flag = 1;
+		if (cub->keys.up == true)
+			cub->keys.up = false;
 		cub->keys.down = true;
 	}
 	if (key == W_KEY)
 	{
-		cub->keys.up = true;
 		cub->p_flag = 0;
+		if (cub->keys.down == true)
+			cub->keys.down = false;
+		cub->keys.up = true;
 	}
 	if (key == S_KEY)
 	{
-		cub->keys.down = true;
 		cub->p_flag = 0;
+		if (cub->keys.up == true)
+			cub->keys.up = false;
+		cub->keys.down = true;
 	}
 	if (key == LEFT_AROW)
 		cub->keys.left = true;
@@ -90,6 +98,17 @@ int	keys_handler(int key, t_cub *cub)
 		cub->keys.right = true;
 	return (0);
 }
+
+// int	mouse_handler(int x, int y, t_cub *cub)
+// {
+// 	if (x < WINDOW_WIDTH / 2 && (y > 0 && y < WINDOW_HEIGHT))
+// 		printf("moved to the right\n");
+// 	else
+// 		printf("moved left\n");
+// 	// mlx_mouse_move(cub->win, WINDOW_HEIGHT/2, WINDOW_WIDTH/2);
+// 	//ft_start(g);
+// 	return (0);
+// }
 
 int	keys_released(int key, t_cub *cub)
 {
