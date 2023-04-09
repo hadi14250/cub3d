@@ -192,7 +192,7 @@ void	print_cub(t_cub *cub);
 
 int		check_characters(t_cub *cub);
 int		init_textures(t_cub *cub);
-int		validate_map(t_cub *cub);
+int		init_colors(t_cub *cub);
 void	init(t_cub *cub);
 
 

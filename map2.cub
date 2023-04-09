@@ -1,0 +1,13 @@
+WE ./game_textures/WE.xpm
+C 255, 192, 203
+F 0, 100, 100
+SO ./game_textures/SO.xpm
+
+
+NO ./game_textures/NO.xpm
+
+EA ./game_textures/EA.xpm
+
+111111111
+100111101
+111111111
