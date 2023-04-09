@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_mapfile.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bsaeed <bsaeed@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 23:03:02 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/08 17:16:11 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/10 03:20:32 by bsaeed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -378,7 +378,7 @@ void	parse_rgb(t_cub *cub)
 	rgb(cub, ft_strnstr(cub->f_rgb, "F", ft_strlen(cub->f_rgb)) + 1, 'F');
 	cub->c_rgb = free_null(cub->c_rgb);
 	cub->f_rgb = free_null(cub->f_rgb);
-	convert_colors(cub, cub->rgb[1], 0);;
+	convert_colors(cub, cub->rgb[1], 0);
 	convert_colors(cub, cub->rgb[0], 1);
 }
 
@@ -389,29 +389,6 @@ void	parse_info(t_cub *cub)
 	cub->map_1d_len = ft_strlen(cub->map_1d);
 	parse_rgb(cub);
 	check_for_textures(cub);
-}
-
-int	map(t_cub *cub, char *line)
-{
-	char	**tmp;
-
-	if (!cub->map)
-	{
-		cub->map = malloc(sizeof(char *) * 2);
-		if (!cub->map)
-			return (1);
-		cub->map[0] = ft_strdup(line);
-		cub->map[1] = NULL;
-	}
-	else
-	{
-		tmp = ft_reallocation(cub->map, ft_array_length(cub->map) + 2);
-		if (!tmp)
-			return (1);
-		cub->map = tmp;
-		cub->map[ft_array_length(cub->map)] = ft_strdup(line);
-	}
-	return (0);
 }
 
 int	return_len(char **split)

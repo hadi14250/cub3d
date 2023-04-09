@@ -9,7 +9,6 @@ CYAN=\033[0;36m
 RESET=\033[0m
 
 SRCS	= 	main.c \
-			parsing/parse_map.c\
 			parsing/parse_ext.c \
 			parsing/parse_utils.c \
 			parsing/parse_colors.c \
@@ -21,9 +20,8 @@ SRCS	= 	main.c \
 			raycasting/line_drawing.c \
 			raycasting/drawing_utils.c \
 			raycasting/raycasting.c \
-			
+
 BONUSSRCS	=	bonus/main.c \
-			bonus/parsing/parse_map.c\
 			bonus/parsing/parse_ext.c \
 			bonus/parsing/parse_utils.c \
 			bonus/parsing/parse_colors.c \

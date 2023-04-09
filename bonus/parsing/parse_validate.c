@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_validate.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bsaeed <bsaeed@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 21:07:14 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/08 04:14:34 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/10 03:28:25 by bsaeed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,6 @@ void	fill_textures(t_cub *cub, int i)
 		}
 	}
 }
-
-// char	*trimmer(char *texture_path)
-// {
-// 	char	*res;
-
-// 	res = ft_strtrim(texture_path, "\n");
-// 	free(texture_path);
-// 	return (res);
-// }
 
 int	init_textures(t_cub *cub)
 {

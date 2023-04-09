@@ -6,7 +6,7 @@
 /*   By: bsaeed <bsaeed@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 20:15:27 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/10 01:03:47 by bsaeed           ###   ########.fr       */
+/*   Updated: 2023/04/10 03:33:35 by bsaeed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # define PI 3.14159265
 # define TWO_PI 6.283185
 
-# define FOV_ANGLE 60 * (PI / 180)
+# define FOV_ANGLE 70 * (PI / 180)
 
 #define WALL_STRIP_WIDTH 1
 
