@@ -6,7 +6,7 @@
 /*   By: bsaeed <bsaeed@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 23:03:02 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/09 04:23:28 by bsaeed           ###   ########.fr       */
+/*   Updated: 2023/04/09 06:13:13 by bsaeed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -797,7 +797,6 @@ void	map_change(t_cub *cub)
 {
 	int	i;
 
-	free_split(&cub->map);
 	i = 0;
 	while (cub->map_1d[i])
 	{
@@ -817,28 +816,6 @@ void	print_new_map(t_cub *cub)
 		printf("|%s|\n", cub->map[i++]);
 }
 
-void	allocate_map(t_cub *cub)
-{
-	int	i;
-	int	len;
-
-	int	long_len;
-
-	i = 0;
-	len = -1;
-	long_len = -1;
-	while (cub->map[i])
-	{
-		len = ft_strlen(cub->map[i]);
-		if (len >= long_len)
-			long_len = len;
-		i++;
-	}
-	free_split(&cub->map);
-	cub->map = ft_calloc(i * long_len, sizeof(char *));
-	print_new_map(cub);
-}
-
 void	parse_map(t_cub *cub)
 {
 	cub->map = ft_split(cub->map_1d, '\n');
@@ -852,12 +829,45 @@ void	split_map(t_cub *cub)
 {
 	free_split(&cub->map);
 	cub->map = ft_split(cub->map_1d, '\n');
-	printf("\n\n\n\n\n\n\n");
-	print_new_map(cub);
-	printf("\n\n\n\n\n\n\n");
-
-
 }
+
+int	get_longest_line(t_cub *cub)
+{
+	int	i;
+	int	len;
+	int	longest;
+
+	i = 0;
+	len = -1;
+	longest = -1;
+	while (cub->map[i])
+	{
+		len = ft_strlen(cub->map[i]);
+		if (len > longest)
+			longest = len;
+		i++;
+	}
+	return (longest);
+}
+
+void	alloc_rect_map(t_cub *cub)
+{
+	char	**tmp_map;
+	int		i;
+	int		line;
+	int		num_lines;
+
+	i = 0;
+	num_lines = 0;
+	line = get_longest_line(cub);
+	while (cub->map[num_lines])
+		num_lines++;
+	tmp_map = (char **)ft_calloc(num_lines, sizeof(char *));
+	while (i < num_lines)
+		tmp_map[i++] = (char *)ft_calloc(line, sizeof(char));
+	free_split(&tmp_map);
+}
+
 
 void	parse_map2(t_cub *cub)
 {
@@ -875,6 +885,6 @@ int	parse(int ac, t_cub *cub, char *map_file)
 
 	/* MORE PARSING*/
 	parse_map2(cub);
-	allocate_map(cub);
+
 	return (0);
 }
