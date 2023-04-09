@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 23:10:35 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/10 03:18:38 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/10 03:32:30 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,7 +173,8 @@ void	draw_background(t_img *img, t_cub *cub)
 
 void	init_player(t_player *player, t_cub *cub)
 {
-	init_point(&player->pos, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
+	init_point(&player->pos, (MAP_NUM_COLS * TILE_SIZE) / 2,
+		(MAP_NUM_ROWS * TILE_SIZE) / 2);
 	player->width = 3;
 	player->height = 3;
 	player->turndirection = 0;
@@ -271,7 +272,8 @@ bool	maphaswallat(double x, double y)
 
 	map_grid_index_x = floor(x / TILE_SIZE);
 	map_grid_index_y = floor(y / TILE_SIZE);
-	if (x < 0 || x > WINDOW_WIDTH || y < 0 || y > WINDOW_HEIGHT)
+	if (x < 0 || x > MAP_NUM_COLS * TILE_SIZE
+		|| y < 0 || y > MAP_NUM_ROWS * TILE_SIZE)
 		return (true);
 	if ((Map[map_grid_index_y][map_grid_index_x] == 0))
 		return (false);
@@ -337,8 +339,8 @@ void	cast_horz_ray(double ray_angle, t_ray *ray, t_player *player)
 	ray->next_h_touch.x = ray->h_intercept.x;
 	ray->next_h_touch.y = ray->h_intercept.y;
 
-	while (ray->next_h_touch.x >= 0 && ray->next_h_touch.x <= WINDOW_WIDTH
-		&& ray->next_h_touch.y >= 0 && ray->next_h_touch.y <= WINDOW_HEIGHT)
+	while (ray->next_h_touch.x >= 0 && ray->next_h_touch.x <= MAP_NUM_COLS * TILE_SIZE
+		&& ray->next_h_touch.y >= 0 && ray->next_h_touch.y <= MAP_NUM_ROWS * TILE_SIZE)
 	{
 		if (ray->is_ray_facing_up)
 			init_point(&ray->to_check, ray->next_h_touch.x,
@@ -392,8 +394,8 @@ void	cast_vert_ray(double ray_angle, t_ray *ray, t_player *player)
 	ray->next_v_touch.x = ray->v_intercept.x;
 	ray->next_v_touch.y = ray->v_intercept.y;
 
-	while (ray->next_v_touch.x >= 0 && ray->next_v_touch.x <= WINDOW_WIDTH
-		&& ray->next_v_touch.y >= 0 && ray->next_v_touch.y <= WINDOW_HEIGHT)
+	while (ray->next_v_touch.x >= 0 && ray->next_v_touch.x <= MAP_NUM_COLS * TILE_SIZE
+		&& ray->next_v_touch.y >= 0 && ray->next_v_touch.y <= MAP_NUM_ROWS * TILE_SIZE)
 	{
 		if (ray->is_ray_facing_left)
 			init_point(&ray->to_check, ray->next_v_touch.x - 1,
