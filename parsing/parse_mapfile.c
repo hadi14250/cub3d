@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 23:03:02 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/09 17:07:34 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/09 17:52:28 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -541,6 +541,20 @@ void	check_for_lines(t_cub *cub)
 	}
 }
 
+char	*ft_maptrim(char const *s1, char const *set)
+{
+	int		i;
+	char	*res;
+
+	if (!s1 || !set)
+		return (NULL);
+	i = ft_strlen((char *)s1);
+	while (*s1 && ft_strrchr(set, s1[i]))
+		i--;
+	res = ft_substr(s1, 0, i + 1);
+	return (res);
+}
+
 void	realloc_map(t_cub *cub)
 {
 	char	*temp;
@@ -551,7 +565,7 @@ void	realloc_map(t_cub *cub)
 	temp  = ft_strsjoin(len, &cub->map[cub->max], "\n");
 	cub->map_1d = free_null(cub->map_1d);
 	cub->map_1d = temp;
-	temp = ft_strtrim(cub->map_1d, " \t\n\r\f\v");
+	temp = ft_maptrim(cub->map_1d, "\n\r\f\v");
 	cub->map_1d = free_null(cub->map_1d);
 	cub->map_1d = temp;
 }
@@ -873,28 +887,28 @@ void	*allocate_new_map(t_cub *cub)
 	return (new);
 }
 
-void	validate_map(t_cub *cub)
-{
-	char	**new;
-	int		i;
-	int		d;
-	int		j;
+// void	validate_map(t_cub *cub)
+// {
+// 	char	**new;
+// 	int		i;
+// 	int		d;
+// 	int		j;
 
-	j = -1;
-	d = -1;
-	i = -1;
-	convert_spaces(cub);
-	free_split(&cub->map);
-	cub->map = ft_split(cub->map_1d, '\n');
-	new = allocate_new_map(cub);
-	while (new[++i] != NULL)
-	{
-		d = -1;
-		while (cub->map[++d] != '\0')
-			new[i][d] = cub->map[i][d];
-		new[i][d] = '\0';
-	}
-}
+// 	j = -1;
+// 	d = -1;
+// 	i = -1;
+// 	convert_spaces(cub);
+// 	free_split(&cub->map);
+// 	cub->map = ft_split(cub->map_1d, '\n');
+// 	new = allocate_new_map(cub);
+// 	while (new[++i] != NULL)
+// 	{
+// 		d = -1;
+// 		while (cub->map[++d] != '\0')
+// 			new[i][d] = cub->map[i][d];
+// 		new[i][d] = '\0';
+// 	}
+// }
 
 int	parse(int ac, t_cub *cub, char *map_file)
 {
@@ -905,7 +919,7 @@ int	parse(int ac, t_cub *cub, char *map_file)
 	parse_map(cub);
 
 	/* MORE PARSING*/
-	validate_map(cub);
+	// validate_map(cub);
 
 	return (0);
 }
