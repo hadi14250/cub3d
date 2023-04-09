@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_mapfile.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bsaeed <bsaeed@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 23:03:02 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/09 02:20:15 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/09 04:23:28 by bsaeed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -225,7 +225,8 @@ void	print_cub(t_cub *cub)
 	printf("positions: no %d, ea: %d, so: %d, we: %d, map: %d, floor: %d, ceiling: %d\n",
 	cub->no_pos, cub->ea_pos, cub->so_pos, cub->we_pos, cub->map_pos,
 	cub->floor_pos, cub->ceiling_pos);
-	printf("max is: %d and it is --->%s<---\n", cub->max, cub->map[cub->max]);
+	if (cub->map)
+		printf("max is: %d and it is --->%s<---\n", cub->max, cub->map[cub->max]);
 	printf("player direction is: %f\n", cub->dir.actual_dir);
 }
 
@@ -792,6 +793,52 @@ void	check_lines(char *str, t_cub *cub)
 		exit_cub(cub, 1, "Error\nconesuctive new lines in map\n");
 }
 
+void	map_change(t_cub *cub)
+{
+	int	i;
+
+	free_split(&cub->map);
+	i = 0;
+	while (cub->map_1d[i])
+	{
+		if (cub->map_1d[i] == ' ' || cub->map_1d[i] == '\t' ||
+				cub->map_1d[i] == '\r' || cub->map_1d[i] == '\v' || cub->map_1d[i] == '\f')
+			cub->map_1d[i] = '1';
+		i++;
+	}
+}
+
+void	print_new_map(t_cub *cub)
+{
+	int	i;
+
+	i = 0;
+	while (cub->map[i])
+		printf("|%s|\n", cub->map[i++]);
+}
+
+void	allocate_map(t_cub *cub)
+{
+	int	i;
+	int	len;
+
+	int	long_len;
+
+	i = 0;
+	len = -1;
+	long_len = -1;
+	while (cub->map[i])
+	{
+		len = ft_strlen(cub->map[i]);
+		if (len >= long_len)
+			long_len = len;
+		i++;
+	}
+	free_split(&cub->map);
+	cub->map = ft_calloc(i * long_len, sizeof(char *));
+	print_new_map(cub);
+}
+
 void	parse_map(t_cub *cub)
 {
 	cub->map = ft_split(cub->map_1d, '\n');
@@ -801,6 +848,23 @@ void	parse_map(t_cub *cub)
 	check_player_format(cub);
 }
 
+void	split_map(t_cub *cub)
+{
+	free_split(&cub->map);
+	cub->map = ft_split(cub->map_1d, '\n');
+	printf("\n\n\n\n\n\n\n");
+	print_new_map(cub);
+	printf("\n\n\n\n\n\n\n");
+
+
+}
+
+void	parse_map2(t_cub *cub)
+{
+	map_change(cub);
+	split_map(cub);
+}
+
 int	parse(int ac, t_cub *cub, char *map_file)
 {
 	arg_count(ac);
@@ -808,5 +872,9 @@ int	parse(int ac, t_cub *cub, char *map_file)
 	ft_file_ext(cub, map_file);
 	parse_info(cub);
 	parse_map(cub);
+
+	/* MORE PARSING*/
+	parse_map2(cub);
+	allocate_map(cub);
 	return (0);
 }
