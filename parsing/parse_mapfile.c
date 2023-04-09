@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 23:03:02 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/09 22:55:25 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/10 01:11:17 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -230,6 +230,19 @@ void	print_map_two(char **split)
 	printf("\n");
 }
 
+char	*return_str_dir(t_cub *cub)
+{
+	if (cub->dir.north == 1)
+		return ("North");
+	else if (cub->dir.south == 1)
+		return ("South");
+	else if (cub->dir.west == 1)
+		return ("West");
+	else if (cub->dir.east == 1)
+		return ("East");
+	return ("(null)");
+}
+
 void	print_cub(t_cub *cub)
 {
 	printf("1D MAP: -->\n%s<--\n", cub->map_1d);
@@ -244,7 +257,7 @@ void	print_cub(t_cub *cub)
 	printf("positions: no %d, ea: %d, so: %d, we: %d, map: %d, floor: %d, ceiling: %d\n",
 	cub->no_pos, cub->ea_pos, cub->so_pos, cub->we_pos, cub->map_pos,
 	cub->floor_pos, cub->ceiling_pos);
-	printf("player direction is: %f\n", cub->dir.actual_dir);
+	printf("player direction is: %s\n", return_str_dir(cub));
 }
 
 void	trim_comma(char *str)
