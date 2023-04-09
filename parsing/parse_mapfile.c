@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_mapfile.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bsaeed <bsaeed@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 23:03:02 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/09 06:13:13 by bsaeed           ###   ########.fr       */
+/*   Updated: 2023/04/09 16:43:36 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,9 +213,25 @@ void	check_for_textures(t_cub *cub)
 		exit_cub(cub, 1, "memory allocation fail\n");
 }
 
+void	print_map_two(char **split)
+{
+	int	i;
+
+	if (!split)
+	{
+		return ;
+	}
+	i = -1;
+	while (split[++i])
+		printf("--->%s<---\n", split[i]);
+	printf("\n");
+}
+
 void	print_cub(t_cub *cub)
 {
 	printf("1D MAP: -->\n%s<--\n", cub->map_1d);
+	printf("2D MAP:\n");
+	print_map_two(cub->map);
 	printf("NO: -->%s<--\n", cub->xpm[0]);
 	printf("SO: -->%s<--\n", cub->xpm[1]);
 	printf("EA: -->%s<--\n", cub->xpm[2]);
@@ -424,20 +440,6 @@ int	return_len(char **split)
 	while(split[++i] != NULL)
 		d += ft_strlen(split[i]) + 1;
 	return (d);
-}
-
-void	print_map_two(char **split)
-{
-	int	i;
-
-	if (!split)
-	{
-		return ;
-	}
-	i = -1;
-	while (split[++i])
-		printf("->%s<-\n", split[i]);
-	printf("\n");
 }
 
 int	return_split_len(char **split)
@@ -793,7 +795,7 @@ void	check_lines(char *str, t_cub *cub)
 		exit_cub(cub, 1, "Error\nconesuctive new lines in map\n");
 }
 
-void	map_change(t_cub *cub)
+void	convert_spaces(t_cub *cub)
 {
 	int	i;
 
@@ -825,13 +827,7 @@ void	parse_map(t_cub *cub)
 	check_player_format(cub);
 }
 
-void	split_map(t_cub *cub)
-{
-	free_split(&cub->map);
-	cub->map = ft_split(cub->map_1d, '\n');
-}
-
-int	get_longest_line(t_cub *cub)
+int	get_longest_line(char **split)
 {
 	int	i;
 	int	len;
@@ -840,9 +836,9 @@ int	get_longest_line(t_cub *cub)
 	i = 0;
 	len = -1;
 	longest = -1;
-	while (cub->map[i])
+	while (split[i])
 	{
-		len = ft_strlen(cub->map[i]);
+		len = ft_strlen(split[i]);
 		if (len > longest)
 			longest = len;
 		i++;
@@ -850,29 +846,46 @@ int	get_longest_line(t_cub *cub)
 	return (longest);
 }
 
-void	alloc_rect_map(t_cub *cub)
+void	*callocer(int size, int block, t_cub *cub)
 {
-	char	**tmp_map;
-	int		i;
-	int		line;
-	int		num_lines;
+	void	*ptr;
 
-	i = 0;
-	num_lines = 0;
-	line = get_longest_line(cub);
-	while (cub->map[num_lines])
-		num_lines++;
-	tmp_map = (char **)ft_calloc(num_lines, sizeof(char *));
-	while (i < num_lines)
-		tmp_map[i++] = (char *)ft_calloc(line, sizeof(char));
-	free_split(&tmp_map);
+	ptr = ft_calloc(block, size);
+	if (!ptr)
+		exit_cub(cub, 1, "Error\nmemory allocation failed");
+	return(ptr);
 }
 
-
-void	parse_map2(t_cub *cub)
+void	*allocate_new_map(t_cub *cub)
 {
-	map_change(cub);
-	split_map(cub);
+	int		longest;
+	int		height;
+	char	**new;
+	int		i;
+
+	i = -1;
+	longest = get_longest_line(cub->map);
+	height = return_split_len(cub->map);
+	new = callocer(height + 1, sizeof(char *), cub);
+	while (++i < height)
+		new[i] = callocer(longest + 1, sizeof(char), cub);
+	new[i] = NULL;
+	return (new);
+}
+
+void	validate_map(t_cub *cub)
+{
+	char	**new;
+	int		i;
+	int		d;
+
+	d = -1;
+	i = -1;
+	convert_spaces(cub);
+	free_split(&cub->map);
+	cub->map = ft_split(cub->map_1d, '\n');
+	new = allocate_new_map(cub);
+	
 }
 
 int	parse(int ac, t_cub *cub, char *map_file)
@@ -884,7 +897,7 @@ int	parse(int ac, t_cub *cub, char *map_file)
 	parse_map(cub);
 
 	/* MORE PARSING*/
-	parse_map2(cub);
+	validate_map(cub);
 
 	return (0);
 }
