@@ -69,13 +69,13 @@ clean:
 	$(CLNLIB)
 	@$(RM) $(OBJS)
 	@make clean -C ./mlx && rm -rf *.dSYM
-	@make clean -C ./bonus
+	# @make clean -C ./bonus
 	@echo "$(YELLOW)Removed object files.$(RESET)"
 
 fclean: clean
 	$(FCLNLIB)
 	@$(RM) $(NAME)
-	@$(RM) $(BONUSNAME)
+	# @$(RM) $(BONUSNAME)
 	@make clean -C ./mlx && rm -rf *.dSYM
 	@echo "$(YELLOW)Removed executable.$(RESET)"
 

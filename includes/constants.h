@@ -6,12 +6,14 @@
 /*   By: bsaeed <bsaeed@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 20:15:27 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/10 03:33:35 by bsaeed           ###   ########.fr       */
+/*   Updated: 2023/04/10 03:43:58 by bsaeed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # ifndef CONSTANTS_H
 # define CONSTANTS_H
+
+#include "../cub3d.h"
 
 # define TILE_SIZE 64
 
@@ -22,8 +24,8 @@
 # define MAP_NUM_COLS 20
 
 
-# define WINDOW_WIDTH (MAP_NUM_COLS * TILE_SIZE)
-# define WINDOW_HEIGHT (MAP_NUM_ROWS * TILE_SIZE)
+# define WINDOW_WIDTH 320
+# define WINDOW_HEIGHT 200
 
 # define PI 3.14159265
 # define TWO_PI 6.283185
@@ -34,7 +36,9 @@
 
 # define NUM_RAYS WINDOW_WIDTH / WALL_STRIP_WIDTH
 
-# define MINIMAP_SCALE_FACTOR 0.3
+# define MINIMAP_SCALE_FACTOR 0.2
+
+# define DIST_PROJ_PLANE ((WINDOW_WIDTH / 2) / tan(FOV_ANGLE / 2))
 
 // // texture
 // # define TEXTURE_HEIGHT 			64

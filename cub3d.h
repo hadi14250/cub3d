@@ -6,7 +6,7 @@
 /*   By: bsaeed <bsaeed@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 03:12:29 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/10 03:19:59 by bsaeed           ###   ########.fr       */
+/*   Updated: 2023/04/10 03:43:18 by bsaeed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ typedef struct s_cub
 	int				n_columns;
 	unsigned long	floor;
 	unsigned long	ceiling;
-	int				texture[4][TEXTURE_HEIGHT * TEXTURE_WIDTH];
+	uint32_t		texture[4][TEXTURE_HEIGHT * TEXTURE_WIDTH];
 	t_key			key;
 	t_point			start_line_pos;
 	t_point			end_line_pos;
@@ -124,7 +124,6 @@ typedef struct s_cub
 	t_keys			keys;
 	int				*color_buffer;
 	int				*tex;
-
 	int				i;
 	double			proj_wall_h;
 	int				t_size;
@@ -136,6 +135,7 @@ typedef struct s_cub
 	int				map_1d_len;
 	char			*c_rgb;
 	char			*f_rgb;
+	bool			color_flag;
 	int				fd;
 	int				no_pos;
 	int				so_pos;
@@ -147,7 +147,6 @@ typedef struct s_cub
 	int				max;
 	char			*trimmed;
 	t_dir			dir;
-	bool			color_flag;
 	int				p_flag;
 }				t_cub;
 
