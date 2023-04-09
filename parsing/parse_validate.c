@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_validate.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bsaeed <bsaeed@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 21:07:14 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/09 04:17:37 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/10 03:28:56 by bsaeed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,6 @@ void	fill_textures(t_cub *cub, int i)
 	}
 }
 
-// char	*trimmer(char *texture_path)
-// {
-// 	char	*res;
-
-// 	res = ft_strtrim(texture_path, "\n");
-// 	free(texture_path);
-// 	return (res);
-// }
-
 int	init_textures(t_cub *cub)
 {
 	int		i;
@@ -47,7 +38,7 @@ int	init_textures(t_cub *cub)
 	while (i < 4)
 	{
 		cub->img2[i].img_ptr = mlx_xpm_file_to_image(cub->mlx, cub->xpm[i], \
-			&cub->img2[i].width, &cub->img2[i].height);
+			&(cub->img2[i].width), &(cub->img2[i].height));
 		if (!cub->img2[i].img_ptr)
 			exit_cub(cub, 1, "Error\ncan't convert xpf file to img\n");
 		address = (int *) mlx_get_data_addr(cub->img2[i].img_ptr, &cub->img2[i].bits_per_pixel,
@@ -60,4 +51,3 @@ int	init_textures(t_cub *cub)
 	}
 	return (0);
 }
-

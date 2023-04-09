@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/10 03:12:29 by bsaeed            #+#    #+#             */
+/*   Updated: 2023/04/10 03:39:44 by hakaddou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
@@ -16,15 +27,14 @@
 # include <string.h>
 # include <stdarg.h>
 # include <math.h>
-#include <stdbool.h>
-#include "./mlx/mlx.h"
-#include "./includes/constants.h"
-#include "./includes/keys.h"
-#include "./includes/shapes.h"
-#include "./includes/colors.h"
-#include "./includes/raycasting.h"
-#include <strings.h>
-
+# include <stdbool.h>
+# include "./mlx/mlx.h"
+# include "./includes/constants.h"
+# include "./includes/keys.h"
+# include "./includes/shapes.h"
+# include "./includes/colors.h"
+# include "./includes/raycasting.h"
+# include <strings.h>
 
 // texture
 
@@ -50,7 +60,6 @@ typedef struct s_img
 	int		height;
 }				t_img;
 
-
 // textures struct
 typedef struct s_img2
 {
@@ -62,7 +71,6 @@ typedef struct s_img2
 	int		width;
 	int		height;
 }				t_img2;
-
 
 // player struct
 typedef struct s_key
@@ -92,7 +100,6 @@ typedef struct s_dir
 	int		east;
 	double	actual_dir;
 }				t_dir;
-
 
 // map struct
 typedef struct s_cub
@@ -128,7 +135,6 @@ typedef struct s_cub
 	int				map_1d_len;
 	char			*c_rgb;
 	char			*f_rgb;
-	bool			color_flag;
 	int				fd;
 	int				no_pos;
 	int				so_pos;
@@ -140,6 +146,7 @@ typedef struct s_cub
 	int				max;
 	char			*trimmed;
 	t_dir			dir;
+	bool			color_flag;
 	int				p_flag;
 }				t_cub;
 
@@ -158,28 +165,14 @@ typedef struct s_cub
 // 	int		side;
 // }			t_ray;
 
-
 /* parsing utils */
-void	ft_free(char ***array);
 int		ft_array_length(char **array);
-char	**ft_reallocation(char **pointer, int size);
-void	print_map(char **map);
-
 
 //------------cub_utils_folder------------//
 
-//const char		*get_exit(const char *file);
 unsigned long	rgb_to_hex(int red, int green, int blue, t_cub *cub);
-
-// int				get_next_line(int fd, char **line);
-// int				ft_new_line(char *buf);
 int				ft_array_length(char **arr);
-// int				ft_strncmp(const char *s1, char *s2, size_t n);
-// int				ft_atoi(const char *str);
-
 void			ft_free(char ***arr);
-
-
 /*parsing*/
 
 int		ft_file_ext(t_cub *cub, char *map_file);
@@ -188,12 +181,10 @@ void		parse_map(t_cub *cub);
 int		parse(int ac, t_cub *cub, char *map_file);
 void	print_cub(t_cub *cub);
 
-
 int		check_characters(t_cub *cub);
 int		init_textures(t_cub *cub);
 int		init_colors(t_cub *cub);
 void	init(t_cub *cub);
-
 
 /* mlx utils */
 void	*free_img(void *img_ptr, void *mlx);
@@ -237,4 +228,3 @@ void	update(t_cub *cub);
 void	exit_cub(t_cub *cub, int code, char *msg);
 
 #endif
-
