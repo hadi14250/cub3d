@@ -10,11 +10,21 @@ RESET=\033[0m
 
 SRCS	= 	main.c \
 			parsing/parse_ext.c \
-			parsing/parse_utils.c \
 			parsing/parse_colors.c \
 			parsing/parse_mapfile.c \
 			parsing/parse_validate.c \
 			parsing/parse_initializer.c \
+			parsing/check_walls.c \
+			parsing/print_funcs.c \
+			parsing/parse_textures.c \
+			parsing/create_rectangle_map.c \
+			parsing/parse_utils1.c \
+			parsing/parse_utils2.c \
+			parsing/parse_utils3.c \
+			parsing/parse_utils4.c \
+			parsing/parse_utils5.c \
+			parsing/parse_utils6.c \
+			parsing/parse_map1.c \
 			raycasting/utils.c \
 			raycasting/key_handles.c \
 			raycasting/line_drawing.c \

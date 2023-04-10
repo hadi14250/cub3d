@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 03:12:29 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/10 19:38:42 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/10 19:42:20 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,6 +143,7 @@ typedef struct s_cub
 	int				we_pos;
 	int				ea_pos;
 	int				floor_pos;
+	void			*sniper;
 	int				ceiling_pos;
 	int				map_pos;
 	int				max;
@@ -179,14 +180,69 @@ void			ft_free(char ***arr);
 
 int		ft_file_ext(t_cub *cub, char *map_file);
 void	parse_info(t_cub *cub);
-void		parse_map(t_cub *cub);
+void	parse_map(t_cub *cub);
 int		parse(int ac, t_cub *cub, char *map_file);
-void	print_cub(t_cub *cub);
+void	check_floor_ceiling(t_cub *cub);
+void	check_north_south(t_cub *cub);
+void	east_west(t_cub *cub);
+char	*ft_tex_dup(const char *s1);
+size_t	ft_tex_len(const char *s);
+int		rgb(t_cub *cub, char *line, char flag);
+void	trim_comma(char *str);
+void	parse_rgb(t_cub *cub);
+void	*allocate_new_map(t_cub *cub);
+void	memset_map(t_cub *cub, char **tmp_map);
+void	hadis_rectangle_map(t_cub *cub, char **tmp_map);
+int		return_split_len(char **split);
+int		get_longest_line(char **split);
 
 int		check_characters(t_cub *cub);
 int		init_textures(t_cub *cub);
 int		init_colors(t_cub *cub);
 void	init(t_cub *cub);
+void	check_borders(t_cub *cub);
+void	*callocer(int size, int block, t_cub *cub);
+void	free_split(char ***split);
+void	*free_null(void *ptr);
+void	check_for_textures(t_cub *cub);
+void	set_player_direction(t_cub *cub);
+
+//parse_utils2
+int		ft_close(int fd);
+void	null_params(char **tmp, char **total, char **line);
+void	free_params(char **line, char **tmp, char **input);
+int		return_len(char **split);
+void	arg_count(int ac);
+
+//parse_utils3
+int		get_longest_line(char **split);
+void	convert_space_to_wall(t_cub *cub);
+void	convert_spaces(t_cub *cub);
+int		is_valid_char(char c);
+void	trim_spaces(char *str);
+
+//parse_utils5
+int		return_double_len(char **split);
+char	*ft_maptrim(char const *s1, char const *set);
+void	trim_comma(char *str);
+int		check_next_line(t_cub *cub, char *str, int len);
+void	check_for_lines(t_cub *cub);
+
+//parse_utils6
+int		check_spaces(char *str);
+void	check_other_format(t_cub *cub);
+void	check_player_format_two(t_cub *cub);
+void	check_player_format(t_cub *cub);
+void	check_lines(char *str, t_cub *cub);
+//parsemap1
+char	*take_map_input(int fd, t_cub *cub);
+void	realloc_map(t_cub *cub);
+void	check_map_pos(t_cub *cub, char **half_map);
+void	check_positions(t_cub *cub);
+void	check_other_format_1d(t_cub *cub);
+/*print functions to delete later*/
+void	print_map_two(char **split);
+void	print_cub(t_cub *cub);
 
 /* mlx utils */
 void	*free_img(void *img_ptr, void *mlx);
