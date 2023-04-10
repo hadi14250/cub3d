@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 03:12:29 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/10 19:42:20 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/11 02:10:08 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,6 +149,7 @@ typedef struct s_cub
 	char			*trimmed;
 	t_dir			dir;
 	int				p_flag;
+	int				m_flag;
 	double			scale_factor;
 	int				fps;
 	double			aim_factor;
@@ -294,4 +295,8 @@ void	render_map(t_cub *cub);
 bool	maphaswallat(double x, double y);
 int		get_map_at(int i, int j);
 bool	is_inside_map(double x, double y);
+
+
+/*	bonus	*/
+void	render_gun(t_cub *cub);
 #endif
