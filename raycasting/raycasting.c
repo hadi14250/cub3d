@@ -6,43 +6,11 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 23:10:35 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/10 03:32:30 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/10 18:54:39 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-
-const int Map[MAP_NUM_ROWS][MAP_NUM_COLS] = {
-    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ,1, 1, 1, 1, 1, 1, 1},
-    {1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1},
-    {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1},
-    {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1},
-    {1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 1},
-    {1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1},
-    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
-};
-
-// const int Map[MAP_NUM_ROWS][MAP_NUM_COLS] = {
-//     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ,1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ,1, 1},
-//     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ,0, 1},
-//     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ,0, 1},
-//     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ,0, 1},
-//     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ,0, 1},
-//     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ,0, 1},
-//     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ,0, 1},
-//     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ,0, 1},
-//     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ,0, 1},
-//     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ,0, 1},
-//     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ,0, 1},
-//     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ,0, 1},
-//     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ,1, 1}
-// };
 
 typedef struct s_loc_3d_wall_vars
 {
@@ -189,6 +157,7 @@ void	setup(t_cub *cub)
 {
 	cub->fps = 1;
 
+	cub->scale_factor = MINIMAP_SCALE_FACTOR;
 	init_player(&cub->player, cub);
 	//
 	// for (int x = 0; x < TEX_WIDTH; x++)
@@ -202,9 +171,9 @@ void	setup(t_cub *cub)
 
 void	render_player(t_player *player, t_cub *cub)
 {
-	init_circle(&player->circle, player->pos.x * MINIMAP_SCALE_FACTOR,
-		player->pos.y * MINIMAP_SCALE_FACTOR,
-		player->radius * MINIMAP_SCALE_FACTOR);
+	init_circle(&player->circle, player->pos.x * cub->scale_factor,
+		player->pos.y * cub->scale_factor,
+		player->radius * cub->scale_factor);
 	draw_circle(&cub->img, player->circle, GREEN_COLOR);
 }
 
@@ -218,66 +187,20 @@ void	render_rays(t_cub *cub, t_ray *rays)
 	i = -1;
 	while (++i < NUM_RAYS)
 	{
-		init_point(&start, cub->player.pos.x * MINIMAP_SCALE_FACTOR,
-			cub->player.pos.y * MINIMAP_SCALE_FACTOR);
-		init_point(&end, rays[i].wall_hit.x * MINIMAP_SCALE_FACTOR,
-			rays[i].wall_hit.y * MINIMAP_SCALE_FACTOR);
+		init_point(&start, cub->player.pos.x * cub->scale_factor,
+			cub->player.pos.y * cub->scale_factor);
+		init_point(&end, rays[i].wall_hit.x * cub->scale_factor,
+			rays[i].wall_hit.y * cub->scale_factor);
 
-		init_circle(&circle, rays[i].wall_hit.x * MINIMAP_SCALE_FACTOR,
-			rays[i].wall_hit.y * MINIMAP_SCALE_FACTOR,
-			5 * MINIMAP_SCALE_FACTOR);
+		init_circle(&circle, rays[i].wall_hit.x * cub->scale_factor,
+			rays[i].wall_hit.y * cub->scale_factor,
+			5 * cub->scale_factor);
 
 		draw_line(&cub->img, start, end, BRIGHT_YELLOW);
 
 		draw_circle(&cub->img, circle, RED_COLOR);
 
 	}
-}
-
-void	render_map(t_cub *cub)
-{
-	int		i;
-	int		j;
-	int		tilex;
-	int		tiley;
-	int		tilecolor;
-	t_rect	rect;
-
-	i = -1;
-	j = -1;
-	while (++i < MAP_NUM_ROWS)
-	{
-		j = -1;
-		while (++j < MAP_NUM_COLS)
-		{
-			tilex = j * TILE_SIZE;
-			tiley = i * TILE_SIZE;
-			if (Map[i][j] == 1)
-				tilecolor = WHITE_COLOR;
-			else
-				tilecolor = BLACK_COLOR;
-			rect = init_rect(tilex * MINIMAP_SCALE_FACTOR,
-					tiley * MINIMAP_SCALE_FACTOR,
-					TILE_SIZE * MINIMAP_SCALE_FACTOR,
-					TILE_SIZE * MINIMAP_SCALE_FACTOR);
-			draw_rectangle(&cub->img, rect, tilecolor);
-		}
-	}
-}
-
-bool	maphaswallat(double x, double y)
-{
-	int	map_grid_index_x;
-	int	map_grid_index_y;
-
-	map_grid_index_x = floor(x / TILE_SIZE);
-	map_grid_index_y = floor(y / TILE_SIZE);
-	if (x < 0 || x > MAP_NUM_COLS * TILE_SIZE
-		|| y < 0 || y > MAP_NUM_ROWS * TILE_SIZE)
-		return (true);
-	if ((Map[map_grid_index_y][map_grid_index_x] == 0))
-		return (false);
-	return (true);
 }
 
 void	move_player(t_player *player, int flag)
@@ -338,9 +261,7 @@ void	cast_horz_ray(double ray_angle, t_ray *ray, t_player *player)
 		ray->h_step.x *= -1;
 	ray->next_h_touch.x = ray->h_intercept.x;
 	ray->next_h_touch.y = ray->h_intercept.y;
-
-	while (ray->next_h_touch.x >= 0 && ray->next_h_touch.x <= MAP_NUM_COLS * TILE_SIZE
-		&& ray->next_h_touch.y >= 0 && ray->next_h_touch.y <= MAP_NUM_ROWS * TILE_SIZE)
+	while (is_inside_map(ray->next_h_touch.x, ray->next_h_touch.y))
 	{
 		if (ray->is_ray_facing_up)
 			init_point(&ray->to_check, ray->next_h_touch.x,
@@ -353,9 +274,9 @@ void	cast_horz_ray(double ray_angle, t_ray *ray, t_player *player)
 		{
 			ray->horz_wallhit.x = ray->next_h_touch.x;
 			ray->horz_wallhit.y = ray->next_h_touch.y;
-			ray->horz_wall_content = Map
-			[(int)floor(ray->to_check.y / TILE_SIZE)]
-			[(int)floor(ray->to_check.x / TILE_SIZE)];
+			ray->horz_wall_content = get_map_at(
+				floor(ray->to_check.y / TILE_SIZE),
+				floor(ray->to_check.x / TILE_SIZE));
 			ray->foundHorzWallHit = true;
 			break ;
 		}
@@ -393,9 +314,7 @@ void	cast_vert_ray(double ray_angle, t_ray *ray, t_player *player)
 
 	ray->next_v_touch.x = ray->v_intercept.x;
 	ray->next_v_touch.y = ray->v_intercept.y;
-
-	while (ray->next_v_touch.x >= 0 && ray->next_v_touch.x <= MAP_NUM_COLS * TILE_SIZE
-		&& ray->next_v_touch.y >= 0 && ray->next_v_touch.y <= MAP_NUM_ROWS * TILE_SIZE)
+	while (is_inside_map(ray->next_v_touch.x, ray->next_v_touch.y))
 	{
 		if (ray->is_ray_facing_left)
 			init_point(&ray->to_check, ray->next_v_touch.x - 1,
@@ -408,9 +327,9 @@ void	cast_vert_ray(double ray_angle, t_ray *ray, t_player *player)
 		{
 			ray->vert_wallhit.x = ray->next_v_touch.x;
 			ray->vert_wallhit.y = ray->next_v_touch.y;
-			ray->vert_wall_content = Map
-			[(int)floor(ray->to_check.y / TILE_SIZE)]
-			[(int)floor(ray->to_check.x / TILE_SIZE)];
+			ray->vert_wall_content = get_map_at(
+				floor(ray->to_check.y / TILE_SIZE),
+				floor(ray->to_check.x / TILE_SIZE));
 			ray->foundVertWallHit = true;
 			break ;
 		}
