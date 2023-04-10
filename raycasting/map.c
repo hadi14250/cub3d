@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 18:18:09 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/10 18:49:00 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/10 18:53:36 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,37 +56,6 @@ bool	is_inside_map(double x, double y)
 }
 
 void	render_map(t_cub *cub)
-{
-	int		i;
-	int		j;
-	int		tilex;
-	int		tiley;
-	int		tilecolor;
-	t_rect	rect;
-
-	i = -1;
-	j = -1;
-	while (++i < MAP_NUM_ROWS)
-	{
-		j = -1;
-		while (++j < MAP_NUM_COLS)
-		{
-			tilex = j * TILE_SIZE;
-			tiley = i * TILE_SIZE;
-			if (Map[i][j] == 1)
-				tilecolor = WHITE_COLOR;
-			else
-				tilecolor = BLACK_COLOR;
-			rect = init_rect(tilex * cub->scale_factor,
-					tiley * cub->scale_factor,
-					TILE_SIZE * cub->scale_factor,
-					TILE_SIZE * cub->scale_factor);
-			draw_rectangle(&cub->img, rect, tilecolor);
-		}
-	}
-}
-
-void	render_map_two(t_cub *cub)
 {
 	int		i;
 	int		j;
