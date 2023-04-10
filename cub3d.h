@@ -121,7 +121,6 @@ typedef struct s_cub
 	t_point			start_line_pos;
 	t_point			end_line_pos;
 	t_player		player;
-	float			fps;
 	t_keys			keys;
 	int				*color_buffer;
 	int				*tex;
@@ -151,6 +150,8 @@ typedef struct s_cub
 	t_dir			dir;
 	int				p_flag;
 	double			scale_factor;
+	int				fps;
+	double			aim_factor;
 }				t_cub;
 
 // raycasting struct
