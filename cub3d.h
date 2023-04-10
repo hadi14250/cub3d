@@ -238,5 +238,11 @@ void	update(t_cub *cub);
 /*	free utils	*/
 void	exit_cub(t_cub *cub, int code, char *msg);
 
+/*	map	*/
+void	render_map_two(t_cub *cub);
+void	render_map(t_cub *cub);
+bool	maphaswallat(double x, double y);
+int		get_map_at(int i, int j);
+bool	is_inside_map(double x, double y);
 #endif
 

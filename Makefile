@@ -21,6 +21,7 @@ SRCS	= 	main.c \
 			raycasting/line_drawing.c \
 			raycasting/drawing_utils.c \
 			raycasting/raycasting.c \
+			raycasting/map.c
 			
 BONUSSRCS	=	bonus/main.c \
 			bonus/parsing/parse_map.c\
