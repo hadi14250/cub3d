@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 18:09:08 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/10 04:46:31 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/10 16:43:52 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,12 @@
 
 // if the key is clicked, then we upudate depeends on what was
 // clicked and set the rest to zero
+
+void	rerender(t_cub *cub)
+{
+	update(cub);
+	render(cub);
+}
 
 void    mouse_funcs(t_cub *cub, int flag)
 {
@@ -58,6 +64,7 @@ int mouse_events(int x, int y, t_cub *cub)
 
 int	keys_handler(int key, t_cub *cub)
 {
+	printf("Key is %d\n", key);
 	if (key == ESC)
 	{
 		cub->img.img_ptr = free_img(cub->img.img_ptr, cub->mlx);
@@ -96,6 +103,32 @@ int	keys_handler(int key, t_cub *cub)
 		cub->keys.left = true;
 	if (key == RIGHT_AROW)
 		cub->keys.right = true;
+	if (key == F_KEY)
+	{
+		if (cub->scale_factor == MINIMAP_SCALE_FACTOR)
+			cub->scale_factor = 1;
+		else
+			cub->scale_factor = MINIMAP_SCALE_FACTOR;	
+		rerender(cub);
+	}
+	if (key == PLUS_KEY)
+	{
+		if (cub->scale_factor < 0.99)
+		{
+			cub->scale_factor += 0.1;
+			printf("Scale factor is %f\n", cub->scale_factor);
+		}
+		rerender(cub);
+	}
+	if (key == MINUS_KEY)
+	{
+		if (cub->scale_factor > 0.31)
+		{
+			cub->scale_factor -= 0.1;
+			printf("Scale factor is %f\n", cub->scale_factor);
+		}
+		rerender(cub);
+	}
 	return (0);
 }
 
@@ -160,10 +193,7 @@ int	render_loop(t_cub *cub)
 	if (cub->keys.left == true)
 		cub->player.turndirection = -1;
 	if (ft_memchr(&cub->keys, 1, sizeof(t_keys)))
-	{
-		update(cub);
-		render(cub);
-	}
+		rerender(cub);
 	return (0);
 }
 
