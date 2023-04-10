@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 20:15:27 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/10 03:31:01 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/10 04:27:35 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 # define MAP_NUM_COLS 20
 
 
-# define WINDOW_WIDTH 320
-# define WINDOW_HEIGHT 200
+# define WINDOW_WIDTH 1280
+# define WINDOW_HEIGHT 800
 
 # define PI 3.14159265
 # define TWO_PI 6.283185
