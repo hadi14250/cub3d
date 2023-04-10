@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 18:06:46 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/03 18:17:11 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/10 20:47:45 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,38 @@ void	draw_circle(t_img *img, t_circle circle, int color)
 	}
 }
 
-void	draw_line(t_img *img, t_point start, t_point end, int color)
+void rasterize_circle(t_img *img, t_circle circle, int color)
+{
+    int x = circle.radius;
+    int y = 0;
+    int radius_error = 1 - x;
+
+    while (x >= y)
+    {
+        my_mlx_pixel_put(img, circle.x + x, circle.y + y, color);
+        my_mlx_pixel_put(img, circle.x - x, circle.y + y, color);
+        my_mlx_pixel_put(img, circle.x + x, circle.y - y, color);
+        my_mlx_pixel_put(img, circle.x - x, circle.y - y, color);
+        my_mlx_pixel_put(img, circle.x + y, circle.y + x, color);
+        my_mlx_pixel_put(img, circle.x - y, circle.y + x, color);
+        my_mlx_pixel_put(img, circle.x + y, circle.y - x, color);
+        my_mlx_pixel_put(img, circle.x - y, circle.y - x, color);
+
+        y++;
+
+        if (radius_error < 0)
+        {
+            radius_error += 2 * y + 1;
+        }
+        else
+        {
+            x--;
+            radius_error += 2 * (y - x) + 1;
+        }
+    }
+}
+
+void	draw_bressen_line(t_img *img, t_point start, t_point end, int color)
 {
 	int	dx;
 	int	dy;
