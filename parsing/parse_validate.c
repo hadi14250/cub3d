@@ -6,7 +6,7 @@
 /*   By: bsaeed <bsaeed@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 21:07:14 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/10 03:28:56 by bsaeed           ###   ########.fr       */
+/*   Updated: 2023/04/10 17:17:48 by bsaeed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,9 @@ int	init_textures(t_cub *cub)
 			&(cub->img2[i].width), &(cub->img2[i].height));
 		if (!cub->img2[i].img_ptr)
 			exit_cub(cub, 1, "Error\ncan't convert xpf file to img\n");
-		address = (int *) mlx_get_data_addr(cub->img2[i].img_ptr, &cub->img2[i].bits_per_pixel,
-			&cub->img2[i].line_length, &cub->img2[i].endian);
+		address = (int *) mlx_get_data_addr(cub->img2[i].img_ptr,
+				&cub->img2[i].bits_per_pixel,
+				&cub->img2[i].line_length, &cub->img2[i].endian);
 		cub->img2[i].address = address;
 		if (!cub->img2[i].address)
 			exit_cub(cub, 1, "Error\ncouldn't get img address\n");

@@ -6,11 +6,55 @@
 /*   By: bsaeed <bsaeed@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 01:34:04 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/10 03:17:25 by bsaeed           ###   ########.fr       */
+/*   Updated: 2023/04/10 16:22:04 by bsaeed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+void	convert_colors(t_cub *cub, char *rgb, int flag)
+{
+	unsigned long	temp;
+	char			**line;
+
+	cub->color_flag = false;
+	line = ft_split(rgb, ' ');
+	if (flag == 0)
+	{
+		temp = rgb_to_hex(ft_atoi(line[0]),
+				ft_atoi(line[1]), ft_atoi(line[2]), cub);
+		cub->ceiling = temp;
+	}
+	else
+	{
+		temp = rgb_to_hex(ft_atoi(line[0]),
+				ft_atoi(line[1]), ft_atoi(line[2]), cub);
+		cub->floor = temp;
+	}
+	free_split(&line);
+	if (cub->color_flag == true)
+		exit_cub(cub, 1, "Error\nRgb out of bound\n");
+}
+
+void	parse_rgb(t_cub *cub)
+{
+	check_floor_ceiling(cub);
+	check_north_south(cub);
+	east_west(cub);
+	cub->rgb = ft_calloc(5, sizeof(char *));
+	cub->c_rgb = ft_strnstr(cub->map_1d, "C", cub->map_1d_len);
+	cub->c_rgb = ft_tex_dup(cub->c_rgb);
+	trim_comma(cub->c_rgb);
+	cub->f_rgb = ft_strnstr(cub->map_1d, "F", cub->map_1d_len);
+	cub->f_rgb = ft_tex_dup(cub->f_rgb);
+	trim_comma(cub->f_rgb);
+	rgb(cub, ft_strnstr(cub->c_rgb, "C", ft_strlen(cub->c_rgb)) + 1, 'C');
+	rgb(cub, ft_strnstr(cub->f_rgb, "F", ft_strlen(cub->f_rgb)) + 1, 'F');
+	cub->c_rgb = free_null(cub->c_rgb);
+	cub->f_rgb = free_null(cub->f_rgb);
+	convert_colors(cub, cub->rgb[1], 0);
+	convert_colors(cub, cub->rgb[0], 1);
+}
 
 int	*check_rgb(char **rgb_array)
 {
@@ -32,49 +76,20 @@ int	*check_rgb(char **rgb_array)
 	return (rgb);
 }
 
-// void	convert_colors(t_cub *cub, int *rgb, int flag)
-// {
-// 	unsigned long	temp;
+int	rgb(t_cub *cub, char *line, char flag)
+{
+	char	**tokens;
 
-// 	if (flag == 0)
-// 	{
-// 		temp = rgb_to_hex(rgb[0], rgb[1], rgb[2]);
-// 		cub->floor = temp;
-// 	}
-// 	if (flag == 1)
-// 	{
-// 		temp = rgb_to_hex(rgb[0], rgb[1], rgb[2]);
-// 		cub->ceiling = temp;
-// 	}
-// }
-
-// int	init_colors(t_cub *cub)
-// {
-// 	int		i;
-// 	int		*rgb;
-// 	char	**temp;
-
-// 	i = 0;
-// 	while (cub->rgb[i])
-// 	{
-// 		temp = ft_split(cub->rgb[i], ',');
-// 		if (ft_array_length(temp) != 3)
-// 		{
-// 			printf("messed up RGB size\n");
-// 			exit(1);
-// 		}
-// 		if (!temp)
-// 			return (1);
-// 		rgb = check_rgb(temp);
-// 		if (!rgb)
-// 		{
-// 			free(rgb);
-// 			return (1);
-// 		}
-// 		convert_colors(cub, rgb, i);
-// 		ft_free(&temp);
-// 		free(rgb);
-// 		i++;
-// 	}
-// 	return (0);
-// }
+	tokens = ft_split(line, ' ');
+	if (ft_array_length(tokens) != 3)
+	{
+		free_split(&tokens);
+		exit_cub(cub, 1, "Error\nRgb validation failed\n");
+	}
+	if (flag == 'F')
+		cub->rgb[0] = ft_strdup(line);
+	else if (flag == 'C')
+		cub->rgb[1] = ft_strdup(line);
+	free_split(&tokens);
+	return (0);
+}

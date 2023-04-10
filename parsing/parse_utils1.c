@@ -1,31 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_utils.c                                      :+:      :+:    :+:   */
+/*   parse_utils1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bsaeed <bsaeed@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 20:59:19 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/10 03:18:47 by bsaeed           ###   ########.fr       */
+/*   Updated: 2023/04/10 17:19:20 by bsaeed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void	ft_free(char ***array)
+void	*free_null(void *ptr)
 {
-	int	i;
+	if (!ptr)
+		return (NULL);
+	free(ptr);
+	return (NULL);
+}
 
-	i = 0;
-	if (!*array)
+void	free_split(char ***split)
+{
+	int		i;
+	char	**to_free;
+
+	to_free = *split;
+	i = -1;
+	if (!to_free)
 		return ;
-	while ((*array)[i])
-	{
-		free((*array)[i]);
-		i++;
-	}
-	free(*array);
-	*array = NULL;
+	while (to_free[++i])
+		to_free[i] = free_null(to_free[i]);
+	*split = free_null(to_free);
 }
 
 int	ft_array_length(char **array)
@@ -38,24 +44,14 @@ int	ft_array_length(char **array)
 	return (i);
 }
 
-char	**ft_reallocation(char **pointer, int size)
+void	*callocer(int size, int block, t_cub *cub)
 {
-	int		i;
-	char	**new_pointer;
+	void	*ptr;
 
-	i = 0;
-	new_pointer = malloc(sizeof(char *) * size);
-	if (!new_pointer)
-		return (NULL);
-	while (pointer[i])
-	{
-		new_pointer[i] = pointer[i];
-		i++;
-	}
-	new_pointer[i] = NULL;
-	new_pointer[i + 1] = NULL;
-	free(pointer);
-	return (new_pointer);
+	ptr = ft_calloc(block, size);
+	if (!ptr)
+		exit_cub(cub, 1, "Error\nmemory allocation failed");
+	return (ptr);
 }
 
 unsigned long	rgb_to_hex(int red, int green, int blue, t_cub *cub)

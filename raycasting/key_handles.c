@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 18:09:08 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/10 16:43:52 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/10 19:42:48 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,15 @@ void    mouse_funcs(t_cub *cub, int flag)
 {
 	if (flag == 0)
 	{
-		cub->keys.left = true;
 		if (cub->keys.right == true)
 			cub->keys.right = false;
+		cub->keys.left = true;
 	}
 	if (flag == 1)
 	{
-		cub->keys.right = true;
 		if (cub->keys.left == true)
 			cub->keys.left = false;
+		cub->keys.right = true;
 	}
 	if (flag == 2)
 	{
@@ -44,22 +44,22 @@ void    mouse_funcs(t_cub *cub, int flag)
 
 int mouse_events(int x, int y, t_cub *cub)
 {
-	static int  prev_x;
-	static int flag = 0;
+	static int	prev_x;
+	static int	flag = 0;
 
 	(void)y;
 	if (flag == 0)
 		flag = 1;
 	else if (flag == 1)
 		flag = 0;
-	if (x < prev_x)
+	if (x < prev_x && (x >= 0 && x <= WINDOW_WIDTH))
 		mouse_funcs(cub, 0);
-	else if ((x > prev_x))
+	else if ((x > prev_x) && (x >= 0 && x <= WINDOW_WIDTH))
 		mouse_funcs(cub, 1);
 	if (flag == 0 || x == prev_x)
 		mouse_funcs(cub, 2);
 	prev_x = x;
-	return 0;
+	return (0);
 }
 
 int	keys_handler(int key, t_cub *cub)

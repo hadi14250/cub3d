@@ -6,14 +6,12 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 22:16:47 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/06 01:02:40 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/10 18:20:28 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # ifndef RAYCASTING_H
 # define RAYCASTING_H
-
-#include "../cub3d.h"
 
 typedef struct s_ray
 {
