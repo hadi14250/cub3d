@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 20:12:18 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/11 01:55:05 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/11 02:01:11 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct s_keys
 	bool	a;
 	bool	d;
 	bool	scale_flag;
+	bool	aim;
 	bool	m_left;
 	bool	m_right;
 	bool	m_leftclick;

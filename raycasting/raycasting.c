@@ -6,11 +6,13 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 23:10:35 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/11 01:55:45 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/11 02:11:06 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+
 
 typedef struct s_loc_3d_wall_vars
 {
@@ -43,6 +45,17 @@ int	return_tex_val(t_cub *cub, int x, t_wall_cords cords, t_ray *rays)
 	return (cords.return_tex_val);
 }
 
+void	render_gun(t_cub *cub)
+{
+	int	size;
+
+	size = 256;
+	cub->sniper = mlx_xpm_file_to_image(cub->mlx, "./sniper.xpm", &size, &size);
+	if (!cub->sniper)
+		exit_cub(cub, 1, "gun not found\n");
+	mlx_put_image_to_window(cub->mlx, cub->win, cub->sniper,
+	WINDOW_WIDTH / 2, WINDOW_HEIGHT);
+}
 
 void	draw_3d_ceiling(t_cub *cub, int wall_top_pixel, int x)
 {
@@ -442,7 +455,6 @@ void	render(t_cub *cub)
 {
 	// generate_3d_wprojection(&cub->player, cub->player.rays, cub);
 	// render_color_buffer(cub);
-	int size = 256;
 	render_map(cub);
 	render_rays(cub, cub->player.rays);
 	render_player(&cub->player, cub);
@@ -454,6 +466,7 @@ void	raycasting(t_cub *cub)
 	setup(cub);
 	update(cub);
 	render(cub);
+	// render_gun(cub);
 	hook_keys(cub);
 	mlx_loop(cub->mlx);
 }

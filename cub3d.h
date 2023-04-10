@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bsaeed <bsaeed@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 03:12:29 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/10 22:18:57 by bsaeed           ###   ########.fr       */
+/*   Updated: 2023/04/11 02:10:08 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -295,4 +295,8 @@ void	render_map(t_cub *cub);
 bool	maphaswallat(double x, double y);
 int		get_map_at(int i, int j);
 bool	is_inside_map(double x, double y);
+
+
+/*	bonus	*/
+void	render_gun(t_cub *cub);
 #endif

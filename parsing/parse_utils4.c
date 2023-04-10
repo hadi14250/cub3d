@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils4.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bsaeed <bsaeed@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 17:14:05 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/10 17:19:39 by bsaeed           ###   ########.fr       */
+/*   Updated: 2023/04/11 02:06:11 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ void	exit_cub(t_cub *cub, int code, char *msg)
 		cub->tex = free_null(cub->tex);
 	if (cub->img.img_ptr)
 		mlx_destroy_image(cub->mlx, cub->img.img_ptr);
+	if (cub->sniper)
+		mlx_destroy_image(cub->mlx, cub->sniper);
 	while (++i < 4)
 	{
 		if (cub->img2[i].img_ptr)

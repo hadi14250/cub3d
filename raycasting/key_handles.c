@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 18:09:08 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/11 01:55:16 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/11 02:11:00 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	rerender(t_cub *cub)
 {
 	update(cub);
 	render(cub);
+	// render_gun(cub);
 }
 
 void    mouse_funcs(t_cub *cub, int flag)
