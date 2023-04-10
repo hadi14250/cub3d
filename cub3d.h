@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 03:12:29 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/10 03:39:44 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/10 19:38:42 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,7 @@ typedef struct s_cub
 	int				map_1d_len;
 	char			*c_rgb;
 	char			*f_rgb;
+	bool			color_flag;
 	int				fd;
 	int				no_pos;
 	int				so_pos;
@@ -146,7 +147,6 @@ typedef struct s_cub
 	int				max;
 	char			*trimmed;
 	t_dir			dir;
-	bool			color_flag;
 	int				p_flag;
 }				t_cub;
 
