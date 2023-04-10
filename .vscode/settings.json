@@ -1,6 +1,7 @@
 {
 	"files.associations": {
 		"chrono": "c",
-		"constants.h": "c"
+		"constants.h": "c",
+		"cub3d.h": "c"
 	}
 }

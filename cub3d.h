@@ -260,15 +260,18 @@ void	ft_drawlinex(t_img *img, t_point start, t_point end, int color);
 void	ft_drawliney(t_img *img, t_point start, t_point end, int color);
 long	absolute(long num);
 void	help_for_draw(t_img *img, t_point start, t_point end, int color);
-void	draw_line(t_img *img, t_point start, t_point end, int color);
+void	draw_bressen_line(t_img *img, t_point start, t_point end, int color);
+void	draw_dda_line(t_img *img, t_point start, t_point end, int color);
 
 /* drawing_utls*/
 void	draw_circle(t_img *img, t_circle circle, int color);
-void	draw_line(t_img *img, t_point start, t_point end, int color);
+void	draw_bressen_line(t_img *img, t_point start, t_point end, int color);
 void	init_point(t_point *point, int x, int y);
 void	init_circle(t_circle *circle, int x, int y, int radius);
 void	draw_rectangle(t_img *img, t_rect rect, int color);
 t_rect	init_rect(int x, int y, int width, int height);
+void rasterize_circle(t_img *img, t_circle circle, int color);
+long	absolute(long num);
 
 /* mlx utils*/
 void	*free_img(void *img_ptr, void *mlx);
