@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 18:09:08 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/10 16:43:52 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/11 01:48:55 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,22 @@ int mouse_events(int x, int y, t_cub *cub)
 		mouse_funcs(cub, 2);
 	prev_x = x;
 	return 0;
+}
+
+void	animate_aim(t_cub *cub)
+{
+	int	i;
+
+	i = -1;
+	// if (cub->player.dist_proj_plane 
+	// 	<= ((WINDOW_WIDTH / 2) / tan(FOV_ANGLE / 2)))
+	// {			
+		cub->player.dist_proj_plane = 
+		(((WINDOW_WIDTH * (cub->aim_factor)) / tan(FOV_ANGLE / 2)));
+		rerender(cub);
+		cub->aim_factor += 0.1;
+		cub->fps -= 1;
+	// }
 }
 
 int	keys_handler(int key, t_cub *cub)
@@ -119,15 +135,19 @@ int	keys_handler(int key, t_cub *cub)
 			printf("Scale factor is %f\n", cub->scale_factor);
 		}
 		rerender(cub);
+		return (0);
 	}
 	if (key == MINUS_KEY)
 	{
 		if (cub->scale_factor > 0.31)
-		{
 			cub->scale_factor -= 0.1;
-			printf("Scale factor is %f\n", cub->scale_factor);
-		}
 		rerender(cub);
+	}
+	if (key == SHIFT || key == SHIFT - 1)
+	{
+		cub->keys.aim = true;
+		cub->fps = 15;
+		cub->aim_factor = 0.5;
 	}
 	return (0);
 }
@@ -160,6 +180,14 @@ int	keys_released(int key, t_cub *cub)
 		cub->keys.right = false;
 	if (key == A_KEY)
 		cub->keys.left = false;
+	if (key == SHIFT || key == SHIFT - 1)
+	{
+		cub->player.dist_proj_plane = 
+			((WINDOW_WIDTH / 2) / tan(FOV_ANGLE / 2));
+		cub->keys.aim = false;
+		rerender(cub);
+	}
+		
 	return (0);
 }
 
@@ -192,6 +220,14 @@ int	render_loop(t_cub *cub)
 		cub->player.turndirection = 1;
 	if (cub->keys.left == true)
 		cub->player.turndirection = -1;
+	if (cub->keys.aim == true)
+	{
+		if (cub->fps >= 0)
+			animate_aim(cub);
+		else
+			cub->keys.aim = false;
+	}
+
 	if (ft_memchr(&cub->keys, 1, sizeof(t_keys)))
 		rerender(cub);
 	return (0);
