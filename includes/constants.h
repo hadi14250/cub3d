@@ -6,7 +6,7 @@
 /*   By: bsaeed <bsaeed@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 20:15:27 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/10 03:50:40 by bsaeed           ###   ########.fr       */
+/*   Updated: 2023/04/10 19:49:18 by bsaeed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,19 @@
 # define MAP_NUM_COLS 20
 
 
-# define WINDOW_WIDTH 1080
-# define WINDOW_HEIGHT 720
+# define WINDOW_WIDTH 1280
+# define WINDOW_HEIGHT 800
 
 # define PI 3.14159265
 # define TWO_PI 6.283185
 
-# define FOV_ANGLE 70 * (PI / 180)
+# define FOV_ANGLE 60 * (PI / 180)
 
 #define WALL_STRIP_WIDTH 1
 
 # define NUM_RAYS WINDOW_WIDTH / WALL_STRIP_WIDTH
 
-# define MINIMAP_SCALE_FACTOR 0.2
+# define MINIMAP_SCALE_FACTOR 0.3
 
 # define DIST_PROJ_PLANE ((WINDOW_WIDTH / 2) / tan(FOV_ANGLE / 2))
 

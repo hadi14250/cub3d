@@ -6,7 +6,7 @@
 /*   By: bsaeed <bsaeed@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 03:12:29 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/10 18:18:40 by bsaeed           ###   ########.fr       */
+/*   Updated: 2023/04/10 19:49:01 by bsaeed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ typedef struct s_key
 	int	right;
 	int	left;
 	int	p;
+	int	scale_flag;
 }				t_key;
 
 typedef struct s_buff
@@ -149,6 +150,7 @@ typedef struct s_cub
 	char			*trimmed;
 	t_dir			dir;
 	int				p_flag;
+	double			scale_factor;
 }				t_cub;
 
 // raycasting struct
@@ -283,4 +285,9 @@ void	update(t_cub *cub);
 /*	free utils	*/
 void	exit_cub(t_cub *cub, int code, char *msg);
 
+/*	map	*/
+void	render_map(t_cub *cub);
+bool	maphaswallat(double x, double y);
+int		get_map_at(int i, int j);
+bool	is_inside_map(double x, double y);
 #endif
