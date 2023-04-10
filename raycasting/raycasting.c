@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 23:10:35 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/10 19:42:56 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/11 01:51:39 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void	generate_3d_wprojection(t_player *player, t_ray *rays, t_cub *cub)
 	while (++x < NUM_RAYS)
 	{
 		rays[x].correct_dist = rays[x].hit_distance * cos(rays[x].ray_angle - player->rotationangle);
-		cub->proj_wall_h = (TILE_SIZE / rays[x].correct_dist) * DIST_PROJ_PLANE;
+		cub->proj_wall_h = (TILE_SIZE / rays[x].correct_dist) * player->dist_proj_plane;
 		cub->wall_strip_height = (int)cub->proj_wall_h;
 		cub->wall_top_pixel = (WINDOW_HEIGHT / 2) - (cub->wall_strip_height / 2);
 		if (cub->wall_top_pixel < 0)
@@ -158,6 +158,7 @@ void	setup(t_cub *cub)
 	cub->fps = 1;
 
 	cub->scale_factor = MINIMAP_SCALE_FACTOR;
+	cub->player.dist_proj_plane = DIST_PROJ_PLANE;
 	init_player(&cub->player, cub);
 	//
 	// for (int x = 0; x < TEX_WIDTH; x++)
@@ -196,7 +197,7 @@ void	render_rays(t_cub *cub, t_ray *rays)
 			rays[i].wall_hit.y * cub->scale_factor,
 			5 * cub->scale_factor);
 
-		draw_line(&cub->img, start, end, BRIGHT_YELLOW);
+		draw_bressen_line(&cub->img, start, end, BRIGHT_YELLOW);
 
 		draw_circle(&cub->img, circle, RED_COLOR);
 
@@ -228,12 +229,11 @@ void	move_player(t_player *player, int flag)
 	}
 }
 
-float	normalize_angle(double angle)
+void	normalize_angle(double *angle)
 {
-	angle = remainder(angle, TWO_PI);
-	if (angle < 0)
-		angle = TWO_PI + angle;
-	return (angle);
+	*angle = remainder(*angle, TWO_PI);
+	if (*angle < 0)
+		*angle = TWO_PI + *angle;
 }
 
 void	cast_horz_ray(double ray_angle, t_ray *ray, t_player *player)
@@ -343,7 +343,8 @@ void	cast_vert_ray(double ray_angle, t_ray *ray, t_player *player)
 
 void	init_ray(double ray_angle, t_ray *ray, int stripid)
 {
-	ray->ray_angle = normalize_angle(ray_angle);
+	ray->ray_angle = ray_angle;
+	normalize_angle(&ray->ray_angle);
 	ray->is_ray_facing_down = (ray->ray_angle > 0 && ray->ray_angle < PI);
 	ray->is_ray_facing_up = !ray->is_ray_facing_down;
 	ray->is_ray_facing_right = (ray->ray_angle > (1.5 * PI)
@@ -417,7 +418,7 @@ void	cast_all_rays(t_ray *rays, t_player *player)
 	while (++i < NUM_RAYS)
 	{
 		ray_angle = player->rotationangle
-			+ atan((i - NUM_RAYS / 2) / DIST_PROJ_PLANE);
+			+ atan((i - NUM_RAYS / 2) / player->dist_proj_plane);
 		cast_ray(ray_angle, &rays[i], i, player);
 	}
 }

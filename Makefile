@@ -27,10 +27,12 @@ SRCS	= 	main.c \
 			parsing/parse_map1.c \
 			raycasting/utils.c \
 			raycasting/key_handles.c \
-			raycasting/line_drawing.c \
+			raycasting/bressen_line.c \
 			raycasting/drawing_utils.c \
 			raycasting/raycasting.c \
-			raycasting/map.c
+			raycasting/map.c \
+			raycasting/dda_line.c \
+
 			
 BONUSSRCS	=	bonus/main.c \
 			bonus/parsing/parse_ext.c \
@@ -41,7 +43,7 @@ BONUSSRCS	=	bonus/main.c \
 			bonus/parsing/parse_initializer.c \
 			bonus/raycasting/utils.c \
 			bonus/raycasting/key_handles.c \
-			bonus/raycasting/line_drawing.c \
+			bonus/raycasting/bressen_line.c \
 			bonus/raycasting/drawing_utils.c \
 			bonus/raycasting/raycasting.c \
 
