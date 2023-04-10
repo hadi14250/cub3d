@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bsaeed <bsaeed@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 20:27:50 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/10 17:32:59 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/10 22:21:53 by bsaeed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int main(int ac, char **av)
 	print_cub(&cub);
 
 	// parse_size(cub);
-
+	cub.m_flag = 0;
 	init_mlx_utils(&cub);
 	raycasting(&cub);
 	exit_cub(&cub, 0, "game finished successfully\n");

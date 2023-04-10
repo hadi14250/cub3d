@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keys.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bsaeed <bsaeed@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 20:12:18 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/10 16:34:59 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/11 01:19:53 by bsaeed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,10 @@ typedef struct s_keys
 	bool	a;
 	bool	d;
 	bool	scale_flag;
+	bool	m_left;
+	bool	m_right;
+	bool	m_leftclick;
+	bool	m_rightclick;
 }			t_keys;
-
 
 #endif

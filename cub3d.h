@@ -6,7 +6,7 @@
 /*   By: bsaeed <bsaeed@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 03:12:29 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/10 19:49:01 by bsaeed           ###   ########.fr       */
+/*   Updated: 2023/04/10 22:18:57 by bsaeed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,7 @@ typedef struct s_cub
 	char			*trimmed;
 	t_dir			dir;
 	int				p_flag;
+	int				m_flag;
 	double			scale_factor;
 }				t_cub;
 
