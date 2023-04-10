@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 20:12:18 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/04 14:45:11 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/10 16:34:59 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,9 @@
 # define REDO 666
 # define Z_KEY 6
 # define X_KEY 7
+# define F_KEY 3
+# define PLUS_KEY 69
+# define MINUS_KEY 78
 
 typedef struct s_keys
 {
@@ -44,6 +47,7 @@ typedef struct s_keys
 	bool	s;
 	bool	a;
 	bool	d;
+	bool	scale_flag;
 }			t_keys;
 
 

@@ -82,6 +82,7 @@ typedef struct s_key
 	int	right;
 	int	left;
 	int	p;
+	int	scale_flag;
 }				t_key;
 
 typedef struct s_buff
@@ -148,6 +149,7 @@ typedef struct s_cub
 	t_dir			dir;
 	bool			color_flag;
 	int				p_flag;
+	double			scale_factor;
 }				t_cub;
 
 // raycasting struct

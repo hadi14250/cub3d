@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 23:10:35 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/10 03:32:30 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/10 16:31:09 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,6 +189,7 @@ void	setup(t_cub *cub)
 {
 	cub->fps = 1;
 
+	cub->scale_factor = MINIMAP_SCALE_FACTOR;
 	init_player(&cub->player, cub);
 	//
 	// for (int x = 0; x < TEX_WIDTH; x++)
@@ -202,9 +203,9 @@ void	setup(t_cub *cub)
 
 void	render_player(t_player *player, t_cub *cub)
 {
-	init_circle(&player->circle, player->pos.x * MINIMAP_SCALE_FACTOR,
-		player->pos.y * MINIMAP_SCALE_FACTOR,
-		player->radius * MINIMAP_SCALE_FACTOR);
+	init_circle(&player->circle, player->pos.x * cub->scale_factor,
+		player->pos.y * cub->scale_factor,
+		player->radius * cub->scale_factor);
 	draw_circle(&cub->img, player->circle, GREEN_COLOR);
 }
 
@@ -218,14 +219,14 @@ void	render_rays(t_cub *cub, t_ray *rays)
 	i = -1;
 	while (++i < NUM_RAYS)
 	{
-		init_point(&start, cub->player.pos.x * MINIMAP_SCALE_FACTOR,
-			cub->player.pos.y * MINIMAP_SCALE_FACTOR);
-		init_point(&end, rays[i].wall_hit.x * MINIMAP_SCALE_FACTOR,
-			rays[i].wall_hit.y * MINIMAP_SCALE_FACTOR);
+		init_point(&start, cub->player.pos.x * cub->scale_factor,
+			cub->player.pos.y * cub->scale_factor);
+		init_point(&end, rays[i].wall_hit.x * cub->scale_factor,
+			rays[i].wall_hit.y * cub->scale_factor);
 
-		init_circle(&circle, rays[i].wall_hit.x * MINIMAP_SCALE_FACTOR,
-			rays[i].wall_hit.y * MINIMAP_SCALE_FACTOR,
-			5 * MINIMAP_SCALE_FACTOR);
+		init_circle(&circle, rays[i].wall_hit.x * cub->scale_factor,
+			rays[i].wall_hit.y * cub->scale_factor,
+			5 * cub->scale_factor);
 
 		draw_line(&cub->img, start, end, BRIGHT_YELLOW);
 
@@ -256,10 +257,10 @@ void	render_map(t_cub *cub)
 				tilecolor = WHITE_COLOR;
 			else
 				tilecolor = BLACK_COLOR;
-			rect = init_rect(tilex * MINIMAP_SCALE_FACTOR,
-					tiley * MINIMAP_SCALE_FACTOR,
-					TILE_SIZE * MINIMAP_SCALE_FACTOR,
-					TILE_SIZE * MINIMAP_SCALE_FACTOR);
+			rect = init_rect(tilex * cub->scale_factor,
+					tiley * cub->scale_factor,
+					TILE_SIZE * cub->scale_factor,
+					TILE_SIZE * cub->scale_factor);
 			draw_rectangle(&cub->img, rect, tilecolor);
 		}
 	}
