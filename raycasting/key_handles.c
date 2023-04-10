@@ -6,7 +6,7 @@
 /*   By: bsaeed <bsaeed@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 18:09:08 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/11 01:23:05 by bsaeed           ###   ########.fr       */
+/*   Updated: 2023/04/11 01:41:19 by bsaeed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,6 +181,5 @@ void	hook_keys(t_cub *cub)
 	mlx_hook(cub->win, 17, 0, exit_app, cub);
 	mlx_hook(cub->win, 2, 0, keys_handler, cub);
 	mlx_hook(cub->win, 3, 0, keys_released, cub);
-	//mlx_hook(cub->win, 6, 1L<<6, mouse_events, cub);
 	mlx_loop_hook(cub->mlx, render_loop, cub);
 }
