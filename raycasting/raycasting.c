@@ -6,7 +6,7 @@
 /*   By: bsaeed <bsaeed@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 23:10:35 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/11 01:41:47 by bsaeed           ###   ########.fr       */
+/*   Updated: 2023/04/11 01:50:12 by bsaeed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -442,12 +442,10 @@ void	render(t_cub *cub)
 	// generate_3d_wprojection(&cub->player, cub->player.rays, cub);
 	// render_color_buffer(cub);
 	int size = 256;
-	cub->sniper = mlx_xpm_file_to_image(cub->mlx, "./sniper.xpm", &size, &size);
 	render_map(cub);
 	render_rays(cub, cub->player.rays);
 	render_player(&cub->player, cub);
 	mlx_put_image_to_window(cub->mlx, cub->win, cub->img.img_ptr, 0, 0);
-	mlx_put_image_to_window(cub->mlx, cub->win, cub->sniper, WINDOW_WIDTH/2, WINDOW_HEIGHT);
 }
 
 void	raycasting(t_cub *cub)
