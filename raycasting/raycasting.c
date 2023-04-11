@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 23:10:35 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/11 04:01:00 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/11 20:39:33 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,10 +152,39 @@ void	draw_background(t_img *img, t_cub *cub)
 	draw_rectangle(img, rect_down, cub->floor);
 }
 
+void	init_player_pos(t_cub *cub, t_player *player)
+{
+	int	x;
+	int	y;
+	int	new_x;
+	int	new_y;
+
+	y = -1;
+	while (++y < player->map3d.height)
+	{
+		x = -1;
+		while (++x < player->map3d.width)
+		{
+			if (player->map3d.map[y][x] == 'N'
+				|| player->map3d.map[y][x] == 'S'
+				|| player->map3d.map[y][x] == 'W'
+				|| player->map3d.map[y][x] == 'E')
+			{
+				new_x = x;
+				new_y = y;
+				player->map3d.map[x][y] = '0';
+			}
+		}
+	}
+	init_point(&player->pos, (new_x * TILE_SIZE) / 2,
+	(new_y * TILE_SIZE) / 2);
+}
+
 void	init_player(t_player *player, t_cub *cub)
 {
-	init_point(&player->pos, (MAP_NUM_COLS * TILE_SIZE) / 2,
-		(MAP_NUM_ROWS * TILE_SIZE) / 2);
+	// init_player_pos() // was here
+	// init_point(&player->pos, (MAP_NUM_COLS * TILE_SIZE) / 2,
+	// 	(MAP_NUM_ROWS * TILE_SIZE) / 2);
 	player->width = 3;
 	player->height = 3;
 	player->turndirection = 0;
@@ -166,12 +195,23 @@ void	init_player(t_player *player, t_cub *cub)
 	player->radius = 10;
 }
 
+void	init_map(t_cub *cub)
+{
+	cub->player.map3d.map = cub->map;
+	cub->player.map3d.height = return_split_len(cub->map);
+	cub->player.map3d.width = ft_strlen(
+		cub->player.map3d.map[0]
+	);
+	printf("width: %d, height %d\n",
+		cub->player.map3d.width, cub->player.map3d.height);
+}
+
 void	setup(t_cub *cub)
 {
 	cub->fps = 1;
-
 	cub->scale_factor = MINIMAP_SCALE_FACTOR;
 	cub->player.dist_proj_plane = DIST_PROJ_PLANE;
+	init_map(cub);
 	init_player(&cub->player, cub);
 	//
 	// for (int x = 0; x < TEX_WIDTH; x++)

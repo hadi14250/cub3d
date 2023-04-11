@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 22:16:47 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/11 00:48:44 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/11 20:27:21 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,13 @@ typedef struct s_ray
 	double	correct_dist;
 }			t_ray;
 
+typedef struct s_map
+{
+	char	**map;
+	int		width;
+	int		height;
+}			t_map;
+
 typedef struct s_player
 {
 	t_point		pos;
@@ -60,6 +67,7 @@ typedef struct s_player
 	float		turnspeed;
 	t_ray		rays[NUM_RAYS];
 	double		dist_proj_plane;
+	t_map		map3d;
 }			t_player;
 
 #endif
