@@ -1,10 +1,9 @@
-C 255, 192, 203
-F 0, 100, 100
-
-WE ./game_textures/WE.xpm
-SO ./game_textures/SO.xpm
-NO ./game_textures/NO.xpm
-EA ./game_textures/EA.xpm
+NO ./path_to_the_north_texture
+SO ./path_to_the_south_texture
+WE ./path_to_the_west_texture
+EA ./path_to_the_east_texture
+F 220,100,0
+C 225,30,0
 
 		1111111111111111111111111
 		1000000000110000000000001
