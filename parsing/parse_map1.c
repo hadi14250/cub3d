@@ -6,7 +6,7 @@
 /*   By: bsaeed <bsaeed@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 17:37:35 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/10 17:38:48 by bsaeed           ###   ########.fr       */
+/*   Updated: 2023/04/11 15:49:01 by bsaeed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	check_map_pos(t_cub *cub, char **half_map)
 
 	i = cub->max - 1;
 	if (i <= 1)
-		exit_cub(cub, 1, "Invalid map\n");
+		exit_cub(cub, 1, "Error\nInvalid map\n");
 	if (!half_map || !half_map[0])
 		exit_cub(cub, 1, "Error\nunorganized map\n");
 	while (i >= 0)

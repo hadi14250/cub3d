@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bsaeed <bsaeed@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 03:12:29 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/11 02:10:08 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/11 15:44:26 by bsaeed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,20 @@
 # include "./includes/colors.h"
 # include "./includes/raycasting.h"
 # include <strings.h>
+
+//sprites
+
+# define NUM_SPRITES	2
+
+typedef struct s_sprites
+{
+	float	x;
+	float	y;
+	float	distance;
+	float	angle;
+	int		texture;
+}	t_sprites;
+
 
 // texture
 

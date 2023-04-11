@@ -6,7 +6,7 @@
 /*   By: bsaeed <bsaeed@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 16:23:46 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/10 17:10:59 by bsaeed           ###   ########.fr       */
+/*   Updated: 2023/04/11 15:49:30 by bsaeed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,28 +96,28 @@ void	check_for_textures(t_cub *cub)
 {
 	cub->xpm = ft_calloc(5, sizeof(char *));
 	if (!cub->xpm)
-		exit_cub(cub, 1, "memory allocation fail\n");
+		exit_cub(cub, 1, "Error\nmemory allocation fail\n");
 	if (!ft_strnstr(cub->map_1d, "NO", cub->map_1d_len)
 		|| !ft_strnstr(cub->map_1d, "SO", cub->map_1d_len)
 		|| !ft_strnstr(cub->map_1d, "WE", cub->map_1d_len)
 		|| !ft_strnstr(cub->map_1d, "EA", cub->map_1d_len))
-		exit_cub(cub, 1, "texture not found\n");
+		exit_cub(cub, 1, "Error\ntexture not found\n");
 	if (!ft_strnstr(cub->map_1d, "./game_textures/NO.xpm", cub->map_1d_len))
-		exit_cub(cub, 1, "NO texture file not found\n");
+		exit_cub(cub, 1, "Error\nNO texture file not found\n");
 	else
 		cub->xpm[0] = ft_strdup("./game_textures/NO.xpm");
 	if (!ft_strnstr(cub->map_1d, "./game_textures/SO.xpm", cub->map_1d_len))
-		exit_cub(cub, 1, "SO texture file not found\n");
+		exit_cub(cub, 1, "Error\nSO texture file not found\n");
 	else
 		cub->xpm[1] = ft_strdup("./game_textures/SO.xpm");
 	if (!ft_strnstr(cub->map_1d, "./game_textures/WE.xpm", cub->map_1d_len))
-		exit_cub(cub, 1, "WE texture file not found\n");
+		exit_cub(cub, 1, "Error\nWE texture file not found\n");
 	else
 		cub->xpm[2] = ft_strdup("./game_textures/WE.xpm");
 	if (!ft_strnstr(cub->map_1d, "./game_textures/EA.xpm", cub->map_1d_len))
-		exit_cub(cub, 1, "EA texture file not found\n");
+		exit_cub(cub, 1, "Error\nEA texture file not found\n");
 	else
 		cub->xpm[3] = ft_strdup("./game_textures/EA.xpm");
 	if (!cub->xpm[0] || !cub->xpm[1] || !cub->xpm[2] || !cub->xpm[3])
-		exit_cub(cub, 1, "memory allocation fail\n");
+		exit_cub(cub, 1, "Error\nmemory allocation fail\n");
 }
