@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 23:10:35 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/12 02:30:48 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/12 03:25:38 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -530,9 +530,12 @@ void	render(t_cub *cub)
 {
 	// generate_3d_wprojection(&cub->player, cub->player.rays, cub);
 	// render_color_buffer(cub);
-	render_map(cub);
-	render_rays(cub, cub->player.rays);
-	render_player(&cub->player, cub);
+	if (cub->keys.q == false)
+	{
+		render_map(cub);
+		render_rays(cub, cub->player.rays);
+		render_player(&cub->player, cub);
+	}
 	mlx_put_image_to_window(cub->mlx, cub->win, cub->img.img_ptr, 0, 0);
 }
 

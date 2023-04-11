@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 20:12:18 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/11 04:07:21 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/12 03:23:35 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@
 # define PLUS_KEY 69
 # define MINUS_KEY 78
 # define SHIFT 258
+# define Q_KEY 12
 
 typedef struct s_keys
 {
@@ -55,6 +56,7 @@ typedef struct s_keys
 	bool	m_right;
 	bool	m_leftclick;
 	bool	m_rightclick;
+	bool	q;
 }			t_keys;
 
 #endif

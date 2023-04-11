@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 18:09:08 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/11 04:21:48 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/12 03:27:45 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,13 +101,29 @@ int	keys_handler(int key, t_cub *cub)
 		cub->keys.left = true;
 	if (key == RIGHT_AROW)
 		cub->keys.right = true;
-	if (key == F_KEY)
+	if (!cub->keys.q && (key == F_KEY))
 	{
 		if (cub->scale_factor == MINIMAP_SCALE_FACTOR)
 			cub->scale_factor = 1;
 		else
 			cub->scale_factor = MINIMAP_SCALE_FACTOR;
 		rerender(cub);
+	}
+	if (key == Q_KEY)
+	{
+		if (cub->keys.q == false)
+		{
+			cub->keys.q = true;
+			rerender(cub);
+		}
+		else
+		{
+			if (cub->keys.q == true)
+			{
+				cub->keys.q = false;
+				rerender(cub);
+			}
+		}
 	}
 	if (key == PLUS_KEY)
 	{
