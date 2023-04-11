@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 23:10:35 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/11 02:12:02 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/11 04:01:00 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,6 +191,45 @@ void	render_player(t_player *player, t_cub *cub)
 	draw_circle(&cub->img, player->circle, GREEN_COLOR);
 }
 
+
+void draw_cross(t_point cross, int size, int color, t_cub *cub)
+{
+	t_point	start;
+	t_point	end;
+
+	init_point(&start, (cross.x - size), (cross.y - size));
+	init_point(&end, (cross.x + size), (cross.y + size));
+	draw_bressen_line(&cub->img, start, end, color);
+	init_point(&start, (cross.x - size), (cross.y + size));
+	init_point(&end, (cross.x + size), (cross.y - size));
+	draw_bressen_line(&cub->img, start, end, color);
+}
+
+// void	*aim = NULL;
+void	draw_middle_circle(t_cub *cub, t_ray *rays)
+{
+	// int	size;
+	t_circle	circle;
+	t_point		cross;
+	// size = 16;
+
+	init_circle(&circle, rays[MID_RAY].wall_hit.x * cub->scale_factor,
+		rays[MID_RAY].wall_hit.y * cub->scale_factor,
+		10 * cub->scale_factor);
+	draw_circle(&cub->img, circle, BLUE_COLOR);
+	init_point(&cross, rays[MID_RAY].wall_hit.x * cub->scale_factor,
+		rays[MID_RAY].wall_hit.y * cub->scale_factor);
+	draw_cross(cross, 20 * cub->scale_factor, BLUE_COLOR, cub);
+	// if (aim)
+	// 	mlx_destroy_image(cub->mlx, aim);
+	// aim = mlx_xpm_file_to_image(cub->mlx, "./game_textures/aim.xpm", &size, &size);
+	// if (!aim)
+	// 	exit_cub(cub, 1, "xpm file not found\n");
+	// mlx_put_image_to_window(cub->mlx, cub->win, aim,
+	// 	rays[MID_RAY].wall_hit.x * cub->scale_factor,
+	// 	rays[MID_RAY].wall_hit.y * cub->scale_factor);
+}
+
 void	render_rays(t_cub *cub, t_ray *rays)
 {
 	int			i;
@@ -211,10 +250,9 @@ void	render_rays(t_cub *cub, t_ray *rays)
 			5 * cub->scale_factor);
 
 		draw_bressen_line(&cub->img, start, end, BRIGHT_YELLOW);
-
 		draw_circle(&cub->img, circle, RED_COLOR);
-
 	}
+	draw_middle_circle(cub, rays);
 }
 
 void	move_player(t_player *player, int flag)
