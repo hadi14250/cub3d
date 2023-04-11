@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 15:56:43 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/12 00:43:54 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/12 00:53:06 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	check_up(t_cub *cub, int i, int j)
 	up = i;
 	if (i == 0)
 		exit_cub(cub, 1, "Error\n'0' found at the top of the map\n");
-	while (cub->map[up])
+	while (up >= 0)
 	{
 		if (cub->map[up][j])
 		{
