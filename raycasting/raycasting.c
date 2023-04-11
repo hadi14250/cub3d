@@ -6,7 +6,7 @@
 /*   By: bsaeed <bsaeed@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 23:10:35 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/11 15:47:07 by bsaeed           ###   ########.fr       */
+/*   Updated: 2023/04/12 01:01:10 by bsaeed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,10 +152,40 @@ void	draw_background(t_img *img, t_cub *cub)
 	draw_rectangle(img, rect_down, cub->floor);
 }
 
+void	init_player_pos(t_player *player)
+{
+	int	x;
+	int	y;
+	int	new_x;
+	int	new_y;
+
+	y = -1;
+	while (++y < player->map3d.height)
+	{
+		x = -1;
+		while (++x < player->map3d.width)
+		{
+			if (player->map3d.map[y][x] == 'N'
+				|| player->map3d.map[y][x] == 'W'
+				|| player->map3d.map[y][x] == 'S'
+				|| player->map3d.map[y][x] == 'E')
+			{
+				new_x = x;
+				new_y = y;
+				player->map3d.map[y][x] = '0';
+			}
+		}
+	}
+	printf("new_x: %d, new_y: %d\n", new_x, new_y);
+	init_point(&player->pos, ((new_x * TILE_SIZE) + TILE_SIZE / 2),
+	((new_y * TILE_SIZE) + TILE_SIZE / 2));
+}
+
 void	init_player(t_player *player, t_cub *cub)
 {
-	init_point(&player->pos, (MAP_NUM_COLS * TILE_SIZE) / 2,
-		(MAP_NUM_ROWS * TILE_SIZE) / 2);
+	init_player_pos(player);
+	// init_point(&player->pos, (MAP_NUM_COLS * TILE_SIZE) / 2,
+	// 	(MAP_NUM_ROWS * TILE_SIZE) / 2);
 	player->width = 3;
 	player->height = 3;
 	player->turndirection = 0;
@@ -166,12 +196,21 @@ void	init_player(t_player *player, t_cub *cub)
 	player->radius = 10;
 }
 
+void	init_map(t_cub *cub)
+{
+	cub->player.map3d.map = cub->map;
+	cub->player.map3d.height = return_split_len(cub->map);
+	cub->player.map3d.width = ft_strlen(
+		cub->player.map3d.map[0]
+	);
+}
+
 void	setup(t_cub *cub)
 {
 	cub->fps = 1;
-
 	cub->scale_factor = MINIMAP_SCALE_FACTOR;
 	cub->player.dist_proj_plane = DIST_PROJ_PLANE;
+	init_map(cub);
 	init_player(&cub->player, cub);
 	//
 	// for (int x = 0; x < TEX_WIDTH; x++)
@@ -189,6 +228,45 @@ void	render_player(t_player *player, t_cub *cub)
 		player->pos.y * cub->scale_factor,
 		player->radius * cub->scale_factor);
 	draw_circle(&cub->img, player->circle, GREEN_COLOR);
+}
+
+
+void draw_cross(t_point cross, int size, int color, t_cub *cub)
+{
+	t_point	start;
+	t_point	end;
+
+	init_point(&start, (cross.x - size), (cross.y - size));
+	init_point(&end, (cross.x + size), (cross.y + size));
+	draw_bressen_line(&cub->img, start, end, color);
+	init_point(&start, (cross.x - size), (cross.y + size));
+	init_point(&end, (cross.x + size), (cross.y - size));
+	draw_bressen_line(&cub->img, start, end, color);
+}
+
+// void	*aim = NULL;
+void	draw_middle_circle(t_cub *cub, t_ray *rays)
+{
+	// int	size;
+	t_circle	circle;
+	t_point		cross;
+	// size = 16;
+
+	init_circle(&circle, rays[MID_RAY].wall_hit.x * cub->scale_factor,
+		rays[MID_RAY].wall_hit.y * cub->scale_factor,
+		10 * cub->scale_factor);
+	draw_circle(&cub->img, circle, BLUE_COLOR);
+	init_point(&cross, rays[MID_RAY].wall_hit.x * cub->scale_factor,
+		rays[MID_RAY].wall_hit.y * cub->scale_factor);
+	draw_cross(cross, 20 * cub->scale_factor, BLUE_COLOR, cub);
+	// if (aim)
+	// 	mlx_destroy_image(cub->mlx, aim);
+	// aim = mlx_xpm_file_to_image(cub->mlx, "./game_textures/aim.xpm", &size, &size);
+	// if (!aim)
+	// 	exit_cub(cub, 1, "xpm file not found\n");
+	// mlx_put_image_to_window(cub->mlx, cub->win, aim,
+	// 	rays[MID_RAY].wall_hit.x * cub->scale_factor,
+	// 	rays[MID_RAY].wall_hit.y * cub->scale_factor);
 }
 
 void	render_rays(t_cub *cub, t_ray *rays)
@@ -211,10 +289,9 @@ void	render_rays(t_cub *cub, t_ray *rays)
 			5 * cub->scale_factor);
 
 		draw_bressen_line(&cub->img, start, end, BRIGHT_YELLOW);
-
 		draw_circle(&cub->img, circle, RED_COLOR);
-
 	}
+	draw_middle_circle(cub, rays);
 }
 
 void	move_player(t_player *player, int flag)
@@ -235,7 +312,7 @@ void	move_player(t_player *player, int flag)
 		new_pos.x = player->pos.x + (cos(player->rotationangle - (M_PI_2)) * movestep);
 		new_pos.y = player->pos.y + (sin(player->rotationangle - (M_PI_2)) * movestep);
 	}
-	if (!maphaswallat(new_pos.x, new_pos.y))
+	if (!maphaswallat(new_pos.x, new_pos.y, player))
 	{
 		player->pos.x = new_pos.x;
 		player->pos.y = new_pos.y;
@@ -274,7 +351,7 @@ void	cast_horz_ray(double ray_angle, t_ray *ray, t_player *player)
 		ray->h_step.x *= -1;
 	ray->next_h_touch.x = ray->h_intercept.x;
 	ray->next_h_touch.y = ray->h_intercept.y;
-	while (is_inside_map(ray->next_h_touch.x, ray->next_h_touch.y))
+	while (is_inside_map(ray->next_h_touch.x, ray->next_h_touch.y, player))
 	{
 		if (ray->is_ray_facing_up)
 			init_point(&ray->to_check, ray->next_h_touch.x,
@@ -283,13 +360,13 @@ void	cast_horz_ray(double ray_angle, t_ray *ray, t_player *player)
 			init_point(&ray->to_check, ray->next_h_touch.x,
 				ray->next_h_touch.y);
 
-		if (maphaswallat(ray->to_check.x, ray->to_check.y))
+		if (maphaswallat(ray->to_check.x, ray->to_check.y, player))
 		{
 			ray->horz_wallhit.x = ray->next_h_touch.x;
 			ray->horz_wallhit.y = ray->next_h_touch.y;
 			ray->horz_wall_content = get_map_at(
 				floor(ray->to_check.y / TILE_SIZE),
-				floor(ray->to_check.x / TILE_SIZE));
+				floor(ray->to_check.x / TILE_SIZE), player);
 			ray->foundHorzWallHit = true;
 			break ;
 		}
@@ -327,7 +404,7 @@ void	cast_vert_ray(double ray_angle, t_ray *ray, t_player *player)
 
 	ray->next_v_touch.x = ray->v_intercept.x;
 	ray->next_v_touch.y = ray->v_intercept.y;
-	while (is_inside_map(ray->next_v_touch.x, ray->next_v_touch.y))
+	while (is_inside_map(ray->next_v_touch.x, ray->next_v_touch.y, player))
 	{
 		if (ray->is_ray_facing_left)
 			init_point(&ray->to_check, ray->next_v_touch.x - 1,
@@ -336,13 +413,13 @@ void	cast_vert_ray(double ray_angle, t_ray *ray, t_player *player)
 			init_point(&ray->to_check, ray->next_v_touch.x,
 				ray->next_v_touch.y);
 
-		if (maphaswallat(ray->to_check.x, ray->to_check.y))
+		if (maphaswallat(ray->to_check.x, ray->to_check.y, player))
 		{
 			ray->vert_wallhit.x = ray->next_v_touch.x;
 			ray->vert_wallhit.y = ray->next_v_touch.y;
 			ray->vert_wall_content = get_map_at(
 				floor(ray->to_check.y / TILE_SIZE),
-				floor(ray->to_check.x / TILE_SIZE));
+				floor(ray->to_check.x / TILE_SIZE), player);
 			ray->foundVertWallHit = true;
 			break ;
 		}

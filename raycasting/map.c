@@ -6,53 +6,36 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 18:18:09 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/10 20:24:53 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/11 21:37:27 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-
-const int Map[MAP_NUM_ROWS][MAP_NUM_COLS] = {
-    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ,1, 1, 1, 1, 1, 1, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1},
-    {1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1},
-    {1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
-};
-
-bool	maphaswallat(double x, double y)
+bool	maphaswallat(double x, double y, t_player *player)
 {
-	int	map_grid_index_x;
-	int	map_grid_index_y;
+	int	map_index_x;
+	int	map_index_y;
 
-	map_grid_index_x = floor(x / TILE_SIZE);
-	map_grid_index_y = floor(y / TILE_SIZE);
-	if (x < 0 || x > MAP_NUM_COLS * TILE_SIZE
-		|| y < 0 || y > MAP_NUM_ROWS * TILE_SIZE)
+	map_index_x = floor(x / TILE_SIZE);
+	map_index_y = floor(y / TILE_SIZE);
+	if (x < 0 || x > player->map3d.width * TILE_SIZE
+		|| y < 0 || y > player->map3d.height * TILE_SIZE)
 		return (true);
-	if ((Map[map_grid_index_y][map_grid_index_x] == 0))
+	if (player->map3d.map[map_index_y][map_index_x] == '0')
 		return (false);
 	return (true);
 }
 
-int	get_map_at(int i, int j)
+int	get_map_at(int i, int j, t_player *player)
 {
-	return (Map[i][j]);
+	return (player->map3d.map[i][j]);
 }
 
-bool	is_inside_map(double x, double y)
+bool	is_inside_map(double x, double y, t_player *player)
 {
-	return (x >= 0 && x <= MAP_NUM_COLS * TILE_SIZE
-		&& y >= 0 && y <= MAP_NUM_ROWS * TILE_SIZE);
+	return (x >= 0 && x <= player->map3d.width * TILE_SIZE
+		&& y >= 0 && y <= player->map3d.height * TILE_SIZE);
 }
 
 void	render_map(t_cub *cub)
@@ -66,14 +49,14 @@ void	render_map(t_cub *cub)
 
 	i = -1;
 	j = -1;
-	while (++i < MAP_NUM_ROWS)
+	while (++i < cub->player.map3d.height)
 	{
 		j = -1;
-		while (++j < MAP_NUM_COLS)
+		while (++j < cub->player.map3d.width)
 		{
 			tilex = j * TILE_SIZE;
 			tiley = i * TILE_SIZE;
-			if (Map[i][j] == 1)
+			if (cub->player.map3d.map[i][j] == '1')
 				tilecolor = WHITE_COLOR;
 			else
 				tilecolor = BLACK_COLOR;

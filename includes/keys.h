@@ -6,7 +6,7 @@
 /*   By: bsaeed <bsaeed@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 20:12:18 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/11 04:09:38 by bsaeed           ###   ########.fr       */
+/*   Updated: 2023/04/12 01:00:52 by bsaeed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@
 # define PLUS_KEY 69
 # define MINUS_KEY 78
 # define SHIFT 258
-# define LEFT_CLICK 
+# define LEFT_CLICK
 
 typedef struct s_keys
 {
@@ -51,6 +51,7 @@ typedef struct s_keys
 	bool	d;
 	bool	scale_flag;
 	bool	aim;
+	bool	aim_released;
 	bool	m_left;
 	bool	m_right;
 	bool	m_leftclick;

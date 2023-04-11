@@ -6,7 +6,7 @@
 /*   By: bsaeed <bsaeed@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 18:09:08 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/11 04:11:26 by bsaeed           ###   ########.fr       */
+/*   Updated: 2023/04/12 01:01:04 by bsaeed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,18 +54,11 @@ int mouse_events(int x, int y, t_cub *cub)
 
 void	animate_aim(t_cub *cub)
 {
-	int	i;
-
-	i = -1;
-	// if (cub->player.dist_proj_plane
-	// 	<= ((WINDOW_WIDTH / 2) / tan(FOV_ANGLE / 2)))
-	// {
-		cub->player.dist_proj_plane =
-		(((WINDOW_WIDTH * (cub->aim_factor)) / tan(FOV_ANGLE / 2)));
-		rerender(cub);
-		cub->aim_factor += 0.1;
-		cub->fps -= 1;
-	// }
+	cub->player.dist_proj_plane =
+	(((WINDOW_WIDTH * (cub->aim_factor)) / tan(FOV_ANGLE / 2)));
+	rerender(cub);
+	cub->aim_factor += AIM_ZOOM_INCREMENT;
+	cub->fps -= 1;
 }
 
 int	keys_handler(int key, t_cub *cub)
@@ -135,7 +128,7 @@ int	keys_handler(int key, t_cub *cub)
 	if (key == SHIFT || key == SHIFT - 1)
 	{
 		cub->keys.aim = true;
-		cub->fps = 15;
+		cub->fps = AIM_ZOOM_FPS;
 		cub->aim_factor = 0.5;
 	}
 	return (0);
