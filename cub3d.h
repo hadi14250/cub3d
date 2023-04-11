@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 03:12:29 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/11 02:10:08 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/11 21:32:20 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -292,9 +292,9 @@ void	exit_cub(t_cub *cub, int code, char *msg);
 
 /*	map	*/
 void	render_map(t_cub *cub);
-bool	maphaswallat(double x, double y);
-int		get_map_at(int i, int j);
-bool	is_inside_map(double x, double y);
+bool	maphaswallat(double x, double y, t_player *player);
+int		get_map_at(int i, int j, t_player *player);
+bool	is_inside_map(double x, double y, t_player *player);
 
 
 /*	bonus	*/
