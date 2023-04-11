@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 20:15:27 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/11 21:36:51 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/12 01:17:01 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # define AIM_ZOOM_INCREMENT 0.1
 
 # define WINDOW_WIDTH 1280
-# define WINDOW_HEIGHT 830
+# define WINDOW_HEIGHT 832
 
 # define PI 3.14159265
 # define TWO_PI 6.283185
