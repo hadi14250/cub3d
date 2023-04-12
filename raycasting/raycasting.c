@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 23:10:35 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/12 20:10:55 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/12 21:24:01 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,11 +210,11 @@ void	set_minimap_scalefactor(t_cub *cub)
 	t_map	*mini_map;
 
 	mini_map = &cub->player.map3d;
-	mini_map->x_scale_factor = (mini_map->width * 64);
-	mini_map->y_scale_factor = (mini_map->height * 64);
+	mini_map->x_scale_factor = (mini_map->width * TILE_SIZE);
+	mini_map->y_scale_factor = (mini_map->height * TILE_SIZE);
 	
-	mini_width = (WINDOW_WIDTH / mini_map->x_scale_factor) * MINIMAP_SCALE_FACTOR;
-	mini_height = (WINDOW_HEIGHT / mini_map->y_scale_factor) * MINIMAP_SCALE_FACTOR;
+	mini_width = (WINDOW_WIDTH / mini_map->x_scale_factor) * cub->scale_factor;
+	mini_height = (WINDOW_HEIGHT / mini_map->y_scale_factor) * cub->scale_factor;
 
 	mini_map->x_scale_factor = mini_width;
 	mini_map->y_scale_factor = mini_height;
@@ -226,6 +226,7 @@ void	setup(t_cub *cub)
 	// cub->scale_factor = MINIMAP_SCALE_FACTOR;
 	cub->player.dist_proj_plane = DIST_PROJ_PLANE;
 	init_map(cub);
+	cub->scale_factor = MINIMAP_SCALE_FACTOR;
 	set_minimap_scalefactor(cub);
 	printf("x_scale: %f, y_scale: %f\n", cub->player.map3d.x_scale_factor,
 	cub->player.map3d.y_scale_factor);
@@ -306,6 +307,8 @@ void	render_rays(t_cub *cub, t_ray *rays)
 
 	if (cub->player.map3d.x_scale_factor < cub->player.map3d.y_scale_factor)
 		smaller = cub->player.map3d.x_scale_factor;
+	else
+		smaller = cub->player.map3d.y_scale_factor;
 	i = -1;
 	while (++i < NUM_RAYS)
 	{
@@ -316,7 +319,7 @@ void	render_rays(t_cub *cub, t_ray *rays)
 
 		init_circle(&circle, rays[i].wall_hit.x * cub->player.map3d.x_scale_factor,
 			rays[i].wall_hit.y * cub->player.map3d.y_scale_factor,
-			5 * smaller);
+			10 * smaller);
 
 		draw_bressen_line(&cub->img, start, end, BRIGHT_YELLOW);
 		draw_circle(&cub->img, circle, RED_COLOR);
@@ -551,6 +554,7 @@ void	update(t_cub *cub)
 	// ft_bzero(cub->img.img_ptr, cub->img.height * cub->img.width);
 	// if (!cub->img.img_ptr)
 	// 	exit_cub(cub, 1, "Error\n, can't allocate image\n");
+	set_minimap_scalefactor(cub);
 	cast_all_rays(cub->player.rays, &cub->player);
 	move_player(&cub->player, cub->p_flag);
 	generate_3d_wprojection(&cub->player, cub->player.rays, cub);

@@ -6,12 +6,6 @@ SO ./game_textures/SO.xpm
 
 NO ./game_textures/NO.xpm
 
-# define MAP_NUM_ROWS 13
-# define MAP_NUM_COLS 20
-
-
-
-
 EA ./game_textures/EA.xpm
 
         1111111111111111111111111
