@@ -1,20 +1,10 @@
 WE ./game_textures/WE.xpm
 SO ./game_textures/SO.xpm
 NO ./game_textures/NO.xpm
-
-C 0,0,0
-
-
-
-
-
-
-
-
-
 EA ./game_textures/EA.xpm
 
-F 0,0,0         
+C 0,0,0
+F 0,0,0
 
 111111111111111111111
 101000001000000000001
