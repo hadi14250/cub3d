@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 23:10:35 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/13 03:09:30 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/13 03:50:04 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,8 +182,6 @@ void	init_player_pos(t_player *player)
 void	init_player(t_player *player, t_cub *cub)
 {
 	init_player_pos(player);
-	// init_point(&player->pos, (MAP_NUM_COLS * TILE_SIZE) / 2,
-	// 	(MAP_NUM_ROWS * TILE_SIZE) / 2);
 	player->width = 3;
 	player->height = 3;
 	player->turndirection = 0;
@@ -223,22 +221,12 @@ void	set_minimap_scalefactor(t_cub *cub)
 void	setup(t_cub *cub)
 {
 	cub->fps = 1;
-	// cub->scale_factor = MINIMAP_SCALE_FACTOR;
-	// cub->player.dist_proj_plane = DIST_PROJ_PLANE;
 	init_map(cub);
 	cub->scale_factor = MINIMAP_SCALE_FACTOR;
 	set_minimap_scalefactor(cub);
 	printf("x_scale: %f, y_scale: %f\n", cub->player.map3d.x_scale_factor,
 	cub->player.map3d.y_scale_factor);
 	init_player(&cub->player, cub);
-	//
-	// for (int x = 0; x < TEX_WIDTH; x++)
-	// {
-	// 	for (int y = 0; y < TEXTURE_HEIGHT; y++)
-	// 	{
-	// 		cub->tex[TEXTURE_WIDTH * y + x] = (x % 8 && y % 8) ? 0x0000FF : 0x000000;
-	// 	}
-	// }
 }
 
 void	render_player(t_player *player, t_cub *cub)
@@ -541,12 +529,6 @@ void	cast_all_rays(t_ray *rays, t_player *player)
 
 void	update(t_cub *cub)
 {
-	// cub->img.img_ptr = free_img(cub->img.img_ptr, cub->mlx);
-	// cub->img.img_ptr = cub_new_img(&cub->img, cub->mlx,
-	// 		WINDOW_WIDTH, WINDOW_HEIGHT);
-	// ft_bzero(cub->img.img_ptr, cub->img.height * cub->img.width);
-	// if (!cub->img.img_ptr)
-	// 	exit_cub(cub, 1, "Error\n, can't allocate image\n");
 	set_minimap_scalefactor(cub);
 	cast_all_rays(cub->player.rays, &cub->player);
 	move_player(&cub->player, cub->p_flag);
@@ -554,11 +536,8 @@ void	update(t_cub *cub)
 	render_color_buffer(cub);
 }
 
-// render all objects for the current frame
 void	render(t_cub *cub)
 {
-	// generate_3d_wprojection(&cub->player, cub->player.rays, cub);
-	// render_color_buffer(cub);
 	if (cub->keys.q == false)
 	{
 		render_map(cub);
@@ -566,7 +545,6 @@ void	render(t_cub *cub)
 		render_player(&cub->player, cub);
 	}
 	mlx_put_image_to_window(cub->mlx, cub->win, cub->img.img_ptr, 0, 0);
-	// mlx_put_image_to_window(cub->mlx, cub->win, test, size, size);
 }
 
 void	raycasting(t_cub *cub)
@@ -574,7 +552,6 @@ void	raycasting(t_cub *cub)
 	setup(cub);
 	update(cub);
 	render(cub);
-	//render_gun(cub);
 	hook_keys(cub);
 	mlx_loop(cub->mlx);
 }

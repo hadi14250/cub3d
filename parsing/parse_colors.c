@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_colors.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bsaeed <bsaeed@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 01:34:04 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/10 16:22:04 by bsaeed           ###   ########.fr       */
+/*   Updated: 2023/04/13 03:46:30 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	parse_rgb(t_cub *cub)
 	check_floor_ceiling(cub);
 	check_north_south(cub);
 	east_west(cub);
-	cub->rgb = ft_calloc(5, sizeof(char *));
+	cub->rgb = callocer(5, sizeof(char *), cub);
 	cub->c_rgb = ft_strnstr(cub->map_1d, "C", cub->map_1d_len);
 	cub->c_rgb = ft_tex_dup(cub->c_rgb);
 	trim_comma(cub->c_rgb);

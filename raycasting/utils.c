@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 15:18:53 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/10 04:38:35 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/13 03:48:36 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,11 @@ void	init_mlx_utils(t_cub *cub)
 			WINDOW_WIDTH, WINDOW_HEIGHT);
 	if (!cub->img.img_ptr)
 		exit_cub(cub, 1, "Error\ncan't initialise image\n");
-	cub->color_buffer = calloc(sizeof(int) * WINDOW_WIDTH , WINDOW_HEIGHT);
+	cub->color_buffer = callocer(sizeof(int) * WINDOW_WIDTH,
+			WINDOW_HEIGHT, cub);
 	if (!cub->color_buffer)
 		exit_cub(cub, 1, "Error\n, memory alloction failed\n");
-	cub->tex = calloc(sizeof(int) * WINDOW_WIDTH , WINDOW_HEIGHT);
+	cub->tex = callocer(sizeof(int) * WINDOW_WIDTH, WINDOW_HEIGHT, cub);
 	if (!cub->tex)
 		exit_cub(cub, 1, "Error\n, memory alloction failed\n");
 }
