@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 04:16:51 by hakaddou          #+#    #+#             */
-/*   Updated: 2022/03/10 17:16:07 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/13 03:38:24 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,3 @@ int	ft_put_hex(unsigned int nb, char c)
 	length += ft_putchar(res);
 	return (length);
 }
-

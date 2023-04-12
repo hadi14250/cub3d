@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 18:30:32 by hakaddou          #+#    #+#             */
-/*   Updated: 2022/04/22 20:07:55 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/13 03:37:03 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ char	*ft_strsjoin(int ac, char **av, char *sep)
 	}
 	tmp[b] = '\0';
 	return (tmp);
-	// return (ft_strtrim (tmp, sep));
 }
 
 /*#include <stdio.h>

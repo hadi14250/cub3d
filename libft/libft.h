@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 01:15:05 by hakaddou          #+#    #+#             */
-/*   Updated: 2022/06/14 21:43:43 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/13 03:35:30 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <unistd.h>
 # include <stdarg.h>
 # include <limits.h>
-#include <stdlib.h>
+# include <stdlib.h>
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
@@ -30,7 +30,7 @@ typedef struct s_list
 	struct s_list	*next;
 }				t_list;
 
-#define BUFFER_SIZE 100
+# define BUFFER_SIZE 100
 
 int		ft_atoi(const char *str);
 void	ft_bzero(void *s, size_t n);
@@ -85,14 +85,9 @@ int		ft_put_address(unsigned long long nb);
 int		ft_parse(va_list ptr, char c);
 int		ft_printf(const char *str, ...);
 char	*ft_capitalise(char *str);
-int		ft_strlens (int size, char **strs, char *sep);
-char 	*ft_strsjoin(int size, char **strs, char *sep);
-char	*ft_trim_stat(char *str);
-char	*ft_trim_line(char *str);
-char	*ft_get_line(char *str, int fd);
+int		ft_strlens(int size, char **strs, char *sep);
+char	*ft_strsjoin(int size, char **strs, char *sep);
 char	*get_next_line(int fd);
-void	FIZZBUZZ(int n);
-
 char	*gl_strchr(const char *s, int c);
 int		gl_strlen(char *str);
 char	*gl_strjoin(char *s1, char *s2);
