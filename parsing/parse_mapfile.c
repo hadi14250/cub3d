@@ -6,7 +6,7 @@
 /*   By: bsaeed <bsaeed@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 23:03:02 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/13 02:54:04 by bsaeed           ###   ########.fr       */
+/*   Updated: 2023/04/13 03:01:03 by bsaeed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1085,6 +1085,36 @@ void	check_for_walls(t_cub *cub)
 		exit_cub(cub, 1, "Error\nNo walls found\n");
 }
 
+void	check_player_on_border(t_cub *cub)
+{
+	int height;
+	int width;
+	int i;
+
+	i = 0;
+	width = get_longest_line(cub->map) - 1;
+	height = return_split_len(cub->map);
+	while (i < height)
+	{
+		if (cub->map[i][width] == 'N' || cub->map[i][0] == 'N'
+			|| cub->map[i][width] == 'E' || cub->map[i][0] == 'E'
+			|| cub->map[i][width] == 'S' || cub->map[i][0] == 'S'
+			|| cub->map[i][width] == 'W' || cub->map[i][0] == 'W')
+			exit_cub(cub, 1, "Error\nPlayer position on border\n");
+		i++;
+	}
+}
+
+void	check_map_lines(t_cub *cub)
+{
+	int	lines;
+
+	lines = return_split_len(cub->map);
+	if (lines <= 2)
+		exit_cub(cub, 1, "Error\nMap cannot be 2 lines\n");
+	return ;
+}
+
 void	validations(t_cub *cub)
 {
 	char	**temp;
@@ -1092,6 +1122,7 @@ void	validations(t_cub *cub)
 	convert_spaces(cub);
 	free_split(&cub->map);
 	cub->map = ft_split(cub->map_1d, '\n');
+	check_map_lines(cub);
 	check_for_walls(cub);
 	check_borders(cub);
 	free_split(&cub->map);
@@ -1101,6 +1132,7 @@ void	validations(t_cub *cub)
 	memset_map(cub, temp);
 	// free_split(&cub->map);
 	hadis_rectangle_map(cub, temp);
+	check_player_on_border(cub);
 	print_map_two(cub->map);
 }
 
