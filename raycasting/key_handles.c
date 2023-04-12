@@ -6,7 +6,7 @@
 /*   By: bsaeed <bsaeed@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 18:09:08 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/12 01:01:04 by bsaeed           ###   ########.fr       */
+/*   Updated: 2023/04/12 20:29:21 by bsaeed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ int	keys_handler(int key, t_cub *cub)
 		cub->keys.left = true;
 	if (key == RIGHT_AROW)
 		cub->keys.right = true;
-	if (key == F_KEY)
+	if (!cub->keys.q && (key == F_KEY))
 	{
 		if (cub->scale_factor == MINIMAP_SCALE_FACTOR)
 			cub->scale_factor = 1;
@@ -109,11 +109,27 @@ int	keys_handler(int key, t_cub *cub)
 			cub->scale_factor = MINIMAP_SCALE_FACTOR;
 		rerender(cub);
 	}
+	if (key == Q_KEY)
+	{
+		if (cub->keys.q == false)
+		{
+			cub->keys.q = true;
+			rerender(cub);
+		}
+		else
+		{
+			if (cub->keys.q == true)
+			{
+				cub->keys.q = false;
+				rerender(cub);
+			}
+		}
+	}
 	if (key == PLUS_KEY)
 	{
 		if (cub->scale_factor < 0.99)
 		{
-			cub->scale_factor += 0.1;
+			cub->scale_factor += MINIMAP_SCALE_FACTOR;
 			printf("Scale factor is %f\n", cub->scale_factor);
 		}
 		rerender(cub);
@@ -121,8 +137,8 @@ int	keys_handler(int key, t_cub *cub)
 	}
 	if (key == MINUS_KEY)
 	{
-		if (cub->scale_factor > 0.31)
-			cub->scale_factor -= 0.1;
+		if (cub->scale_factor > MINIMAP_SCALE_FACTOR)
+			cub->scale_factor -= MINIMAP_SCALE_FACTOR;
 		rerender(cub);
 	}
 	if (key == SHIFT || key == SHIFT - 1)
