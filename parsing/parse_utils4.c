@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils4.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bsaeed <bsaeed@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 17:14:05 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/11 02:06:11 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/12 23:07:33 by bsaeed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,8 @@ void	exit_cub(t_cub *cub, int code, char *msg)
 	free_split(&cub->rgb);
 	cub->c_rgb = free_null(cub->c_rgb);
 	cub->f_rgb = free_null(cub->f_rgb);
+	free_null(cub->rgb[0]);
+	free_null(cub->rgb[1]);
 	cub->fd = ft_close(cub->fd);
 	cub->color_buffer = free_null(cub->color_buffer);
 	cub->tex = free_null(cub->tex);
