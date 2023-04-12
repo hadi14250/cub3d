@@ -33,7 +33,7 @@ SRCS	= 	main.c \
 			raycasting/map.c \
 			raycasting/dda_line.c \
 
-			
+
 BONUSSRCS	=	bonus/main.c \
 			bonus/parsing/parse_ext.c \
 			bonus/parsing/parse_utils.c \
@@ -57,7 +57,7 @@ mlx		= ./mlx/libmlx.a
 
 CC		= gcc -g3
 RM		= rm -rf
-CFLAGS	= -Wall -Wextra -Werror -Ofast -march=native #-fsanitize=address
+CFLAGS	= -Wall -Wextra -Werror -g3 -fsanitize=address
 NAME	= cub3d
 
 MAKELIB	=	@make -C libft
