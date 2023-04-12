@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 03:12:29 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/13 02:56:06 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/13 03:16:19 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,23 +154,8 @@ typedef struct s_cub
 	double			aim_factor;
 }				t_cub;
 
-// raycasting struct
-
-// typedef struct s_ray
-// {
-// 	t_point	ray_dir;
-// 	t_point	side_dist;
-// 	t_point	delta_dist;
-// 	int		map_x;
-// 	int		map_y;
-// 	double	perspective_wall_distance;
-// 	int		step_x;
-// 	int		step_y;
-// 	int		side;
-// }			t_ray;
-
 /* parsing utils */
-int		ft_array_length(char **array);
+int				ft_array_length(char **array);
 
 //------------cub_utils_folder------------//
 
@@ -179,123 +164,119 @@ int				ft_array_length(char **arr);
 void			ft_free(char ***arr);
 /*parsing*/
 
-int		ft_file_ext(t_cub *cub, char *map_file);
-void	parse_info(t_cub *cub);
-void	parse_map(t_cub *cub);
-int		parse(int ac, t_cub *cub, char *map_file);
-void	check_floor_ceiling(t_cub *cub);
-void	check_north_south(t_cub *cub);
-void	east_west(t_cub *cub);
-char	*ft_tex_dup(const char *s1);
-size_t	ft_tex_len(const char *s);
-int		rgb(t_cub *cub, char *line, char flag);
-void	trim_comma(char *str);
-void	parse_rgb(t_cub *cub);
-void	*allocate_new_map(t_cub *cub);
-void	memset_map(t_cub *cub, char **tmp_map);
-void	hadis_rectangle_map(t_cub *cub, char **tmp_map);
-int		return_split_len(char **split);
-int		get_longest_line(char **split);
-
-int		check_characters(t_cub *cub);
-int		init_textures(t_cub *cub);
-int		init_colors(t_cub *cub);
-void	init(t_cub *cub);
-void	check_borders(t_cub *cub);
-void	*callocer(int size, int block, t_cub *cub);
-void	free_split(char ***split);
-void	*free_null(void *ptr);
-void	check_for_textures(t_cub *cub);
-void	set_player_direction(t_cub *cub);
+int				ft_file_ext(t_cub *cub, char *map_file);
+void			parse_info(t_cub *cub);
+void			parse_map(t_cub *cub);
+int				parse(int ac, t_cub *cub, char *map_file);
+void			check_floor_ceiling(t_cub *cub);
+void			check_north_south(t_cub *cub);
+void			east_west(t_cub *cub);
+char			*ft_tex_dup(const char *s1);
+size_t			ft_tex_len(const char *s);
+int				rgb(t_cub *cub, char *line, char flag);
+void			trim_comma(char *str);
+void			parse_rgb(t_cub *cub);
+void			*allocate_new_map(t_cub *cub);
+void			memset_map(t_cub *cub, char **tmp_map);
+void			hadis_rectangle_map(t_cub *cub, char **tmp_map);
+int				return_split_len(char **split);
+int				get_longest_line(char **split);
+int				init_textures(t_cub *cub);
+void			init(t_cub *cub);
+void			check_borders(t_cub *cub);
+void			*callocer(int size, int block, t_cub *cub);
+void			free_split(char ***split);
+void			*free_null(void *ptr);
+void			check_for_textures(t_cub *cub);
+void			set_player_direction(t_cub *cub);
 
 //parse_utils2
-int		ft_close(int fd);
-void	null_params(char **tmp, char **total, char **line);
-void	free_params(char **line, char **tmp, char **input);
-int		return_len(char **split);
-void	arg_count(int ac);
+int				ft_close(int fd);
+void			null_params(char **tmp, char **total, char **line);
+void			free_params(char **line, char **tmp, char **input);
+int				return_len(char **split);
+void			arg_count(int ac);
 
 //parse_utils3
-int		get_longest_line(char **split);
-void	convert_space_to_wall(t_cub *cub);
-void	convert_spaces(t_cub *cub);
-int		is_valid_char(char c);
-void	trim_spaces(char *str);
+int				get_longest_line(char **split);
+void			convert_space_to_wall(t_cub *cub);
+void			convert_spaces(t_cub *cub);
+int				is_valid_char(char c);
+void			trim_spaces(char *str);
 
 //parse_utils5
-int		return_double_len(char **split);
-char	*ft_maptrim(char const *s1, char const *set);
-void	trim_comma(char *str);
-int		check_next_line(t_cub *cub, char *str, int len);
-void	check_for_lines(t_cub *cub);
+int				return_double_len(char **split);
+char			*ft_maptrim(char const *s1, char const *set);
+void			trim_comma(char *str);
+int				check_next_line(t_cub *cub, char *str, int len);
+void			check_for_lines(t_cub *cub);
 
 //parse_utils6
-int		check_spaces(char *str);
-void	check_other_format(t_cub *cub);
-void	check_player_format_two(t_cub *cub);
-void	check_player_format(t_cub *cub);
-void	check_lines(char *str, t_cub *cub);
+int				check_spaces(char *str);
+void			check_other_format(t_cub *cub);
+void			check_player_format_two(t_cub *cub);
+void			check_player_format(t_cub *cub);
+void			check_lines(char *str, t_cub *cub);
 //parsemap1
-char	*take_map_input(int fd, t_cub *cub);
-void	realloc_map(t_cub *cub);
-void	check_map_pos(t_cub *cub, char **half_map);
-void	check_positions(t_cub *cub);
-void	check_other_format_1d(t_cub *cub);
+char			*take_map_input(int fd, t_cub *cub);
+void			realloc_map(t_cub *cub);
+void			check_map_pos(t_cub *cub, char **half_map);
+void			check_positions(t_cub *cub);
+void			check_other_format_1d(t_cub *cub);
 /*print functions to delete later*/
-void	print_map_two(char **split);
-void	print_cub(t_cub *cub);
+void			print_map_two(char **split);
+void			print_cub(t_cub *cub);
 
 /* mlx utils */
-void	*free_img(void *img_ptr, void *mlx);
-void	*free_window(void *mlx, void *win);
-void	*cub_new_img(t_img *img, void *mlx, int width, int height);
-int		keys_handler(int key, t_cub *cub);
-int		exit_app(t_cub *cub);
-void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
-void	hook_keys(t_cub *cub);
+void			*free_img(void *img_ptr, void *mlx);
+void			*free_window(void *mlx, void *win);
+void			*cub_new_img(t_img *img, void *mlx, int width, int height);
+int				keys_handler(int key, t_cub *cub);
+int				exit_app(t_cub *cub);
+void			my_mlx_pixel_put(t_img *img, int x, int y, int color);
+void			hook_keys(t_cub *cub);
 
 /* bressenhams line drawing */
 
-void	ft_swap(double *a, double *b);
-void	ft_drawlinex(t_img *img, t_point start, t_point end, int color);
-void	ft_drawliney(t_img *img, t_point start, t_point end, int color);
-long	absolute(long num);
-void	help_for_draw(t_img *img, t_point start, t_point end, int color);
-void	draw_bressen_line(t_img *img, t_point start, t_point end, int color);
-void	draw_dda_line(t_img *img, t_point start, t_point end, int color);
+void			ft_swap(double *a, double *b);
+void			ft_drawlinex(t_img *img, t_point start, t_point end, int color);
+void			ft_drawliney(t_img *img, t_point start, t_point end, int color);
+long			absolute(long num);
+void			help_for_draw(t_img *img, t_point s, t_point e, int c);
+void			draw_bressen_line(t_img *img, t_point s, t_point e, int c);
+void			draw_dda_line(t_img *img, t_point s, t_point e, int c);
 
 /* drawing_utls*/
-void	draw_circle(t_img *img, t_circle circle, int color);
-void	draw_bressen_line(t_img *img, t_point start, t_point end, int color);
-void	init_point(t_point *point, int x, int y);
-void	init_circle(t_circle *circle, int x, int y, int radius);
-void	draw_rectangle(t_img *img, t_rect rect, int color);
-t_rect	init_rect(int x, int y, int width, int height);
-void rasterize_circle(t_img *img, t_circle circle, int color);
-long	absolute(long num);
+void			draw_circle(t_img *img, t_circle circle, int color);
+void			draw_bressen_line(t_img *img, t_point s, t_point e, int c);
+void			init_point(t_point *point, int x, int y);
+void			init_circle(t_circle *circle, int x, int y, int radius);
+void			draw_rectangle(t_img *img, t_rect rect, int color);
+t_rect			init_rect(int x, int y, int width, int height);
+void			rasterize_circle(t_img *img, t_circle circle, int color);
+long			absolute(long num);
 
 /* mlx utils*/
-void	*free_img(void *img_ptr, void *mlx);
-void	*free_window(void *mlx, void *win);
-void	*cub_new_img(t_img *img, void *mlx, int width, int height);
-void	init_mlx_utils(t_cub *cub);
+void			*free_img(void *img_ptr, void *mlx);
+void			*free_window(void *mlx, void *win);
+void			*cub_new_img(t_img *img, void *mlx, int width, int height);
+void			init_mlx_utils(t_cub *cub);
 
 /* raycasting*/
-void	raycasting(t_cub *cub);
-void	draw_background(t_img *img, t_cub *cub);
-void	render(t_cub *cub);
-void	update(t_cub *cub);
+void			raycasting(t_cub *cub);
+void			draw_background(t_img *img, t_cub *cub);
+void			render(t_cub *cub);
+void			update(t_cub *cub);
 
 /*	free utils	*/
-void	exit_cub(t_cub *cub, int code, char *msg);
+void			exit_cub(t_cub *cub, int code, char *msg);
 
 /*	map	*/
-void	render_map(t_cub *cub);
-bool	maphaswallat(double x, double y, t_player *player);
-int		get_map_at(int i, int j, t_player *player);
-bool	is_inside_map(double x, double y, t_player *player);
-
+void			render_map(t_cub *cub);
+bool			maphaswallat(double x, double y, t_player *player);
+int				get_map_at(int i, int j, t_player *player);
+bool			is_inside_map(double x, double y, t_player *player);
 
 /*	bonus	*/
-void	render_gun(t_cub *cub);
+void			render_gun(t_cub *cub);
 #endif
