@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_mapfile.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bsaeed <bsaeed@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 23:03:02 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/13 01:30:00 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/13 02:54:04 by bsaeed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,18 @@ void	free_split(char ***split)
 	*split = free_null(to_free);
 }
 
+void	free_rgbs(t_cub *cub)
+{
+	if (cub->rgb)
+	{
+		if (cub->rgb[0])
+			free_null(cub->rgb[0]);
+		if (cub->rgb[1])
+			free_null(cub->rgb[1]);
+	}
+	free(cub->rgb);
+}
+
 void	exit_cub(t_cub *cub, int code, char *msg)
 {
 	// int	i;
@@ -72,7 +84,7 @@ void	exit_cub(t_cub *cub, int code, char *msg)
 		cub->map_1d = free_null(cub->map_1d);
 	free_split(&cub->map);
 	free_split(&cub->xpm);
-	free_split(&cub->rgb);
+	free_rgbs(cub);
 	cub->c_rgb = free_null(cub->c_rgb);
 	cub->f_rgb = free_null(cub->f_rgb);
 	cub->fd = ft_close(cub->fd);
@@ -116,39 +128,6 @@ char	*take_map_input(int fd, t_cub *cub)
 	return (h.total);
 }
 
-// int	parse_xpm(t_cub *cub, int fd)
-// {
-// 	char	*line;
-
-// 	cub->xpm = ft_calloc(sizeof(char *), 5);
-// 	if (!cub->xpm)
-// 		return (1);
-// 	cub->rgb = ft_calloc(sizeof(char *), 3);
-// 	if (!cub->rgb)
-// 		return (1);
-// 	while (ft_array_length(cub->xpm) != 4 || ft_array_length(cub->rgb) != 2)
-// 	{
-// 		line = get_next_line(fd);
-// 		if (!line)
-// 			break ;
-// 		if (ft_strlen(line) == 0)
-// 		{
-// 			if (line[0])
-// 				free(line);
-// 		}
-// 		else if (textures(cub, line) == 1 || rgb(cub, line) == 1)
-// 		{
-// 			free(line);
-// 			line = NULL;
-// 			return (1);
-// 		}
-// 		free(line);
-// 		line = NULL;
-// 	}
-// 	if (line)
-// 		free(line);
-// 	return (0);
-// }
 
 size_t	ft_tex_len(const char *s)
 {
@@ -256,6 +235,26 @@ void	trim_comma(char *str)
 	}
 }
 
+int	check_rgbs(char **line)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (line[i])
+	{
+		j = 0;
+		while(line[i][j])
+		{
+			if (ft_isdigit(line[i][j]) == 0)
+				return (EXIT_FAILURE);
+			j++;
+		}
+		i++;
+	}
+	return (EXIT_SUCCESS);
+}
+
 void	convert_colors(t_cub *cub, char *rgb, int flag)
 {
 	unsigned long	temp;
@@ -263,6 +262,12 @@ void	convert_colors(t_cub *cub, char *rgb, int flag)
 
 	cub->color_flag = false;
 	line = ft_split(rgb, ' ');
+	if (check_rgbs(line) == EXIT_FAILURE)
+	{
+		printf("i come here\n");
+		free_split(&line);
+		exit_cub(cub, 1, "Error\nInvalid RGB values used\n");
+	}
 	if (flag == 0)
 	{
 		temp = rgb_to_hex(ft_atoi(line[0]), ft_atoi(line[1]), ft_atoi(line[2]), cub);
@@ -275,7 +280,7 @@ void	convert_colors(t_cub *cub, char *rgb, int flag)
 	}
 	free_split(&line);
 	if (cub->color_flag == true)
-		exit_cub(cub, 1, "rgb out of bound\n");
+		exit_cub(cub, 1, "Error\nRGB out of bound\n");
 }
 
 int	rgb(t_cub *cub, char *line, char flag)
@@ -286,7 +291,7 @@ int	rgb(t_cub *cub, char *line, char flag)
 	if (ft_array_length(tokens) != 3)
 	{
 		free_split(&tokens);
-		exit_cub(cub, 1, "rgb validation failed\n");
+		exit_cub(cub, 1, "Error\nRGB validation failed\n");
 	}
 	if (flag == 'F')
 		cub->rgb[0] = ft_strdup(line);
@@ -315,7 +320,7 @@ void	check_floor_ceiling(t_cub *cub)
 			f++;
 	}
 	if (!c || !f || c > 1 || f > 1)
-		exit_cub(cub, 1, "invalid rgb format");
+		exit_cub(cub, 1, "Error\ninvalid rgb format\n");
 }
 
 void	check_north_south(t_cub *cub)
@@ -1054,6 +1059,32 @@ void	hadis_rectangle_map(t_cub *cub, char **tmp_map)
 	cub->map = tmp_map;
 }
 
+void	check_for_walls(t_cub *cub)
+{
+	int	i;
+	int	j;
+	int	wall_flag;
+
+	i = 0;
+	wall_flag = 0;
+	while (cub->map[i])
+	{
+		j = 0;
+		while (cub->map[i][j])
+		{
+			if (cub->map[i][j] == '1')
+			{
+				wall_flag = 1;
+				break ;
+			}
+			j++;
+		}
+		i++;
+	}
+	if (!wall_flag)
+		exit_cub(cub, 1, "Error\nNo walls found\n");
+}
+
 void	validations(t_cub *cub)
 {
 	char	**temp;
@@ -1061,6 +1092,7 @@ void	validations(t_cub *cub)
 	convert_spaces(cub);
 	free_split(&cub->map);
 	cub->map = ft_split(cub->map_1d, '\n');
+	check_for_walls(cub);
 	check_borders(cub);
 	free_split(&cub->map);
 	convert_space_to_wall(cub);
