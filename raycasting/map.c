@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 18:18:09 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/12 03:15:14 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/12 19:44:01 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,10 +83,10 @@ void	render_map(t_cub *cub)
 				tilecolor = WHITE_COLOR;
 			else
 				tilecolor = BLACK_COLOR;
-			rect = init_rect(tilex * cub->scale_factor,
-					tiley * cub->scale_factor,
-					TILE_SIZE * cub->scale_factor,
-					TILE_SIZE * cub->scale_factor);
+			rect = init_rect(tilex * cub->player.map3d.x_scale_factor,
+					tiley * cub->player.map3d.y_scale_factor,
+					TILE_SIZE * cub->player.map3d.x_scale_factor,
+					TILE_SIZE * cub->player.map3d.y_scale_factor);
 			draw_rectangle(&cub->img, rect, tilecolor);
 		}
 	}

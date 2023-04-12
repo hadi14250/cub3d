@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 23:10:35 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/12 18:46:27 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/12 20:10:55 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,27 +205,30 @@ void	init_map(t_cub *cub)
 
 void	set_minimap_scalefactor(t_cub *cub)
 {
-	int	x;
-	int	y;
-	t_map mini_map;
+	double	mini_width;
+	double	mini_height;
+	t_map	*mini_map;
 
-	mini_map = cub->player.map3d;
-	x = TILE_SIZE * mini_map.width;
-	y = TILE_SIZE * mini_map.height;
-	mini_map.x_scale_factor = WINDOW_WIDTH * MINIMAP_SCALE_FACTOR;
-	mini_map.y_scale_factor = WINDOW_HEIGHT * MINIMAP_SCALE_FACTOR;
-	printf("width is %d and height is %d | x_scale: %d, y_scale: %d\n", x, y,
-		mini_map.x_scale_factor, mini_map.y_scale_factor);
-	printf("mini_map width: %d", mini_map.width * 64);
+	mini_map = &cub->player.map3d;
+	mini_map->x_scale_factor = (mini_map->width * 64);
+	mini_map->y_scale_factor = (mini_map->height * 64);
+	
+	mini_width = (WINDOW_WIDTH / mini_map->x_scale_factor) * MINIMAP_SCALE_FACTOR;
+	mini_height = (WINDOW_HEIGHT / mini_map->y_scale_factor) * MINIMAP_SCALE_FACTOR;
+
+	mini_map->x_scale_factor = mini_width;
+	mini_map->y_scale_factor = mini_height;
 }
 
 void	setup(t_cub *cub)
 {
 	cub->fps = 1;
-	cub->scale_factor = MINIMAP_SCALE_FACTOR;
+	// cub->scale_factor = MINIMAP_SCALE_FACTOR;
 	cub->player.dist_proj_plane = DIST_PROJ_PLANE;
 	init_map(cub);
 	set_minimap_scalefactor(cub);
+	printf("x_scale: %f, y_scale: %f\n", cub->player.map3d.x_scale_factor,
+	cub->player.map3d.y_scale_factor);
 	init_player(&cub->player, cub);
 	//
 	// for (int x = 0; x < TEX_WIDTH; x++)
@@ -239,9 +242,15 @@ void	setup(t_cub *cub)
 
 void	render_player(t_player *player, t_cub *cub)
 {
-	init_circle(&player->circle, player->pos.x * cub->scale_factor,
-		player->pos.y * cub->scale_factor,
-		player->radius * cub->scale_factor);
+	double smaller;
+
+	if (player->map3d.x_scale_factor < player->map3d.y_scale_factor)
+		smaller = player->map3d.x_scale_factor;
+	else
+		smaller = player->map3d.y_scale_factor;
+	init_circle(&player->circle, player->pos.x * player->map3d.x_scale_factor,
+		player->pos.y * player->map3d.y_scale_factor,
+		player->radius * smaller);
 	draw_circle(&cub->img, player->circle, GREEN_COLOR);
 }
 
@@ -262,18 +271,21 @@ void draw_cross(t_point cross, int size, int color, t_cub *cub)
 // void	*aim = NULL;
 void	draw_middle_circle(t_cub *cub, t_ray *rays)
 {
-	// int	size;
 	t_circle	circle;
 	t_point		cross;
-	// size = 16;
+	double		smaller;
 
-	init_circle(&circle, rays[MID_RAY].wall_hit.x * cub->scale_factor,
-		rays[MID_RAY].wall_hit.y * cub->scale_factor,
-		10 * cub->scale_factor);
+	if (cub->player.map3d.x_scale_factor < cub->player.map3d.y_scale_factor)
+		smaller = cub->player.map3d.x_scale_factor;
+	else
+		smaller = cub->player.map3d.y_scale_factor;
+	init_circle(&circle, rays[MID_RAY].wall_hit.x * cub->player.map3d.x_scale_factor,
+		rays[MID_RAY].wall_hit.y * cub->player.map3d.y_scale_factor,
+		10 * smaller);
 	draw_circle(&cub->img, circle, BLUE_COLOR);
-	init_point(&cross, rays[MID_RAY].wall_hit.x * cub->scale_factor,
-		rays[MID_RAY].wall_hit.y * cub->scale_factor);
-	draw_cross(cross, 20 * cub->scale_factor, BLUE_COLOR, cub);
+	init_point(&cross, rays[MID_RAY].wall_hit.x * cub->player.map3d.x_scale_factor,
+		rays[MID_RAY].wall_hit.y * cub->player.map3d.y_scale_factor);
+	draw_cross(cross, 20 * smaller, BLUE_COLOR, cub);
 	// if (aim)
 	// 	mlx_destroy_image(cub->mlx, aim);
 	// aim = mlx_xpm_file_to_image(cub->mlx, "./game_textures/aim.xpm", &size, &size);
@@ -290,18 +302,21 @@ void	render_rays(t_cub *cub, t_ray *rays)
 	t_point		start;
 	t_point		end;
 	t_circle	circle;
+	double smaller;
 
+	if (cub->player.map3d.x_scale_factor < cub->player.map3d.y_scale_factor)
+		smaller = cub->player.map3d.x_scale_factor;
 	i = -1;
 	while (++i < NUM_RAYS)
 	{
-		init_point(&start, cub->player.pos.x * cub->scale_factor,
-			cub->player.pos.y * cub->scale_factor);
-		init_point(&end, rays[i].wall_hit.x * cub->scale_factor,
-			rays[i].wall_hit.y * cub->scale_factor);
+		init_point(&start, cub->player.pos.x * cub->player.map3d.x_scale_factor,
+			cub->player.pos.y * cub->player.map3d.y_scale_factor);
+		init_point(&end, rays[i].wall_hit.x * cub->player.map3d.x_scale_factor,
+			rays[i].wall_hit.y * cub->player.map3d.y_scale_factor);
 
-		init_circle(&circle, rays[i].wall_hit.x * cub->scale_factor,
-			rays[i].wall_hit.y * cub->scale_factor,
-			5 * cub->scale_factor);
+		init_circle(&circle, rays[i].wall_hit.x * cub->player.map3d.x_scale_factor,
+			rays[i].wall_hit.y * cub->player.map3d.y_scale_factor,
+			5 * smaller);
 
 		draw_bressen_line(&cub->img, start, end, BRIGHT_YELLOW);
 		draw_circle(&cub->img, circle, RED_COLOR);
