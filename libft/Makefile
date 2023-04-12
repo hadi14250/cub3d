@@ -6,7 +6,7 @@
 #    By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/26 01:14:11 by hakaddou          #+#    #+#              #
-#    Updated: 2022/06/14 21:22:14 by hakaddou         ###   ########.fr        #
+#    Updated: 2023/04/13 00:04:44 by hakaddou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ BONUS_OBJS		= $(BONUS:.c=.o)
 
 CC				= gcc
 RM				= rm -f
-CFLAGS			= -Wall -Wextra -Werror
+CFLAGS			= -Wall -Wextra -Werror -Ofast -march=native
 
 NAME			= libft.a
 
