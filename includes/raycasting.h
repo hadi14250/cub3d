@@ -6,11 +6,11 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 22:16:47 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/13 02:59:02 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/13 03:10:07 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef RAYCASTING_H
+#ifndef RAYCASTING_H
 # define RAYCASTING_H
 
 typedef struct s_ray
@@ -34,8 +34,8 @@ typedef struct s_ray
 	bool	is_ray_facing_down;
 	bool	is_ray_facing_right;
 	bool	is_ray_facing_left;
-	bool	foundHorzWallHit;
-	bool	foundVertWallHit;
+	bool	found_h_hit;
+	bool	found_v_hit;
 	int		wall_hit_content;
 	int		horz_wall_content;
 	int		vert_wall_content;
@@ -62,8 +62,8 @@ typedef struct s_player
 	int			radius;
 	float		width;
 	float		height;
-	int			turndirection; // -1 for left and 1 or right
-	int			walkdirection; // -1 if walking backwards and +1 if walking front
+	int			turndirection;
+	int			walkdirection;
 	float		rotationangle;
 	float		walkspeed;
 	float		turnspeed;

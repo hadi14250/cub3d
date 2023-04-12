@@ -6,11 +6,11 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 20:14:36 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/03 23:35:33 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/13 03:10:15 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef SHAPES_H
+#ifndef SHAPES_H
 # define SHAPES_H
 
 typedef struct s_point

@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 23:10:35 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/13 03:00:53 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/13 03:09:30 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -354,7 +354,7 @@ void	normalize_angle(double *angle)
 
 void	cast_horz_ray(double ray_angle, t_ray *ray, t_player *player)
 {
-	ray->foundHorzWallHit = false;
+	ray->found_h_hit = false;
 	init_point(&ray->horz_wallhit, 0, 0);
 	ray->horz_wall_content = 0;
 
@@ -393,7 +393,7 @@ void	cast_horz_ray(double ray_angle, t_ray *ray, t_player *player)
 			ray->horz_wall_content = get_map_at(
 				floor(ray->to_check.y / TILE_SIZE),
 				floor(ray->to_check.x / TILE_SIZE), player);
-			ray->foundHorzWallHit = true;
+			ray->found_h_hit = true;
 			break ;
 		}
 		else
@@ -406,7 +406,7 @@ void	cast_horz_ray(double ray_angle, t_ray *ray, t_player *player)
 
 void	cast_vert_ray(double ray_angle, t_ray *ray, t_player *player)
 {
-	ray->foundVertWallHit = false;
+	ray->found_v_hit = false;
 	init_point(&ray->vert_wallhit, 0, 0);
 	ray->vert_wall_content = 0;
 
@@ -446,7 +446,7 @@ void	cast_vert_ray(double ray_angle, t_ray *ray, t_player *player)
 			ray->vert_wall_content = get_map_at(
 				floor(ray->to_check.y / TILE_SIZE),
 				floor(ray->to_check.x / TILE_SIZE), player);
-			ray->foundVertWallHit = true;
+			ray->found_v_hit = true;
 			break ;
 		}
 		else
@@ -499,12 +499,12 @@ void	set_vert_data(t_ray *ray)
 
 void	calculate_smallest_distance(t_ray *ray, t_player *player)
 {
-	if (ray->foundHorzWallHit)
+	if (ray->found_h_hit)
 		ray->horz_hit_distance = delta_points(player->pos.x,
 				player->pos.y, ray->horz_wallhit.x, ray->horz_wallhit.y);
 	else
 		ray->horz_hit_distance = INT_MAX;
-	if (ray->foundVertWallHit)
+	if (ray->found_v_hit)
 		ray->vert_hit_distance = delta_points(player->pos.x,
 				player->pos.y, ray->vert_wallhit.x, ray->vert_wallhit.y);
 	else

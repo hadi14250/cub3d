@@ -6,11 +6,11 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 20:11:20 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/04 08:39:13 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/13 03:06:54 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef COLORS_H
+#ifndef COLORS_H
 # define COLORS_H
 
 # define NONE_COLOR 0xFF000000
