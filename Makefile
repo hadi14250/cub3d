@@ -57,7 +57,7 @@ mlx		= ./mlx/libmlx.a
 
 CC		= gcc -g3
 RM		= rm -rf
-CFLAGS	= -Wall -Wextra -Werror -g3 -fsanitize=address
+CFLAGS	= -Wall -Wextra -Werror -g3
 NAME	= cub3d
 
 MAKELIB	=	@make -C libft
