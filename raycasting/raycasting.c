@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 23:10:35 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/12 21:50:55 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/13 03:00:53 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -224,7 +224,7 @@ void	setup(t_cub *cub)
 {
 	cub->fps = 1;
 	// cub->scale_factor = MINIMAP_SCALE_FACTOR;
-	cub->player.dist_proj_plane = DIST_PROJ_PLANE;
+	// cub->player.dist_proj_plane = DIST_PROJ_PLANE;
 	init_map(cub);
 	cub->scale_factor = MINIMAP_SCALE_FACTOR;
 	set_minimap_scalefactor(cub);
@@ -269,32 +269,25 @@ void draw_cross(t_point cross, int size, int color, t_cub *cub)
 	draw_bressen_line(&cub->img, start, end, color);
 }
 
-// void	*aim = NULL;
 void	draw_middle_circle(t_cub *cub, t_ray *rays)
 {
 	t_circle	circle;
 	t_point		cross;
 	double		smaller;
+	int			mid;
 
+	mid = cub->player.mid_ray;
 	if (cub->player.map3d.x_scale_factor < cub->player.map3d.y_scale_factor)
 		smaller = cub->player.map3d.x_scale_factor;
 	else
 		smaller = cub->player.map3d.y_scale_factor;
-	init_circle(&circle, rays[MID_RAY].wall_hit.x * cub->player.map3d.x_scale_factor,
-		rays[MID_RAY].wall_hit.y * cub->player.map3d.y_scale_factor,
+	init_circle(&circle, rays[mid].wall_hit.x * cub->player.map3d.x_scale_factor,
+		rays[mid].wall_hit.y * cub->player.map3d.y_scale_factor,
 		10 * smaller);
 	draw_circle(&cub->img, circle, BLUE_COLOR);
-	init_point(&cross, rays[MID_RAY].wall_hit.x * cub->player.map3d.x_scale_factor,
-		rays[MID_RAY].wall_hit.y * cub->player.map3d.y_scale_factor);
+	init_point(&cross, rays[mid].wall_hit.x * cub->player.map3d.x_scale_factor,
+		rays[mid].wall_hit.y * cub->player.map3d.y_scale_factor);
 	draw_cross(cross, 20 * smaller, BLUE_COLOR, cub);
-	// if (aim)
-	// 	mlx_destroy_image(cub->mlx, aim);
-	// aim = mlx_xpm_file_to_image(cub->mlx, "./game_textures/aim.xpm", &size, &size);
-	// if (!aim)
-	// 	exit_cub(cub, 1, "xpm file not found\n");
-	// mlx_put_image_to_window(cub->mlx, cub->win, aim,
-	// 	rays[MID_RAY].wall_hit.x * cub->scale_factor,
-	// 	rays[MID_RAY].wall_hit.y * cub->scale_factor);
 }
 
 void	render_rays(t_cub *cub, t_ray *rays)

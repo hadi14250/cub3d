@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 18:09:08 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/12 21:50:17 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/13 02:51:21 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int mouse_events(int x, int y, t_cub *cub)
 void	animate_aim(t_cub *cub)
 {
 	cub->player.dist_proj_plane =
-	(((WINDOW_WIDTH * (cub->aim_factor)) / tan(FOV_ANGLE / 2)));
+	(((WINDOW_WIDTH * (cub->aim_factor)) / tan(cub->player.fov / 2)));
 	rerender(cub);
 	cub->aim_factor += AIM_ZOOM_INCREMENT;
 	cub->fps -= 1;
@@ -168,7 +168,7 @@ int	keys_released(int key, t_cub *cub)
 	if (key == SHIFT || key == SHIFT - 1)
 	{
 		cub->player.dist_proj_plane =
-			((WINDOW_WIDTH / 2) / tan(FOV_ANGLE / 2));
+			((WINDOW_WIDTH / 2) / tan(cub->player.fov / 2));
 		cub->keys.aim = false;
 		rerender(cub);
 	}

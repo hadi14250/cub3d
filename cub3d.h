@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bsaeed <bsaeed@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 03:12:29 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/12 01:00:25 by bsaeed           ###   ########.fr       */
+/*   Updated: 2023/04/13 02:56:06 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,6 @@ typedef struct s_cub
 	int				i;
 	double			proj_wall_h;
 	int				t_size;
-	double			dist_proj_plane;
 	int				wall_strip_height;
 	int				wall_top_pixel;
 	int				wall_bottom_pixel;

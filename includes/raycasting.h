@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 22:16:47 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/12 19:37:54 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/13 02:59:02 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,10 @@ typedef struct s_player
 	float		walkspeed;
 	float		turnspeed;
 	t_ray		rays[NUM_RAYS];
-	double		dist_proj_plane;
 	t_map		map3d;
+	double		dist_proj_plane;
+	double		mid_ray;
+	double		fov;
 }			t_player;
 
 #endif
