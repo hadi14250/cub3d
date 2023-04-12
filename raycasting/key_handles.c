@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 18:09:08 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/12 03:27:45 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/12 18:35:10 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ int	keys_handler(int key, t_cub *cub)
 	{
 		if (cub->scale_factor < 0.99)
 		{
-			cub->scale_factor += 0.1;
+			cub->scale_factor += MINIMAP_SCALE_FACTOR;
 			printf("Scale factor is %f\n", cub->scale_factor);
 		}
 		rerender(cub);
@@ -137,8 +137,8 @@ int	keys_handler(int key, t_cub *cub)
 	}
 	if (key == MINUS_KEY)
 	{
-		if (cub->scale_factor > 0.31)
-			cub->scale_factor -= 0.1;
+		if (cub->scale_factor > MINIMAP_SCALE_FACTOR)
+			cub->scale_factor -= MINIMAP_SCALE_FACTOR;
 		rerender(cub);
 	}
 	if (key == SHIFT || key == SHIFT - 1)

@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 23:10:35 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/12 03:25:38 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/12 18:46:27 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,12 +203,29 @@ void	init_map(t_cub *cub)
 	);
 }
 
+void	set_minimap_scalefactor(t_cub *cub)
+{
+	int	x;
+	int	y;
+	t_map mini_map;
+
+	mini_map = cub->player.map3d;
+	x = TILE_SIZE * mini_map.width;
+	y = TILE_SIZE * mini_map.height;
+	mini_map.x_scale_factor = WINDOW_WIDTH * MINIMAP_SCALE_FACTOR;
+	mini_map.y_scale_factor = WINDOW_HEIGHT * MINIMAP_SCALE_FACTOR;
+	printf("width is %d and height is %d | x_scale: %d, y_scale: %d\n", x, y,
+		mini_map.x_scale_factor, mini_map.y_scale_factor);
+	printf("mini_map width: %d", mini_map.width * 64);
+}
+
 void	setup(t_cub *cub)
 {
 	cub->fps = 1;
 	cub->scale_factor = MINIMAP_SCALE_FACTOR;
 	cub->player.dist_proj_plane = DIST_PROJ_PLANE;
 	init_map(cub);
+	set_minimap_scalefactor(cub);
 	init_player(&cub->player, cub);
 	//
 	// for (int x = 0; x < TEX_WIDTH; x++)
