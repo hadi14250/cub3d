@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 23:03:02 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/12 23:34:42 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/13 01:30:00 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -241,8 +241,6 @@ void	print_cub(t_cub *cub)
 	printf("positions: no %d, ea: %d, so: %d, we: %d, map: %d, floor: %d, ceiling: %d\n",
 	cub->no_pos, cub->ea_pos, cub->so_pos, cub->we_pos, cub->map_pos,
 	cub->floor_pos, cub->ceiling_pos);
-	if (cub->map)
-		printf("max is: %d and it is --->%s<---\n", cub->max, cub->map[cub->max]);
 	printf("player direction is: %f\n", cub->dir.actual_dir);
 }
 
