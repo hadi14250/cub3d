@@ -1,18 +1,10 @@
 WE ./game_textures/WE.xpm
-C 250, 160, 160
-F 234, 221, 202
 SO ./game_textures/SO.xpm
-
-
 NO ./game_textures/NO.xpm
-
-# define MAP_NUM_ROWS 13
-# define MAP_NUM_COLS 20
-
-
-
-
 EA ./game_textures/EA.xpm
+
+F 220,100,0
+C 225,30,0
 
         1111111111111111111111111
         1000000000110000000000001

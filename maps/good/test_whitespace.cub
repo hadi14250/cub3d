@@ -1,0 +1,52 @@
+
+
+
+
+
+
+
+
+WE ./game_textures/WE.xpm
+SO ./game_textures/SO.xpm
+NO ./game_textures/NO.xpm
+EA ./game_textures/EA.xpm
+
+        F 20,           20,             20
+C 200,          200,200
+
+11111
+10001
+10S01
+10001
+10001
+10001
+11001
+10001
+10001
+10001
+10001
+10001
+11111
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

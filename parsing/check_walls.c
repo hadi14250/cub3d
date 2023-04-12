@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_walls.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bsaeed <bsaeed@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 15:56:43 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/12 00:53:06 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/12 20:56:30 by bsaeed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	check_left(t_cub *cub, int i, int j)
 	left = j;
 	if (i == 0)
 		exit_cub(cub, 1, "Error\n'0' found at the top of the map\n");
-	while (cub->map[i][left])
+	while (left >= 0 && cub->map[i][left])
 	{
 		if (cub->map[i][left])
 		{
