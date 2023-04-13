@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 06:20:48 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/13 06:21:13 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/13 07:10:56 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,24 @@ void	check_anim_aim(t_cub *cub)
 		animate_aim(cub);
 	else
 		cub->keys.aim = false;
+}
+
+void	check_tracking(int key, t_cub *cub)
+{
+	if (key == T_KEY)
+	{
+		if (cub->keys.t == false)
+		{
+			cub->keys.t = true;
+			rerender(cub);
+		}
+		else
+		{
+			if (cub->keys.t == true)
+			{
+				cub->keys.t = false;
+				rerender(cub);
+			}
+		}
+	}
 }

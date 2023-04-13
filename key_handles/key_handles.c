@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 18:09:08 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/13 06:21:06 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/13 07:07:16 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	keys_handler(int key, t_cub *cub)
 	check_direction(key, cub);
 	check_full_screen(key, cub);
 	check_quitting_mini_map(key, cub);
+	check_tracking(key, cub);
 	check_map_scaling(key, cub);
 	check_aiming(key, cub);
 	return (0);

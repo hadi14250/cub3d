@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 18:18:09 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/13 06:39:21 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/13 07:04:48 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,14 @@ bool	is_inside_map(double x, double y, t_player *player)
 		&& y >= 0 && y <= player->map3d.height * TILE_SIZE);
 }
 
+int	return_color(t_cub *cub, int tilecolor)
+{
+	if (cub->keys.t == true)
+		return (0xFFFFFFFF);
+	else
+		return (tilecolor);
+}
+
 void	render_map(t_cub *cub)
 {
 	int		i;
@@ -57,7 +65,7 @@ void	render_map(t_cub *cub)
 			if (cub->player.map3d.map[i][j] == '1')
 				tilecolor = AZURE;
 			else
-				tilecolor = DARK_ORANGE;
+				tilecolor = return_color(cub, DARK_ORANGE);
 			rect = init_rect(tile.x * cub->player.map3d.x_scale_factor,
 					tile.y * cub->player.map3d.y_scale_factor,
 					TILE_SIZE * cub->player.map3d.x_scale_factor,

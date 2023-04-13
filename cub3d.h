@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 03:12:29 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/13 06:14:44 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/13 07:06:31 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -257,11 +257,11 @@ void			*cub_new_img(t_img *img, void *mlx, int width, int height);
 void			init_mlx_utils(t_cub *cub);
 
 /* raycasting*/
-int				return_tex_val(t_cub *cub, int x, t_wall_cords cords, t_ray *rays);
+int				return_tex_val(t_cub *c, int x, t_wall_cords cords, t_ray *r);
 void			draw_3d_ceiling(t_cub *cub, int wall_top_pixel, int x);
 void			draw_3d_floor(t_cub *cub, int wall_bottom_pixel, int x);
 void			draw_3d_wall(t_cub *cub, int x, t_ray *rays);
-void			generate_3d_wprojection(t_player *player, t_ray *rays, t_cub *cub);
+void			generate_3d_wprojection(t_player *p, t_ray *r, t_cub *c);
 void			render_color_buffer(t_cub *cub);
 void			init_player_pos(t_player *player);
 void			init_player(t_player *player, t_cub *cub);
@@ -279,7 +279,7 @@ void			set_h_ray_point(double ray_angle, t_ray *ray, t_player *player);
 void			cast_horz_ray(double ray_angle, t_ray *ray, t_player *player);
 void			set_v_ray_point(double ray_angle, t_ray *ray, t_player *player);
 void			cast_vert_ray(double ray_angle, t_ray *ray, t_player *player);
-void			cast_ray(double ray_angle, t_ray *ray, int stripid, t_player *player);
+void			cast_ray(double ray_angle, t_ray *ray, int sid, t_player *p);
 void			cast_all_rays(t_ray *rays, t_player *player);
 void			update(t_cub *cub);
 void			render(t_cub *cub);
@@ -304,6 +304,7 @@ void			check_quitting_mini_map(int key, t_cub *cub);
 void			check_map_scaling(int key, t_cub *cub);
 void			check_aiming(int key, t_cub *cub);
 int				keys_handler(int key, t_cub *cub);
+void			check_tracking(int key, t_cub *cub);
 int				keys_released(int key, t_cub *cub);
 int				exit_app(t_cub *cub);
 void			check_anim_aim(t_cub *cub);
