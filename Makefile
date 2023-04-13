@@ -51,9 +51,9 @@ OBJS	= $(SRCS:.c=.o)
 FLAGS	= -crs
 mlx		= ./mlx/libmlx.a
 
-CC		= gcc -g3 -fsanitize=address
+CC		= gcc -g3
 RM		= rm -rf
-CFLAGS	= -Wall -Wextra -Werror -g3 -Ofast -march=native -fsanitize=address
+CFLAGS	= -Wall -Wextra -Werror -g3 -Ofast -march=native
 NAME	= cub3d
 
 MAKELIB	=	@make -C libft
@@ -78,13 +78,11 @@ clean:
 	$(CLNLIB)
 	@$(RM) $(OBJS)
 	@make clean -C ./mlx && rm -rf *.dSYM
-	# @make clean -C ./bonus
 	@echo "$(YELLOW)Removed object files.$(RESET)"
 
 fclean: clean
 	$(FCLNLIB)
 	@$(RM) $(NAME)
-	# @$(RM) $(BONUSNAME)
 	@make clean -C ./mlx && rm -rf *.dSYM
 	@echo "$(YELLOW)Removed executable.$(RESET)"
 
