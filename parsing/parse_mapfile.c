@@ -6,7 +6,7 @@
 /*   By: bsaeed <bsaeed@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 23:03:02 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/13 04:05:06 by bsaeed           ###   ########.fr       */
+/*   Updated: 2023/04/13 05:05:53 by bsaeed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1085,63 +1085,56 @@ void	check_for_walls(t_cub *cub)
 		exit_cub(cub, 1, "Error\nNo walls found\n");
 }
 
-void	check_player_on_border(t_cub *cub)
+void	get_player_index(t_cub *cub, int *x, int *y)
 {
-	int height;
-	int width;
-	int i;
+	int	i;
+	int	j;
 
 	i = 0;
-	width = get_longest_line(cub->map) - 1;
-	height = return_split_len(cub->map);
-	while (i < height)
+	while (cub->map[i])
 	{
-		if (cub->map[i][width] == 'N' || cub->map[i][0] == 'N'
-			|| cub->map[i][width] == 'E' || cub->map[i][0] == 'E'
-			|| cub->map[i][width] == 'S' || cub->map[i][0] == 'S'
-			|| cub->map[i][width] == 'W' || cub->map[i][0] == 'W')
-			exit_cub(cub, 1, "Error\nPlayer position on border\n");
+		j = 0;
+		while (cub->map[i][j])
+		{
+			if (cub->map[i][j] == 'N' || cub->map[i][j] == 'E'
+				|| cub->map[i][j] == 'S' || cub->map[i][j] == 'W')
+				{
+					*y = i;
+					*x = j;
+					return ;
+				}
+			j++;
+		}
 		i++;
 	}
+	*x = -1;
+	*y = -1;
 }
 
-// int	get_player_index(t_cub *cub, int flag)
-// {
-// 	int	i;
-// 	int	j;
+void	check_player_walls(t_cub *cub)
+{
+	char	*line;
+	int		x;
+	int		y;
 
-// 	i = 0;
-// 	while (cub->map[i])
-// 	{
-// 		j = 0;
-// 		while (cub->map[i][j])
-// 		{
-// 			if (cub->map[i][j] == 'N' || cub->map[i][j] == 'E'
-// 				|| cub->map[i][j] == 'S' || cub->map[i][j] == 'W')
-// 				{
-// 					if (flag == 0)
-// 						return (i);
-// 					if (flag == 1)
-// 						return (j);
-// 				}
-// 			j++;
-// 		}
-// 		i++;
-// 	}
-// 	return (-1);
-// }
-
-// void	check_player_walls(t_cub *cub)
-// {
-// 	int		p_pos;
-// 	int		len;
-// 	char	*line;
-
-// 	p_pos = get_player_index(cub, 0);
-// 	line = ft_strtrim(cub->map[p_pos], " ");
-// 	len = ft_strlen(line);
-// 	printf("line = |%s|\n", line);
-// }
+	y = -1;
+	x = -1;
+	get_player_index(cub, &x, &y);
+	if (x == -1 || y == -1)
+		exit_cub(cub, 1, "Error\nno player found in check_player_walls\n");
+	line = ft_strtrim(cub->map[y], " ");
+	if (x == 0 || x == (int)(ft_strlen(line) - 1))
+	{
+		line = free_null(line);
+		exit_cub(cub, 1, "Error\nPlayer on border or not surrounded by walls\n");
+	}
+	if (y == 0 || y == (return_split_len(cub->map) - 1))
+	{
+		line = free_null(line);
+		exit_cub(cub, 1, "Error\nPlayer on border or not surrounded by walls\n");
+	}
+	line = free_null(line);
+}
 
 void	check_map_lines(t_cub *cub)
 {
@@ -1149,7 +1142,7 @@ void	check_map_lines(t_cub *cub)
 
 	lines = return_split_len(cub->map);
 	if (lines <= 2)
-		exit_cub(cub, 1, "Error\nMap cannot be 2 lines\n");
+		exit_cub(cub, 1, "Error\nMap cannot be less than 2 lines\n");
 	return ;
 }
 
@@ -1160,7 +1153,7 @@ void	validations(t_cub *cub)
 	convert_spaces(cub);
 	free_split(&cub->map);
 	cub->map = ft_split(cub->map_1d, '\n');
-	//check_player_walls(cub);
+	check_player_walls(cub);
 	check_map_lines(cub);
 	check_for_walls(cub);
 	check_borders(cub);
@@ -1171,7 +1164,6 @@ void	validations(t_cub *cub)
 	memset_map(cub, temp);
 	// free_split(&cub->map);
 	hadis_rectangle_map(cub, temp);
-	check_player_on_border(cub);
 	print_map_two(cub->map);
 }
 
