@@ -32,7 +32,13 @@ SRCS	= 	main.c \
 			raycasting/raycasting.c \
 			raycasting/map.c \
 			raycasting/dda_line.c \
-			raycasting/raycasting_utils.c
+			raycasting/raycasting_utils.c \
+			raycasting/render_walls.c \
+			raycasting/player_set.c \
+			raycasting/raycasting_utils2.c \
+			raycasting/ray.c \
+			raycasting/player_move.c \
+			
 
 
 BONUSSRCS	=	bonus/main.c \

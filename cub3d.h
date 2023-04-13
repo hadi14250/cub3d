@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 03:12:29 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/13 05:18:15 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/13 05:21:14 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -270,7 +270,6 @@ void			draw_3d_floor(t_cub *cub, int wall_bottom_pixel, int x);
 void			draw_3d_wall(t_cub *cub, int x, t_ray *rays);
 void			generate_3d_wprojection(t_player *player, t_ray *rays, t_cub *cub);
 void			render_color_buffer(t_cub *cub);
-void			draw_background(t_img *img, t_cub *cub);
 void			init_player_pos(t_player *player);
 void			init_player(t_player *player, t_cub *cub);
 void			init_map(t_cub *cub);
