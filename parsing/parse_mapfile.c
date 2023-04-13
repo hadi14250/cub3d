@@ -6,7 +6,7 @@
 /*   By: bsaeed <bsaeed@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 23:03:02 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/13 05:05:53 by bsaeed           ###   ########.fr       */
+/*   Updated: 2023/04/13 06:29:48 by bsaeed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -904,7 +904,7 @@ int	check_up(t_cub *cub, int i, int j)
 		exit_cub(cub, 1, "'0' found at the top of the map\n");
 	while (up >= 0)
 	{
-		if (cub->map[up][j])
+		if (cub->map[up][j] != '\0')
 		{
 			if (cub->map[up][j] == '1')
 				return (0);
@@ -917,11 +917,13 @@ int	check_up(t_cub *cub, int i, int j)
 int	check_down(t_cub *cub, int i, int j)
 {
 	int	down;
+	int	height;
 
 	down = i;
+	height = return_split_len(cub->map);
 	if (i == 0)
 		exit_cub(cub, 1, "'0' found at the top of the map\n");
-	while (cub->map[down])
+	while (down < height)
 	{
 		if (cub->map[down][j])
 		{
@@ -940,7 +942,7 @@ int	check_left(t_cub *cub, int i, int j)
 	left = j;
 	if (i == 0)
 		exit_cub(cub, 1, "'0' found at the top of the map\n");
-	while (cub->map[i][left])
+	while (left >= 0)
 	{
 		if (cub->map[i][left])
 		{
@@ -955,11 +957,13 @@ int	check_left(t_cub *cub, int i, int j)
 int	check_right(t_cub *cub, int i, int j)
 {
 	int	right;
+	int	longest;
 
 	right = j;
+	longest = get_longest_line(cub->map);
 	if (i == 0)
 		exit_cub(cub, 1, "'0' found at the top of the map\n");
-	while (cub->map[i][right])
+	while (right < longest)
 	{
 		if (cub->map[i][right])
 		{
@@ -1023,7 +1027,7 @@ void	*allocate_new_map(t_cub *cub)
 	return (new);
 }
 
-void	memset_map(t_cub *cub, char **tmp_map)
+void	memset_map(t_cub *cub, char **tmp_map, char flag)
 {
 	int	i;
 	int	longest;
@@ -1033,7 +1037,7 @@ void	memset_map(t_cub *cub, char **tmp_map)
 	printf("longest = %d\n", longest);
 	while (cub->map[i])
 	{
-		ft_memset(tmp_map[i], '1', longest);
+		ft_memset(tmp_map[i], flag, longest);
 		tmp_map[i][longest] = '\0';
 		i++;
 	}
@@ -1156,13 +1160,18 @@ void	validations(t_cub *cub)
 	check_player_walls(cub);
 	check_map_lines(cub);
 	check_for_walls(cub);
+
+	/*SPLITTING MAP AGAIN FOR '0' BORDER CHECKS TO AVOID INVALID READ*/
+	temp = allocate_new_map(cub);
+	memset_map(cub, temp, 'x');
+	hadis_rectangle_map(cub, temp);
 	check_borders(cub);
+	
 	free_split(&cub->map);
 	convert_space_to_wall(cub);
 	cub->map = ft_split(cub->map_1d, '\n');
 	temp = allocate_new_map(cub);
-	memset_map(cub, temp);
-	// free_split(&cub->map);
+	memset_map(cub, temp, '1');
 	hadis_rectangle_map(cub, temp);
 	print_map_two(cub->map);
 }
