@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 15:18:53 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/13 03:48:36 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/13 08:04:33 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ void	*cub_new_img(t_img *img, void *mlx, int width, int height)
 {
 	if (!img)
 	{
-		printf("img is NULL in cub_new_image\n");
-		exit(1);
+		printf("Error\nimg is NULL in cub_new_image");
+		return (NULL);
 	}
 	if (img->img_ptr != NULL)
 		mlx_destroy_image(mlx, img->img_ptr);

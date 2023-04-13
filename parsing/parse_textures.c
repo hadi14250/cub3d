@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_textures.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bsaeed <bsaeed@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 16:23:46 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/11 15:49:30 by bsaeed           ###   ########.fr       */
+/*   Updated: 2023/04/13 08:14:11 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void	east_west(t_cub *cub)
 		exit_cub(cub, 1, "Error\nmore than one WE texture found\n");
 }
 
-void	check_for_textures(t_cub *cub)
+void	check_tex_alloc(t_cub *cub)
 {
 	cub->xpm = ft_calloc(5, sizeof(char *));
 	if (!cub->xpm)
@@ -102,6 +102,11 @@ void	check_for_textures(t_cub *cub)
 		|| !ft_strnstr(cub->map_1d, "WE", cub->map_1d_len)
 		|| !ft_strnstr(cub->map_1d, "EA", cub->map_1d_len))
 		exit_cub(cub, 1, "Error\ntexture not found\n");
+}
+
+void	check_for_textures(t_cub *cub)
+{
+	check_tex_alloc(cub);
 	if (!ft_strnstr(cub->map_1d, "./game_textures/NO.xpm", cub->map_1d_len))
 		exit_cub(cub, 1, "Error\nNO texture file not found\n");
 	else

@@ -6,15 +6,15 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 15:56:43 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/13 07:28:53 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/13 08:32:41 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-int check_up(t_cub *cub, int i, int j)
+int	check_up(t_cub *cub, int i, int j)
 {
-	int up;
+	int	up;
 
 	up = i;
 	if (i == 0)
@@ -54,7 +54,7 @@ int	check_down(t_cub *cub, int i, int j)
 
 int	check_left(t_cub *cub, int i, int j)
 {
-	int left;
+	int	left;
 
 	left = j;
 	if (i == 0)
@@ -73,8 +73,8 @@ int	check_left(t_cub *cub, int i, int j)
 
 int	check_right(t_cub *cub, int i, int j)
 {
-	int right;
-	int longest;
+	int	right;
+	int	longest;
 
 	right = j;
 	longest = get_longest_line(cub->map);

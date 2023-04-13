@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bsaeed <bsaeed@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 17:37:35 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/11 15:49:01 by bsaeed           ###   ########.fr       */
+/*   Updated: 2023/04/13 08:30:16 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,54 @@ void	check_map_pos(t_cub *cub, char **half_map)
 	realloc_map(cub);
 }
 
+void	check_pos_helper(t_cub *cub)
+{
+	int		i;
+	char	**split;
+
+	split = cub->map;
+	i = -1;
+	while (split[++i] != NULL)
+	{
+		if (ft_strnstr(split[i], "F", ft_strlen(split[i])))
+		{
+			cub->floor_pos = i;
+			if (i > cub->max)
+				cub->max = i;
+		}
+		if (ft_strnstr(split[i], "C", ft_strlen(split[i])))
+		{
+			cub->ceiling_pos = i;
+			if (i > cub->max)
+				cub->max = i;
+		}
+	}
+}
+
+void	check_pos_helper2(t_cub *cub)
+{
+	int		i;
+	char	**split;
+
+	split = cub->map;
+	i = -1;
+	while (split[++i] != NULL)
+	{
+		if (ft_strnstr(split[i], "EA", ft_strlen(split[i])))
+		{
+			cub->ea_pos = i;
+			if (i > cub->max)
+				cub->max = i;
+		}
+		if (ft_strnstr(split[i], "WE", ft_strlen(split[i])))
+		{
+			cub->we_pos = i;
+			if (i > cub->max)
+				cub->max = i;
+		}
+	}
+}
+
 void	check_positions(t_cub *cub)
 {
 	int		i;
@@ -95,59 +143,34 @@ void	check_positions(t_cub *cub)
 			if (i > cub->max)
 				cub->max = i;
 		}
-		if (ft_strnstr(split[i], "WE", ft_strlen(split[i])))
-		{
-			cub->we_pos = i;
-			if (i > cub->max)
-				cub->max = i;
-		}
-		if (ft_strnstr(split[i], "EA", ft_strlen(split[i])))
-		{
-			cub->ea_pos = i;
-			if (i > cub->max)
-				cub->max = i;
-		}
-		if (ft_strnstr(split[i], "F", ft_strlen(split[i])))
-		{
-			cub->floor_pos = i;
-			if (i > cub->max)
-				cub->max = i;
-		}
-		if (ft_strnstr(split[i], "C", ft_strlen(split[i])))
-		{
-			cub->ceiling_pos = i;
-			if (i > cub->max)
-				cub->max = i;
-		}
 	}
+	check_pos_helper(cub);
+	check_pos_helper2(cub);
 	check_map_pos(cub, &cub->map[cub->max + 1]);
 }
 
 void	check_other_format_1d(t_cub *cub)
 {
-	int		i;
-	int		d;
-	int		j;
-	int		r;
+	int		i[4];
 
-	r = 0;
-	i = -1;
-	d = 0;
-	j = 0;
-	while (cub->map_1d[++i] != '\0')
+	i[0] = -1;
+	i[1] = 0;
+	i[2] = 0;
+	i[3] = 0;
+	while (cub->map_1d[++i[0]] != '\0')
 	{
-		if (is_valid_char(cub->map_1d[i]))
-			d++;
+		if (is_valid_char(cub->map_1d[i[0]]))
+			i[1]++;
 		else
 		{
-			if (j == 0)
+			if (i[3] == 0)
 				printf("Error\ninvalid character(s): ");
-			printf("->%c<- in column %d, ", cub->map_1d[i], r + 1);
-			j++;
+			printf("->%c<- in column %d, ", cub->map_1d[i[0]], i[2] + 1);
+			i[3]++;
 		}
-		if (cub->map_1d[i] == '\n')
-			r++;
+		if (cub->map_1d[i[0]] == '\n')
+			i[2]++;
 	}
-	if (d != i)
+	if (i[1] != i[0])
 		exit_cub(cub, 1, "\n");
 }

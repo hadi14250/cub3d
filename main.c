@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 20:27:50 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/13 07:27:30 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/13 08:03:42 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ int	main(int ac, char **av)
 	ft_bzero(&cub, sizeof(cub));
 	parse(ac, &cub, av[1]);
 	init(&cub);
-	print_cub(&cub);
 	init_consts(&cub);
 	init_mlx_utils(&cub);
 	raycasting(&cub);

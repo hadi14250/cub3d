@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 23:03:02 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/13 07:51:58 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/13 08:18:43 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	check_player_walls(t_cub *cub)
 {
 	char	*line;
 	int		x;
-	int 	y;
+	int		y;
 
 	y = -1;
 	x = -1;
@@ -106,11 +106,11 @@ void	get_player_index(t_cub *cub, int *x, int *y)
 		{
 			if (cub->map[i][j] == 'N' || cub->map[i][j] == 'E'
 				|| cub->map[i][j] == 'S' || cub->map[i][j] == 'W')
-				{
-					*y = i;
-					*x = j;
-					return ;
-				}
+			{
+				*y = i;
+				*x = j;
+				return ;
+			}
 			j++;
 		}
 		i++;
@@ -168,7 +168,7 @@ int	check_rgbs(char **line)
 	while (line[i])
 	{
 		j = 0;
-		while(line[i][j])
+		while (line[i][j])
 		{
 			if (ft_isdigit(line[i][j]) == 0)
 				return (EXIT_FAILURE);
@@ -188,18 +188,19 @@ void	convert_colors(t_cub *cub, char *rgb, int flag)
 	line = ft_split(rgb, ' ');
 	if (check_rgbs(line) == EXIT_FAILURE)
 	{
-		printf("i come here\n");
 		free_split(&line);
 		exit_cub(cub, 1, "Error\nInvalid RGB values used\n");
 	}
 	if (flag == 0)
 	{
-		temp = rgb_to_hex(ft_atoi(line[0]), ft_atoi(line[1]), ft_atoi(line[2]), cub);
+		temp = rgb_to_hex(ft_atoi(line[0]), ft_atoi(line[1]),
+				ft_atoi(line[2]), cub);
 		cub->ceiling = temp;
 	}
 	else
 	{
-		temp = rgb_to_hex(ft_atoi(line[0]), ft_atoi(line[1]), ft_atoi(line[2]), cub);
+		temp = rgb_to_hex(ft_atoi(line[0]), ft_atoi(line[1]),
+				ft_atoi(line[2]), cub);
 		cub->floor = temp;
 	}
 	free_split(&line);

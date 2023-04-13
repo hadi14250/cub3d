@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 17:24:00 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/12 23:41:59 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/13 08:09:34 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,50 +60,29 @@ int	check_next_line(t_cub *cub, char *str, int len)
 	int	num[2];
 
 	num[1] = 0;
-	while(len >= 0 && (str[len] == ' ' || str[len] == '\t'))
+	while (len >= 0 && (str[len] == ' ' || str[len] == '\t'))
 		len--;
 	num[0] = len;
 	if (len >= 0 && str[len] == '\n')
 	{
-		while (len >= 0 && (str[len] == ' ' || str[len] == '\t' ||
-			str[len] == '\n' || str[len] == '\r' || str[len] == '\f' ||
-			str[len] == '\v'))
+		while (len >= 0 && (str[len] == ' ' || str[len] == '\t'
+				|| str[len] == '\n' || str[len] == '\r' || str[len] == '\f'
+				|| str[len] == '\v'))
 				len--;
-		if (len >= 0 && (str[len] == '1' || str[len] == '0' ||
-			str[len] == ' ' || str[len] == 'E' || str[len] == 'S' ||
-			str[len] == 'W' || str[len] == 'N'))
-			{
-				num[1] = 1;
-				while (len >= 0 && str[len] != '\n')
-					if (str[len--] == 'F' || str[len] == 'C')
-						num[1] = 0;
-				if (num[1] != 0)
-					exit_cub(cub, 1, "Error\nconesecutive new lines in map\n");
-			}
+		if (len >= 0 && (str[len] == '1' || str[len] == '0'
+				|| str[len] == ' ' || str[len] == 'E' || str[len] == 'S'
+				|| str[len] == 'W' || str[len] == 'N'))
+		{
+			num[1] = 1;
+			while (len >= 0 && str[len] != '\n')
+				if (str[len--] == 'F' || str[len] == 'C')
+					num[1] = 0;
+			if (num[1] != 0)
+				exit_cub(cub, 1, "Error\nconesecutive new lines in map\n");
+		}
 	}
 	return (num[0]);
 }
-
-// int	check_next_line(t_cub *cub, char *str, int len)
-// {
-// 	int	len_two;
-
-// 	while (len >= 0 && (str[len] == ' ' || str[len] == '\t'))
-// 		len--;
-// 	len_two = len;
-// 	if (len >= 0 && str[len] == '\n')
-// 	{
-// 		while (len >= 0 && (str[len] == ' ' || str[len] == '\t'
-// 				|| str[len] == '\n' || str[len] == '\r'
-// 				|| str[len] == '\f' || str[len] == '\v'))
-// 				len--;
-// 		if (len >= 0 && (str[len] == '1' || str[len] == '0'
-// 				|| str[len] == ' ' || str[len] == 'E' || str[len] == 'S'
-// 				|| str[len] == 'W' || str[len] == 'N'))
-// 			exit_cub(cub, 1, "Error\nconesecutive new lines in map\n");
-// 	}
-// 	return (len_two);
-// }
 
 void	check_for_lines(t_cub *cub)
 {
