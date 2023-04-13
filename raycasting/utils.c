@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 15:18:53 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/13 08:04:33 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/13 09:03:22 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,7 @@ void	*free_img(void *img_ptr, void *mlx)
 void	*free_window(void *mlx, void *win)
 {
 	if (win != NULL)
-	{
 		mlx_destroy_window(mlx, win);
-		printf("Window destryoed\n");
-	}
 	return (NULL);
 }
 

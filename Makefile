@@ -25,6 +25,9 @@ SRCS	= 	main.c \
 			parsing/parse_utils5.c \
 			parsing/parse_utils6.c \
 			parsing/parse_map1.c \
+			parsing/parse_utils7.c \
+			parsing/parse_utils8.c \
+			parsing/parse_utils9.c \
 			raycasting/utils.c \
 			raycasting/bressen_line.c \
 			raycasting/drawing_utils.c \
@@ -42,25 +45,7 @@ SRCS	= 	main.c \
 			key_handles/key_checks_two.c \
 			key_handles/key_checks_three.c \
 
-			
 
-
-BONUSSRCS	=	bonus/main.c \
-			bonus/parsing/parse_ext.c \
-			bonus/parsing/parse_utils.c \
-			bonus/parsing/parse_colors.c \
-			bonus/parsing/parse_mapfile.c \
-			bonus/parsing/parse_validate.c \
-			bonus/parsing/parse_initializer.c \
-			bonus/raycasting/utils.c \
-			bonus/raycasting/key_handles.c \
-			bonus/raycasting/bressen_line.c \
-			bonus/raycasting/drawing_utils.c \
-			bonus/raycasting/raycasting.c \
-
-
-BONUSOBJS	=	$(BONUSSRCS:.c=.o)
-BONUSNAME	=	cub3d_bonus
 
 OBJS	= $(SRCS:.c=.o)
 FLAGS	= -crs
@@ -106,18 +91,7 @@ fclean: clean
 re: fclean all
 		make clean
 
-bonus: $(BONUSNAME)
-$(BONUSNAME): $(BONUSOBJS)
-	$(MAKELIB)
-	@echo "$(CYAN)Compiling $(BONUSNAME)...\n$(RESET)"
-	@make -C ./mlx
-	@$(CC) $(CFLAGS) -o $(BONUSNAME) $(BONUSOBJS) $(LIBFT) $(mlx) -framework OpenGL -framework AppKit
-	@echo "$(GREEN)Compilation completed.$(RESET)"
-
 exec: fclean all
 		./cub3d map.cub
 
-execb: fclean bonus
-		./cub3d_bonus map.cub
-
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re

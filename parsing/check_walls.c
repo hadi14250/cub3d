@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 15:56:43 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/13 08:32:41 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/13 09:17:47 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ int	check_up(t_cub *cub, int i, int j)
 
 	up = i;
 	if (i == 0)
-		exit_cub(cub, 1, "'0' found at the top of the map\n");
+		exit_cub(cub, 1,
+			"Error\n'0' found at the top of the map\n");
 	while (up >= 0)
 	{
 		if (cub->map[up][j] != '\0')
@@ -39,7 +40,8 @@ int	check_down(t_cub *cub, int i, int j)
 	down = i;
 	height = return_split_len(cub->map);
 	if (i == 0)
-		exit_cub(cub, 1, "'0' found at the top of the map\n");
+		exit_cub(cub, 1,
+			"Error\n'0' found at the top of the map\n");
 	while (down < height)
 	{
 		if (cub->map[down][j])
@@ -58,7 +60,8 @@ int	check_left(t_cub *cub, int i, int j)
 
 	left = j;
 	if (i == 0)
-		exit_cub(cub, 1, "'0' found at the top of the map\n");
+		exit_cub(cub, 1,
+			"Error\n'0' found at the top of the map\n");
 	while (left >= 0)
 	{
 		if (cub->map[i][left])
@@ -79,7 +82,8 @@ int	check_right(t_cub *cub, int i, int j)
 	right = j;
 	longest = get_longest_line(cub->map);
 	if (i == 0)
-		exit_cub(cub, 1, "'0' found at the top of the map\n");
+		exit_cub(cub, 1,
+			"Error\n'0' found at the top of the map\n");
 	while (right < longest)
 	{
 		if (cub->map[i][right])
@@ -102,24 +106,4 @@ void	all_wall_checks(t_cub *cub, int i, int j)
 		exit_cub(cub, 1, "Error\nMap is not surrounded by walls\n");
 	if (check_right(cub, i, j))
 		exit_cub(cub, 1, "Error\nMap is not surrounded by walls\n");
-}
-
-void	check_borders(t_cub *cub)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	while (cub->map[i])
-	{
-		j = 0;
-		while (cub->map[i][j])
-		{
-			if (cub->map[i][j] == '0')
-				all_wall_checks(cub, i, j);
-			j++;
-		}
-		i++;
-	}
 }

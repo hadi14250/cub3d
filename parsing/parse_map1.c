@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 17:37:35 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/13 08:30:16 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/13 09:15:36 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,58 +95,6 @@ void	check_pos_helper(t_cub *cub)
 				cub->max = i;
 		}
 	}
-}
-
-void	check_pos_helper2(t_cub *cub)
-{
-	int		i;
-	char	**split;
-
-	split = cub->map;
-	i = -1;
-	while (split[++i] != NULL)
-	{
-		if (ft_strnstr(split[i], "EA", ft_strlen(split[i])))
-		{
-			cub->ea_pos = i;
-			if (i > cub->max)
-				cub->max = i;
-		}
-		if (ft_strnstr(split[i], "WE", ft_strlen(split[i])))
-		{
-			cub->we_pos = i;
-			if (i > cub->max)
-				cub->max = i;
-		}
-	}
-}
-
-void	check_positions(t_cub *cub)
-{
-	int		i;
-	char	**split;
-
-	cub->max = 0;
-	split = cub->map;
-	i = -1;
-	while (split[++i] != NULL)
-	{
-		if (ft_strnstr(split[i], "NO", ft_strlen(split[i])))
-		{
-			cub->no_pos = i;
-			if (i > cub->max)
-				cub->max = i;
-		}
-		if (ft_strnstr(split[i], "SO", ft_strlen(split[i])))
-		{
-			cub->so_pos = i;
-			if (i > cub->max)
-				cub->max = i;
-		}
-	}
-	check_pos_helper(cub);
-	check_pos_helper2(cub);
-	check_map_pos(cub, &cub->map[cub->max + 1]);
 }
 
 void	check_other_format_1d(t_cub *cub)

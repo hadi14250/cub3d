@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 17:14:05 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/13 08:12:11 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/13 09:07:25 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,18 +64,6 @@ void	trim_map_spaces(char *str)
 	{
 		if (str[i] == ' ' || str[i] == '\t')
 			str[i] = '0';
-	}
-}
-
-void	free_texes(t_cub *cub)
-{	
-	int	i;
-
-	i = -1;
-	while (++i < 4)
-	{
-		if (cub->img2[i].img_ptr)
-			mlx_destroy_image(cub->mlx, cub->img2[i].img_ptr);
 	}
 }
 

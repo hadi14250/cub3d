@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 03:12:29 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/13 07:40:46 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/13 09:17:33 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -315,6 +315,39 @@ void			check_anim_aim(t_cub *cub);
 void			start_mouse(t_cub *cub);
 int				render_loop(t_cub *cub);
 void			hook_keys(t_cub *cub);
+
+/*	parsing utils	*/
+char			*ft_tex_dup(const char *s1);
+size_t			ft_tex_len(const char *s);
+int				return_split_len(char **split);
+void			trim_map_spaces(char *str);
+void			free_texes(t_cub *cub);
+void			exit_cub(t_cub *cub, int code, char *msg);
+void			set_player_direction(t_cub *cub);
+void			parse_info(t_cub *cub);
+void			parse_map(t_cub *cub);
+void			check_player_walls(t_cub *cub);
+void			check_for_walls(t_cub *cub);
+void			get_player_index(t_cub *cub, int *x, int *y);
+void			check_map_lines(t_cub *cub);
+void			validations(t_cub *cub);
+void			free_rgbs(t_cub *cub);
+int				check_rgbs(char **line);
+void			convert_colors(t_cub *cub, char *rgb, int flag);
+int				parse(int ac, t_cub *cub, char *map_file);
+char			*take_map_input(int fd, t_cub *cub);
+void			realloc_map(t_cub *cub);
+void			check_map_pos(t_cub *cub, char **half_map);
+void			check_pos_helper(t_cub *cub);
+void			check_pos_helper2(t_cub *cub);
+void			check_positions(t_cub *cub);
+void			check_other_format_1d(t_cub *cub);
+int				check_up(t_cub *cub, int i, int j);
+int				check_down(t_cub *cub, int i, int j);
+int				check_left(t_cub *cub, int i, int j);
+int				check_right(t_cub *cub, int i, int j);
+void			all_wall_checks(t_cub *cub, int i, int j);
+void			check_borders(t_cub *cub);
 
 /*	free utils	*/
 void			exit_cub(t_cub *cub, int code, char *msg);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_rectangle_map.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bsaeed <bsaeed@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 16:31:49 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/13 06:40:39 by bsaeed           ###   ########.fr       */
+/*   Updated: 2023/04/13 08:56:16 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ void	memset_map(t_cub *cub, char **tmp_map, char flag)
 
 	i = 0;
 	longest = get_longest_line(cub->map);
-	printf("longest = %d\n", longest);
 	while (cub->map[i])
 	{
 		ft_memset(tmp_map[i], flag, longest);
