@@ -6,7 +6,7 @@
 /*   By: bsaeed <bsaeed@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 16:31:49 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/10 16:31:56 by bsaeed           ###   ########.fr       */
+/*   Updated: 2023/04/13 06:40:39 by bsaeed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	*allocate_new_map(t_cub *cub)
 	return (new);
 }
 
-void	memset_map(t_cub *cub, char **tmp_map)
+void	memset_map(t_cub *cub, char **tmp_map, char flag)
 {
 	int	i;
 	int	longest;
@@ -42,7 +42,7 @@ void	memset_map(t_cub *cub, char **tmp_map)
 	printf("longest = %d\n", longest);
 	while (cub->map[i])
 	{
-		ft_memset(tmp_map[i], '1', longest);
+		ft_memset(tmp_map[i], flag, longest);
 		tmp_map[i][longest] = '\0';
 		i++;
 	}

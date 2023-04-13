@@ -6,22 +6,22 @@
 /*   By: bsaeed <bsaeed@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 15:56:43 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/12 20:56:30 by bsaeed           ###   ########.fr       */
+/*   Updated: 2023/04/13 06:32:14 by bsaeed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-int	check_up(t_cub *cub, int i, int j)
+int check_up(t_cub *cub, int i, int j)
 {
-	int	up;
+	int up;
 
 	up = i;
 	if (i == 0)
-		exit_cub(cub, 1, "Error\n'0' found at the top of the map\n");
+		exit_cub(cub, 1, "'0' found at the top of the map\n");
 	while (up >= 0)
 	{
-		if (cub->map[up][j])
+		if (cub->map[up][j] != '\0')
 		{
 			if (cub->map[up][j] == '1')
 				return (0);
@@ -34,11 +34,13 @@ int	check_up(t_cub *cub, int i, int j)
 int	check_down(t_cub *cub, int i, int j)
 {
 	int	down;
+	int	height;
 
 	down = i;
+	height = return_split_len(cub->map);
 	if (i == 0)
-		exit_cub(cub, 1, "Error\n'0' found at the top of the map\n");
-	while (cub->map[down])
+		exit_cub(cub, 1, "'0' found at the top of the map\n");
+	while (down < height)
 	{
 		if (cub->map[down][j])
 		{
@@ -52,12 +54,12 @@ int	check_down(t_cub *cub, int i, int j)
 
 int	check_left(t_cub *cub, int i, int j)
 {
-	int	left;
+	int left;
 
 	left = j;
 	if (i == 0)
-		exit_cub(cub, 1, "Error\n'0' found at the top of the map\n");
-	while (left >= 0 && cub->map[i][left])
+		exit_cub(cub, 1, "'0' found at the top of the map\n");
+	while (left >= 0)
 	{
 		if (cub->map[i][left])
 		{
@@ -71,12 +73,14 @@ int	check_left(t_cub *cub, int i, int j)
 
 int	check_right(t_cub *cub, int i, int j)
 {
-	int	right;
+	int right;
+	int longest;
 
 	right = j;
+	longest = get_longest_line(cub->map);
 	if (i == 0)
-		exit_cub(cub, 1, "Error\n'0' found at the top of the map\n");
-	while (cub->map[i][right])
+		exit_cub(cub, 1, "'0' found at the top of the map\n");
+	while (right < longest)
 	{
 		if (cub->map[i][right])
 		{

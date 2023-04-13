@@ -6,7 +6,7 @@
 /*   By: bsaeed <bsaeed@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 16:36:53 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/10 17:14:25 by bsaeed           ###   ########.fr       */
+/*   Updated: 2023/04/13 06:53:01 by bsaeed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,18 @@ int	get_longest_line(char **split)
 void	convert_space_to_wall(t_cub *cub)
 {
 	int	i;
+	int	j;
 
 	i = 0;
-	while (cub->map_1d[i])
+	while (cub->map[i])
 	{
-		if (cub->map_1d[i] == ' ')
-			cub->map_1d[i] = '1';
+		j = 0;
+		while (cub->map[i][j])
+		{
+			if (cub->map[i][j] == 'x')
+				cub->map[i][j] = '1';
+			j++;
+		}
 		i++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 03:12:29 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/13 07:06:31 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/13 07:22:23 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,7 +176,7 @@ int				rgb(t_cub *cub, char *line, char flag);
 void			trim_comma(char *str);
 void			parse_rgb(t_cub *cub);
 void			*allocate_new_map(t_cub *cub);
-void			memset_map(t_cub *cub, char **tmp_map);
+void			memset_map(t_cub *cub, char **tmp_map, char flag);
 void			hadis_rectangle_map(t_cub *cub, char **tmp_map);
 int				return_split_len(char **split);
 int				get_longest_line(char **split);
