@@ -6,7 +6,7 @@
 /*   By: bsaeed <bsaeed@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 23:03:02 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/13 05:23:26 by bsaeed           ###   ########.fr       */
+/*   Updated: 2023/04/13 07:06:47 by bsaeed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,15 +140,14 @@ void	validations(t_cub *cub)
 	check_player_walls(cub);
 	check_map_lines(cub);
 	check_for_walls(cub);
-	check_borders(cub);
-	free_split(&cub->map);
-	convert_space_to_wall(cub);
-	cub->map = ft_split(cub->map_1d, '\n');
 	temp = allocate_new_map(cub);
-	memset_map(cub, temp);
+	memset_map(cub, temp, 'x');
 	hadis_rectangle_map(cub, temp);
+	check_borders(cub);
 	print_map_two(cub->map);
+	convert_space_to_wall(cub);
 }
+
 
 int	parse(int ac, t_cub *cub, char *map_file)
 {

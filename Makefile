@@ -55,7 +55,7 @@ OBJS	= $(SRCS:.c=.o)
 FLAGS	= -crs
 mlx		= ./mlx/libmlx.a
 
-CC		= gcc -g3
+CC		= gcc -g3 -fsanitize=address
 RM		= rm -rf
 CFLAGS	= -Wall -Wextra -Werror -g3
 NAME	= cub3d
