@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 03:12:29 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/13 04:07:19 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/13 05:18:15 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -263,10 +263,40 @@ void			*cub_new_img(t_img *img, void *mlx, int width, int height);
 void			init_mlx_utils(t_cub *cub);
 
 /* raycasting*/
-void			raycasting(t_cub *cub);
+int				return_tex_val(t_cub *cub, int x, t_wall_cords cords, t_ray *rays);
+void			render_gun(t_cub *cub);
+void			draw_3d_ceiling(t_cub *cub, int wall_top_pixel, int x);
+void			draw_3d_floor(t_cub *cub, int wall_bottom_pixel, int x);
+void			draw_3d_wall(t_cub *cub, int x, t_ray *rays);
+void			generate_3d_wprojection(t_player *player, t_ray *rays, t_cub *cub);
+void			render_color_buffer(t_cub *cub);
 void			draw_background(t_img *img, t_cub *cub);
-void			render(t_cub *cub);
+void			init_player_pos(t_player *player);
+void			init_player(t_player *player, t_cub *cub);
+void			init_map(t_cub *cub);
+void			set_minimap_scalefactor(t_cub *cub);
+void			setup(t_cub *cub);
+void			render_player(t_player *player, t_cub *cub);
+void			draw_cross(t_point cross, int size, int color, t_cub *cub);
+double			return_smallest(double a, double b);
+void			draw_middle_circle(t_cub *cub, t_ray *rays);
+void			render_rays(t_cub *cub, t_ray *rays);
+void			move_player(t_player *player, int flag);
+void			normalize_angle(double *angle);
+void			set_h_ray_point(double ray_angle, t_ray *ray, t_player *player);
+void			cast_horz_ray(double ray_angle, t_ray *ray, t_player *player);
+void			set_v_ray_point(double ray_angle, t_ray *ray, t_player *player);
+void			cast_vert_ray(double ray_angle, t_ray *ray, t_player *player);
+void			cast_ray(double ray_angle, t_ray *ray, int stripid, t_player *player);
+void			cast_all_rays(t_ray *rays, t_player *player);
 void			update(t_cub *cub);
+void			render(t_cub *cub);
+void			raycasting(t_cub *cub);
+void			init_ray(double ray_angle, t_ray *ray, int stripid);
+double			delta_points(double x1, double y1, double x2, double y2);
+void			set_horz_data(t_ray *ray);
+void			set_vert_data(t_ray *ray);
+void			calculate_smallest_distance(t_ray *ray, t_player *player);
 
 /*	free utils	*/
 void			exit_cub(t_cub *cub, int code, char *msg);

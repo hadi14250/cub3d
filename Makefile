@@ -32,6 +32,7 @@ SRCS	= 	main.c \
 			raycasting/raycasting.c \
 			raycasting/map.c \
 			raycasting/dda_line.c \
+			raycasting/raycasting_utils.c
 
 
 BONUSSRCS	=	bonus/main.c \
