@@ -6,7 +6,7 @@
 /*   By: bsaeed <bsaeed@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 23:03:02 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/13 03:01:03 by bsaeed           ###   ########.fr       */
+/*   Updated: 2023/04/13 04:05:06 by bsaeed           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1105,6 +1105,44 @@ void	check_player_on_border(t_cub *cub)
 	}
 }
 
+// int	get_player_index(t_cub *cub, int flag)
+// {
+// 	int	i;
+// 	int	j;
+
+// 	i = 0;
+// 	while (cub->map[i])
+// 	{
+// 		j = 0;
+// 		while (cub->map[i][j])
+// 		{
+// 			if (cub->map[i][j] == 'N' || cub->map[i][j] == 'E'
+// 				|| cub->map[i][j] == 'S' || cub->map[i][j] == 'W')
+// 				{
+// 					if (flag == 0)
+// 						return (i);
+// 					if (flag == 1)
+// 						return (j);
+// 				}
+// 			j++;
+// 		}
+// 		i++;
+// 	}
+// 	return (-1);
+// }
+
+// void	check_player_walls(t_cub *cub)
+// {
+// 	int		p_pos;
+// 	int		len;
+// 	char	*line;
+
+// 	p_pos = get_player_index(cub, 0);
+// 	line = ft_strtrim(cub->map[p_pos], " ");
+// 	len = ft_strlen(line);
+// 	printf("line = |%s|\n", line);
+// }
+
 void	check_map_lines(t_cub *cub)
 {
 	int	lines;
@@ -1122,6 +1160,7 @@ void	validations(t_cub *cub)
 	convert_spaces(cub);
 	free_split(&cub->map);
 	cub->map = ft_split(cub->map_1d, '\n');
+	//check_player_walls(cub);
 	check_map_lines(cub);
 	check_for_walls(cub);
 	check_borders(cub);
