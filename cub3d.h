@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 03:12:29 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/13 05:21:14 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/13 06:14:44 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,6 @@ typedef struct s_cub
 	unsigned long	floor;
 	unsigned long	ceiling;
 	uint32_t		texture[4][TEXTURE_HEIGHT * TEXTURE_WIDTH];
-	t_key			key;
 	t_point			start_line_pos;
 	t_point			end_line_pos;
 	t_player		player;
@@ -231,10 +230,7 @@ void			print_cub(t_cub *cub);
 void			*free_img(void *img_ptr, void *mlx);
 void			*free_window(void *mlx, void *win);
 void			*cub_new_img(t_img *img, void *mlx, int width, int height);
-int				keys_handler(int key, t_cub *cub);
-int				exit_app(t_cub *cub);
 void			my_mlx_pixel_put(t_img *img, int x, int y, int color);
-void			hook_keys(t_cub *cub);
 
 /* bressenhams line drawing */
 
@@ -244,7 +240,6 @@ void			ft_drawliney(t_img *img, t_point start, t_point end, int color);
 long			absolute(long num);
 void			help_for_draw(t_img *img, t_point s, t_point e, int c);
 void			draw_bressen_line(t_img *img, t_point s, t_point e, int c);
-void			draw_dda_line(t_img *img, t_point s, t_point e, int c);
 
 /* drawing_utls*/
 void			draw_circle(t_img *img, t_circle circle, int color);
@@ -253,7 +248,6 @@ void			init_point(t_point *point, int x, int y);
 void			init_circle(t_circle *circle, int x, int y, int radius);
 void			draw_rectangle(t_img *img, t_rect rect, int color);
 t_rect			init_rect(int x, int y, int width, int height);
-void			rasterize_circle(t_img *img, t_circle circle, int color);
 long			absolute(long num);
 
 /* mlx utils*/
@@ -264,7 +258,6 @@ void			init_mlx_utils(t_cub *cub);
 
 /* raycasting*/
 int				return_tex_val(t_cub *cub, int x, t_wall_cords cords, t_ray *rays);
-void			render_gun(t_cub *cub);
 void			draw_3d_ceiling(t_cub *cub, int wall_top_pixel, int x);
 void			draw_3d_floor(t_cub *cub, int wall_bottom_pixel, int x);
 void			draw_3d_wall(t_cub *cub, int x, t_ray *rays);
@@ -297,6 +290,27 @@ void			set_horz_data(t_ray *ray);
 void			set_vert_data(t_ray *ray);
 void			calculate_smallest_distance(t_ray *ray, t_player *player);
 
+/*	key handles	*/
+void			rerender(t_cub *cub);
+void			mouse_funcs(t_cub *cub, int flag);
+int				mouse_events(int x, int y, t_cub *cub);
+void			animate_aim(t_cub *cub);
+void			check_for_exit(int key, t_cub *cub);
+void			check_left_right_move(int key, t_cub *cub);
+void			check_player_movement(int key, t_cub *cub);
+void			check_direction(int key, t_cub *cub);
+void			check_full_screen(int key, t_cub *cub);
+void			check_quitting_mini_map(int key, t_cub *cub);
+void			check_map_scaling(int key, t_cub *cub);
+void			check_aiming(int key, t_cub *cub);
+int				keys_handler(int key, t_cub *cub);
+int				keys_released(int key, t_cub *cub);
+int				exit_app(t_cub *cub);
+void			check_anim_aim(t_cub *cub);
+void			start_mouse(t_cub *cub);
+int				render_loop(t_cub *cub);
+void			hook_keys(t_cub *cub);
+
 /*	free utils	*/
 void			exit_cub(t_cub *cub, int code, char *msg);
 
@@ -307,6 +321,4 @@ int				get_map_at(int i, int j, t_player *player);
 bool			is_inside_map(double x, double y, t_player *player);
 double			return_smallest(double a, double b);
 
-/*	bonus	*/
-void			render_gun(t_cub *cub);
 #endif

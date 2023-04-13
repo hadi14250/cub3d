@@ -26,18 +26,22 @@ SRCS	= 	main.c \
 			parsing/parse_utils6.c \
 			parsing/parse_map1.c \
 			raycasting/utils.c \
-			raycasting/key_handles.c \
 			raycasting/bressen_line.c \
 			raycasting/drawing_utils.c \
 			raycasting/raycasting.c \
 			raycasting/map.c \
-			raycasting/dda_line.c \
 			raycasting/raycasting_utils.c \
 			raycasting/render_walls.c \
 			raycasting/player_set.c \
 			raycasting/raycasting_utils2.c \
 			raycasting/ray.c \
 			raycasting/player_move.c \
+			key_handles/key_handles.c \
+			key_handles/mouse.c \
+			key_handles/key_checks_one.c \
+			key_handles/key_checks_two.c \
+			key_handles/key_checks_three.c \
+
 			
 
 
