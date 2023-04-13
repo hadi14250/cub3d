@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 22:16:47 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/13 03:10:07 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/13 04:05:57 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct s_map
 	int		height;
 	double	x_scale_factor;
 	double	y_scale_factor;
+	double	small_factor;
 }			t_map;
 
 typedef struct s_player

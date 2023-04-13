@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 23:10:35 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/13 03:50:04 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/13 04:15:42 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	render_gun(t_cub *cub)
 	if (!cub->sniper)
 		exit_cub(cub, 1, "gun not found\n");
 	mlx_put_image_to_window(cub->mlx, cub->win, cub->sniper,
-	WINDOW_WIDTH / 2, WINDOW_HEIGHT);
+		WINDOW_WIDTH / 2, WINDOW_HEIGHT);
 }
 
 void	draw_3d_ceiling(t_cub *cub, int wall_top_pixel, int x)
@@ -79,7 +79,7 @@ void	draw_3d_floor(t_cub *cub, int wall_bottom_pixel, int x)
 void	draw_3d_wall(t_cub *cub, int x, t_ray *rays)
 {
 	int					y;
-	t_wall_cords	cords;
+	t_wall_cords		cords;
 
 	cub->t_size = TILE_SIZE;
 	bzero(&cords, sizeof(t_wall_cords));
@@ -91,7 +91,7 @@ void	draw_3d_wall(t_cub *cub, int x, t_ray *rays)
 	while (y < cub->wall_bottom_pixel)
 	{
 		cords.dis_from_top = y + ((cub->wall_strip_height / 2)
-			- (WINDOW_HEIGHT / 2));
+				- (WINDOW_HEIGHT / 2));
 		cords.tex_offset_y = cords.dis_from_top
 			* ((float)cub->img2[0].height / cub->wall_strip_height);
 		cords.return_tex_val = return_tex_val(cub, x, cords, rays);
@@ -100,7 +100,6 @@ void	draw_3d_wall(t_cub *cub, int x, t_ray *rays)
 	}
 }
 
-
 void	generate_3d_wprojection(t_player *player, t_ray *rays, t_cub *cub)
 {
 	int	x;
@@ -108,13 +107,17 @@ void	generate_3d_wprojection(t_player *player, t_ray *rays, t_cub *cub)
 	x = -1;
 	while (++x < NUM_RAYS)
 	{
-		rays[x].correct_dist = rays[x].hit_distance * cos(rays[x].ray_angle - player->rotationangle);
-		cub->proj_wall_h = (TILE_SIZE / rays[x].correct_dist) * player->dist_proj_plane;
+		rays[x].correct_dist = rays[x].hit_distance * cos(rays[x].ray_angle
+				- player->rotationangle);
+		cub->proj_wall_h = (TILE_SIZE / rays[x].correct_dist)
+			* player->dist_proj_plane;
 		cub->wall_strip_height = (int)cub->proj_wall_h;
-		cub->wall_top_pixel = (WINDOW_HEIGHT / 2) - (cub->wall_strip_height / 2);
+		cub->wall_top_pixel = (WINDOW_HEIGHT / 2)
+			- (cub->wall_strip_height / 2);
 		if (cub->wall_top_pixel < 0)
 			cub->wall_top_pixel = 0;
-		cub->wall_bottom_pixel = ((WINDOW_HEIGHT / 2) + (cub->wall_strip_height / 2));
+		cub->wall_bottom_pixel = ((WINDOW_HEIGHT / 2)
+				+ (cub->wall_strip_height / 2));
 		if (cub->wall_bottom_pixel > WINDOW_HEIGHT)
 			cub->wall_bottom_pixel = WINDOW_HEIGHT;
 		draw_3d_ceiling(cub, cub->wall_top_pixel, x);
@@ -176,7 +179,7 @@ void	init_player_pos(t_player *player)
 	}
 	printf("new_x: %d, new_y: %d\n", new_x, new_y);
 	init_point(&player->pos, ((new_x * TILE_SIZE) + TILE_SIZE / 2),
-	((new_y * TILE_SIZE) + TILE_SIZE / 2));
+		((new_y * TILE_SIZE) + TILE_SIZE / 2));
 }
 
 void	init_player(t_player *player, t_cub *cub)
@@ -197,8 +200,8 @@ void	init_map(t_cub *cub)
 	cub->player.map3d.map = cub->map;
 	cub->player.map3d.height = return_split_len(cub->map);
 	cub->player.map3d.width = ft_strlen(
-		cub->player.map3d.map[0]
-	);
+			cub->player.map3d.map[0]
+			);
 }
 
 void	set_minimap_scalefactor(t_cub *cub)
@@ -210,12 +213,12 @@ void	set_minimap_scalefactor(t_cub *cub)
 	mini_map = &cub->player.map3d;
 	mini_map->x_scale_factor = (mini_map->width * TILE_SIZE);
 	mini_map->y_scale_factor = (mini_map->height * TILE_SIZE);
-	
 	mini_width = (WINDOW_WIDTH / mini_map->x_scale_factor) * cub->scale_factor;
-	mini_height = (WINDOW_HEIGHT / mini_map->y_scale_factor) * cub->scale_factor;
-
+	mini_height = (WINDOW_HEIGHT / mini_map->y_scale_factor)
+		* cub->scale_factor;
 	mini_map->x_scale_factor = mini_width;
 	mini_map->y_scale_factor = mini_height;
+	mini_map->small_factor = return_smallest(mini_height, mini_width);
 }
 
 void	setup(t_cub *cub)
@@ -225,26 +228,19 @@ void	setup(t_cub *cub)
 	cub->scale_factor = MINIMAP_SCALE_FACTOR;
 	set_minimap_scalefactor(cub);
 	printf("x_scale: %f, y_scale: %f\n", cub->player.map3d.x_scale_factor,
-	cub->player.map3d.y_scale_factor);
+		cub->player.map3d.y_scale_factor);
 	init_player(&cub->player, cub);
 }
 
 void	render_player(t_player *player, t_cub *cub)
 {
-	double smaller;
-
-	if (player->map3d.x_scale_factor < player->map3d.y_scale_factor)
-		smaller = player->map3d.x_scale_factor;
-	else
-		smaller = player->map3d.y_scale_factor;
 	init_circle(&player->circle, player->pos.x * player->map3d.x_scale_factor,
 		player->pos.y * player->map3d.y_scale_factor,
-		player->radius * smaller);
+		player->radius * player->map3d.small_factor);
 	draw_circle(&cub->img, player->circle, GREEN_COLOR);
 }
 
-
-void draw_cross(t_point cross, int size, int color, t_cub *cub)
+void	draw_cross(t_point cross, int size, int color, t_cub *cub)
 {
 	t_point	start;
 	t_point	end;
@@ -257,25 +253,33 @@ void draw_cross(t_point cross, int size, int color, t_cub *cub)
 	draw_bressen_line(&cub->img, start, end, color);
 }
 
+double	return_smallest(double a, double b)
+{
+	if (a < b)
+		return (a);
+	else
+		return (b);
+}
+
 void	draw_middle_circle(t_cub *cub, t_ray *rays)
 {
 	t_circle	circle;
 	t_point		cross;
-	double		smaller;
 	int			mid;
 
 	mid = cub->player.mid_ray;
 	if (cub->player.map3d.x_scale_factor < cub->player.map3d.y_scale_factor)
-		smaller = cub->player.map3d.x_scale_factor;
+		cub->player.map3d.small_factor = cub->player.map3d.x_scale_factor;
 	else
-		smaller = cub->player.map3d.y_scale_factor;
-	init_circle(&circle, rays[mid].wall_hit.x * cub->player.map3d.x_scale_factor,
+		cub->player.map3d.small_factor = cub->player.map3d.y_scale_factor;
+	init_circle(&circle, rays[mid].wall_hit.x
+		* cub->player.map3d.x_scale_factor,
 		rays[mid].wall_hit.y * cub->player.map3d.y_scale_factor,
-		10 * smaller);
+		10 * cub->player.map3d.small_factor);
 	draw_circle(&cub->img, circle, BLUE_COLOR);
 	init_point(&cross, rays[mid].wall_hit.x * cub->player.map3d.x_scale_factor,
 		rays[mid].wall_hit.y * cub->player.map3d.y_scale_factor);
-	draw_cross(cross, 20 * smaller, BLUE_COLOR, cub);
+	draw_cross(cross, 20 * cub->player.map3d.small_factor, BLUE_COLOR, cub);
 }
 
 void	render_rays(t_cub *cub, t_ray *rays)
@@ -284,12 +288,7 @@ void	render_rays(t_cub *cub, t_ray *rays)
 	t_point		start;
 	t_point		end;
 	t_circle	circle;
-	double smaller;
 
-	if (cub->player.map3d.x_scale_factor < cub->player.map3d.y_scale_factor)
-		smaller = cub->player.map3d.x_scale_factor;
-	else
-		smaller = cub->player.map3d.y_scale_factor;
 	i = -1;
 	while (++i < NUM_RAYS)
 	{
@@ -297,11 +296,10 @@ void	render_rays(t_cub *cub, t_ray *rays)
 			cub->player.pos.y * cub->player.map3d.y_scale_factor);
 		init_point(&end, rays[i].wall_hit.x * cub->player.map3d.x_scale_factor,
 			rays[i].wall_hit.y * cub->player.map3d.y_scale_factor);
-
-		init_circle(&circle, rays[i].wall_hit.x * cub->player.map3d.x_scale_factor,
+		init_circle(&circle, rays[i].wall_hit.x
+			* cub->player.map3d.x_scale_factor,
 			rays[i].wall_hit.y * cub->player.map3d.y_scale_factor,
-			10 * smaller);
-
+			10 * cub->player.map3d.small_factor);
 		draw_bressen_line(&cub->img, start, end, BRIGHT_YELLOW);
 		draw_circle(&cub->img, circle, RED_COLOR);
 	}
@@ -314,7 +312,6 @@ void	move_player(t_player *player, int flag)
 	t_point	new_pos;
 
 	player->rotationangle += player->turndirection * player->turnspeed;
-
 	movestep = player->walkdirection * player->walkspeed;
 	if (flag == 0)
 	{
@@ -323,8 +320,10 @@ void	move_player(t_player *player, int flag)
 	}
 	else
 	{
-		new_pos.x = player->pos.x + (cos(player->rotationangle - (M_PI_2)) * movestep);
-		new_pos.y = player->pos.y + (sin(player->rotationangle - (M_PI_2)) * movestep);
+		new_pos.x = player->pos.x + (cos(player->rotationangle
+					- (M_PI_2)) * movestep);
+		new_pos.y = player->pos.y + (sin(player->rotationangle
+					- (M_PI_2)) * movestep);
 	}
 	if (!maphaswallat(new_pos.x, new_pos.y, player))
 	{
@@ -340,31 +339,31 @@ void	normalize_angle(double *angle)
 		*angle = TWO_PI + *angle;
 }
 
-void	cast_horz_ray(double ray_angle, t_ray *ray, t_player *player)
+void	set_h_ray_point(double ray_angle, t_ray *ray, t_player *player)
 {
 	ray->found_h_hit = false;
 	init_point(&ray->horz_wallhit, 0, 0);
 	ray->horz_wall_content = 0;
-
-
 	ray->h_intercept.y = floor(player->pos.y / TILE_SIZE) * TILE_SIZE;
 	if (ray->is_ray_facing_down)
 		ray->h_intercept.y += TILE_SIZE;
 	ray->h_intercept.x = player->pos.x + (
 			(ray->h_intercept.y - player->pos.y) / tan(ray_angle));
-
 	ray->h_step.y = TILE_SIZE;
 	if (ray->is_ray_facing_up)
 		ray->h_step.y *= -1;
-
 	ray->h_step.x = TILE_SIZE / tan(ray_angle);
-
 	if (ray->is_ray_facing_left && ray->h_step.x > 0)
 		ray->h_step.x *= -1;
 	if (ray->is_ray_facing_right && ray->h_step.x < 0)
 		ray->h_step.x *= -1;
 	ray->next_h_touch.x = ray->h_intercept.x;
 	ray->next_h_touch.y = ray->h_intercept.y;
+}
+
+void	cast_horz_ray(double ray_angle, t_ray *ray, t_player *player)
+{
+	set_h_ray_point(ray_angle, ray, player);
 	while (is_inside_map(ray->next_h_touch.x, ray->next_h_touch.y, player))
 	{
 		if (ray->is_ray_facing_up)
@@ -373,14 +372,13 @@ void	cast_horz_ray(double ray_angle, t_ray *ray, t_player *player)
 		else
 			init_point(&ray->to_check, ray->next_h_touch.x,
 				ray->next_h_touch.y);
-
 		if (maphaswallat(ray->to_check.x, ray->to_check.y, player))
 		{
 			ray->horz_wallhit.x = ray->next_h_touch.x;
 			ray->horz_wallhit.y = ray->next_h_touch.y;
 			ray->horz_wall_content = get_map_at(
-				floor(ray->to_check.y / TILE_SIZE),
-				floor(ray->to_check.x / TILE_SIZE), player);
+					floor(ray->to_check.y / TILE_SIZE),
+					floor(ray->to_check.x / TILE_SIZE), player);
 			ray->found_h_hit = true;
 			break ;
 		}
@@ -392,32 +390,31 @@ void	cast_horz_ray(double ray_angle, t_ray *ray, t_player *player)
 	}
 }
 
-void	cast_vert_ray(double ray_angle, t_ray *ray, t_player *player)
+void	set_v_ray_point(double ray_angle, t_ray *ray, t_player *player)
 {
 	ray->found_v_hit = false;
 	init_point(&ray->vert_wallhit, 0, 0);
 	ray->vert_wall_content = 0;
-
-
 	ray->v_intercept.x = floor(player->pos.x / TILE_SIZE) * TILE_SIZE;
 	if (ray->is_ray_facing_right)
 		ray->v_intercept.x += TILE_SIZE;
-
 	ray->v_intercept.y = player->pos.y + (
 			(ray->v_intercept.x - player->pos.x) * tan(ray_angle));
 	ray->v_step.x = TILE_SIZE;
 	if (ray->is_ray_facing_left)
 		ray->v_step.x *= -1;
-
 	ray->v_step.y = TILE_SIZE * tan(ray_angle);
-
 	if (ray->is_ray_facing_up && ray->v_step.y > 0)
 		ray->v_step.y *= -1;
 	if (ray->is_ray_facing_down && ray->v_step.y < 0)
 		ray->v_step.y *= -1;
-
 	ray->next_v_touch.x = ray->v_intercept.x;
 	ray->next_v_touch.y = ray->v_intercept.y;
+}
+
+void	cast_vert_ray(double ray_angle, t_ray *ray, t_player *player)
+{
+	set_v_ray_point(ray_angle, ray, player);
 	while (is_inside_map(ray->next_v_touch.x, ray->next_v_touch.y, player))
 	{
 		if (ray->is_ray_facing_left)
@@ -426,14 +423,13 @@ void	cast_vert_ray(double ray_angle, t_ray *ray, t_player *player)
 		else
 			init_point(&ray->to_check, ray->next_v_touch.x,
 				ray->next_v_touch.y);
-
 		if (maphaswallat(ray->to_check.x, ray->to_check.y, player))
 		{
 			ray->vert_wallhit.x = ray->next_v_touch.x;
 			ray->vert_wallhit.y = ray->next_v_touch.y;
 			ray->vert_wall_content = get_map_at(
-				floor(ray->to_check.y / TILE_SIZE),
-				floor(ray->to_check.x / TILE_SIZE), player);
+					floor(ray->to_check.y / TILE_SIZE),
+					floor(ray->to_check.x / TILE_SIZE), player);
 			ray->found_v_hit = true;
 			break ;
 		}
@@ -452,7 +448,7 @@ void	init_ray(double ray_angle, t_ray *ray, int stripid)
 	ray->is_ray_facing_down = (ray->ray_angle > 0 && ray->ray_angle < PI);
 	ray->is_ray_facing_up = !ray->is_ray_facing_down;
 	ray->is_ray_facing_right = (ray->ray_angle > (1.5 * PI)
-		|| ray->ray_angle < (PI / 2));
+			|| ray->ray_angle < (PI / 2));
 	ray->is_ray_facing_left = !ray->is_ray_facing_right;
 	ray->stripid = stripid;
 }
