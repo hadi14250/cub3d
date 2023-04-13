@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 03:12:29 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/13 07:22:23 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/13 07:40:46 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,8 +161,11 @@ int				ft_array_length(char **array);
 unsigned long	rgb_to_hex(int red, int green, int blue, t_cub *cub);
 int				ft_array_length(char **arr);
 void			ft_free(char ***arr);
-/*parsing*/
 
+/*parsing*/
+void			free_rgbs(t_cub *cub);
+int				check_rgbs(char **line);
+void			convert_colors(t_cub *cub, char *rgb, int flag);
 int				ft_file_ext(t_cub *cub, char *map_file);
 void			parse_info(t_cub *cub);
 void			parse_map(t_cub *cub);
@@ -188,6 +191,7 @@ void			free_split(char ***split);
 void			*free_null(void *ptr);
 void			check_for_textures(t_cub *cub);
 void			set_player_direction(t_cub *cub);
+void			get_player_index(t_cub *cub, int *x, int *y);
 
 //parse_utils2
 int				ft_close(int fd);

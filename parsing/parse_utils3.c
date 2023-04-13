@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils3.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bsaeed <bsaeed@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 16:36:53 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/13 06:53:01 by bsaeed           ###   ########.fr       */
+/*   Updated: 2023/04/13 07:52:14 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	convert_space_to_wall(t_cub *cub)
 		j = 0;
 		while (cub->map[i][j])
 		{
-			if (cub->map[i][j] == 'x')
+			if (cub->map[i][j] == 'x' || cub->map[i][j] == ' ')
 				cub->map[i][j] = '1';
 			j++;
 		}

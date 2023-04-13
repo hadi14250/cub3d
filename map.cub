@@ -14,12 +14,17 @@ NO ./game_textures/NO.xpm
 
 
 
+
+
+
+
 EA ./game_textures/EA.xpm
 
 C 0,0,255
-F 1
+F 0,211,20
 
 11111
-11011
-11N11
-11111
+10001
+100N1
+
+1111  11
