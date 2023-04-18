@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 20:27:50 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/10 17:32:59 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/13 08:03:42 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,18 +42,23 @@ void	draw_rectangle(t_img *img, t_rect rect, int color)
 	}
 }
 
+void	init_consts(t_cub *cub)
+{
+	cub->player.fov = FOV_ANGLE * (PI / 180);
+	cub->player.dist_proj_plane = ((WINDOW_WIDTH / 2)
+			/ tan(cub->player.fov / 2));
+	cub->player.mid_ray = (NUM_RAYS / 2) - 1;
+}
+
 // make re && make clean && clear && valgrind --leak-check=full ./cub3d map.cub
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
 	t_cub		cub;
 
 	ft_bzero(&cub, sizeof(cub));
 	parse(ac, &cub, av[1]);
 	init(&cub);
-	print_cub(&cub);
-
-	// parse_size(cub);
-
+	init_consts(&cub);
 	init_mlx_utils(&cub);
 	raycasting(&cub);
 	exit_cub(&cub, 0, "game finished successfully\n");

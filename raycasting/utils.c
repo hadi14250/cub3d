@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 15:18:53 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/10 04:38:35 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/13 09:03:22 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,7 @@ void	*free_img(void *img_ptr, void *mlx)
 void	*free_window(void *mlx, void *win)
 {
 	if (win != NULL)
-	{
 		mlx_destroy_window(mlx, win);
-		printf("Window destryoed\n");
-	}
 	return (NULL);
 }
 
@@ -35,8 +32,8 @@ void	*cub_new_img(t_img *img, void *mlx, int width, int height)
 {
 	if (!img)
 	{
-		printf("img is NULL in cub_new_image\n");
-		exit(1);
+		printf("Error\nimg is NULL in cub_new_image");
+		return (NULL);
 	}
 	if (img->img_ptr != NULL)
 		mlx_destroy_image(mlx, img->img_ptr);
@@ -62,10 +59,11 @@ void	init_mlx_utils(t_cub *cub)
 			WINDOW_WIDTH, WINDOW_HEIGHT);
 	if (!cub->img.img_ptr)
 		exit_cub(cub, 1, "Error\ncan't initialise image\n");
-	cub->color_buffer = calloc(sizeof(int) * WINDOW_WIDTH , WINDOW_HEIGHT);
+	cub->color_buffer = callocer(sizeof(int) * WINDOW_WIDTH,
+			WINDOW_HEIGHT, cub);
 	if (!cub->color_buffer)
 		exit_cub(cub, 1, "Error\n, memory alloction failed\n");
-	cub->tex = calloc(sizeof(int) * WINDOW_WIDTH , WINDOW_HEIGHT);
+	cub->tex = callocer(sizeof(int) * WINDOW_WIDTH, WINDOW_HEIGHT, cub);
 	if (!cub->tex)
 		exit_cub(cub, 1, "Error\n, memory alloction failed\n");
 }

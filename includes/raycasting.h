@@ -6,11 +6,11 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 22:16:47 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/10 18:20:28 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/13 05:08:43 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef RAYCASTING_H
+#ifndef RAYCASTING_H
 # define RAYCASTING_H
 
 typedef struct s_ray
@@ -34,14 +34,32 @@ typedef struct s_ray
 	bool	is_ray_facing_down;
 	bool	is_ray_facing_right;
 	bool	is_ray_facing_left;
-	bool	foundHorzWallHit;
-	bool	foundVertWallHit;
+	bool	found_h_hit;
+	bool	found_v_hit;
 	int		wall_hit_content;
 	int		horz_wall_content;
 	int		vert_wall_content;
 	int		stripid;
 	double	correct_dist;
 }			t_ray;
+
+typedef struct s_map
+{
+	char	**map;
+	int		width;
+	int		height;
+	double	x_scale_factor;
+	double	y_scale_factor;
+	double	small_factor;
+}			t_map;
+
+typedef struct s_loc_3d_wall_vars
+{
+	int		return_tex_val;
+	int		dis_from_top;
+	int		tex_offset_y;
+	int		tex_offset_x;
+}		t_wall_cords;
 
 typedef struct s_player
 {
@@ -53,12 +71,16 @@ typedef struct s_player
 	int			radius;
 	float		width;
 	float		height;
-	int			turndirection; // -1 for left and 1 or right
-	int			walkdirection; // -1 if walking backwards and +1 if walking front
+	int			turndirection;
+	int			walkdirection;
 	float		rotationangle;
 	float		walkspeed;
 	float		turnspeed;
-	t_ray	rays[NUM_RAYS];
+	t_ray		rays[NUM_RAYS];
+	t_map		map3d;
+	double		dist_proj_plane;
+	double		mid_ray;
+	double		fov;
 }			t_player;
 
 #endif

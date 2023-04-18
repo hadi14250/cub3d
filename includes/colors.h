@@ -6,11 +6,11 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 20:11:20 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/04 08:39:13 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/13 06:40:50 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef COLORS_H
+#ifndef COLORS_H
 # define COLORS_H
 
 # define NONE_COLOR 0xFF000000
@@ -42,5 +42,15 @@
 # define BRIGHTER_YELLOW 0xD1D100
 
 # define BRIGHT_YELLOW 0xF1E488
+
+# define DARK_BROWN 0x5C4033
+
+# define SKY_BLUE 0x87CEEB
+
+# define MIDNIGHT_BLUE 0x191970
+
+# define AZURE 0xF0FFFF
+
+# define DARK_ORANGE 0x1d0320
 
 #endif

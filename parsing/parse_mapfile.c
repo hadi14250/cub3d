@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 23:03:02 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/10 19:42:41 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/13 09:13:11 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,21 +42,29 @@ void	parse_map(t_cub *cub)
 	check_player_format(cub);
 }
 
-void	validations(t_cub *cub)
+void	check_player_walls(t_cub *cub)
 {
-	char	**temp;
+	char	*line;
+	int		x;
+	int		y;
 
-	convert_spaces(cub);
-	free_split(&cub->map);
-	cub->map = ft_split(cub->map_1d, '\n');
-	check_borders(cub);
-	free_split(&cub->map);
-	convert_space_to_wall(cub);
-	cub->map = ft_split(cub->map_1d, '\n');
-	temp = allocate_new_map(cub);
-	memset_map(cub, temp);
-	hadis_rectangle_map(cub, temp);
-	print_map_two(cub->map);
+	y = -1;
+	x = -1;
+	get_player_index(cub, &x, &y);
+	if (x == -1 || y == -1)
+		exit_cub(cub, 1, "Error\nno player found in check_player_walls\n");
+	line = ft_strtrim(cub->map[y], " ");
+	if (x == 0 || x == (int)(ft_strlen(line) - 1))
+	{
+		line = free_null(line);
+		exit_cub(cub, 1, "Error\nPlayer on border or not surrounded by walls\n");
+	}
+	if (y == 0 || y == (return_split_len(cub->map) - 1))
+	{
+		line = free_null(line);
+		exit_cub(cub, 1, "Error\nPlayer on border or not surrounded by walls\n");
+	}
+	line = free_null(line);
 }
 
 int	parse(int ac, t_cub *cub, char *map_file)

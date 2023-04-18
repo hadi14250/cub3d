@@ -6,11 +6,11 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 20:12:18 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/10 16:34:59 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/13 07:06:01 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef KEYS_H
+#ifndef KEYS_H
 # define KEYS_H
 
 # define ESC 53
@@ -36,6 +36,9 @@
 # define F_KEY 3
 # define PLUS_KEY 69
 # define MINUS_KEY 78
+# define SHIFT 258
+# define Q_KEY 12
+# define T_KEY 17
 
 typedef struct s_keys
 {
@@ -48,7 +51,14 @@ typedef struct s_keys
 	bool	a;
 	bool	d;
 	bool	scale_flag;
+	bool	aim;
+	bool	aim_released;
+	bool	m_left;
+	bool	m_right;
+	bool	m_leftclick;
+	bool	m_rightclick;
+	bool	q;
+	bool	t;
 }			t_keys;
-
 
 #endif

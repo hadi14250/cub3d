@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 19:43:45 by hakaddou          #+#    #+#             */
-/*   Updated: 2022/04/10 03:14:12 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/13 03:38:32 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,4 +21,3 @@ t_list	*ft_lstnew(void *content)
 	ptr->content = content;
 	return (ptr);
 }
-

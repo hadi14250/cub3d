@@ -3,45 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   parse_colors.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bsaeed <bsaeed@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 01:34:04 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/10 16:22:04 by bsaeed           ###   ########.fr       */
+/*   Updated: 2023/04/13 07:42:43 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-
-void	convert_colors(t_cub *cub, char *rgb, int flag)
-{
-	unsigned long	temp;
-	char			**line;
-
-	cub->color_flag = false;
-	line = ft_split(rgb, ' ');
-	if (flag == 0)
-	{
-		temp = rgb_to_hex(ft_atoi(line[0]),
-				ft_atoi(line[1]), ft_atoi(line[2]), cub);
-		cub->ceiling = temp;
-	}
-	else
-	{
-		temp = rgb_to_hex(ft_atoi(line[0]),
-				ft_atoi(line[1]), ft_atoi(line[2]), cub);
-		cub->floor = temp;
-	}
-	free_split(&line);
-	if (cub->color_flag == true)
-		exit_cub(cub, 1, "Error\nRgb out of bound\n");
-}
 
 void	parse_rgb(t_cub *cub)
 {
 	check_floor_ceiling(cub);
 	check_north_south(cub);
 	east_west(cub);
-	cub->rgb = ft_calloc(5, sizeof(char *));
+	cub->rgb = callocer(5, sizeof(char *), cub);
 	cub->c_rgb = ft_strnstr(cub->map_1d, "C", cub->map_1d_len);
 	cub->c_rgb = ft_tex_dup(cub->c_rgb);
 	trim_comma(cub->c_rgb);
@@ -56,25 +32,25 @@ void	parse_rgb(t_cub *cub)
 	convert_colors(cub, cub->rgb[0], 1);
 }
 
-int	*check_rgb(char **rgb_array)
-{
-	int	i;
-	int	*rgb;
+// int	*check_rgb(char **rgb_array)
+// {
+// 	int	i;
+// 	int	*rgb;
 
-	i = 0;
-	rgb = malloc(sizeof(int) * 4);
-	if (!rgb)
-		return (NULL);
-	while (rgb_array[i])
-	{
-		rgb[i] = ft_atoi(rgb_array[i]);
-		if (rgb[i] < 0 || rgb[i] > 255)
-			return (NULL);
-		i++;
-	}
-	rgb[i] = 0;
-	return (rgb);
-}
+// 	i = 0;
+// 	rgb = malloc(sizeof(int) * 4);
+// 	if (!rgb)
+// 		return (NULL);
+// 	while (rgb_array[i])
+// 	{
+// 		rgb[i] = ft_atoi(rgb_array[i]);
+// 		if (rgb[i] < 0 || rgb[i] > 255)
+// 			return (NULL);
+// 		i++;
+// 	}
+// 	rgb[i] = 0;
+// 	return (rgb);
+// }
 
 int	rgb(t_cub *cub, char *line, char flag)
 {

@@ -25,29 +25,27 @@ SRCS	= 	main.c \
 			parsing/parse_utils5.c \
 			parsing/parse_utils6.c \
 			parsing/parse_map1.c \
+			parsing/parse_utils7.c \
+			parsing/parse_utils8.c \
+			parsing/parse_utils9.c \
 			raycasting/utils.c \
-			raycasting/key_handles.c \
-			raycasting/line_drawing.c \
+			raycasting/bressen_line.c \
 			raycasting/drawing_utils.c \
 			raycasting/raycasting.c \
-			raycasting/map.c
-			
-BONUSSRCS	=	bonus/main.c \
-			bonus/parsing/parse_ext.c \
-			bonus/parsing/parse_utils.c \
-			bonus/parsing/parse_colors.c \
-			bonus/parsing/parse_mapfile.c \
-			bonus/parsing/parse_validate.c \
-			bonus/parsing/parse_initializer.c \
-			bonus/raycasting/utils.c \
-			bonus/raycasting/key_handles.c \
-			bonus/raycasting/line_drawing.c \
-			bonus/raycasting/drawing_utils.c \
-			bonus/raycasting/raycasting.c \
+			raycasting/map.c \
+			raycasting/raycasting_utils.c \
+			raycasting/render_walls.c \
+			raycasting/player_set.c \
+			raycasting/raycasting_utils2.c \
+			raycasting/ray.c \
+			raycasting/player_move.c \
+			key_handles/key_handles.c \
+			key_handles/mouse.c \
+			key_handles/key_checks_one.c \
+			key_handles/key_checks_two.c \
+			key_handles/key_checks_three.c \
 
 
-BONUSOBJS	=	$(BONUSSRCS:.c=.o)
-BONUSNAME	=	cub3d_bonus
 
 OBJS	= $(SRCS:.c=.o)
 FLAGS	= -crs
@@ -55,7 +53,7 @@ mlx		= ./mlx/libmlx.a
 
 CC		= gcc -g3
 RM		= rm -rf
-CFLAGS	= -Wall -Wextra -Werror -Ofast -march=native
+CFLAGS	= -Wall -Wextra -Werror -g3 -Ofast -march=native
 NAME	= cub3d
 
 MAKELIB	=	@make -C libft
@@ -80,31 +78,18 @@ clean:
 	$(CLNLIB)
 	@$(RM) $(OBJS)
 	@make clean -C ./mlx && rm -rf *.dSYM
-	# @make clean -C ./bonus
 	@echo "$(YELLOW)Removed object files.$(RESET)"
 
 fclean: clean
 	$(FCLNLIB)
 	@$(RM) $(NAME)
-	# @$(RM) $(BONUSNAME)
 	@make clean -C ./mlx && rm -rf *.dSYM
 	@echo "$(YELLOW)Removed executable.$(RESET)"
 
 re: fclean all
 		make clean
 
-bonus: $(BONUSNAME)
-$(BONUSNAME): $(BONUSOBJS)
-	$(MAKELIB)
-	@echo "$(CYAN)Compiling $(BONUSNAME)...\n$(RESET)"
-	@make -C ./mlx
-	@$(CC) $(CFLAGS) -o $(BONUSNAME) $(BONUSOBJS) $(LIBFT) $(mlx) -framework OpenGL -framework AppKit
-	@echo "$(GREEN)Compilation completed.$(RESET)"
-
 exec: fclean all
 		./cub3d map.cub
 
-execb: fclean bonus
-		./cub3d_bonus map.cub
-
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re

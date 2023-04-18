@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils4.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bsaeed <bsaeed@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 17:14:05 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/10 17:19:39 by bsaeed           ###   ########.fr       */
+/*   Updated: 2023/04/13 09:07:25 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,27 +69,20 @@ void	trim_map_spaces(char *str)
 
 void	exit_cub(t_cub *cub, int code, char *msg)
 {
-	int	i;
-
-	i = -1;
 	if (cub->color_buffer)
 		cub->color_buffer = free_null(cub->color_buffer);
 	if (cub->tex)
 		cub->tex = free_null(cub->tex);
 	if (cub->img.img_ptr)
 		mlx_destroy_image(cub->mlx, cub->img.img_ptr);
-	while (++i < 4)
-	{
-		if (cub->img2[i].img_ptr)
-			mlx_destroy_image(cub->mlx, cub->img2[i].img_ptr);
-	}
+	free_texes(cub);
 	if (cub->win)
 		mlx_destroy_window(cub->mlx, cub->win);
 	if (cub->map_1d)
 		cub->map_1d = free_null(cub->map_1d);
 	free_split(&cub->map);
 	free_split(&cub->xpm);
-	free_split(&cub->rgb);
+	free_rgbs(cub);
 	cub->c_rgb = free_null(cub->c_rgb);
 	cub->f_rgb = free_null(cub->f_rgb);
 	cub->fd = ft_close(cub->fd);

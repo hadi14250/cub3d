@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 18:06:46 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/03 18:17:11 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/13 06:55:07 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	draw_circle(t_img *img, t_circle circle, int color)
 	}
 }
 
-void	draw_line(t_img *img, t_point start, t_point end, int color)
+void	draw_bressen_line(t_img *img, t_point start, t_point end, int color)
 {
 	int	dx;
 	int	dy;
