@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 22:16:47 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/13 05:08:43 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/18 23:44:07 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct s_map
 	double	x_scale_factor;
 	double	y_scale_factor;
 	double	small_factor;
+	double	big_factor;
 }			t_map;
 
 typedef struct s_loc_3d_wall_vars

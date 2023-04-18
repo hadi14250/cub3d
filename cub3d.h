@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 03:12:29 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/13 09:17:33 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/19 01:34:32 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,6 +151,7 @@ typedef struct s_cub
 	double			scale_factor;
 	int				fps;
 	double			aim_factor;
+	void			*gun;
 }				t_cub;
 
 /* parsing utils */
@@ -275,6 +276,7 @@ void			setup(t_cub *cub);
 void			render_player(t_player *player, t_cub *cub);
 void			draw_cross(t_point cross, int size, int color, t_cub *cub);
 double			return_smallest(double a, double b);
+double			return_biggest(double a, double b);
 void			draw_middle_circle(t_cub *cub, t_ray *rays);
 void			render_rays(t_cub *cub, t_ray *rays);
 void			move_player(t_player *player, int flag);
@@ -358,5 +360,11 @@ bool			maphaswallat(double x, double y, t_player *player);
 int				get_map_at(int i, int j, t_player *player);
 bool			is_inside_map(double x, double y, t_player *player);
 double			return_smallest(double a, double b);
+
+/*	rendering guns	*/
+void			put_big_rifle(t_cub *cub);
+void			put_machine_gun(t_cub *cub);
+void			put_machine_gun_aimed(t_cub *cub);
+void			put_aim(t_cub *cub);
 
 #endif

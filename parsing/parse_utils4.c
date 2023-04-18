@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 17:14:05 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/13 09:07:25 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/19 00:51:19 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ void	exit_cub(t_cub *cub, int code, char *msg)
 		cub->color_buffer = free_null(cub->color_buffer);
 	if (cub->tex)
 		cub->tex = free_null(cub->tex);
+	if (cub->gun)
+		mlx_destroy_image(cub->mlx, cub->gun);
 	if (cub->img.img_ptr)
 		mlx_destroy_image(cub->mlx, cub->img.img_ptr);
 	free_texes(cub);

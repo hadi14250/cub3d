@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 23:10:35 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/13 07:18:38 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/19 03:30:32 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,66 @@ void	update(t_cub *cub)
 	render_color_buffer(cub);
 }
 
+void	put_big_rifle(t_cub *cub)
+{
+	int	size;
+
+	size = 540;
+	if (cub->gun)
+		mlx_destroy_image(cub->mlx, cub->gun);
+	cub->gun = mlx_xpm_file_to_image(cub->mlx,
+		"./game_textures/big_rifle.xpm", &size, &size);
+	mlx_put_image_to_window(cub->mlx, cub->win, cub->gun,
+		(WINDOW_WIDTH) - (size * 1.5),
+		WINDOW_HEIGHT - size);
+}
+
+void	put_machine_gun_aimed(t_cub *cub)
+{
+	int	width;
+	int	height;
+
+	width = 711;
+	height = 351;
+	if (cub->gun)
+		mlx_destroy_image(cub->mlx, cub->gun);
+	cub->gun = mlx_xpm_file_to_image(cub->mlx,
+		"./game_textures/machine_gun_aimed.xpm", &width, &height);
+	mlx_put_image_to_window(cub->mlx, cub->win, cub->gun,
+		(WINDOW_WIDTH / 2) - (width / 2),
+		WINDOW_HEIGHT - (height - 20));
+}
+
+void	put_aim(t_cub *cub)
+{
+	int	width;
+	int	height;
+
+	width = 711;
+	height = 351;
+	if (cub->gun)
+		mlx_destroy_image(cub->mlx, cub->gun);
+	cub->gun = mlx_xpm_file_to_image(cub->mlx,
+		"./game_textures/aiming.xpm", &width, &height);
+	mlx_put_image_to_window(cub->mlx, cub->win, cub->gun,
+		(WINDOW_WIDTH / 2) - (width / 2),
+		WINDOW_HEIGHT - (height - 20));
+}
+
+void	put_machine_gun(t_cub *cub)
+{
+	int	size;
+
+	size = 540;
+	if (cub->gun)
+		mlx_destroy_image(cub->mlx, cub->gun);
+	cub->gun = mlx_xpm_file_to_image(cub->mlx,
+		"./game_textures/machine_gun.xpm", &size, &size);
+	mlx_put_image_to_window(cub->mlx, cub->win, cub->gun,
+		(WINDOW_WIDTH / 2) - (size / 2),
+		WINDOW_HEIGHT - size);
+}
+
 void	render(t_cub *cub)
 {
 	if (cub->keys.q == false)
@@ -55,6 +115,9 @@ void	render(t_cub *cub)
 		render_player(&cub->player, cub);
 	}
 	mlx_put_image_to_window(cub->mlx, cub->win, cub->img.img_ptr, 0, 0);
+	// if (!cub->keys.aim_released)
+	// 	put_machine_gun(cub);
+	put_machine_gun(cub);
 }
 
 void	raycasting(t_cub *cub)

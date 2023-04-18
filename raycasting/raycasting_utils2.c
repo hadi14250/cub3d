@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 05:24:50 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/13 05:25:06 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/18 23:51:53 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	render_player(t_player *player, t_cub *cub)
 {
 	init_circle(&player->circle, player->pos.x * player->map3d.x_scale_factor,
 		player->pos.y * player->map3d.y_scale_factor,
-		player->radius * player->map3d.small_factor);
+		player->radius * player->map3d.big_factor);
 	draw_circle(&cub->img, player->circle, GREEN_COLOR);
 }
 
@@ -41,6 +41,15 @@ double	return_smallest(double a, double b)
 		return (b);
 }
 
+double	return_biggest(double a, double b)
+{
+	if (a < b)
+		return (b);
+	else
+		return (a);
+}
+
+
 void	draw_middle_circle(t_cub *cub, t_ray *rays)
 {
 	t_circle	circle;
@@ -59,7 +68,7 @@ void	draw_middle_circle(t_cub *cub, t_ray *rays)
 	draw_circle(&cub->img, circle, BLUE_COLOR);
 	init_point(&cross, rays[mid].wall_hit.x * cub->player.map3d.x_scale_factor,
 		rays[mid].wall_hit.y * cub->player.map3d.y_scale_factor);
-	draw_cross(cross, 20 * cub->player.map3d.small_factor, BLUE_COLOR, cub);
+	draw_cross(cross, 20 * cub->player.map3d.big_factor, BLUE_COLOR, cub);
 }
 
 void	render_rays(t_cub *cub, t_ray *rays)

@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 05:23:00 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/13 05:23:13 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/04/18 23:46:11 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,4 +92,5 @@ void	set_minimap_scalefactor(t_cub *cub)
 	mini_map->x_scale_factor = mini_width;
 	mini_map->y_scale_factor = mini_height;
 	mini_map->small_factor = return_smallest(mini_height, mini_width);
+	mini_map->big_factor = return_biggest(mini_height, mini_width);
 }
