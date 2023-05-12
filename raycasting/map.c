@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 18:18:09 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/13 07:04:48 by hakaddou         ###   ########.fr       */
+/*   Updated: 2023/05/12 19:00:57 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ bool	is_inside_map(double x, double y, t_player *player)
 int	return_color(t_cub *cub, int tilecolor)
 {
 	if (cub->keys.t == true)
-		return (0xFFFFFFFF);
+		return (0x00FFFFFF);
 	else
 		return (tilecolor);
 }
