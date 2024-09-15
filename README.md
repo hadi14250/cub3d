@@ -41,7 +41,7 @@ Inspired by Doom, the first game that introduced ray casting. We start with disp
 ## Gameplay
 
 - `w/s/a/d` for player movement.
-- `left ⬅️` and `right ➡️` arrow or mouse for direction.
+- `left` and `right` arrow or mouse for direction.
 - `shift` to aim.
 - `f` to maxiamise and minimise minimap.
 - `q` to remove or put back minimap.
