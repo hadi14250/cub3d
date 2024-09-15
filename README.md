@@ -1,4 +1,3 @@
-# Cub3d
 
 <div align="center">
 <a href="https://github.com/hadi14250">
