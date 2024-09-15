@@ -30,18 +30,28 @@ Inspired by Doom, the first game that introduced ray casting. We start with disp
 
 <br>
 
-## How to play
+## How to run
 
 - Go to root directory and run `make`
-- Run ```docker-compose up --build```
-- Go to ```https://localhost:80/```
-- Authorise With 42 Intra
-- Enjoy
+- Run `./cub3d maps/good/bigmap.cub`
+- Choose between different maps in `maps/good/`
+
+<br>
+
+## Gameplay
+
+- `w/s/a/d` for player movement.
+- left ⬅️ and right ➡️ arrow or mouse for direction.
+- `shift` to aim.
+- `f` to maxiamise and minimise minimap.
+- `q` to remove or put back minimap.
+- `esc` to quit the game.
 
 <br>
 
 
-## Usage
+
+<!-- ## Usage
 ```javascript
 test
-```
+``` -->
