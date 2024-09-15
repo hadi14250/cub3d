@@ -11,3 +11,22 @@
 </div>
 
 
+<br>
+
+
+# Cub3D
+
+Inspired by Doom, the first game that introduced ray casting. We start with displaying a single pixel on the screen to drawing complex 3d structures. Uses the simple 42 C graphics library called MLX. 
+
+<br>
+
+## Distinctive Features
+
+  - 🎯 Aiming (zooming in)
+  - 🧱 Wall collision
+  - 🗺️ Minimap, can be minimised and maximised
+  - 🔎 Minimap shows player feild of view
+  - 🖱️ Mouse movement (event listener)
+
+<br>
+
