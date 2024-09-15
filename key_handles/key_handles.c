@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 18:09:08 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/19 01:20:46 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/09/15 13:54:14 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	keys_released(int key, t_cub *cub)
 
 int	render_loop(t_cub *cub)
 {
-	start_mouse(cub);
+	// start_mouse(cub);
 	if (cub->keys.up == false)
 		cub->player.walkdirection = 0;
 	if (cub->keys.down == false)
