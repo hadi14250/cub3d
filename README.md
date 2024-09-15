@@ -40,7 +40,7 @@ Inspired by Doom, the first game that introduced ray casting. We start with disp
 
 ## Gameplay
 
-`keyboard iputs`:
+<<`keyboard iputs`>>
 
 - `w/s/a/d` for player movement.
 - `left` and `right` arrow or mouse for direction.
