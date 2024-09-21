@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 23:10:35 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/19 03:30:32 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/09/21 09:27:17 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,8 @@ void	render(t_cub *cub)
 	// if (!cub->keys.aim_released)
 	// 	put_machine_gun(cub);
 	put_machine_gun(cub);
+	// mlx_destroy_image(cub., void *img_ptr);
+	// mlx_put_image_to_window(cub->mlx, cub->win, cub->img.img_ptr, 0, 0);
 }
 
 void	raycasting(t_cub *cub)
