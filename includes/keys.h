@@ -59,6 +59,7 @@ typedef struct s_keys
 	bool	m_rightclick;
 	bool	q;
 	bool	t;
+	bool	f;
 }			t_keys;
 
 #endif

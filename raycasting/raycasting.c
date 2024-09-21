@@ -106,6 +106,14 @@ void	put_machine_gun(t_cub *cub)
 		WINDOW_HEIGHT - size);
 }
 
+void	remove_machine_gun(t_cub *cub)
+{
+	if  (cub->gun)
+		mlx_destroy_image(cub->mlx, cub->gun);
+	cub->gun = NULL;
+}
+
+
 void	render(t_cub *cub)
 {
 	if (cub->keys.q == false)
@@ -117,9 +125,8 @@ void	render(t_cub *cub)
 	mlx_put_image_to_window(cub->mlx, cub->win, cub->img.img_ptr, 0, 0);
 	// if (!cub->keys.aim_released)
 	// 	put_machine_gun(cub);
-	put_machine_gun(cub);
-	// mlx_destroy_image(cub., void *img_ptr);
-	// mlx_put_image_to_window(cub->mlx, cub->win, cub->img.img_ptr, 0, 0);
+	if (!cub->keys.f)
+		put_machine_gun(cub);
 }
 
 void	raycasting(t_cub *cub)

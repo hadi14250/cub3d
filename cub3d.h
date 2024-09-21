@@ -83,6 +83,7 @@ typedef struct s_key
 	int	left;
 	int	p;
 	int	scale_flag;
+	int	f;
 }				t_key;
 
 typedef struct s_buff
@@ -366,5 +367,6 @@ void			put_big_rifle(t_cub *cub);
 void			put_machine_gun(t_cub *cub);
 void			put_machine_gun_aimed(t_cub *cub);
 void			put_aim(t_cub *cub);
+void			remove_machine_gun(t_cub *cub);
 
 #endif

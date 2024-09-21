@@ -61,6 +61,7 @@ void	check_full_screen(int key, t_cub *cub)
 {
 	if (!cub->keys.q && (key == F_KEY))
 	{
+		cub->keys.f = !(cub->keys.f);
 		if (cub->scale_factor == MINIMAP_SCALE_FACTOR)
 			cub->scale_factor = 1;
 		else
