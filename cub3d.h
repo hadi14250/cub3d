@@ -41,13 +41,6 @@
 # define TEXTURE_HEIGHT 			64
 # define TEXTURE_WIDTH 				64
 
-typedef struct s_state
-{
-	t_point			position;
-	t_point			direction;
-	t_point			plane;
-}			t_state;
-
 // screen struct
 typedef struct s_img
 {
@@ -71,20 +64,6 @@ typedef struct s_img2
 	int		width;
 	int		height;
 }				t_img2;
-
-// player struct
-typedef struct s_key
-{
-	int	w;
-	int	s;
-	int	a;
-	int	d;
-	int	right;
-	int	left;
-	int	p;
-	int	scale_flag;
-	int	f;
-}				t_key;
 
 typedef struct s_buff
 {
@@ -113,18 +92,13 @@ typedef struct s_cub
 	char			**rgb;
 	char			**xpm;
 	char			**map;
-	int				n_rows;
-	int				n_columns;
 	unsigned long	floor;
 	unsigned long	ceiling;
 	uint32_t		texture[4][TEXTURE_HEIGHT * TEXTURE_WIDTH];
-	t_point			start_line_pos;
-	t_point			end_line_pos;
 	t_player		player;
 	t_keys			keys;
 	int				*color_buffer;
 	int				*tex;
-	int				i;
 	double			proj_wall_h;
 	int				t_size;
 	int				wall_strip_height;
@@ -141,14 +115,10 @@ typedef struct s_cub
 	int				we_pos;
 	int				ea_pos;
 	int				floor_pos;
-	void			*sniper;
 	int				ceiling_pos;
-	int				map_pos;
 	int				max;
-	char			*trimmed;
 	t_dir			dir;
 	int				p_flag;
-	int				m_flag;
 	double			scale_factor;
 	int				fps;
 	double			aim_factor;
@@ -249,7 +219,6 @@ void			draw_bressen_line(t_img *img, t_point s, t_point e, int c);
 
 /* drawing_utls*/
 void			draw_circle(t_img *img, t_circle circle, int color);
-void			draw_bressen_line(t_img *img, t_point s, t_point e, int c);
 void			init_point(t_point *point, int x, int y);
 void			init_circle(t_circle *circle, int x, int y, int radius);
 void			draw_rectangle(t_img *img, t_rect rect, int color);
