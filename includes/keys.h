@@ -39,6 +39,7 @@
 # define SHIFT 258
 # define Q_KEY 12
 # define T_KEY 17
+# define C_KEY 8
 
 typedef struct s_keys
 {
@@ -60,6 +61,7 @@ typedef struct s_keys
 	bool	q;
 	bool	t;
 	bool	f;
+	bool	c; /* controls */
 }			t_keys;
 
 #endif

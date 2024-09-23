@@ -18,6 +18,13 @@ void	rerender(t_cub *cub)
 	render(cub);
 }
 
+void	check_controls(int key, t_cub *cub)
+{
+	if (key == C_KEY)
+		cub->keys.c = !(cub->keys.c);
+	rerender(cub);
+}
+
 int	keys_handler(int key, t_cub *cub)
 {
 	check_for_exit(key, cub);
@@ -28,6 +35,7 @@ int	keys_handler(int key, t_cub *cub)
 	check_tracking(key, cub);
 	check_map_scaling(key, cub);
 	check_aiming(key, cub);
+	check_controls(key, cub);
 	return (0);
 }
 
@@ -59,7 +67,8 @@ int	keys_released(int key, t_cub *cub)
 
 int	render_loop(t_cub *cub)
 {
-	start_mouse(cub);
+	// start_mouse(cub);
+	// mlx_mouse_hide();
 	if (cub->keys.up == false)
 		cub->player.walkdirection = 0;
 	if (cub->keys.down == false)
@@ -80,6 +89,9 @@ int	render_loop(t_cub *cub)
 		check_anim_aim(cub);
 	if (ft_memchr(&cub->keys, 1, sizeof(t_keys)))
 		rerender(cub);
+	if (cub->keys.c == true)
+		mlx_string_put(cub->mlx, cub->win, 500, 500, WHITE_COLOR, "Hello World");
+
 	return (0);
 }
 

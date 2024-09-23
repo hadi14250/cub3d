@@ -123,8 +123,6 @@ void	render(t_cub *cub)
 		render_player(&cub->player, cub);
 	}
 	mlx_put_image_to_window(cub->mlx, cub->win, cub->img.img_ptr, 0, 0);
-	// if (!cub->keys.aim_released)
-	// 	put_machine_gun(cub);
 	if (!cub->keys.f)
 		put_machine_gun(cub);
 }
