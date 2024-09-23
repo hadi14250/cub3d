@@ -90,7 +90,7 @@ int	render_loop(t_cub *cub)
 	if (ft_memchr(&cub->keys, 1, sizeof(t_keys)))
 		rerender(cub);
 	if (cub->keys.c == true)
-		mlx_string_put(cub->mlx, cub->win, 500, 500, WHITE_COLOR, "Hello World");
+		mlx_string_put(cub->mlx, cub->win, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2, WHITE_COLOR, "Hello World");
 
 	return (0);
 }
