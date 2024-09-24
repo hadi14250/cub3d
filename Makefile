@@ -44,6 +44,7 @@ SRCS	= 	main.c \
 			key_handles/key_checks_one.c \
 			key_handles/key_checks_two.c \
 			key_handles/key_checks_three.c \
+			game_controls/game_controls.c \
 
 
 

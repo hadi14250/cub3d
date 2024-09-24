@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 23:10:35 by hakaddou          #+#    #+#             */
-/*   Updated: 2024/09/21 09:27:17 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/09/24 10:12:43 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,14 +106,6 @@ void	put_machine_gun(t_cub *cub)
 		WINDOW_HEIGHT - size);
 }
 
-void	remove_machine_gun(t_cub *cub)
-{
-	if  (cub->gun)
-		mlx_destroy_image(cub->mlx, cub->gun);
-	cub->gun = NULL;
-}
-
-
 void	render(t_cub *cub)
 {
 	if (cub->keys.q == false)
@@ -123,7 +115,7 @@ void	render(t_cub *cub)
 		render_player(&cub->player, cub);
 	}
 	mlx_put_image_to_window(cub->mlx, cub->win, cub->img.img_ptr, 0, 0);
-	if (!cub->keys.f)
+	if (!cub->keys.f && !cub->keys.c)
 		put_machine_gun(cub);
 }
 

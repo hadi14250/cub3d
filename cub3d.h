@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 03:12:29 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/19 01:34:32 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/09/24 10:09:51 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -336,6 +336,8 @@ void			put_big_rifle(t_cub *cub);
 void			put_machine_gun(t_cub *cub);
 void			put_machine_gun_aimed(t_cub *cub);
 void			put_aim(t_cub *cub);
-void			remove_machine_gun(t_cub *cub);
+
+/*	game controls	*/
+void    		print_control_box(t_cub *cub);
 
 #endif

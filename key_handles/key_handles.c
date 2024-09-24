@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 18:09:08 by hakaddou          #+#    #+#             */
-/*   Updated: 2024/09/15 14:24:41 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/09/24 09:53:37 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	render_loop(t_cub *cub)
 	if (ft_memchr(&cub->keys, 1, sizeof(t_keys)))
 		rerender(cub);
 	if (cub->keys.c == true)
-		mlx_string_put(cub->mlx, cub->win, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2, WHITE_COLOR, "Hello World");
+		print_control_box(cub);
 
 	return (0);
 }
