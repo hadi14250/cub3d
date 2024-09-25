@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 03:12:29 by bsaeed            #+#    #+#             */
-/*   Updated: 2024/09/24 10:09:51 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/09/25 10:20:50 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -220,6 +220,7 @@ void			draw_bressen_line(t_img *img, t_point s, t_point e, int c);
 /* drawing_utls*/
 void			draw_circle(t_img *img, t_circle circle, int color);
 void			init_point(t_point *point, int x, int y);
+void			init_colored_point(t_colored_point *point, int x, int y, int color);
 void			init_circle(t_circle *circle, int x, int y, int radius);
 void			draw_rectangle(t_img *img, t_rect rect, int color);
 t_rect			init_rect(int x, int y, int width, int height);

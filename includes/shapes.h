@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 20:14:36 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/13 03:10:15 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/09/25 10:19:01 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,13 @@ typedef struct s_point
 	double			x;
 	double			y;
 }			t_point;
+
+typedef struct s_colored_point
+{
+	double			x;
+	double			y;
+	int				color;
+}			t_colored_point;
 
 typedef struct s_circle
 {

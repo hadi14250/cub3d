@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 18:06:46 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/13 06:55:07 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/09/25 10:20:28 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,13 @@ void	init_point(t_point *point, int x, int y)
 {
 	point->x = x;
 	point->y = y;
+}
+
+void	init_colored_point(t_colored_point *point, int x, int y, int color)
+{
+	point->x = x;
+	point->y = y;
+	point->color = color;
 }
 
 // initialises the t_circle struct x and y and
