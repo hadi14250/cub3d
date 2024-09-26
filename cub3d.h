@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 03:12:29 by bsaeed            #+#    #+#             */
-/*   Updated: 2024/09/25 10:20:50 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/09/26 10:26:19 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@
 # include "./includes/shapes.h"
 # include "./includes/colors.h"
 # include "./includes/raycasting.h"
+# include "./includes/control_box.h"
 # include <strings.h>
 
 // texture
@@ -123,6 +124,7 @@ typedef struct s_cub
 	int				fps;
 	double			aim_factor;
 	void			*gun;
+	t_contorl_box	control_box;
 }				t_cub;
 
 /* parsing utils */
