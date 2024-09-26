@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 09:50:53 by hakaddou          #+#    #+#             */
-/*   Updated: 2024/09/26 10:48:29 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/09/26 10:53:02 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void    print_string(t_cub *cub, char *str)
     // int height = cub->control_box.height;
     int len_str = ft_strlen(str);
     // int x = cub->control_box.x + (cub->control_box.width / 2) - (len_str);
-    int x = (WINDOW_WIDTH / 2) - len_str * 4 ;
+    int x = (WINDOW_WIDTH / 2) - len_str * 3 ;
     // printf("len_str is: %d\n", len_str);
     // int y = cub->control_box.y;
     
@@ -43,5 +43,8 @@ void    print_control_box(t_cub *cub)
     cub->control_box.controls_rect,
     BLACK_COLOR);
     render(cub);
-    print_string(cub, "Hello Pretty World Hello Pretty World Hello Pretty World");
+    // print_string(cub, "Hello Pretty World Hello Pretty World Hello Pretty World");
+    mlx_string_put(cub->mlx, cub->win, 0, WINDOW_HEIGHT / 2, WHITE_COLOR,
+    "Hello World "
+    );
 }
