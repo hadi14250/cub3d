@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 10:21:17 by hakaddou          #+#    #+#             */
-/*   Updated: 2024/09/26 10:25:48 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/09/27 09:50:10 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef struct s_contorl_box
     int     y;
     t_rect  controls_rect;
     char    **choices;
+    int     last_string_y_pos;
 }			t_contorl_box;
 
 #endif

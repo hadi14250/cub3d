@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 09:50:53 by hakaddou          #+#    #+#             */
-/*   Updated: 2024/09/26 11:21:29 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/09/27 09:53:12 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void    print_string_middle_box(t_cub *cub, int y, int color, char *str)
 {
     int len_str = ft_strlen(str);
     int x = (WINDOW_WIDTH / 2) - (len_str * 7.5) / 2 ;
+    cub->control_box.last_string_y_pos = y;
     mlx_string_put(cub->mlx, cub->win, x, y, color, str);
 }
 
@@ -38,16 +39,16 @@ void    print_control_box(t_cub *cub)
     BLACK_COLOR);
     render(cub);
     print_string_middle_box(cub, (WINDOW_HEIGHT / 2) - 20, WHITE_COLOR, "Hello Pretty World Hello Pretty World Hello Pretty World");
-    print_string_middle_box(cub, (WINDOW_HEIGHT / 2) - 40, WHITE_COLOR, "Hello Pretty World");
-    print_string_middle_box(cub, (WINDOW_HEIGHT / 2) - 60, WHITE_COLOR, "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20");
-    print_string_middle_box(cub, (WINDOW_HEIGHT / 2) - 80, WHITE_COLOR, "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30");
-    print_string_middle_box(cub, (WINDOW_HEIGHT / 2) - 100, WHITE_COLOR, "My name is hadi and I am 24 years old");
-    print_string_middle_box(cub, (WINDOW_HEIGHT / 2) - 120, WHITE_COLOR, "I have a passion for eating icecream");
-    print_string_middle_box(cub, (WINDOW_HEIGHT / 2) - 140, WHITE_COLOR, "one");
-    print_string_middle_box(cub, (WINDOW_HEIGHT / 2) - 160, WHITE_COLOR, "one one");
-    print_string_middle_box(cub, (WINDOW_HEIGHT / 2) - 180, WHITE_COLOR, "one one one");
-    print_string_middle_box(cub, (WINDOW_HEIGHT / 2) - 200, WHITE_COLOR, "one one one one");
-    print_string_middle_box(cub, (WINDOW_HEIGHT / 2) - 220, WHITE_COLOR, "one one one one one");
-    print_string_middle_box(cub, (WINDOW_HEIGHT / 2) - 240, WHITE_COLOR, "one one one one one one");
-    print_string_middle_box(cub, (WINDOW_HEIGHT / 2) - 260, WHITE_COLOR, "one one one one one one one");
+    print_string_middle_box(cub, cub->control_box.last_string_y_pos - 20, WHITE_COLOR, "Hello Pretty World");
+    print_string_middle_box(cub, cub->control_box.last_string_y_pos - 20, WHITE_COLOR, "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20");
+    print_string_middle_box(cub, cub->control_box.last_string_y_pos - 20, WHITE_COLOR, "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30");
+    print_string_middle_box(cub, cub->control_box.last_string_y_pos - 20, WHITE_COLOR, "My name is hadi and I am 24 years old");
+    print_string_middle_box(cub, cub->control_box.last_string_y_pos - 20, WHITE_COLOR, "I have a passion for eating icecream");
+    print_string_middle_box(cub, cub->control_box.last_string_y_pos - 20, WHITE_COLOR, "one");
+    print_string_middle_box(cub, cub->control_box.last_string_y_pos - 20, WHITE_COLOR, "one one");
+    print_string_middle_box(cub, cub->control_box.last_string_y_pos - 20, WHITE_COLOR, "one one one");
+    print_string_middle_box(cub, cub->control_box.last_string_y_pos - 20, WHITE_COLOR, "one one one one");
+    print_string_middle_box(cub, cub->control_box.last_string_y_pos - 20, WHITE_COLOR, "one one one one one");
+    print_string_middle_box(cub, cub->control_box.last_string_y_pos - 20, WHITE_COLOR, "one one one one one one");
+    print_string_middle_box(cub, cub->control_box.last_string_y_pos - 20, WHITE_COLOR, "one one one one one one one");
 }
