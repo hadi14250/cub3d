@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 09:50:53 by hakaddou          #+#    #+#             */
-/*   Updated: 2024/09/27 09:53:12 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/09/27 10:04:19 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void    print_control_box(t_cub *cub)
     draw_rectangle(
         &cub->img,
     cub->control_box.controls_rect,
-    BLACK_COLOR);
+    TRANSPARENT_BLACK_COLOR);
     render(cub);
     print_string_middle_box(cub, (WINDOW_HEIGHT / 2) - 20, WHITE_COLOR, "Hello Pretty World Hello Pretty World Hello Pretty World");
     print_string_middle_box(cub, cub->control_box.last_string_y_pos - 20, WHITE_COLOR, "Hello Pretty World");

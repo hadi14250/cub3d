@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 20:11:20 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/13 06:40:50 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/09/27 10:05:30 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # define RED_COLOR 0x00FF0000
 # define CYAN_COLOR 0x0000FFFF
 # define BLACK_COLOR 0x00000000
+# define TRANSPARENT_BLACK_COLOR 0x33000000
 # define BLUE_COLOR 0x000000FF
 # define MAGENTA_COLOR 0x00FF00FF
 # define EGYPTIAN_BLUE_COLOR 0x1434A4
