@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 09:50:53 by hakaddou          #+#    #+#             */
-/*   Updated: 2024/09/27 10:04:19 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/09/27 10:10:37 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,13 @@ void    print_control_box(t_cub *cub)
     cub->control_box.controls_rect,
     TRANSPARENT_BLACK_COLOR);
     render(cub);
-    print_string_middle_box(cub, (WINDOW_HEIGHT / 2) - 20, WHITE_COLOR, "Hello Pretty World Hello Pretty World Hello Pretty World");
-    print_string_middle_box(cub, cub->control_box.last_string_y_pos - 20, WHITE_COLOR, "Hello Pretty World");
-    print_string_middle_box(cub, cub->control_box.last_string_y_pos - 20, WHITE_COLOR, "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20");
-    print_string_middle_box(cub, cub->control_box.last_string_y_pos - 20, WHITE_COLOR, "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30");
-    print_string_middle_box(cub, cub->control_box.last_string_y_pos - 20, WHITE_COLOR, "My name is hadi and I am 24 years old");
-    print_string_middle_box(cub, cub->control_box.last_string_y_pos - 20, WHITE_COLOR, "I have a passion for eating icecream");
-    print_string_middle_box(cub, cub->control_box.last_string_y_pos - 20, WHITE_COLOR, "one");
-    print_string_middle_box(cub, cub->control_box.last_string_y_pos - 20, WHITE_COLOR, "one one");
-    print_string_middle_box(cub, cub->control_box.last_string_y_pos - 20, WHITE_COLOR, "one one one");
-    print_string_middle_box(cub, cub->control_box.last_string_y_pos - 20, WHITE_COLOR, "one one one one");
-    print_string_middle_box(cub, cub->control_box.last_string_y_pos - 20, WHITE_COLOR, "one one one one one");
-    print_string_middle_box(cub, cub->control_box.last_string_y_pos - 20, WHITE_COLOR, "one one one one one one");
-    print_string_middle_box(cub, cub->control_box.last_string_y_pos - 20, WHITE_COLOR, "one one one one one one one");
+    cub->control_box.last_string_y_pos = (WINDOW_HEIGHT / 2) - 200;
+    print_string_middle_box(cub, cub->control_box.last_string_y_pos + 20, WHITE_COLOR, "one");
+    print_string_middle_box(cub, cub->control_box.last_string_y_pos + 20, WHITE_COLOR, "one one");
+    print_string_middle_box(cub, cub->control_box.last_string_y_pos + 20, WHITE_COLOR, "one one one");
+    print_string_middle_box(cub, cub->control_box.last_string_y_pos + 20, WHITE_COLOR, "one one one one");
+    print_string_middle_box(cub, cub->control_box.last_string_y_pos + 20, WHITE_COLOR, "one one one one one");
+    print_string_middle_box(cub, cub->control_box.last_string_y_pos + 20, WHITE_COLOR, "one one one one one one");
+    print_string_middle_box(cub, cub->control_box.last_string_y_pos + 20, WHITE_COLOR, "one one one one one one one");
+    // task for tmrw : print a box behind each string to make it look like a button
 }
