@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 20:15:27 by hakaddou          #+#    #+#             */
-/*   Updated: 2024/09/24 10:29:16 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/09/28 10:36:10 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@
 # define NUM_RAYS WINDOW_WIDTH
 
 # define MINIMAP_SCALE_FACTOR 0.3
+
+# define BUTTON_NUM 20
 
 // // texture
 // # define TEXTURE_HEIGHT 			64

@@ -6,11 +6,16 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 09:50:53 by hakaddou          #+#    #+#             */
-/*   Updated: 2024/09/28 10:25:54 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/09/28 10:37:04 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+void    print_button(t_cub *cub)
+{
+    
+}
 
 void    print_string_middle_box(t_cub *cub, int y, int color, char *str)
 {
