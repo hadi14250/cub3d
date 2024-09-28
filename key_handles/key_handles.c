@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 18:09:08 by hakaddou          #+#    #+#             */
-/*   Updated: 2024/09/24 09:53:37 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/09/28 10:25:51 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	check_controls(int key, t_cub *cub)
 {
 	if (key == C_KEY)
 		cub->keys.c = !(cub->keys.c);
-	rerender(cub);
 }
 
 int	keys_handler(int key, t_cub *cub)
@@ -62,6 +61,7 @@ int	keys_released(int key, t_cub *cub)
 		cub->keys.aim = false;
 		rerender(cub);
 	}
+	// if (key == C_KEY)
 	return (0);
 }
 
