@@ -6,24 +6,32 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 09:50:53 by hakaddou          #+#    #+#             */
-/*   Updated: 2024/09/28 10:47:14 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/09/28 10:57:23 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void    init_button_middle(t_button *button, char *str)
+void    init_button_middle(t_button *button, char *str, int color, int y)
 {
-    
+    button->str = str;
+    button->str_len = ft_strlen(str);
+    button->str_x = (WINDOW_WIDTH / 2) - (button->str_len * 7.5) / 2 ;
+    button->str_y = y;
+    button->last_button_y_pos = y;
+    button->color = color;
+    button->str_width = button->str_len * CHAR_PIXEL_WIDTH;
+    button->str_height = CHAR_PIXEL_WIDTH;
+    // mlx_string_put(cub->mlx, cub->win, x, y, color, str);
 }
 
 /* int post is a flag to determine if we want to print in
 the middle of the box, to the right, or left */
 
-void    init_button(t_button *button, char *str, int pos)
+void    init_button(t_button *button, char *str, int pos, int color, int y)
 {
     if (pos == MIDDLE)
-        init_button_middle(button, str);
+        init_button_middle(button, str, color, y);
 }
 
 // void    print_button(t_cub *cub)
@@ -34,7 +42,7 @@ void    init_button(t_button *button, char *str, int pos)
 void    print_string_middle_box(t_cub *cub, int y, int color, char *str)
 {
     int len_str = ft_strlen(str);
-    int x = (WINDOW_WIDTH / 2) - (len_str * 7.5) / 2 ;
+    int x = (WINDOW_WIDTH / 2) - (len_str * CHAR_PIXEL_WIDTH) / 2 ;
     cub->control_box.last_string_y_pos = y;
     mlx_string_put(cub->mlx, cub->win, x, y, color, str);
 }

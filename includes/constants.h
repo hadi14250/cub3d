@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 20:15:27 by hakaddou          #+#    #+#             */
-/*   Updated: 2024/09/28 10:46:08 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/09/28 10:59:23 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@
 # define BUTTON_NUM 20
 
 # define MIDDLE 0
+
+# define CHAR_PIXEL_WIDTH 8
 
 // // texture
 // # define TEXTURE_HEIGHT 			64
