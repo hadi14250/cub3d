@@ -6,16 +6,30 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 09:50:53 by hakaddou          #+#    #+#             */
-/*   Updated: 2024/09/28 10:37:04 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/09/28 10:47:14 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void    print_button(t_cub *cub)
+void    init_button_middle(t_button *button, char *str)
 {
     
 }
+
+/* int post is a flag to determine if we want to print in
+the middle of the box, to the right, or left */
+
+void    init_button(t_button *button, char *str, int pos)
+{
+    if (pos == MIDDLE)
+        init_button_middle(button, str);
+}
+
+// void    print_button(t_cub *cub)
+// {
+    
+// }
 
 void    print_string_middle_box(t_cub *cub, int y, int color, char *str)
 {
@@ -47,12 +61,12 @@ void    print_control_box(t_cub *cub)
 
 
     cub->control_box.last_string_y_pos = (WINDOW_HEIGHT / 2) - 200;
-    print_string_middle_box(cub, cub->control_box.last_string_y_pos + 20, WHITE_COLOR, "one");
-    print_string_middle_box(cub, cub->control_box.last_string_y_pos + 20, WHITE_COLOR, "one one");
-    print_string_middle_box(cub, cub->control_box.last_string_y_pos + 20, WHITE_COLOR, "one one one");
-    print_string_middle_box(cub, cub->control_box.last_string_y_pos + 20, WHITE_COLOR, "one one one one");
-    print_string_middle_box(cub, cub->control_box.last_string_y_pos + 20, WHITE_COLOR, "one one one one one");
-    print_string_middle_box(cub, cub->control_box.last_string_y_pos + 20, WHITE_COLOR, "one one one one one one");
-    print_string_middle_box(cub, cub->control_box.last_string_y_pos + 20, WHITE_COLOR, "one one one one one one one");
+    print_string_middle_box(cub, cub->control_box.last_string_y_pos + 50, WHITE_COLOR, "one");
+    print_string_middle_box(cub, cub->control_box.last_string_y_pos + 50, WHITE_COLOR, "one one");
+    print_string_middle_box(cub, cub->control_box.last_string_y_pos + 50, WHITE_COLOR, "one one one");
+    print_string_middle_box(cub, cub->control_box.last_string_y_pos + 50, WHITE_COLOR, "one one one one");
+    print_string_middle_box(cub, cub->control_box.last_string_y_pos + 50, WHITE_COLOR, "one one one one one");
+    print_string_middle_box(cub, cub->control_box.last_string_y_pos + 50, WHITE_COLOR, "one one one one one one");
+    print_string_middle_box(cub, cub->control_box.last_string_y_pos + 50, WHITE_COLOR, "one one one one one one one");
     // task for tmrw : print a box behind each string to make it look like a button
 }

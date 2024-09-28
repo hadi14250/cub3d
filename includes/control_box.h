@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 10:21:17 by hakaddou          #+#    #+#             */
-/*   Updated: 2024/09/28 10:40:05 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/09/28 10:43:22 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct s_button
 	int				str_width;
 	int				str_height;
     char            *str;
+    int             str_len;
 }			t_button;
 
 

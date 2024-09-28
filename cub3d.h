@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 03:12:29 by bsaeed            #+#    #+#             */
-/*   Updated: 2024/09/26 10:26:19 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/09/28 10:48:10 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -342,5 +342,8 @@ void			put_aim(t_cub *cub);
 
 /*	game controls	*/
 void    		print_control_box(t_cub *cub);
+void    		print_string_middle_box(t_cub *cub, int y, int color, char *str);
+void    		init_button(t_button *button, char *str, int pos);
+void    		init_button_middle(t_button *button, char *str);
 
 #endif
