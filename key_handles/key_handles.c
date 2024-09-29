@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 18:09:08 by hakaddou          #+#    #+#             */
-/*   Updated: 2024/09/28 10:25:51 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/09/29 10:36:27 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int	keys_handler(int key, t_cub *cub)
 	check_map_scaling(key, cub);
 	check_aiming(key, cub);
 	check_controls(key, cub);
+	rerender(cub);
 	return (0);
 }
 
@@ -69,29 +70,17 @@ int	render_loop(t_cub *cub)
 {
 	// start_mouse(cub);
 	// mlx_mouse_hide();
-	if (cub->keys.up == false)
-		cub->player.walkdirection = 0;
-	if (cub->keys.down == false)
-		cub->player.walkdirection = 0;
-	if (cub->keys.right == false && cub->keys.m_right == false)
-		cub->player.turndirection = 0;
-	if (cub->keys.left == false && cub->keys.m_left == false)
-		cub->player.turndirection = 0;
-	if (cub->keys.up == true)
-		cub->player.walkdirection = 1;
-	if (cub->keys.down == true)
-		cub->player.walkdirection = -1;
-	if (cub->keys.right == true || cub->keys.m_right == true)
-		cub->player.turndirection = 1;
-	if (cub->keys.left == true || cub->keys.m_left == true)
-		cub->player.turndirection = -1;
-	if (cub->keys.aim == true)
-		check_anim_aim(cub);
-	if (ft_memchr(&cub->keys, 1, sizeof(t_keys)))
-		rerender(cub);
-	if (cub->keys.c == true)
-		print_control_box(cub);
-
+	(cub->keys.up == false) && (cub->player.walkdirection = 0, 0);
+	(cub->keys.down == false) && (cub->player.walkdirection = 0, 0);
+	(cub->keys.right == false && cub->keys.m_right == false) && (cub->player.turndirection = 0, 0);
+	(cub->keys.left == false && cub->keys.m_left == false) && (cub->player.turndirection = 0, 0);
+	(cub->keys.up == true) && (cub->player.walkdirection = 1, 0);
+	(cub->keys.down == true) && (cub->player.walkdirection = -1, 0);
+	(cub->keys.right == true || cub->keys.m_right == true) && (cub->player.turndirection = 1, 0);
+	(cub->keys.left == true || cub->keys.m_left == true) && (cub->player.turndirection = -1, 0);
+	(cub->keys.aim) && (check_anim_aim(cub), 0);
+	(ft_memchr(&cub->keys, 1, sizeof(t_keys))) && (rerender(cub), 0);
+	cub->keys.c && (print_control_box(cub), 0);
 	return (0);
 }
 
