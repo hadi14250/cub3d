@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 09:50:53 by hakaddou          #+#    #+#             */
-/*   Updated: 2024/09/29 10:22:45 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/09/30 11:31:08 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void    init_button_middle(t_button *button, char *str, int color, int y)
     button->color = color;
     button->str_width = button->str_len * CHAR_PIXEL_WIDTH;
     button->str_height = CHAR_PIXEL_WIDTH;
-    // mlx_string_put(cub->mlx, cub->win, x, y, color, str);
 }
 
 /* int post is a flag to determine if we want to print in
@@ -30,14 +29,10 @@ the middle of the box, to the right, or left */
 
 void    init_button(t_button *button, char *str, int pos, int color, int y)
 {
-    if (pos == MIDDLE)
+    if (pos == MID_FLAF)
         init_button_middle(button, str, color, y);
 }
 
-// void    print_button(t_cub *cub)
-// {
-    
-// }
 
 void    print_string_middle_box(t_cub *cub, int y, int color, char *str)
 {
@@ -65,6 +60,28 @@ void    print_control_box(t_cub *cub)
     cub->control_box.controls_rect,
     TRANSPARENT_BLACK_COLOR);
     
+    init_button(&cub->control_box.buttons[0], "test test test test ", MID_FLAF, RED_COLOR, Y_MID);
+
+    cub->control_box.buttons[0].button_rect = init_rect(
+      cub->control_box.buttons[0].str_x,
+      cub->control_box.buttons[0].str_y,
+      cub->control_box.buttons[0].str_width,
+      cub->control_box.buttons[0].str_height  
+    );
+
+    draw_rectangle(
+            &cub->img,
+            cub->control_box.buttons[0].button_rect,
+            cub->control_box.buttons[0].color
+        );
+
+printf("Button X: %d, Y: %d, Width: %d, Height: %d\n", 
+    cub->control_box.buttons[0].str_x, 
+    cub->control_box.buttons[0].str_y, 
+    cub->control_box.buttons[0].str_width, 
+    cub->control_box.buttons[0].str_height);
+
+
     render(cub);
 
 

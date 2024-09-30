@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 20:15:27 by hakaddou          #+#    #+#             */
-/*   Updated: 2024/09/28 10:59:23 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/09/30 11:11:36 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,11 @@
 
 # define BUTTON_NUM 20
 
-# define MIDDLE 0
+# define X_MID WINDOW_WIDTH / 2
+
+# define Y_MID WINDOW_HEIGHT / 2
+
+# define MID_FLAF 0
 
 # define CHAR_PIXEL_WIDTH 8
 
