@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 09:50:53 by hakaddou          #+#    #+#             */
-/*   Updated: 2024/10/01 10:24:05 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/10/01 10:58:24 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,12 @@ void	draw_button(t_cub *cub, t_button *button)
 
 void    init_button_middle(t_button *button, char *str, int y)
 {
-    button->last_button_y_pos = (WINDOW_HEIGHT / 2) - (BUTTON_START_DISTANCE * (button->button_num + 1));
+    if (button->button_num == 0)
+        button->last_button_y_pos = (WINDOW_HEIGHT / 2) - (BUTTON_START_DISTANCE);        
+    else if (button->button_num < BUTTON_NUM)
+        button->last_button_y_pos = button[(button->button_num - 1)].last_button_y_pos + BUTTON_VERTICAL_DISTANCE; /* - (BUTTON_START_DISTANCE - (button->button_num + 1));    */
+
+    printf("y pos is: %d for button number: %d\n", button->last_button_y_pos, button->button_num);
     button->str = str;
     button->str_len = ft_strlen(str);
     button->str_x = (WINDOW_WIDTH / 2) - (button->str_len * 7.5) / 2 ;
@@ -76,6 +81,48 @@ void    init_button_nums(t_button *buttons)
         buttons[i].button_num = i;
 }
 
+void    draw_all_buttons(t_button *buttons, t_cub *cub)
+{
+    int i;
+
+    i = -1;
+    while(++i < BUTTON_NUM)
+    {
+        if (buttons[i].str_len <= 0)
+            break;
+        buttons[i].button_rect = init_rect(
+        buttons[i].button_x,
+        buttons[i].button_y,
+        buttons[i].button_w,
+        buttons[i].button_h  
+        );
+
+        draw_button(
+                cub,
+                &cub->control_box.buttons[i]
+            );
+    }
+}
+
+void    print_all_strings(t_button *buttons, t_cub *cub)
+{
+    int i;
+
+    i = -1;
+    while(++i < BUTTON_NUM)
+    {
+        if (buttons[i].str_len > 0)
+        {
+            print_string_middle_box(
+                cub,
+                buttons[i].last_button_y_pos + BUTTON_VERTICAL_DISTANCE * buttons[i].button_num,
+                buttons[i].str
+                );
+        }
+    }
+
+}
+
 void    print_control_box(t_cub *cub)
 {
     cub->control_box.width = WINDOW_WIDTH / 1.6;
@@ -95,35 +142,13 @@ void    print_control_box(t_cub *cub)
     TRANSPARENT_BLACK_COLOR);
     
     init_button_nums(cub->control_box.buttons);
+
     init_button(&cub->control_box.buttons[0], "test", MID_FLAF, Y_MID);
+    init_button(&cub->control_box.buttons[1], "test 2", MID_FLAF, Y_MID);
 
-    cub->control_box.buttons[0].button_rect = init_rect(
-      cub->control_box.buttons[0].button_x,
-      cub->control_box.buttons[0].button_y,
-      cub->control_box.buttons[0].button_w,
-      cub->control_box.buttons[0].button_h  
-    );
-
-    draw_button(
-            cub,
-            &cub->control_box.buttons[0]
-        );
+    draw_all_buttons(cub->control_box.buttons, cub);
 
     render(cub);
 
-    print_string_middle_box(
-        cub,
-        cub->control_box.buttons[0].last_button_y_pos + BUTTON_VERTICAL_DISTANCE * cub->control_box.buttons[0].button_num,
-        cub->control_box.buttons[0].str
-        );
-
-
-
-    // print_string_middle_box(cub, cub->control_box.last_string_y_pos + 50, WHITE_COLOR, "one one");
-    // print_string_middle_box(cub, cub->control_box.last_string_y_pos + 50, WHITE_COLOR, "one one one");
-    // print_string_middle_box(cub, cub->control_box.last_string_y_pos + 50, WHITE_COLOR, "one one one one");
-    // print_string_middle_box(cub, cub->control_box.last_string_y_pos + 50, WHITE_COLOR, "one one one one one");
-    // print_string_middle_box(cub, cub->control_box.last_string_y_pos + 50, WHITE_COLOR, "one one one one one one");
-    // print_string_middle_box(cub, cub->control_box.last_string_y_pos + 50, WHITE_COLOR, "one one one one one one one");
-    // task for tmrw : print a box behind each string to make it look like a button
+    print_all_strings(cub->control_box.buttons, cub);
 }
