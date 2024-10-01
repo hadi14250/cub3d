@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 20:15:27 by hakaddou          #+#    #+#             */
-/*   Updated: 2024/09/30 11:48:39 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/10/01 09:57:45 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@
 
 # define CHAR_PIXEL_WIDTH 8
 
-# define BUTTON_START_DISTANCE 200
+# define BUTTON_START_DISTANCE 250
 
 # define BUTTON_VERTICAL_DISTANCE 50
 
