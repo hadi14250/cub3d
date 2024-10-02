@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 20:15:27 by hakaddou          #+#    #+#             */
-/*   Updated: 2024/10/01 10:45:47 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/10/02 09:29:03 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 
 # define MINIMAP_SCALE_FACTOR 0.3
 
-# define BUTTON_NUM 2
+# define BUTTON_NUM 5
 
 # define X_MID WINDOW_WIDTH / 2
 

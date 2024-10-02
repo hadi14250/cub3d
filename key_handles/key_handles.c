@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 18:09:08 by hakaddou          #+#    #+#             */
-/*   Updated: 2024/09/29 10:36:27 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/10/02 10:25:55 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ int	keys_released(int key, t_cub *cub)
 		rerender(cub);
 	}
 	// if (key == C_KEY)
+	// 	cub->keys.c = false;
 	return (0);
 }
 
@@ -70,6 +71,7 @@ int	render_loop(t_cub *cub)
 {
 	// start_mouse(cub);
 	// mlx_mouse_hide();
+
 	(cub->keys.up == false) && (cub->player.walkdirection = 0, 0);
 	(cub->keys.down == false) && (cub->player.walkdirection = 0, 0);
 	(cub->keys.right == false && cub->keys.m_right == false) && (cub->player.turndirection = 0, 0);
@@ -79,8 +81,8 @@ int	render_loop(t_cub *cub)
 	(cub->keys.right == true || cub->keys.m_right == true) && (cub->player.turndirection = 1, 0);
 	(cub->keys.left == true || cub->keys.m_left == true) && (cub->player.turndirection = -1, 0);
 	(cub->keys.aim) && (check_anim_aim(cub), 0);
-	(ft_memchr(&cub->keys, 1, sizeof(t_keys))) && (rerender(cub), 0);
-	cub->keys.c && (print_control_box(cub), 0);
+	// cub->keys.c && (print_control_box(cub), 0);
+	(ft_memchr(&cub->keys, 1, sizeof(t_keys))) && (render(cub), 0);
 	return (0);
 }
 
