@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 09:50:53 by hakaddou          #+#    #+#             */
-/*   Updated: 2024/10/02 10:19:36 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/10/01 10:58:24 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void    init_button_middle(t_button *button, char *str, int y)
     if (button->button_num == 0)
         button->last_button_y_pos = (WINDOW_HEIGHT / 2) - (BUTTON_START_DISTANCE);        
     else if (button->button_num < BUTTON_NUM)
-        button->last_button_y_pos = button[(button->button_num - 1)].last_button_y_pos + BUTTON_VERTICAL_DISTANCE;
+        button->last_button_y_pos = button[(button->button_num - 1)].last_button_y_pos + BUTTON_VERTICAL_DISTANCE; /* - (BUTTON_START_DISTANCE - (button->button_num + 1));    */
 
     printf("y pos is: %d for button number: %d\n", button->last_button_y_pos, button->button_num);
     button->str = str;
@@ -147,6 +147,8 @@ void    print_control_box(t_cub *cub)
     init_button(&cub->control_box.buttons[1], "test 2", MID_FLAF, Y_MID);
 
     draw_all_buttons(cub->control_box.buttons, cub);
+
+    render(cub);
 
     print_all_strings(cub->control_box.buttons, cub);
 }
