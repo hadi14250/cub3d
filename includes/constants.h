@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 20:15:27 by hakaddou          #+#    #+#             */
-/*   Updated: 2024/10/03 09:36:06 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/10/03 10:33:52 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,11 @@
 
 # define MID_FLAF 0
 
-# define CHAR_PIXEL_WIDTH 8
+# define CHAR_PIXEL_WIDTH 7.3
 
-# define BUTTON_START_DISTANCE 250
+# define BUTTON_START_DISTANCE 200
 
-# define BUTTON_VERTICAL_DISTANCE 20
+# define BUTTON_VERTICAL_DISTANCE 50
 
 
 #define STR_COLOR WHITE_COLOR

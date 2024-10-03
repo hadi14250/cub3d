@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 09:50:53 by hakaddou          #+#    #+#             */
-/*   Updated: 2024/10/03 09:52:27 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/10/03 09:53:53 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,6 +148,7 @@ void    print_control_box(t_cub *cub)
     init_button(&cub->control_box.buttons[1], "test 2", MID_FLAF, Y_MID);
     init_button(&cub->control_box.buttons[2], " test 3 test 3 test 3", MID_FLAF, Y_MID);
     init_button(&cub->control_box.buttons[3], " test 4 test 4 test 4 test 4", MID_FLAF, Y_MID);
+    init_button(&cub->control_box.buttons[4], " tes 5 ", MID_FLAF, Y_MID);
 
     draw_all_buttons(cub->control_box.buttons, cub);
 
