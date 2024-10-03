@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 09:50:53 by hakaddou          #+#    #+#             */
-/*   Updated: 2024/10/03 09:15:28 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/10/03 09:25:18 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void    init_button_middle(t_button *button, char *str, int y)
     }
     else if (button->button_num < BUTTON_NUM && button->status == false)
     {
-        button->last_button_y_pos = button[(button->button_num - 1)].last_button_y_pos + BUTTON_VERTICAL_DISTANCE; /* - (BUTTON_START_DISTANCE - (button->button_num + 1));    */
+        button->last_button_y_pos = button[(button->button_num - 2)].last_button_y_pos + BUTTON_VERTICAL_DISTANCE;
         button->status = true;
     }
     button->str = str;
