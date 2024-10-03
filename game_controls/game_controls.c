@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 09:50:53 by hakaddou          #+#    #+#             */
-/*   Updated: 2024/10/03 09:25:18 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/10/03 09:28:06 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ void    print_all_strings(t_button *buttons, t_cub *cub)
         {
             print_string_middle_box(
                 cub,
-                buttons[i].last_button_y_pos + BUTTON_VERTICAL_DISTANCE * buttons[i].button_num,
+                buttons[i].last_button_y_pos,
                 buttons[i].str
                 );
         }
