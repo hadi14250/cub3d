@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 09:50:53 by hakaddou          #+#    #+#             */
-/*   Updated: 2024/10/03 09:28:06 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/10/03 09:52:27 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,6 @@ void	draw_button(t_cub *cub, t_button *button)
 
 void    init_button_middle(t_button *button, char *str, int y)
 {
-    if (button->button_num == 0 && button->status == false)
-    {
-        button->last_button_y_pos = (WINDOW_HEIGHT / 2) - (BUTTON_START_DISTANCE);        
-        button->status = true;
-    }
-    else if (button->button_num < BUTTON_NUM && button->status == false)
-    {
-        button->last_button_y_pos = button[(button->button_num - 2)].last_button_y_pos + BUTTON_VERTICAL_DISTANCE;
-        button->status = true;
-    }
     button->str = str;
     button->str_len = ft_strlen(str);
     button->str_x = (WINDOW_WIDTH / 2) - (button->str_len * 7.5) / 2 ;
@@ -76,13 +66,20 @@ void    print_string_middle_box(t_cub *cub, int y, char *str)
     mlx_string_put(cub->mlx, cub->win, x, y, STR_COLOR, str);
 }
 
-void    init_button_nums(t_button *buttons)
+void init_button_nums(t_button *buttons)
 {
     int i;
 
     i = -1;
-    while(++i < BUTTON_NUM)
+    while (++i < BUTTON_NUM)
+    {
         buttons[i].button_num = i;
+        buttons[i].status = false;
+        if (i == 0)
+            buttons[i].last_button_y_pos = (WINDOW_HEIGHT / 2) - (BUTTON_START_DISTANCE);
+        else
+            buttons[i].last_button_y_pos = buttons[i - 1].last_button_y_pos + BUTTON_VERTICAL_DISTANCE;
+    }
 }
 
 void    draw_all_buttons(t_button *buttons, t_cub *cub)
@@ -147,8 +144,10 @@ void    print_control_box(t_cub *cub)
     
     init_button_nums(cub->control_box.buttons);
 
-    init_button(&cub->control_box.buttons[0], "test", MID_FLAF, Y_MID);
+    init_button(&cub->control_box.buttons[0], "test 1", MID_FLAF, Y_MID);
     init_button(&cub->control_box.buttons[1], "test 2", MID_FLAF, Y_MID);
+    init_button(&cub->control_box.buttons[2], " test 3 test 3 test 3", MID_FLAF, Y_MID);
+    init_button(&cub->control_box.buttons[3], " test 4 test 4 test 4 test 4", MID_FLAF, Y_MID);
 
     draw_all_buttons(cub->control_box.buttons, cub);
 
