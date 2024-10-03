@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 09:50:53 by hakaddou          #+#    #+#             */
-/*   Updated: 2024/10/01 10:58:24 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/10/03 09:15:28 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,16 @@ void	draw_button(t_cub *cub, t_button *button)
 
 void    init_button_middle(t_button *button, char *str, int y)
 {
-    if (button->button_num == 0)
+    if (button->button_num == 0 && button->status == false)
+    {
         button->last_button_y_pos = (WINDOW_HEIGHT / 2) - (BUTTON_START_DISTANCE);        
-    else if (button->button_num < BUTTON_NUM)
+        button->status = true;
+    }
+    else if (button->button_num < BUTTON_NUM && button->status == false)
+    {
         button->last_button_y_pos = button[(button->button_num - 1)].last_button_y_pos + BUTTON_VERTICAL_DISTANCE; /* - (BUTTON_START_DISTANCE - (button->button_num + 1));    */
-
-    printf("y pos is: %d for button number: %d\n", button->last_button_y_pos, button->button_num);
+        button->status = true;
+    }
     button->str = str;
     button->str_len = ft_strlen(str);
     button->str_x = (WINDOW_WIDTH / 2) - (button->str_len * 7.5) / 2 ;
