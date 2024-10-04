@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 09:50:53 by hakaddou          #+#    #+#             */
-/*   Updated: 2024/10/03 11:13:17 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/10/04 12:16:10 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	draw_button(t_cub *cub, t_button *button)
 		i++;
 		j = rect.y;
 	}
-    // print_string_middle_box(cub, button->str_y, WHITE_COLOR, button->str);
 }
 
 void    init_button_middle(t_button *button, char *str, int y)
@@ -96,7 +95,6 @@ void    draw_all_buttons(t_button *buttons, t_cub *cub)
         buttons[i].button_w,
         buttons[i].button_h  
         );
-
         draw_button(
                 cub,
                 &cub->control_box.buttons[i]
@@ -129,7 +127,6 @@ void    print_control_box(t_cub *cub)
     cub->control_box.height = WINDOW_HEIGHT / 1.6;
     cub->control_box.x = WINDOW_WIDTH /  5.6;
     cub->control_box.y = WINDOW_HEIGHT / 5.6;
-
     cub->control_box.controls_rect = init_rect(
         cub->control_box.x,
         cub->control_box.y,
@@ -140,9 +137,7 @@ void    print_control_box(t_cub *cub)
         &cub->img,
     cub->control_box.controls_rect,
     TRANSPARENT_BLACK_COLOR);
-    
     init_button_nums(cub->control_box.buttons);
-
     init_button(&cub->control_box.buttons[0], "-------------------------------------", MID_FLAF, Y_MID);
     init_button(&cub->control_box.buttons[1], "----------------------------------", MID_FLAF, Y_MID);
     init_button(&cub->control_box.buttons[2], "-----------------------------", MID_FLAF, Y_MID);
@@ -151,10 +146,7 @@ void    print_control_box(t_cub *cub)
     init_button(&cub->control_box.buttons[5], "------------", MID_FLAF, Y_MID);
     init_button(&cub->control_box.buttons[6], "------", MID_FLAF, Y_MID);
     init_button(&cub->control_box.buttons[7], "---", MID_FLAF, Y_MID);
-
     draw_all_buttons(cub->control_box.buttons, cub);
-
     render(cub);
-
     print_all_strings(cub->control_box.buttons, cub);
 }
