@@ -6,31 +6,106 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 09:50:53 by hakaddou          #+#    #+#             */
-/*   Updated: 2024/10/05 11:22:26 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/10/05 11:46:21 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void	draw_button(t_cub *cub, t_button *button)
+void draw_button(t_cub *cub, t_button *button)
 {
-	int	i;
-	int	j;
-    t_rect rect;
+    int     i;
+    int     j;
+    t_rect  rect;
+    int     center_x;
+    int     center_y;
+    int     dx;
+    int     dy;
+    int     r_squared;
+    int     radius;
 
-    rect = button->button_rect;
-	i = button->button_x;
-	j = button->button_y;
-	while (i < rect.x + rect.width)
-	{
-		while (j < rect.y + rect.height)
-		{
-			my_mlx_pixel_put(&cub->img, i, j, BUTTON_COLOR);
-			j++;
-		}
-		i++;
-		j = rect.y;
-	}
+    radius = 10 * ROUNDED_BUTTONS;
+    r_squared = radius * radius;
+    rect = button->button_rect;    
+    i = rect.x + radius;
+    while (i < rect.x + rect.width - radius)
+    {
+        j = rect.y;
+        while (j < rect.y + rect.height)
+            my_mlx_pixel_put(&cub->img, i, j++, BUTTON_COLOR);
+        i++;
+    }
+    i = rect.x;
+    while (i < rect.x + rect.width)
+    {
+        j = rect.y + radius;
+        while (j < rect.y + rect.height - radius)
+            my_mlx_pixel_put(&cub->img, i, j++, BUTTON_COLOR);
+        i++;
+    }
+    center_x = rect.x + radius;
+    center_y = rect.y + radius;
+    i = 0;
+    while (i < radius)
+    {
+        j = 0;
+        while (j < radius)
+        {
+            dx = i - radius;
+            dy = j - radius;
+            if (dx * dx + dy * dy <= r_squared)
+                my_mlx_pixel_put(&cub->img, center_x + dx, center_y + dy, BUTTON_COLOR);
+            j++;
+        }
+        i++;
+    }
+
+    center_x = rect.x + rect.width - radius;
+    i = 0;
+    while (i < radius)
+    {
+        j = 0;
+        while (j < radius)
+        {
+            dx = i;
+            dy = j - radius;
+            if (dx * dx + dy * dy <= r_squared)
+                my_mlx_pixel_put(&cub->img, center_x + dx, rect.y + j, BUTTON_COLOR);
+            j++;
+        }
+        i++;
+    }
+    center_x = rect.x + radius;
+    center_y = rect.y + rect.height - radius;
+    i = 0;
+    while (i < radius)
+    {
+        j = 0;
+        while (j < radius)
+        {
+            dx = i - radius;
+            dy = j;
+            if (dx * dx + dy * dy <= r_squared)
+                my_mlx_pixel_put(&cub->img, center_x + dx, center_y + dy, BUTTON_COLOR);
+            j++;
+        }
+        i++;
+    }
+    center_x = rect.x + rect.width - radius;
+    i = 0;
+    while (i < radius)
+    {
+        j = 0;
+        while (j < radius)
+        {
+            dx = i;
+            dy = j;
+            if (dx * dx + dy * dy <= r_squared)
+                my_mlx_pixel_put(&cub->img, center_x + dx, center_y + dy, BUTTON_COLOR);
+            j++;
+        }
+        i++;
+    }
 }
 
 void    resize_button(t_button *button)
@@ -64,7 +139,6 @@ void    init_button(t_button *button, char *str, int pos, int y)
     if (pos == MID_FLAF)
         init_button_middle(button, str, y);
 }
-
 
 void    print_string_middle_box(t_cub *cub, int y, char *str)
 {
