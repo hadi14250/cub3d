@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 09:50:53 by hakaddou          #+#    #+#             */
-/*   Updated: 2024/10/04 12:16:10 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/10/05 11:22:26 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,14 @@ void	draw_button(t_cub *cub, t_button *button)
 	}
 }
 
+void    resize_button(t_button *button)
+{
+    button->button_x -= BUTTON_X_SHIFT;
+    button->button_w += (BUTTON_X_SHIFT * 2);
+    button->button_y -= BUTTON_Y_SHIFT;
+    button->button_h += (BUTTON_Y_SHIFT * 2);
+}
+
 void    init_button_middle(t_button *button, char *str, int y)
 {
     button->str = str;
@@ -41,10 +49,11 @@ void    init_button_middle(t_button *button, char *str, int y)
     button->str_y = y;
     button->str_width = button->str_len * CHAR_PIXEL_WIDTH;
     button->str_height = CHAR_PIXEL_WIDTH;
-    button->button_x = button->str_x ;
+    button->button_x = button->str_x;
     button->button_y = button->last_button_y_pos - button->str_height;
     button->button_w = button->str_width;
     button->button_h = button->str_height;
+    resize_button(button);
 }
 
 /* int post is a flag to determine if we want to print in
@@ -61,7 +70,6 @@ void    print_string_middle_box(t_cub *cub, int y, char *str)
 {
     int len_str = ft_strlen(str);
     int x = (WINDOW_WIDTH / 2) - (len_str * CHAR_PIXEL_WIDTH) / 2 ;
-    cub->control_box.last_string_y_pos = y;
     mlx_string_put(cub->mlx, cub->win, x, y, STR_COLOR, str);
 }
 
@@ -138,14 +146,14 @@ void    print_control_box(t_cub *cub)
     cub->control_box.controls_rect,
     TRANSPARENT_BLACK_COLOR);
     init_button_nums(cub->control_box.buttons);
-    init_button(&cub->control_box.buttons[0], "-------------------------------------", MID_FLAF, Y_MID);
-    init_button(&cub->control_box.buttons[1], "----------------------------------", MID_FLAF, Y_MID);
-    init_button(&cub->control_box.buttons[2], "-----------------------------", MID_FLAF, Y_MID);
-    init_button(&cub->control_box.buttons[3], "-------------------------", MID_FLAF, Y_MID);
-    init_button(&cub->control_box.buttons[4], "-----------------", MID_FLAF, Y_MID);
-    init_button(&cub->control_box.buttons[5], "------------", MID_FLAF, Y_MID);
-    init_button(&cub->control_box.buttons[6], "------", MID_FLAF, Y_MID);
-    init_button(&cub->control_box.buttons[7], "---", MID_FLAF, Y_MID);
+    init_button(&cub->control_box.buttons[0], "Hello World 1 2 3 4", MID_FLAF, Y_MID);
+    init_button(&cub->control_box.buttons[1], "My Name is Hadi And I am 24 years old", MID_FLAF, Y_MID);
+    init_button(&cub->control_box.buttons[2], "42 Abu Dhabi", MID_FLAF, Y_MID);
+    init_button(&cub->control_box.buttons[3], "Testing Testing", MID_FLAF, Y_MID);
+    init_button(&cub->control_box.buttons[4], "SOS", MID_FLAF, Y_MID);
+    init_button(&cub->control_box.buttons[5], "Need button to look rounded", MID_FLAF, Y_MID);
+    init_button(&cub->control_box.buttons[6], "how?", MID_FLAF, Y_MID);
+    init_button(&cub->control_box.buttons[7], "idk", MID_FLAF, Y_MID);
     draw_all_buttons(cub->control_box.buttons, cub);
     render(cub);
     print_all_strings(cub->control_box.buttons, cub);

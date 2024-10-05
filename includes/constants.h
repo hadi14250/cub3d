@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 20:15:27 by hakaddou          #+#    #+#             */
-/*   Updated: 2024/10/03 10:33:52 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/10/05 11:22:45 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,9 @@
 #define STR_COLOR WHITE_COLOR
 
 # define BUTTON_COLOR RED_COLOR
+
+# define BUTTON_X_SHIFT 25
+# define BUTTON_Y_SHIFT 10
 
 // // texture
 // # define TEXTURE_HEIGHT 			64
