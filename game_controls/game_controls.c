@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 09:50:53 by hakaddou          #+#    #+#             */
-/*   Updated: 2024/10/06 09:34:26 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/10/06 09:41:20 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,15 +157,9 @@ void init_button_nums(t_button *buttons)
     {
         buttons[i].button_num = i;
         if (i == 0)
-        {
             buttons[i].last_button_y_pos = (WINDOW_HEIGHT / 2) - (BUTTON_START_DISTANCE);
-            buttons[i].hovered = true;
-        }
         else
-        {
             buttons[i].last_button_y_pos = buttons[i - 1].last_button_y_pos + BUTTON_VERTICAL_DISTANCE;
-            buttons[i].hovered = false;
-        }
         buttons[i].str = NULL;
     }
 }
@@ -220,8 +214,12 @@ void    mark_hovered_button(t_button *buttons)
     {
         if (buttons[i].hovered == true)
             break ;
+        i++;
     }
-    buttons[i].color = HOVER_COLOR;
+    if (i < BUTTON_NUM && buttons[i].str != NULL)
+        buttons[i].color = HOVER_COLOR;
+    else
+        buttons[0].color = HOVER_COLOR;
 }
 
 void    print_control_box(t_cub *cub)
@@ -250,17 +248,12 @@ void    print_control_box(t_cub *cub)
     init_button(&cub->control_box.buttons[6], "how?", MID_FLAF, Y_MID);
     init_button(&cub->control_box.buttons[7], "idk", MID_FLAF, Y_MID);
     
+
     mark_hovered_button(cub->control_box.buttons);
     
     draw_all_buttons(cub->control_box.buttons, cub);
     render(cub);
     print_all_strings(cub->control_box.buttons, cub);
-    
-    
-    // cub->control_box.buttons[0].color = BLUE_COLOR;
-    // redraw_button(&cub->control_box.buttons[0], cub);
-    // render(cub);
-    // print_all_strings(cub->control_box.buttons, cub);
 }
 
 void    redraw_button(t_button *button, t_cub *cub)
