@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 03:12:29 by bsaeed            #+#    #+#             */
-/*   Updated: 2024/10/01 10:24:07 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/10/06 09:15:46 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -345,5 +345,5 @@ void    		print_control_box(t_cub *cub);
 void    		print_string_middle_box(t_cub *cub, int y, char *str);
 void			init_button(t_button *button, char *str, int pos, int y);
 void			init_button_middle(t_button *button, char *str, int y);
-
+void   			redraw_button(t_button *button, t_cub *cub);
 #endif

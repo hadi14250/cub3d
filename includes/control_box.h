@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 10:21:17 by hakaddou          #+#    #+#             */
-/*   Updated: 2024/10/03 11:13:23 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/10/06 09:29:01 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,9 @@ typedef struct s_button
     int             last_button_y_pos;
     int             button_num;
     t_rect          button_rect;
-    bool            hover;
+    int             color;
+    int             str_color;
+    bool            hovered;
 }			t_button;
 
 
