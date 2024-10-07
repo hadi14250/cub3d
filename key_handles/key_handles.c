@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 18:09:08 by hakaddou          #+#    #+#             */
-/*   Updated: 2024/09/29 10:36:27 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/10/07 09:40:59 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	rerender(t_cub *cub)
 
 void	check_controls(int key, t_cub *cub)
 {
+	if (key == DOWN_AROW)
+		cub->control_box.down_arrow = true;
 	if (key == C_KEY)
 		cub->keys.c = !(cub->keys.c);
 }
@@ -62,7 +64,8 @@ int	keys_released(int key, t_cub *cub)
 		cub->keys.aim = false;
 		rerender(cub);
 	}
-	// if (key == C_KEY)
+	if (key == DOWN_AROW)
+		cub->control_box.down_arrow = false;
 	return (0);
 }
 
@@ -79,6 +82,9 @@ int	render_loop(t_cub *cub)
 	(cub->keys.right == true || cub->keys.m_right == true) && (cub->player.turndirection = 1, 0);
 	(cub->keys.left == true || cub->keys.m_left == true) && (cub->player.turndirection = -1, 0);
 	(cub->keys.aim) && (check_anim_aim(cub), 0);
+	
+	(cub->keys.c && cub->control_box.down_arrow) && (change_hover_state(cub->control_box.buttons), 0);
+	
 	(ft_memchr(&cub->keys, 1, sizeof(t_keys))) && (rerender(cub), 0);
 	cub->keys.c && (print_control_box(cub), 0);
 	return (0);
