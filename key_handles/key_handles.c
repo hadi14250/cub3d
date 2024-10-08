@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 18:09:08 by hakaddou          #+#    #+#             */
-/*   Updated: 2024/10/08 11:40:34 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/10/08 15:51:58 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ void	rerender(t_cub *cub)
 
 void	check_controls(int key, t_cub *cub)
 {
-	if (key == DOWN_AROW)
-		cub->control_box.down_arrow = true;
-	if (key == C_KEY)
-		cub->keys.c = !(cub->keys.c);
+    if (key == DOWN_AROW)
+        change_hover_state(cub->control_box.buttons);
+    if (key == C_KEY)
+        cub->keys.c = !(cub->keys.c);
 }
 
 int	keys_handler(int key, t_cub *cub)
@@ -71,23 +71,23 @@ int	keys_released(int key, t_cub *cub)
 
 int	render_loop(t_cub *cub)
 {
-	// start_mouse(cub);
-	// mlx_mouse_hide();
-	(cub->keys.up == false) && (cub->player.walkdirection = 0, 0);
-	(cub->keys.down == false) && (cub->player.walkdirection = 0, 0);
-	(cub->keys.right == false && cub->keys.m_right == false) && (cub->player.turndirection = 0, 0);
-	(cub->keys.left == false && cub->keys.m_left == false) && (cub->player.turndirection = 0, 0);
-	(cub->keys.up == true) && (cub->player.walkdirection = 1, 0);
-	(cub->keys.down == true) && (cub->player.walkdirection = -1, 0);
-	(cub->keys.right == true || cub->keys.m_right == true) && (cub->player.turndirection = 1, 0);
-	(cub->keys.left == true || cub->keys.m_left == true) && (cub->player.turndirection = -1, 0);
-	(cub->keys.aim) && (check_anim_aim(cub), 0);
-	
-	(cub->keys.c && cub->control_box.down_arrow) && (change_hover_state(cub->control_box.buttons), 0);
-	
-	(ft_memchr(&cub->keys, 1, sizeof(t_keys))) && (rerender(cub), 0);
-	return (0);
+    (cub->keys.up == false) && (cub->player.walkdirection = 0, 0);
+    (cub->keys.down == false) && (cub->player.walkdirection = 0, 0);
+    (cub->keys.right == false && cub->keys.m_right == false) && (cub->player.turndirection = 0, 0);
+    (cub->keys.left == false && cub->keys.m_left == false) && (cub->player.turndirection = 0, 0);
+    (cub->keys.up == true) && (cub->player.walkdirection = 1, 0);
+    (cub->keys.down == true) && (cub->player.walkdirection = -1, 0);
+    (cub->keys.right == true || cub->keys.m_right == true) && (cub->player.turndirection = 1, 0);
+    (cub->keys.left == true || cub->keys.m_left == true) && (cub->player.turndirection = -1, 0);
+    (cub->keys.aim) && (check_anim_aim(cub), 0);
+    
+    (cub->keys.c && cub->control_box.down_arrow) && (change_hover_state(cub->control_box.buttons), 0);
+    
+    (ft_memchr(&cub->keys, 1, sizeof(t_keys))) && (rerender(cub), 0);
+    
+    return (0);
 }
+
 
 void	hook_keys(t_cub *cub)
 {

@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 09:50:53 by hakaddou          #+#    #+#             */
-/*   Updated: 2024/10/08 11:38:29 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/10/08 15:41:12 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,17 @@ void    change_hover_state(t_button *buttons)
     int i;
 
     i = 0;
-
     while(i < BUTTON_NUM && buttons[i].str != NULL)
     {
         if (buttons[i].hovered == true)
-            break ;
+            break;
         i++;
     }
-    if (i + 1 < BUTTON_NUM && buttons[i].str != NULL)
-    {
-        buttons[i].hovered = false;
+
+    buttons[i].hovered = false;
+
+    if (i + 1 < BUTTON_NUM && buttons[i + 1].str != NULL)
         buttons[i + 1].hovered = true;
-    }
     else
         buttons[0].hovered = true;
 }
@@ -272,7 +271,6 @@ void    print_control_box(t_cub *cub)
     mark_hovered_button(cub->control_box.buttons);
     
     draw_all_buttons(cub->control_box.buttons, cub);
-    // render(cub);
 }
 
 void    redraw_button(t_button *button, t_cub *cub)

@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 03:12:29 by bsaeed            #+#    #+#             */
-/*   Updated: 2024/10/08 11:39:17 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/10/08 15:35:33 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # include <stdarg.h>
 # include <math.h>
 # include <stdbool.h>
+#include <time.h>
 # include "./mlx/mlx.h"
 # include "./includes/constants.h"
 # include "./includes/keys.h"
@@ -125,6 +126,7 @@ typedef struct s_cub
 	double			aim_factor;
 	void			*gun;
 	t_contorl_box	control_box;
+	double			last_menu_action_time;
 }				t_cub;
 
 /* parsing utils */
