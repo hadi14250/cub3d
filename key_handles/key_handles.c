@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 18:09:08 by hakaddou          #+#    #+#             */
-/*   Updated: 2024/10/07 09:40:59 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/10/08 11:40:34 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ int	render_loop(t_cub *cub)
 	(cub->keys.c && cub->control_box.down_arrow) && (change_hover_state(cub->control_box.buttons), 0);
 	
 	(ft_memchr(&cub->keys, 1, sizeof(t_keys))) && (rerender(cub), 0);
-	cub->keys.c && (print_control_box(cub), 0);
 	return (0);
 }
 

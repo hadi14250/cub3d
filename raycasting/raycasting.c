@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 23:10:35 by hakaddou          #+#    #+#             */
-/*   Updated: 2024/09/28 10:30:34 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/10/08 11:40:01 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,13 +108,17 @@ void	put_machine_gun(t_cub *cub)
 
 void	render(t_cub *cub)
 {
-	if (cub->keys.q == false && cub->keys.c == false)
+	if (cub->keys.c)
+		print_control_box(cub);
+	else if (cub->keys.q == false)
 	{
 		render_map(cub);
 		render_rays(cub, cub->player.rays);
 		render_player(&cub->player, cub);
 	}
 	mlx_put_image_to_window(cub->mlx, cub->win, cub->img.img_ptr, 0, 0);
+	if (cub->keys.c)
+		print_all_strings(cub->control_box.buttons, cub);
 	if (!cub->keys.f && !cub->keys.c)
 		put_machine_gun(cub);
 }

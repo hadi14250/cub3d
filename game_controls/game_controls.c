@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 09:50:53 by hakaddou          #+#    #+#             */
-/*   Updated: 2024/10/07 09:39:07 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/10/08 11:38:29 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -272,8 +272,7 @@ void    print_control_box(t_cub *cub)
     mark_hovered_button(cub->control_box.buttons);
     
     draw_all_buttons(cub->control_box.buttons, cub);
-    render(cub);
-    print_all_strings(cub->control_box.buttons, cub);
+    // render(cub);
 }
 
 void    redraw_button(t_button *button, t_cub *cub)
