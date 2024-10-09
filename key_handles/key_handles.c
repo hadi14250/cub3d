@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 18:09:08 by hakaddou          #+#    #+#             */
-/*   Updated: 2024/10/09 09:09:26 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/10/09 09:11:05 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,6 @@ int	keys_released(int key, t_cub *cub)
 		cub->keys.aim = false;
 		rerender(cub);
 	}
-	if (key == DOWN_AROW)
-		cub->control_box.down_arrow = false;
 	return (0);
 }
 
