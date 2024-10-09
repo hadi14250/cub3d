@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 18:09:08 by hakaddou          #+#    #+#             */
-/*   Updated: 2024/10/08 15:51:58 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/10/09 09:09:26 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,6 @@ int	render_loop(t_cub *cub)
     (cub->keys.right == true || cub->keys.m_right == true) && (cub->player.turndirection = 1, 0);
     (cub->keys.left == true || cub->keys.m_left == true) && (cub->player.turndirection = -1, 0);
     (cub->keys.aim) && (check_anim_aim(cub), 0);
-    
-    (cub->keys.c && cub->control_box.down_arrow) && (change_hover_state(cub->control_box.buttons), 0);
     
     (ft_memchr(&cub->keys, 1, sizeof(t_keys))) && (rerender(cub), 0);
     
