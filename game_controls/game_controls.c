@@ -6,13 +6,13 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 09:50:53 by hakaddou          #+#    #+#             */
-/*   Updated: 2024/10/08 15:41:12 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/10/09 09:25:35 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void    change_hover_state(t_button *buttons)
+void    inc_button_hover(t_button *buttons)
 {
     int i;
 
@@ -30,6 +30,40 @@ void    change_hover_state(t_button *buttons)
         buttons[i + 1].hovered = true;
     else
         buttons[0].hovered = true;
+}
+
+void    dec_button_hover(t_button *buttons)
+{
+    int i;
+    int last_registered_button;
+
+    last_registered_button = 0;
+    i = 0;
+    while(i < BUTTON_NUM && buttons[i].str != NULL)
+    {
+        if (buttons[i].hovered == true)
+            break;
+        i++;
+    }
+
+    buttons[i].hovered = false;
+    
+    if (i - 1 >= 0 && buttons[i - 1].str != NULL)
+        buttons[i - 1].hovered = true;
+    else
+    {
+        while(last_registered_button < BUTTON_NUM && buttons[last_registered_button].str != NULL)
+            last_registered_button++;
+        buttons[last_registered_button - 1].hovered = true;
+    }
+}
+
+void    change_hover_state(t_button *buttons, int key)
+{
+    if (key == DOWN_AROW)
+        inc_button_hover(buttons);
+    else
+        dec_button_hover(buttons);
 }
 
 void draw_button(t_cub *cub, t_button *button)

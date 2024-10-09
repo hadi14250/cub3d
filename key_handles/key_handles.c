@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 18:09:08 by hakaddou          #+#    #+#             */
-/*   Updated: 2024/10/09 09:11:05 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/10/09 09:13:07 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	rerender(t_cub *cub)
 
 void	check_controls(int key, t_cub *cub)
 {
-    if (key == DOWN_AROW)
-        change_hover_state(cub->control_box.buttons);
+    if (key == DOWN_AROW || key == UP_AROW)
+        change_hover_state(cub->control_box.buttons, key);
     if (key == C_KEY)
         cub->keys.c = !(cub->keys.c);
 }
