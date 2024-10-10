@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 18:09:08 by hakaddou          #+#    #+#             */
-/*   Updated: 2024/10/09 09:13:07 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/10/10 09:15:55 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ int	render_loop(t_cub *cub)
     
     return (0);
 }
-
 
 void	hook_keys(t_cub *cub)
 {

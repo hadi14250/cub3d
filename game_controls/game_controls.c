@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 09:50:53 by hakaddou          #+#    #+#             */
-/*   Updated: 2024/10/09 09:25:35 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/10/10 09:50:49 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,17 @@ void    inc_button_hover(t_button *buttons)
 {
     int i;
 
-    i = 0;
-    while(i < BUTTON_NUM && buttons[i].str != NULL)
+    i = -1;
+    while(++i < BUTTON_NUM && buttons[i].str != NULL && buttons[i].hovered == false)
+        ;
+
+    if (i == buttons[0].max_buttons)
     {
-        if (buttons[i].hovered == true)
-            break;
-        i++;
+        buttons[0].hovered = false;
+        buttons[1].hovered = true;
+        return ;
     }
-
     buttons[i].hovered = false;
-
     if (i + 1 < BUTTON_NUM && buttons[i + 1].str != NULL)
         buttons[i + 1].hovered = true;
     else
@@ -275,6 +276,18 @@ void    mark_hovered_button(t_button *buttons)
     else
         buttons[0].color = HOVER_COLOR;
 }
+void    update_max_button_num(t_button *buttons)
+{
+    int i;
+    int j;
+
+    j = -1;
+    i = -1;
+    while (++i < BUTTON_NUM && buttons[i].str != NULL)
+        ;
+    while (++j < BUTTON_NUM && buttons[j].str != NULL)
+        buttons[j].max_buttons = i;
+}
 
 void    print_control_box(t_cub *cub)
 {
@@ -301,6 +314,8 @@ void    print_control_box(t_cub *cub)
     init_button(&cub->control_box.buttons[5], "Need button to look rounded", MID_FLAF, Y_MID);
     init_button(&cub->control_box.buttons[6], "how?", MID_FLAF, Y_MID);
     init_button(&cub->control_box.buttons[7], "idk", MID_FLAF, Y_MID);
+    
+    update_max_button_num(cub->control_box.buttons);
 
     mark_hovered_button(cub->control_box.buttons);
     
