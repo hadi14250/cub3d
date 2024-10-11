@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 09:50:53 by hakaddou          #+#    #+#             */
-/*   Updated: 2024/10/10 09:56:09 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/10/11 08:38:24 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -287,6 +287,24 @@ void    update_max_button_num(t_button *buttons)
         buttons[j].max_buttons = i;
 }
 
+void    intit_all_buttons(t_button *buttons)
+{
+    init_button_nums(buttons);
+
+    init_button(&buttons[0], "Hello World 1 2 3 4", MID_FLAF, Y_MID);
+    init_button(&buttons[1], "My Name is Hadi And I am 24 years old", MID_FLAF, Y_MID);
+    init_button(&buttons[2], "42 Abu Dhabi", MID_FLAF, Y_MID);
+    init_button(&buttons[3], "Testing Testing", MID_FLAF, Y_MID);
+    init_button(&buttons[4], "SOS", MID_FLAF, Y_MID);
+    init_button(&buttons[5], "Need button to look rounded", MID_FLAF, Y_MID);
+    init_button(&buttons[6], "how?", MID_FLAF, Y_MID);
+    init_button(&buttons[7], "idk", MID_FLAF, Y_MID);
+
+    update_max_button_num(buttons);
+
+    mark_hovered_button(buttons);
+}
+
 void    print_control_box(t_cub *cub)
 {
     cub->control_box.width = WINDOW_WIDTH / 1.6;
@@ -303,19 +321,8 @@ void    print_control_box(t_cub *cub)
         &cub->img,
     cub->control_box.controls_rect,
     TRANSPARENT_BLACK_COLOR);
-    init_button_nums(cub->control_box.buttons);
-    init_button(&cub->control_box.buttons[0], "Hello World 1 2 3 4", MID_FLAF, Y_MID);
-    init_button(&cub->control_box.buttons[1], "My Name is Hadi And I am 24 years old", MID_FLAF, Y_MID);
-    init_button(&cub->control_box.buttons[2], "42 Abu Dhabi", MID_FLAF, Y_MID);
-    init_button(&cub->control_box.buttons[3], "Testing Testing", MID_FLAF, Y_MID);
-    init_button(&cub->control_box.buttons[4], "SOS", MID_FLAF, Y_MID);
-    init_button(&cub->control_box.buttons[5], "Need button to look rounded", MID_FLAF, Y_MID);
-    init_button(&cub->control_box.buttons[6], "how?", MID_FLAF, Y_MID);
-    init_button(&cub->control_box.buttons[7], "idk", MID_FLAF, Y_MID);
-    
-    update_max_button_num(cub->control_box.buttons);
 
-    mark_hovered_button(cub->control_box.buttons);
+    intit_all_buttons(cub->control_box.buttons);
     
     draw_all_buttons(cub->control_box.buttons, cub);
 }
