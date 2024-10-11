@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 20:15:27 by hakaddou          #+#    #+#             */
-/*   Updated: 2024/10/09 09:23:37 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/10/11 08:45:15 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@
 
 # define Y_MID WINDOW_HEIGHT / 2
 
-# define MID_FLAF 0
+# define MID_FLAG 0
 
 # define CHAR_PIXEL_WIDTH 7.3
 

@@ -45,7 +45,10 @@ SRCS	= 	main.c \
 			key_handles/key_checks_two.c \
 			key_handles/key_checks_three.c \
 			game_controls/game_controls.c \
-
+			game_controls/button_controls.c \
+			game_controls/button_drawing.c \
+			game_controls/button_init.c \
+			game_controls/string_functions.c \
 
 
 OBJS	= $(SRCS:.c=.o)

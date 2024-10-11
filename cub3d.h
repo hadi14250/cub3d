@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 03:12:29 by bsaeed            #+#    #+#             */
-/*   Updated: 2024/10/09 09:13:21 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/10/11 08:52:14 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -344,10 +344,28 @@ void			put_aim(t_cub *cub);
 
 /*	game controls	*/
 void    		print_control_box(t_cub *cub);
-void    		print_string_middle_box(t_cub *cub, int y, char *str);
-void			init_button(t_button *button, char *str, int pos, int y);
-void			init_button_middle(t_button *button, char *str, int y);
-void   			redraw_button(t_button *button, t_cub *cub);
-void			change_hover_state(t_button *buttons, int key);
-void    		print_all_strings(t_button *buttons, t_cub *cub);
+
+/*	button controls	*/
+void    		inc_button_hover(t_button *buttons);
+void    		dec_button_hover(t_button *buttons);
+void    		change_hover_state(t_button *buttons, int key);
+void    		resize_button(t_button *button);
+void    		mark_hovered_button(t_button *buttons);
+void    		update_max_button_num(t_button *buttons);
+
+/*	button drawing	*/
+void			draw_button(t_cub *cub, t_button *button);
+void    		draw_all_buttons(t_button *buttons, t_cub *cub);
+void    		redraw_button(t_button *button, t_cub *cub);
+
+/*	button init	*/
+void    		intit_all_buttons(t_button *buttons);
+void    		init_button_middle(t_button *button, char *str, int y);
+void    		init_button(t_button *button, char *str, int pos, int y);
+void			init_button_nums(t_button *buttons);
+
+/* game contorl string functions */
+void			print_string_middle_box(t_cub *cub, int y, char *str);
+void			print_all_strings(t_button *buttons, t_cub *cub);
+
 #endif
