@@ -16,14 +16,13 @@ void    intit_all_buttons(t_button *buttons)
 {
     init_button_nums(buttons);
 
-    init_button(&buttons[0], "Hello World 1 2 3 4", MID_FLAG, Y_MID);
-    init_button(&buttons[1], "My Name is Hadi And I am 24 years old", MID_FLAG, Y_MID);
-    init_button(&buttons[2], "42 Abu Dhabi", MID_FLAG, Y_MID);
-    init_button(&buttons[3], "Testing Testing", MID_FLAG, Y_MID);
-    init_button(&buttons[4], "SOS", MID_FLAG, Y_MID);
-    init_button(&buttons[5], "Need button to look rounded", MID_FLAG, Y_MID);
-    init_button(&buttons[6], "how?", MID_FLAG, Y_MID);
-    init_button(&buttons[7], "idk", MID_FLAG, Y_MID);
+    init_button(&buttons[0], "Change Gun", MID_FLAG, Y_MID);
+    init_button(&buttons[1], "Remove Gun", MID_FLAG, Y_MID);
+    init_button(&buttons[2], "Change Ground Color (random)", MID_FLAG, Y_MID);
+    init_button(&buttons[3], "Change Sky Color (random)", MID_FLAG, Y_MID);
+    init_button(&buttons[4], "Change Map Background Color", MID_FLAG, Y_MID);
+    init_button(&buttons[5], "Change Map Wall Color", MID_FLAG, Y_MID);
+    init_button(&buttons[6], "Change Map Ray Color", MID_FLAG, Y_MID);
 
     update_max_button_num(buttons);
 
