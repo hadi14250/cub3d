@@ -65,6 +65,8 @@ LIBFT	=	libft/libft.a
 CLNLIB	=	@make clean -C libft
 FCLNLIB	=	@make fclean -C libft
 
+ARGS := $(filter-out $(firstword $(MAKECMDGOALS)),$(MAKECMDGOALS))
+
 all: $(NAME)
 
 $(NAME): $(OBJS)
@@ -93,7 +95,13 @@ fclean: clean
 re: fclean all
 		make clean
 
-exec: fclean all
-		./cub3d map.cub
+exec: 			$(NAME)
+					@./$(NAME) $(ARGS)
+
+rexec: 			re
+					@./$(NAME) $(ARGS)
+
+%:
+	@:
 
 .PHONY: all clean fclean re
