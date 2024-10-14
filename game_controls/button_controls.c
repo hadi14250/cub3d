@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 08:41:43 by hakaddou          #+#    #+#             */
-/*   Updated: 2024/10/11 08:48:37 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/10/14 17:30:10 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,4 +101,20 @@ void    update_max_button_num(t_button *buttons)
         ;
     while (++j < BUTTON_NUM && buttons[j].str != NULL)
         buttons[j].max_buttons = i;
+}
+
+void    reset_hover_state(t_button *buttons)
+{
+    int i;
+
+    i = -1;
+    while(++i < BUTTON_NUM && buttons[i].str != NULL)
+    {
+        if(buttons[i].hovered == true)
+        {
+            buttons[i].hovered = false;
+            buttons[0].hovered = true;
+            break ;
+        }
+    }
 }

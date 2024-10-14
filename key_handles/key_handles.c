@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 18:09:08 by hakaddou          #+#    #+#             */
-/*   Updated: 2024/10/14 17:25:01 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/10/14 17:27:25 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,11 @@ void	check_controls(int key, t_cub *cub)
 	if (cub->keys.c == true && (key == ENTER_KEY || key == NUMPAD_ENTER_KEY))
 		printf("entered here\n");
     if (key == C_KEY)
+	{
         cub->keys.c = !(cub->keys.c);
+		if (cub->keys.c == false)
+			reset_hover_state(cub->control_box.buttons);
+	}
 }
 
 int	keys_handler(int key, t_cub *cub)

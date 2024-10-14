@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 03:12:29 by bsaeed            #+#    #+#             */
-/*   Updated: 2024/10/11 08:52:14 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/10/14 17:30:30 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -352,6 +352,7 @@ void    		change_hover_state(t_button *buttons, int key);
 void    		resize_button(t_button *button);
 void    		mark_hovered_button(t_button *buttons);
 void    		update_max_button_num(t_button *buttons);
+void			reset_hover_state(t_button *buttons);
 
 /*	button drawing	*/
 void			draw_button(t_cub *cub, t_button *button);
