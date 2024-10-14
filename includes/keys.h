@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 20:12:18 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/13 07:06:01 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/10/14 17:20:29 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,9 @@
 # define Q_KEY 12
 # define T_KEY 17
 # define C_KEY 8
+# define ENTER_KEY 36
+# define NUMPAD_ENTER_KEY 76
+
 
 typedef struct s_keys
 {
