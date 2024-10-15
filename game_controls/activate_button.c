@@ -6,7 +6,7 @@
 /*   By: hadikaddoura <hadikaddoura@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 21:18:21 by hakaddou          #+#    #+#             */
-/*   Updated: 2024/10/15 21:28:42 by hadikaddour      ###   ########.fr       */
+/*   Updated: 2024/10/15 22:40:08 by hadikaddour      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ t_button *get_hovered_button(t_button *buttons)
         ;
     if (i >= 0 && buttons[i].str != NULL)
         return(&buttons[i]);
-    return (NULL);
+    if (buttons[0].str != NULL)
+        return (&buttons[0]);
+    return(NULL);
 }
 
 void    activate_button(t_cub *cub)
@@ -29,5 +31,8 @@ void    activate_button(t_cub *cub)
     t_button *hovered;
 
     hovered = get_hovered_button(cub->control_box.buttons);
+    if (!hovered)
+        exit_cub(cub, 1, "no buttons exist\n");
     printf("hovered button is: %s\n", hovered->str);
 }
+
