@@ -23,7 +23,7 @@ void	check_controls(int key, t_cub *cub)
     if (cub->keys.c == true && (key == DOWN_AROW || key == UP_AROW))
         change_hover_state(cub->control_box.buttons, key);
 	if (cub->keys.c == true && (key == ENTER_KEY || key == NUMPAD_ENTER_KEY))
-		printf("entered here\n");
+		activate_button(cub);
     if (key == C_KEY)
 	{
         cub->keys.c = !(cub->keys.c);

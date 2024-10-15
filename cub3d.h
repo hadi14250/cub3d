@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hadikaddoura <hadikaddoura@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 03:12:29 by bsaeed            #+#    #+#             */
-/*   Updated: 2024/10/14 17:30:30 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/10/15 21:25:30 by hadikaddour      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -368,5 +368,8 @@ void			init_button_nums(t_button *buttons);
 /* game contorl string functions */
 void			print_string_middle_box(t_cub *cub, int y, char *str);
 void			print_all_strings(t_button *buttons, t_cub *cub);
+
+/* button activation */
+void    		activate_button(t_cub *cub);
 
 #endif
