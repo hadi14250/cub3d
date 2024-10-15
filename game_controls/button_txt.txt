@@ -1,0 +1,9 @@
+Change Gun
+Remove Gun
+Change Ground Color (random)
+Change Sky Color (random)
+Change Map Background Color
+Change Map Wall Color
+Change Map Ray Color
+Exit Controls
+Exit Game

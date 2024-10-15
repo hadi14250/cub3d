@@ -6,7 +6,7 @@
 /*   By: hadikaddoura <hadikaddoura@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 03:12:29 by bsaeed            #+#    #+#             */
-/*   Updated: 2024/10/15 21:25:30 by hadikaddour      ###   ########.fr       */
+/*   Updated: 2024/10/15 23:04:46 by hadikaddour      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,49 +84,55 @@ typedef struct s_dir
 	double	actual_dir;
 }				t_dir;
 
+typedef	struct	s_button_controls
+{
+	bool	remove_machine_gun;
+}				t_button_controls;
+
 // map struct
 typedef struct s_cub
 {
-	void			*mlx;
-	void			*win;
-	t_img			img;
-	t_img2			img2[4];
-	char			**rgb;
-	char			**xpm;
-	char			**map;
-	unsigned long	floor;
-	unsigned long	ceiling;
-	uint32_t		texture[4][TEXTURE_HEIGHT * TEXTURE_WIDTH];
-	t_player		player;
-	t_keys			keys;
-	int				*color_buffer;
-	int				*tex;
-	double			proj_wall_h;
-	int				t_size;
-	int				wall_strip_height;
-	int				wall_top_pixel;
-	int				wall_bottom_pixel;
-	char			*map_1d;
-	int				map_1d_len;
-	char			*c_rgb;
-	char			*f_rgb;
-	bool			color_flag;
-	int				fd;
-	int				no_pos;
-	int				so_pos;
-	int				we_pos;
-	int				ea_pos;
-	int				floor_pos;
-	int				ceiling_pos;
-	int				max;
-	t_dir			dir;
-	int				p_flag;
-	double			scale_factor;
-	int				fps;
-	double			aim_factor;
-	void			*gun;
-	t_contorl_box	control_box;
-	double			last_menu_action_time;
+	void				*mlx;
+	void				*win;
+	t_img				img;
+	t_img2				img2[4];
+	char				**rgb;
+	char				**xpm;
+	char				**map;
+	unsigned long		floor;
+	unsigned long		ceiling;
+	uint32_t			texture[4][TEXTURE_HEIGHT * TEXTURE_WIDTH];
+	t_player			player;
+	t_keys				keys;
+	int					*color_buffer;
+	int					*tex;
+	double				proj_wall_h;
+	int					t_size;
+	int					wall_strip_height;
+	int					wall_top_pixel;
+	int					wall_bottom_pixel;
+	char				*map_1d;
+	int					map_1d_len;
+	char				*c_rgb;
+	char				*f_rgb;
+	bool				color_flag;
+	int					fd;
+	int					no_pos;
+	int					so_pos;
+	int					we_pos;
+	int					ea_pos;
+	int					floor_pos;
+	int					ceiling_pos;
+	int					max;
+	t_dir				dir;
+	int					p_flag;
+	double				scale_factor;
+	int					fps;
+	double				aim_factor;
+	void				*gun;
+	t_contorl_box		control_box;
+	double				last_menu_action_time;
+	t_button_controls	button_controls;
 }				t_cub;
 
 /* parsing utils */
@@ -360,6 +366,7 @@ void    		draw_all_buttons(t_button *buttons, t_cub *cub);
 void    		redraw_button(t_button *button, t_cub *cub);
 
 /*	button init	*/
+void    		get_button_txt(t_button *buttons);
 void    		intit_all_buttons(t_button *buttons);
 void    		init_button_middle(t_button *button, char *str, int y);
 void    		init_button(t_button *button, char *str, int pos, int y);

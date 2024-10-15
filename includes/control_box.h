@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   control_box.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hadikaddoura <hadikaddoura@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 10:21:17 by hakaddou          #+#    #+#             */
-/*   Updated: 2024/10/10 09:45:07 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/10/15 22:53:42 by hadikaddour      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ typedef struct s_button
     bool            hovered;
     int             max_buttons;
 }			t_button;
-
 
 typedef struct s_contorl_box
 {

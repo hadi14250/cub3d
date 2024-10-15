@@ -3,27 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   button_init.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hadikaddoura <hadikaddoura@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 08:44:48 by hakaddou          #+#    #+#             */
-/*   Updated: 2024/10/11 08:50:45 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/10/15 23:34:48 by hadikaddour      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
+void    get_button_txt(t_button *buttons)
+{
+    int     i;
+    char    *str;
+    int     fd;
+
+    fd = open("./game_controls/button_txt.txt", O_RDONLY);
+    if(fd < 0)
+        return ;
+    i = 0;
+    str = "h";
+    while(str && i < BUTTON_NUM)
+    {
+        str = get_next_line(fd);
+        init_button(&buttons[i], str, MID_FLAG, Y_MID);
+        i++;
+    }
+    close(fd);
+}
+
 void    intit_all_buttons(t_button *buttons)
 {
     init_button_nums(buttons);
 
-    init_button(&buttons[0], "Change Gun", MID_FLAG, Y_MID);
-    init_button(&buttons[1], "Remove Gun", MID_FLAG, Y_MID);
-    init_button(&buttons[2], "Change Ground Color (random)", MID_FLAG, Y_MID);
-    init_button(&buttons[3], "Change Sky Color (random)", MID_FLAG, Y_MID);
-    init_button(&buttons[4], "Change Map Background Color", MID_FLAG, Y_MID);
-    init_button(&buttons[5], "Change Map Wall Color", MID_FLAG, Y_MID);
-    init_button(&buttons[6], "Change Map Ray Color", MID_FLAG, Y_MID);
-
+    get_button_txt(buttons);
     update_max_button_num(buttons);
 
     mark_hovered_button(buttons);

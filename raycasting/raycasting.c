@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hadikaddoura <hadikaddoura@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 23:10:35 by hakaddou          #+#    #+#             */
-/*   Updated: 2024/10/08 11:40:01 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/10/15 22:56:54 by hadikaddour      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,8 @@ void	render(t_cub *cub)
 	mlx_put_image_to_window(cub->mlx, cub->win, cub->img.img_ptr, 0, 0);
 	if (cub->keys.c)
 		print_all_strings(cub->control_box.buttons, cub);
-	if (!cub->keys.f && !cub->keys.c)
+	if (!cub->keys.f && !cub->keys.c && 
+		!cub->button_controls.remove_machine_gun)
 		put_machine_gun(cub);
 }
 
