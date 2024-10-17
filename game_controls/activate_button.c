@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 21:18:21 by hakaddou          #+#    #+#             */
-/*   Updated: 2024/10/17 09:23:36 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/10/17 09:32:14 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,54 +26,43 @@ t_button *get_hovered_button(t_button *buttons)
     return(NULL);
 }
 
+unsigned int get_random_color()
+{
+    unsigned int    red;
+    unsigned int    green;
+    unsigned int    blue;
+    unsigned int    color;
+
+    red = rand() % 256;
+    green = rand() % 256;
+    blue = rand() % 256;
+    color = (red << 16) | (green << 8) | blue;
+    return(color);
+}
+
 void    change_ground_color_random(t_cub *cub)
 {
-    unsigned int red = rand() % 256;
-    unsigned int green = rand() % 256;
-    unsigned int blue = rand() % 256;
-
-    unsigned int color = (red << 16) | (green << 8) | blue;
-    cub->floor = color;
+    cub->floor = get_random_color();
 }
 
 void    change_sky_color_random(t_cub *cub)
 {
-    unsigned int red = rand() % 256;
-    unsigned int green = rand() % 256;
-    unsigned int blue = rand() % 256;
-
-    unsigned int color = (red << 16) | (green << 8) | blue;
-    cub->ceiling = color;
+    cub->ceiling = get_random_color();
 }
 
 void    change_minimap_backgound_color_random(t_cub *cub)
 {
-    unsigned int red = rand() % 256;
-    unsigned int green = rand() % 256;
-    unsigned int blue = rand() % 256;
-
-    unsigned int color = (red << 16) | (green << 8) | blue;
-    cub->player.map3d.map_background_color = color;
+    cub->player.map3d.map_background_color = get_random_color();
 }
 
 void    change_minimap_wall_color_random(t_cub *cub)
 {
-    unsigned int red = rand() % 256;
-    unsigned int green = rand() % 256;
-    unsigned int blue = rand() % 256;
-
-    unsigned int color = (red << 16) | (green << 8) | blue;
-    cub->player.map3d.map_wall_color = color;
+    cub->player.map3d.map_wall_color = get_random_color();
 }
 
 void    change_minimap_ray_color_random(t_cub *cub)
 {
-    unsigned int red = rand() % 256;
-    unsigned int green = rand() % 256;
-    unsigned int blue = rand() % 256;
-
-    unsigned int color = (red << 16) | (green << 8) | blue;
-    cub->player.map3d.map_ray_color = color;
+    cub->player.map3d.map_ray_color = get_random_color();
 }
 
 void    parse_button_functionality(t_button *hovered, t_cub *cub)
