@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 21:18:21 by hakaddou          #+#    #+#             */
-/*   Updated: 2024/10/17 09:21:42 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/10/17 09:23:36 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,16 @@ void    change_minimap_wall_color_random(t_cub *cub)
     cub->player.map3d.map_wall_color = color;
 }
 
+void    change_minimap_ray_color_random(t_cub *cub)
+{
+    unsigned int red = rand() % 256;
+    unsigned int green = rand() % 256;
+    unsigned int blue = rand() % 256;
+
+    unsigned int color = (red << 16) | (green << 8) | blue;
+    cub->player.map3d.map_ray_color = color;
+}
+
 void    parse_button_functionality(t_button *hovered, t_cub *cub)
 {
     if(!ft_strncmp(hovered->str, "Exit Game", ft_strlen(hovered->str)))
@@ -83,6 +93,8 @@ void    parse_button_functionality(t_button *hovered, t_cub *cub)
         change_minimap_backgound_color_random(cub);
     if(!ft_strncmp(hovered->str, "Change Minimap Wall Color (random)", ft_strlen(hovered->str)))
         change_minimap_wall_color_random(cub);
+    if(!ft_strncmp(hovered->str, "Change Minmap Ray Color (random)", ft_strlen(hovered->str)))
+        change_minimap_ray_color_random(cub);
 }
 
 void    activate_button(t_cub *cub)

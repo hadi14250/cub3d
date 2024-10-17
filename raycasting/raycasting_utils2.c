@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 05:24:50 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/18 23:51:53 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/10/17 09:25:22 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	render_rays(t_cub *cub, t_ray *rays)
 			* cub->player.map3d.x_scale_factor,
 			rays[i].wall_hit.y * cub->player.map3d.y_scale_factor,
 			10 * cub->player.map3d.small_factor);
-		draw_bressen_line(&cub->img, start, end, BRIGHT_YELLOW);
+		draw_bressen_line(&cub->img, start, end, cub->player.map3d.map_ray_color);
 		draw_circle(&cub->img, circle, RED_COLOR);
 	}
 	draw_middle_circle(cub, rays);

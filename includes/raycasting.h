@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 22:16:47 by hakaddou          #+#    #+#             */
-/*   Updated: 2024/10/17 09:10:12 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/10/17 09:24:53 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ typedef struct s_map
 	double	big_factor;
 	int		map_background_color;
 	int		map_wall_color;
+	int		map_ray_color;
 }			t_map;
 
 typedef struct s_loc_3d_wall_vars
