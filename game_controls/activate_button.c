@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   activate_button.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hadikaddoura <hadikaddoura@student.42.f    +#+  +:+       +#+        */
+/*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 21:18:21 by hakaddou          #+#    #+#             */
-/*   Updated: 2024/10/16 18:53:58 by hadikaddour      ###   ########.fr       */
+/*   Updated: 2024/10/17 08:33:46 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,13 @@ t_button *get_hovered_button(t_button *buttons)
 
 void    parse_button_functionality(t_button *hovered, t_cub *cub)
 {
-    printf("->>>> %s\n", hovered->str);
     if(!ft_strncmp(hovered->str, "Exit Game", ft_strlen(hovered->str)))
         exit_app(cub);
+    if(!ft_strncmp(hovered->str, "Exit Controls", ft_strlen(hovered->str)))
+    {
+        reset_hover_state(cub->control_box.buttons);
+        cub->keys.c = false;
+    }
 }
 
 void    activate_button(t_cub *cub)
