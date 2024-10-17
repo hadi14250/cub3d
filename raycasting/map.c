@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 18:18:09 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/05/12 19:00:57 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/10/17 09:17:15 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,9 @@ void	render_map(t_cub *cub)
 		{
 			init_point(&tile, j * TILE_SIZE, i * TILE_SIZE);
 			if (cub->player.map3d.map[i][j] == '1')
-				tilecolor = AZURE;
+				tilecolor = cub->player.map3d.map_wall_color;
 			else
-				tilecolor = return_color(cub, DARK_ORANGE);
+				tilecolor = cub->player.map3d.map_background_color;
 			rect = init_rect(tile.x * cub->player.map3d.x_scale_factor,
 					tile.y * cub->player.map3d.y_scale_factor,
 					TILE_SIZE * cub->player.map3d.x_scale_factor,

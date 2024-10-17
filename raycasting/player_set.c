@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 05:23:00 by hakaddou          #+#    #+#             */
-/*   Updated: 2023/04/18 23:46:11 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/10/17 09:17:44 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ void	init_map(t_cub *cub)
 	cub->player.map3d.width = ft_strlen(
 			cub->player.map3d.map[0]
 			);
+	cub->player.map3d.map_background_color = DARK_ORANGE;
+	cub->player.map3d.map_wall_color = AZURE;
 }
 
 void	set_minimap_scalefactor(t_cub *cub)

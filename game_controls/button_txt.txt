@@ -2,8 +2,8 @@ Change Gun
 Remove Gun
 Change Sky Color (random)
 Change Ground Color (random)
-Change Map Background Color
-Change Map Wall Color
-Change Map Ray Color
+Change Minmap Background Color (random)
+Change Minimap Wall Color (random)
+Change Minmap Ray Color (random)
 Exit Controls
 Exit Game
