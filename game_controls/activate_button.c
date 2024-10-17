@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 21:18:21 by hakaddou          #+#    #+#             */
-/*   Updated: 2024/10/17 08:33:46 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/10/17 08:51:28 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,16 @@ t_button *get_hovered_button(t_button *buttons)
     return(NULL);
 }
 
+void    change_ground_color_random(t_cub *cub)
+{
+    unsigned int red = rand() % 256;
+    unsigned int green = rand() % 256;
+    unsigned int blue = rand() % 256;
+
+    unsigned int color = (red << 16) | (green << 8) | blue;
+    cub->floor = color;
+}
+
 void    parse_button_functionality(t_button *hovered, t_cub *cub)
 {
     if(!ft_strncmp(hovered->str, "Exit Game", ft_strlen(hovered->str)))
@@ -35,6 +45,8 @@ void    parse_button_functionality(t_button *hovered, t_cub *cub)
         reset_hover_state(cub->control_box.buttons);
         cub->keys.c = false;
     }
+    if(!ft_strncmp(hovered->str, "Change Ground Color (random)", ft_strlen(hovered->str)))
+        change_ground_color_random(cub);
 }
 
 void    activate_button(t_cub *cub)
