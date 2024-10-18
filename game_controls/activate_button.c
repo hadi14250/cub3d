@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   activate_button.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hadikaddoura <hadikaddoura@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 21:18:21 by hakaddou          #+#    #+#             */
-/*   Updated: 2024/10/17 09:32:14 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/10/18 20:56:38 by hadikaddour      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,13 @@ void    change_minimap_ray_color_random(t_cub *cub)
     cub->player.map3d.map_ray_color = get_random_color();
 }
 
+void    remove_gun(t_cub *cub)
+{
+    cub->button_controls.remove_machine_gun = !cub->button_controls.remove_machine_gun;
+    cub->keys.c = false;
+    reset_hover_state(cub->control_box.buttons);
+}
+
 void    parse_button_functionality(t_button *hovered, t_cub *cub)
 {
     if(!ft_strncmp(hovered->str, "Exit Game", ft_strlen(hovered->str)))
@@ -84,6 +91,8 @@ void    parse_button_functionality(t_button *hovered, t_cub *cub)
         change_minimap_wall_color_random(cub);
     if(!ft_strncmp(hovered->str, "Change Minmap Ray Color (random)", ft_strlen(hovered->str)))
         change_minimap_ray_color_random(cub);
+    if(!ft_strncmp(hovered->str, "Remove Gun", ft_strlen(hovered->str)))
+        remove_gun(cub);
 }
 
 void    activate_button(t_cub *cub)
@@ -95,8 +104,5 @@ void    activate_button(t_cub *cub)
         exit_cub(cub, 1, "no buttons exist\n");
         
     parse_button_functionality(hovered, cub);
-
-    // cub->button_controls.remove_machine_gun = !cub->button_controls.remove_machine_gun;
-    // cub->keys.c = false;
 }
 
