@@ -1,5 +1,5 @@
 Change Gun
-Remove Gun
+Un Equip Gun
 Change Sky Color (random)
 Change Ground Color (random)
 Change Minmap Background Color (random)

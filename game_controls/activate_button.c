@@ -6,7 +6,7 @@
 /*   By: hadikaddoura <hadikaddoura@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 21:18:21 by hakaddou          #+#    #+#             */
-/*   Updated: 2024/10/18 20:56:38 by hadikaddour      ###   ########.fr       */
+/*   Updated: 2024/10/18 22:06:37 by hadikaddour      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,10 @@ void    remove_gun(t_cub *cub)
     cub->button_controls.remove_machine_gun = !cub->button_controls.remove_machine_gun;
     cub->keys.c = false;
     reset_hover_state(cub->control_box.buttons);
+    if(cub->button_controls.remove_machine_gun == false)
+        cub->control_box.buttons_txt[1] = "Un Equip Gun";
+    else
+        cub->control_box.buttons_txt[1] = "Re Equip Gun";
 }
 
 void    parse_button_functionality(t_button *hovered, t_cub *cub)
@@ -91,7 +95,8 @@ void    parse_button_functionality(t_button *hovered, t_cub *cub)
         change_minimap_wall_color_random(cub);
     if(!ft_strncmp(hovered->str, "Change Minmap Ray Color (random)", ft_strlen(hovered->str)))
         change_minimap_ray_color_random(cub);
-    if(!ft_strncmp(hovered->str, "Remove Gun", ft_strlen(hovered->str)))
+    if(!ft_strncmp(hovered->str, "Un Equip Gun", ft_strlen(hovered->str)) ||
+        !ft_strncmp(hovered->str, "Re Equip Gun", ft_strlen(hovered->str)))
         remove_gun(cub);
 }
 
