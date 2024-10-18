@@ -6,7 +6,7 @@
 /*   By: hadikaddoura <hadikaddoura@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 20:27:50 by hakaddou          #+#    #+#             */
-/*   Updated: 2024/10/15 23:28:34 by hadikaddour      ###   ########.fr       */
+/*   Updated: 2024/10/18 21:51:25 by hadikaddour      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	init_consts(t_cub *cub)
 			/ tan(cub->player.fov / 2));
 	cub->player.mid_ray = (NUM_RAYS / 2) - 1;
 	init_button_nums(cub->control_box.buttons);
-	get_button_txt(cub->control_box.buttons);
+	get_button_txt(cub->control_box.buttons, cub);
 }
 
 // make re && make clean && clear && valgrind --leak-check=full ./cub3d map.cub

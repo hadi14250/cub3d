@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils4.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hadikaddoura <hadikaddoura@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 17:14:05 by bsaeed            #+#    #+#             */
-/*   Updated: 2023/04/19 00:51:19 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/10/18 21:57:24 by hadikaddour      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ void	exit_cub(t_cub *cub, int code, char *msg)
 		cub->map_1d = free_null(cub->map_1d);
 	free_split(&cub->map);
 	free_split(&cub->xpm);
+	free_split(&cub->control_box.buttons_txt);
 	free_rgbs(cub);
 	cub->c_rgb = free_null(cub->c_rgb);
 	cub->f_rgb = free_null(cub->f_rgb);

@@ -6,7 +6,7 @@
 /*   By: hadikaddoura <hadikaddoura@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 10:21:17 by hakaddou          #+#    #+#             */
-/*   Updated: 2024/10/15 22:53:42 by hadikaddour      ###   ########.fr       */
+/*   Updated: 2024/10/18 21:46:21 by hadikaddour      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct s_contorl_box
     int     last_string_y_pos;
     bool    down_arrow;
     bool    down_arrow_released;
+    char    **buttons_txt;
 }			t_contorl_box;
 
 #endif

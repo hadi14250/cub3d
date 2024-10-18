@@ -6,17 +6,18 @@
 /*   By: hadikaddoura <hadikaddoura@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 08:44:48 by hakaddou          #+#    #+#             */
-/*   Updated: 2024/10/15 23:34:48 by hadikaddour      ###   ########.fr       */
+/*   Updated: 2024/10/18 21:56:02 by hadikaddour      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void    get_button_txt(t_button *buttons)
+void    get_button_txt(t_button *buttons, t_cub *cub)
 {
     int     i;
     char    *str;
     int     fd;
+    int     j;
 
     fd = open("./game_controls/button_txt.txt", O_RDONLY);
     if(fd < 0)
@@ -30,13 +31,30 @@ void    get_button_txt(t_button *buttons)
         i++;
     }
     close(fd);
+    cub->control_box.buttons_txt = malloc(sizeof(char *) * i + 1);
+    cub->control_box.buttons_txt[i] = NULL;
+    j = 0;
+    while(j < i)
+    {
+        cub->control_box.buttons_txt[j] = buttons[j].str;
+        j++;
+    }
 }
 
-void    intit_all_buttons(t_button *buttons)
+void    get_saved_button_txt(t_button *buttons, t_cub *cub)
+{
+    int     i;
+
+    i = -1;
+    while(++i < BUTTON_NUM)
+        init_button(&buttons[i], cub->control_box.buttons_txt[i], MID_FLAG, Y_MID);
+}
+
+void    intit_all_buttons(t_button *buttons, t_cub *cub)
 {
     init_button_nums(buttons);
 
-    get_button_txt(buttons);
+    get_saved_button_txt(buttons, cub);
     update_max_button_num(buttons);
 
     mark_hovered_button(buttons);

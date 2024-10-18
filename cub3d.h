@@ -6,7 +6,7 @@
 /*   By: hadikaddoura <hadikaddoura@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 03:12:29 by bsaeed            #+#    #+#             */
-/*   Updated: 2024/10/15 23:04:46 by hadikaddour      ###   ########.fr       */
+/*   Updated: 2024/10/18 21:53:23 by hadikaddour      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -366,8 +366,8 @@ void    		draw_all_buttons(t_button *buttons, t_cub *cub);
 void    		redraw_button(t_button *button, t_cub *cub);
 
 /*	button init	*/
-void    		get_button_txt(t_button *buttons);
-void    		intit_all_buttons(t_button *buttons);
+void			get_button_txt(t_button *buttons, t_cub *cub);
+void		    intit_all_buttons(t_button *buttons, t_cub *cub);
 void    		init_button_middle(t_button *button, char *str, int y);
 void    		init_button(t_button *button, char *str, int pos, int y);
 void			init_button_nums(t_button *buttons);
