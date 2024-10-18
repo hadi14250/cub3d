@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hadikaddoura <hadikaddoura@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 23:10:35 by hakaddou          #+#    #+#             */
-/*   Updated: 2024/10/17 09:02:46 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/10/18 22:26:08 by hadikaddour      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,11 @@ void	render(t_cub *cub)
 		print_control_box(cub);
 		cub->player.map3d.y_scale_factor /= 2;
 		cub->player.map3d.x_scale_factor /= 2;
+	}
+	if(cub->keys.c && cub->keys.f)
+	{
+		cub->player.map3d.y_scale_factor /= 3;
+		cub->player.map3d.x_scale_factor /= 3;
 	}
 	if (cub->keys.q == false)
 	{
