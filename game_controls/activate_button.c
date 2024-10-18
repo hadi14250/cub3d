@@ -6,7 +6,7 @@
 /*   By: hadikaddoura <hadikaddoura@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 21:18:21 by hakaddou          #+#    #+#             */
-/*   Updated: 2024/10/18 22:06:37 by hadikaddour      ###   ########.fr       */
+/*   Updated: 2024/10/18 22:14:12 by hadikaddour      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,15 +65,37 @@ void    change_minimap_ray_color_random(t_cub *cub)
     cub->player.map3d.map_ray_color = get_random_color();
 }
 
+void    change_equip_button_state(t_cub *cub)
+{
+    int     i;
+    char    **txt;
+
+    i = 0;
+    txt = cub->control_box.buttons_txt;
+    while(txt[i] != NULL)
+    {
+        if(!ft_strncmp(txt[i], "Un Equip Gun", ft_strlen(txt[i])))
+        {
+            free(txt[i]);
+            txt[i] = ft_strdup("Re Equip Gun");
+            break;
+        }
+        else if (!ft_strncmp(txt[i], "Re Equip Gun", ft_strlen(txt[i])))
+        {
+            free(txt[i]);
+            txt[i] = ft_strdup("Un Equip Gun");
+            break;
+        }
+        i++;
+    }
+}
+
 void    remove_gun(t_cub *cub)
 {
     cub->button_controls.remove_machine_gun = !cub->button_controls.remove_machine_gun;
     cub->keys.c = false;
     reset_hover_state(cub->control_box.buttons);
-    if(cub->button_controls.remove_machine_gun == false)
-        cub->control_box.buttons_txt[1] = "Un Equip Gun";
-    else
-        cub->control_box.buttons_txt[1] = "Re Equip Gun";
+    change_equip_button_state(cub);
 }
 
 void    parse_button_functionality(t_button *hovered, t_cub *cub)
