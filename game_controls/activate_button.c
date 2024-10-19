@@ -6,7 +6,7 @@
 /*   By: hadikaddoura <hadikaddoura@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 21:18:21 by hakaddou          #+#    #+#             */
-/*   Updated: 2024/10/18 22:19:10 by hadikaddour      ###   ########.fr       */
+/*   Updated: 2024/10/19 11:13:24 by hadikaddour      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_button *get_hovered_button(t_button *buttons)
     i = -1;
     while(++i < BUTTON_NUM && buttons[i].str != NULL && buttons[i].hovered == false)
         ;
-    if (i >= 0 && buttons[i].str != NULL)
+    if (i >= 0 && i < BUTTON_NUM && buttons[i].str != NULL)
         return(&buttons[i]);
     if (buttons[0].str != NULL)
         return (&buttons[0]);

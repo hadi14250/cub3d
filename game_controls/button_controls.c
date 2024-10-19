@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   button_controls.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hadikaddoura <hadikaddoura@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 08:41:43 by hakaddou          #+#    #+#             */
-/*   Updated: 2024/10/14 17:30:10 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/10/19 11:03:51 by hadikaddour      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
