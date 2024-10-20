@@ -50,6 +50,7 @@ SRCS	= 	main.c \
 			game_controls/button_init.c \
 			game_controls/string_functions.c \
 			game_controls/activate_button.c  \
+			game_controls/activate_button_utils.c  \
 
 
 OBJS	= $(SRCS:.c=.o)

@@ -6,7 +6,7 @@
 /*   By: hadikaddoura <hadikaddoura@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 03:12:29 by bsaeed            #+#    #+#             */
-/*   Updated: 2024/10/18 21:53:23 by hadikaddour      ###   ########.fr       */
+/*   Updated: 2024/10/20 22:29:43 by hadikaddour      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -378,5 +378,8 @@ void			print_all_strings(t_button *buttons, t_cub *cub);
 
 /* button activation */
 void    		activate_button(t_cub *cub);
+void			change_equip_button_state(t_cub *cub);
+t_button		*get_hovered_button(t_button *buttons);
+unsigned int	get_random_color();
 
 #endif
