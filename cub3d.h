@@ -6,7 +6,7 @@
 /*   By: hadikaddoura <hadikaddoura@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 03:12:29 by bsaeed            #+#    #+#             */
-/*   Updated: 2024/10/20 22:29:43 by hadikaddour      ###   ########.fr       */
+/*   Updated: 2024/10/20 22:32:03 by hadikaddour      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -381,5 +381,13 @@ void    		activate_button(t_cub *cub);
 void			change_equip_button_state(t_cub *cub);
 t_button		*get_hovered_button(t_button *buttons);
 unsigned int	get_random_color();
+void			change_ground_color_random(t_cub *cub);
+void			change_sky_color_random(t_cub *cub);
+void			change_minimap_backgound_color_random(t_cub *cub);
+void			change_minimap_wall_color_random(t_cub *cub);
+void			change_minimap_ray_color_random(t_cub *cub);
+void			remove_gun(t_cub *cub);
+void			parse_button_functionality(t_button *hovered, t_cub *cub);
+void			activate_button(t_cub *cub);
 
 #endif
