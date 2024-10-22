@@ -5,5 +5,6 @@ Change Ground Color (random)
 Change Minmap Background Color (random)
 Change Minimap Wall Color (random)
 Change Minmap Ray Color (random)
+Reset Controls
 Exit Controls
 Exit Game

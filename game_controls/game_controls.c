@@ -6,7 +6,7 @@
 /*   By: hadikaddoura <hadikaddoura@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 09:50:53 by hakaddou          #+#    #+#             */
-/*   Updated: 2024/10/18 21:53:39 by hadikaddour      ###   ########.fr       */
+/*   Updated: 2024/10/22 20:17:42 by hadikaddour      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void    print_control_box(t_cub *cub)
 {
-    cub->control_box.width = WINDOW_WIDTH / 1.6;
-    cub->control_box.height = WINDOW_HEIGHT / 1.6;
-    cub->control_box.x = WINDOW_WIDTH /  5.6;
-    cub->control_box.y = WINDOW_HEIGHT / 5.6;
+    cub->control_box.width = WINDOW_WIDTH / 1.4;
+    cub->control_box.height = WINDOW_HEIGHT / 1.4;
+    cub->control_box.x = WINDOW_WIDTH /  7;
+    cub->control_box.y = WINDOW_HEIGHT / 6;
     cub->control_box.controls_rect = init_rect(
         cub->control_box.x,
         cub->control_box.y,
