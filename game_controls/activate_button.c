@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   activate_button.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hadikaddoura <hadikaddoura@student.42.f    +#+  +:+       +#+        */
+/*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 21:18:21 by hakaddou          #+#    #+#             */
-/*   Updated: 2024/10/20 22:31:48 by hadikaddour      ###   ########.fr       */
+/*   Updated: 2024/10/23 20:29:01 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,16 @@ void    remove_gun(t_cub *cub)
     change_equip_button_state(cub);
 }
 
+void    reset_controls(t_cub *cub)
+{
+    t_original_settings original = cub->control_box.original_controls;
+    cub->floor = original.floor_color;
+    cub->ceiling = original.sky_color;
+    cub->player.map3d.map_background_color = original.mini_map_bg_color;
+    cub->player.map3d.map_wall_color = original.mini_map_wall_color;
+    cub->player.map3d.map_ray_color = original.mini_map_ray_color;
+}
+
 void    parse_button_functionality(t_button *hovered, t_cub *cub)
 {
     if(!ft_strncmp(hovered->str, "Exit Game", ft_strlen(hovered->str)))
@@ -67,7 +77,22 @@ void    parse_button_functionality(t_button *hovered, t_cub *cub)
     if(!ft_strncmp(hovered->str, "Un Equip Gun", ft_strlen(hovered->str)) ||
         !ft_strncmp(hovered->str, "Re Equip Gun", ft_strlen(hovered->str)))
         remove_gun(cub);
+    if(!ft_strncmp(hovered->str, "Reset Controls", ft_strlen(hovered->str)))
+         reset_controls(cub);
 }
+
+// void	set_original_controls(t_cub *cub)
+// {
+// 	t_original_settings	original;
+// 	original.gun = cub->gun;
+// 	original.sky_color = cub->ceiling;
+// 	original.floor_color = cub->floor;
+// 	original.mini_map_bg_color = cub->player.map3d.map_background_color;
+// 	original.mini_map_wall_color = cub->player.map3d.map_wall_color;
+// 	original.mini_map_ray_color = cub->player.map3d.map_ray_color;
+// 	cub->control_box.original_controls = original;
+// }
+
 
 void    activate_button(t_cub *cub)
 {

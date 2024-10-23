@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hadikaddoura <hadikaddoura@student.42.f    +#+  +:+       +#+        */
+/*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 20:27:50 by hakaddou          #+#    #+#             */
-/*   Updated: 2024/10/18 21:51:25 by hadikaddour      ###   ########.fr       */
+/*   Updated: 2024/10/23 20:24:11 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,18 @@ void	draw_rectangle(t_img *img, t_rect rect, int color)
 	}
 }
 
+void	set_original_controls(t_cub *cub)
+{
+	t_original_settings	original;
+	original.gun = cub->gun;
+	original.sky_color = cub->ceiling;
+	original.floor_color = cub->floor;
+	original.mini_map_bg_color = cub->player.map3d.map_background_color;
+	original.mini_map_wall_color = cub->player.map3d.map_wall_color;
+	original.mini_map_ray_color = cub->player.map3d.map_ray_color;
+	cub->control_box.original_controls = original;
+}
+
 void	init_consts(t_cub *cub)
 {
 	cub->player.fov = FOV_ANGLE * (PI / 180);
@@ -62,6 +74,7 @@ int	main(int ac, char **av)
 	init(&cub);
 	init_consts(&cub);
 	init_mlx_utils(&cub);
+	set_original_controls(&cub);
 	raycasting(&cub);
 	exit_cub(&cub, 0, "game finished successfully\n");
 }
