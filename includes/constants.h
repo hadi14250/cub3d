@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 20:15:27 by hakaddou          #+#    #+#             */
-/*   Updated: 2024/10/26 09:46:48 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/10/26 10:07:47 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,28 +34,5 @@
 # define NUM_RAYS WINDOW_WIDTH
 
 # define MINIMAP_SCALE_FACTOR 0.3
-
-# define BUTTON_NUM 9
-
-# define X_MID WINDOW_WIDTH / 2
-
-# define Y_MID WINDOW_HEIGHT / 2
-
-# define MID_FLAG 0
-
-# define CHAR_PIXEL_WIDTH 7.3
-
-# define BUTTON_START_DISTANCE 200
-
-# define BUTTON_VERTICAL_DISTANCE 50
-
-# define BUTTON_COLOR RED_COLOR
-# define STR_COLOR    WHITE_COLOR
-#define HOVER_COLOR BLUE_COLOR
-
-# define BUTTON_X_SHIFT 25
-# define BUTTON_Y_SHIFT 10
-
-#define ROUNDED_BUTTONS true
 
 #endif

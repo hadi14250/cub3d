@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 10:21:17 by hakaddou          #+#    #+#             */
-/*   Updated: 2024/10/23 20:18:50 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/10/26 10:10:17 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define CONTROL_BOX_H
 
 # include "../cub3d.h"
+# include "./button_vars.h"
 
 typedef struct s_original_settings {
     void    *gun;
