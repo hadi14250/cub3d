@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   button_init.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hadikaddoura <hadikaddoura@student.42.f    +#+  +:+       +#+        */
+/*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 08:44:48 by hakaddou          #+#    #+#             */
-/*   Updated: 2024/10/19 11:02:45 by hadikaddour      ###   ########.fr       */
+/*   Updated: 2024/10/26 10:02:07 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ void    get_button_txt(t_button *buttons, t_cub *cub)
     int     fd;
     int     j;
 
-    fd = open("./game_controls/button_txt.txt", O_RDONLY);
+    fd = open("./button_txt/button_txt.txt", O_RDONLY);
     if(fd < 0)
-        return ;
+        exit_cub(cub, 1, "can't open file /button_txt/button_txt.txt\n");
     i = 0;
     str = "h";
     while(str && i < BUTTON_NUM)
@@ -31,6 +31,8 @@ void    get_button_txt(t_button *buttons, t_cub *cub)
         i++;
     }
     close(fd);
+    if (i != BUTTON_NUM)
+        exit_cub(cub, 1, "number of buttons in /button_txt/button_txt.txt do not mach the BUTTON_NUM constant in includes/button_vars\n");
     cub->control_box.buttons_txt = malloc(sizeof(char *) * i + 1);
     cub->control_box.buttons_txt[i] = NULL;
     j = 0;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_controls.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hadikaddoura <hadikaddoura@student.42.f    +#+  +:+       +#+        */
+/*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 09:50:53 by hakaddou          #+#    #+#             */
-/*   Updated: 2024/10/22 20:17:42 by hadikaddour      ###   ########.fr       */
+/*   Updated: 2024/10/26 10:01:54 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void    print_control_box(t_cub *cub)
         &cub->img,
     cub->control_box.controls_rect,
     TRANSPARENT_BLACK_COLOR);
+
 
     intit_all_buttons(cub->control_box.buttons, cub);
     
