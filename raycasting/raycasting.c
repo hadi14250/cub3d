@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hadikaddoura <hadikaddoura@student.42.f    +#+  +:+       +#+        */
+/*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 23:10:35 by hakaddou          #+#    #+#             */
-/*   Updated: 2024/10/18 22:26:08 by hadikaddour      ###   ########.fr       */
+/*   Updated: 2024/10/27 10:32:01 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	cast_all_rays(t_ray *rays, t_player *player)
 void	setup(t_cub *cub)
 {
 	cub->fps = 1;
-	init_map(cub);
 	cub->scale_factor = MINIMAP_SCALE_FACTOR;
 	set_minimap_scalefactor(cub);
 	init_player(&cub->player, cub);

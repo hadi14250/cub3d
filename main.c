@@ -6,7 +6,7 @@
 /*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 20:27:50 by hakaddou          #+#    #+#             */
-/*   Updated: 2024/10/23 20:24:11 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/10/27 10:32:09 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ int	main(int ac, char **av)
 	init(&cub);
 	init_consts(&cub);
 	init_mlx_utils(&cub);
+	init_map(&cub);
 	set_original_controls(&cub);
 	raycasting(&cub);
 	exit_cub(&cub, 0, "game finished successfully\n");
