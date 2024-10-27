@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_handles.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hadikaddoura <hadikaddoura@student.42.f    +#+  +:+       +#+        */
+/*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 18:09:08 by hakaddou          #+#    #+#             */
-/*   Updated: 2024/10/15 22:49:48 by hadikaddour      ###   ########.fr       */
+/*   Updated: 2024/10/27 10:41:49 by hakaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ int	keys_released(int key, t_cub *cub)
 
 int	render_loop(t_cub *cub)
 {
+	start_mouse(cub);
     (cub->keys.up == false) && (cub->player.walkdirection = 0, 0);
     (cub->keys.down == false) && (cub->player.walkdirection = 0, 0);
     (cub->keys.right == false && cub->keys.m_right == false) && (cub->player.turndirection = 0, 0);

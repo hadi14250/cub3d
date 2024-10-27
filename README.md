@@ -52,34 +52,9 @@ Inspired by Doom, the first game that introduced ray casting. We start with disp
 - `w/s/a/d` for player movement.
 - `left` and `right` arrow or mouse for direction.
 - `shift` to aim.
-- `f` to maxiamise and minimise minimap.
+- `c` open or close controls menu
+- `f` to maxiamise or minimise minimap.
 - `q` to remove or put back minimap.
 - `esc` to quit the game.
 
 <br>
-
-
-
-<!-- ## Usage
-```javascript
-test
-``` -->
-
-<table>
-
-<tr>
-    <td align="center" style="word-wrap: break-word; width: 150.0; height: 150.0">
-        <a href=https://github.com/hadi14250>
-            <img src="https://avatars.githubusercontent.com/u/93770645?v=4" width="100;"  style="border-radius:50%;align-items:center;justify-content:center;overflow:hidden;padding-top:10px" alt=Yixin Shen/>
-            <br />
-            <sub style="font-size:14px"><b>Hadi Kaddoura</b></sub>
-        </a>
-    </td>
-    <td align="center" style="word-wrap: break-word; width: 150.0; height: 150.0">
-        <a href=https://github.com/Onesignature>
-            <img src="https://avatars.githubusercontent.com/u/75629555?v=4" width="100;"  style="border-radius:50%;align-items:center;justify-content:center;overflow:hidden;padding-top:10px" alt=Bailey Harrington/>
-            <br />
-            <sub style="font-size:14px"><b>Bilal Saeed</b></sub>
-        </a>
-</tr>
-</table>
