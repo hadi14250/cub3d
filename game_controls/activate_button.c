@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   activate_button.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hakaddou <hakaddou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hadikaddoura <hadikaddoura@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 21:18:21 by hakaddou          #+#    #+#             */
-/*   Updated: 2024/10/27 10:37:05 by hakaddou         ###   ########.fr       */
+/*   Updated: 2024/10/28 22:21:27 by hadikaddour      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,11 +80,13 @@ void    parse_button_functionality(t_button *hovered, t_cub *cub)
         change_minimap_wall_color_random(cub);
     if(!ft_strncmp(hovered->str, "Change Minmap Ray Color (random)", ft_strlen(hovered->str)))
         change_minimap_ray_color_random(cub);
-    if(!ft_strncmp(hovered->str, "Un Equip Gun", ft_strlen(hovered->str)) ||
-        !ft_strncmp(hovered->str, "Re Equip Gun", ft_strlen(hovered->str)))
-        remove_gun(cub);
+    // if(!ft_strncmp(hovered->str, "Un Equip Gun", ft_strlen(hovered->str)) ||
+    //     !ft_strncmp(hovered->str, "Re Equip Gun", ft_strlen(hovered->str)))
+    //     remove_gun(cub);
     if(!ft_strncmp(hovered->str, "Reset Controls", ft_strlen(hovered->str)))
          reset_controls(cub);
+    else
+        remove_gun(cub);
 }
 
 void    activate_button(t_cub *cub)
