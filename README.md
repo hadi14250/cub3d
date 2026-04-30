@@ -23,7 +23,7 @@
 
 # Cub3D
 
-Inspired by Doom, the first game that introduced ray casting. We start with displaying a single pixel on the screen to drawing complex 3d structures. Uses the simple 42 C graphics library called MLX. 
+Inspired by Doom, the first game that introduced ray casting. We start with displaying a single pixel on the screen to drawing complex 3d structures. Uses the simple 42 C graphics library called MLX.
 
 <br>
 
@@ -32,8 +32,10 @@ Inspired by Doom, the first game that introduced ray casting. We start with disp
   - 🎯 Aiming (zooming in).
   - 🧱 Wall collision.
   - 🗺️ Minimap, can be minimised and maximised.
-  - 🔎 Minimap shows player feild of view.
+  - 🔎 Minimap shows player field of view.
   - 🖱️ Mouse movement (event listener).
+  - 🎮 In-game controls panel with clickable buttons.
+  - 🎨 Customise minimap ray color, equip/un-equip the gun, and reset controls on the fly.
 
 <br>
 
@@ -47,14 +49,20 @@ Inspired by Doom, the first game that introduced ray casting. We start with disp
 
 ## Gameplay
 
-<<`keyboard iputs`>>
+<<`keyboard inputs`>>
 
 - `w/s/a/d` for player movement.
 - `left` and `right` arrow or mouse for direction.
 - `shift` to aim.
-- `c` open or close controls menu
-- `f` to maxiamise or minimise minimap.
+- `c` open or close controls menu.
+- `f` to maximise or minimise minimap.
 - `q` to remove or put back minimap.
 - `esc` to quit the game.
+
+<<`controls menu`>>
+
+- Change minimap ray color (random).
+- Equip or un-equip the gun.
+- Reset controls back to defaults.
 
 <br>
