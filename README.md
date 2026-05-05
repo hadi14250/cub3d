@@ -1,68 +1,83 @@
-
 <div align="center">
-<a href="https://github.com/hadi14250">
+  <a href="https://github.com/hadi14250">
     <img src="github_gifs/cub-rounded.gif" alt="3d cube" width="150" height="150">
   </a>
-  <h3 align="center">Cub3D</h3>
-  3D Game Inspired By Doom
-  <br>
-  <br>
+
+  <h1>Cub3D</h1>
+
+  <p><strong>A 3D game inspired by Doom — built from scratch in C using ray casting.</strong></p>
 </div>
 
+<br>
 
 <div align="center">
-<a href="https://github.com/hadi14250">
-    <img src="github_gifs/gameplay.gif" alt="gif gameplay"  width="600" height="400">
+  <a href="https://github.com/hadi14250">
+    <img src="github_gifs/gameplay.gif" alt="gameplay" width="600" height="400">
   </a>
-
-
 </div>
 
 <br>
 
+## About
 
-# Cub3D
-
-Inspired by Doom, the first game that introduced ray casting. We start with displaying a single pixel on the screen to drawing complex 3d structures. Uses the simple 42 C graphics library called MLX.
-
-<br>
-
-## Distinctive Features
-
-  - 🎯 Aiming (zooming in).
-  - 🧱 Wall collision.
-  - 🗺️ Minimap, can be minimised and maximised.
-  - 🔎 Minimap shows player field of view.
-  - 🖱️ Mouse movement (event listener).
-  - 🎮 In-game controls panel with clickable buttons.
-  - 🎨 Customise minimap ray color, equip/un-equip the gun, and reset controls on the fly.
+Cub3D is a 42 project inspired by Doom, the first game to popularize ray casting. The journey starts at drawing a single pixel and grows into rendering complex 3D scenes in real time. The renderer is built on top of the minimal 42 C graphics library, **MLX**.
 
 <br>
 
-## How to run
+## Features
 
-- Go to root directory and run `make`
-- Run `./cub3d maps/good/bigmap.cub`
-- Choose between different maps in `maps/good/`
+- 🎯 **Aiming** — zoom in for a closer shot
+- 🧱 **Wall collision** detection
+- 🗺️ **Minimap** with minimize and maximize support
+- 🔎 **Field-of-view rays** drawn on the minimap
+- 🖱️ **Mouse look** via event listener
+- 🎮 **In-game controls panel** with clickable buttons
+- 🎨 **Customization on the fly** — change ray color, equip/un-equip the gun, reset controls
+
+<br>
+
+## Getting Started
+
+```sh
+make
+./cub3d maps/good/bigmap.cub
+```
+
+Other maps are available in `maps/good/`.
 
 <br>
 
-## Gameplay
+## Controls
 
-<<`keyboard inputs`>>
+### Keyboard
 
-- `w/s/a/d` for player movement.
-- `left` and `right` arrow or mouse for direction.
-- `shift` to aim.
-- `c` open or close controls menu.
-- `f` to maximise or minimise minimap.
-- `q` to remove or put back minimap.
-- `esc` to quit the game.
+| Key | Action |
+| --- | --- |
+| `W` `A` `S` `D` | Move the player |
+| `←` `→` / mouse | Look around |
+| `Shift` | Aim (zoom) |
+| `C` | Open / close controls menu |
+| `F` | Maximize / minimize minimap |
+| `Q` | Show / hide minimap |
+| `Esc` | Quit |
 
-<<`controls menu`>>
+### Controls Menu
 
-- Change minimap ray color (random).
-- Equip or un-equip the gun.
-- Reset controls back to defaults.
+- Randomize the minimap ray color
+- Equip or un-equip the gun
+- Reset controls back to defaults
 
 <br>
+
+## Built With
+
+- **C**
+- **MLX** — the 42 graphics library
+- **Makefile** build system
+- A custom **libft** for core utilities
+
+<br>
+
+<div align="center">
+  <sub>Made as part of the 42 curriculum.</sub>
+</div>
